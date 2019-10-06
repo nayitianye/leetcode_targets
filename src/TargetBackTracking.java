@@ -11,6 +11,7 @@ import java.util.Stack;
  * 526 691 784 842 980 996 1066 1079 1087 1088
  */
 public class TargetBackTracking {
+
     /**
      * 10. 正则表达式匹配
      * @param text
@@ -29,6 +30,42 @@ public class TargetBackTracking {
             return first_match && isMatch(text.substring(1), pattern.substring(1));
         }
     }
+
+    //region 22. 括号生成  2019/10/6  回溯求解
+    /**
+     * 给出 n 代表生成括号的对数，请你写出一个函数，
+     * 使其能够生成所有可能的并且有效的括号组合。
+     * 例如，给出 n = 3，生成结果为：
+     *
+     * [
+     *   "((()))",
+     *   "(()())",
+     *   "(())()",
+     *   "()(())",
+     *   "()()()"
+     * ]
+     *
+     * @param n
+     * @return
+     */
+    private List<String> generateParenthesis(int n) {
+        List<String> ans=new ArrayList<>();
+        backtrack(ans,"",0,0,n);
+        return ans;
+    }
+
+    private void backtrack(List<String> ans,String cur,int open,int close,int max){
+        if(cur.length()==max*2){
+            ans.add(cur);
+            return;
+        }
+        if(open<max){
+            backtrack(ans,cur+"(",open+1,close,max);
+        }else{
+            backtrack(ans,cur+")",open,close+1,max);
+        }
+    }
+    //endregion
 
     /**
      * 46. 全排列

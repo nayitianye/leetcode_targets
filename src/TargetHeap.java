@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.prism.PrFilterContext;
+
 import java.util.*;
 
 public class TargetHeap {
@@ -142,6 +144,103 @@ public class TargetHeap {
         }
         return nums[nums.length-k-1];
     }
+
+    //region 347. 前 K 个高频元素  2019/10/3  优先队列
+    /**
+     * 给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+     *
+     * 示例 1:
+     * 输入: nums = [1,1,1,2,2,3], k = 2
+     * 输出: [1,2]
+     *
+     * 示例 2:
+     * 输入: nums = [1], k = 1
+     * 输出: [1]
+     *
+     * 说明：
+     * 你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
+     * 你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小。
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    private List<Integer> topKFrequent(int[] nums, int k) {
+        TreeMap<Integer,Integer> map=new TreeMap<>();
+        for(int num:nums){
+            if(map.containsKey(num)){
+                map.put(num,map.get(num)+1);
+            }else{
+                map.put(num,1);
+            }
+        }
+
+        PriorityQueue<Freq> pq=new PriorityQueue<>();
+
+        //比较器的使用
+        //PriorityQueue<Freq> pq=new PriorityQueue<>(new FreqComparator());
+
+        //匿名类
+       /* PriorityQueue<Freq> pq=new PriorityQueue<>(new Comparator<Freq>() {
+            @Override
+            public int compare(Freq o1, Freq o2) {
+                return o1.freq-o2.freq;
+            }
+        });*/
+
+       //避免构造自定义类
+        /*PriorityQueue<Integer> pq=new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return map.get(o1)-map.get(o2);
+            }
+        });*/
+
+        //lambda表达式
+        /*PriorityQueue<Integer> pq=new PriorityQueue<>(
+                (a,b)->map.get(a)-map.get(b)
+        );*/
+        for(int key:map.keySet()){
+            if(pq.size()<k){
+                pq.add(new Freq(key,map.get(key)));
+            }else if(map.get(key)>pq.peek().freq){
+                pq.poll();
+                pq.add(new Freq(key,map.get(key)));
+            }
+        }
+        LinkedList<Integer> res=new LinkedList<>();
+        while(!pq.isEmpty()){
+            res.add(pq.poll().e);
+        }
+        return res;
+    }
+
+    private class Freq implements Comparable<Freq>{
+        public int e,freq;
+        public Freq(int e,int freq){
+            this.e=e;
+            this.freq=freq;
+        }
+        @Override
+        public int compareTo(Freq o) {
+            if(this.freq<o.freq){
+                return -1;
+            }else if(this.freq>o.freq){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+
+    private class FreqComparator implements Comparator<Freq>{
+        @Override
+        public int compare(Freq o1, Freq o2) {
+            return o1.freq-o2.freq;
+        }
+    }
+    //endregion
+
     public static void main(String[] args) {
         ListNode node=new ListNode(-9);
         node.next=new ListNode(-7);
