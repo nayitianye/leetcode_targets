@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.jar.JarEntry;
 
 /**
  * @author yyb
@@ -311,6 +310,57 @@ public class TargetString {
     }
     //endregion
 
+    //region 791. 自定义字符串排序   2019/10/9
+    /**
+     * 字符串S和 T 只包含小写字符。在S中，所有字符只会出现一次。
+     * S 已经根据某种规则进行了排序。我们要根据S中的字符顺序对T进行排序。
+     * 更具体地说，如果S中x在y之前出现，那么返回的字符串中x也应出现在y之前。
+     * 返回任意一种符合条件的字符串T。
+     * 示例:
+     * 输入:
+     * S = "cba"
+     * T = "abcd"
+     * 输出: "cbad"
+     *
+     * 解释:
+     * S中出现了字符 "a", "b", "c", 所以 "a", "b", "c" 的顺序应该是 "c", "b", "a".
+     * 由于 "d" 没有在S中出现, 它可以放在T的任意位置. "dcba", "cdba", "cbda" 都是合法的输出。
+     * 注意:
+     * S的最大长度为26，其中没有重复的字符。
+     * T的最大长度为200。
+     * S和T只包含小写字符。
+     * @param S
+     * @param T
+     * @return
+     */
+    public String customSortString(String S, String T) {
+        int m = S.length(),n = T.length();
+        int[] map = new int[26];      //记录T中的字符个数
+        int[] map1 = new int[26];   //记录S是否包含某个字符
+        for(int i = 0;i < m;i++){
+            char c = S.charAt(i);
+            map1[c-'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i < n;i++){
+            char c = T.charAt(i);
+            int t = c -'a';
+            map[t]++;
+            if(map1[t] == 0) sb.append(c);            //如果S中不包含该字符，直接加上
+        }
+        //按照S中的顺序，包含几次加几次
+        for(int i = 0;i < m;i++){
+            char c = S.charAt(i);
+            int cnt = map[c-'a'];
+            if(cnt > 0){
+                for(int k = 0;k < cnt;k++)
+                    sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    //endregion
+
     //region 804. 唯一摩尔斯密码词  2019/10/3   集合
     /**
      * 国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如: "a" 对应 ".-", "b" 对应 "-...", "c" 对应 "-.-.", 等等。
@@ -562,92 +612,6 @@ public class TargetString {
         return sum;
     }
     //endregion
-
-    /**
-     * 字符串S和 T 只包含小写字符。在S中，所有字符只会出现一次。
-     * S 已经根据某种规则进行了排序。我们要根据S中的字符顺序对T进行排序。
-     * 更具体地说，如果S中x在y之前出现，那么返回的字符串中x也应出现在y之前。
-     * 返回任意一种符合条件的字符串T。
-     * 示例:
-     * 输入:
-     * S = "cba"
-     * T = "abcd"
-     * 输出: "cbad"
-     *
-     * 解释:
-     * S中出现了字符 "a", "b", "c", 所以 "a", "b", "c" 的顺序应该是 "c", "b", "a".
-     * 由于 "d" 没有在S中出现, 它可以放在T的任意位置. "dcba", "cdba", "cbda" 都是合法的输出。
-     * 注意:
-     * S的最大长度为26，其中没有重复的字符。
-     * T的最大长度为200。
-     * S和T只包含小写字符。
-     * @param S
-     * @param T
-     * @return
-     */
-    public String customSortString(String S, String T) {
-        int m = S.length(),n = T.length();
-        int[] map = new int[26];      //记录T中的字符个数
-        int[] map1 = new int[26];   //记录S是否包含某个字符
-        for(int i = 0;i < m;i++){
-            char c = S.charAt(i);
-            map1[c-'a']++;
-        }
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0;i < n;i++){
-            char c = T.charAt(i);
-            int t = c -'a';
-            map[t]++;
-            if(map1[t] == 0) sb.append(c);            //如果S中不包含该字符，直接加上
-        }
-        //按照S中的顺序，包含几次加几次
-        for(int i = 0;i < m;i++){
-            char c = S.charAt(i);
-            int cnt = map[c-'a'];
-            if(cnt > 0){
-                for(int k = 0;k < cnt;k++)
-                    sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-    /*public String customSortString(String S, String T) {
-        Map<Character,Integer> map=new HashMap<>();
-        for(int i=0;i<S.length();i++){
-            map.put(S.charAt(i),i);
-        }
-        char[] chars=T.toCharArray();
-        quickSort(chars,0,chars.length-1,map);
-        StringBuilder res=new StringBuilder();
-        for(int i=0;i<chars.length;i++){
-            res.append(chars[i]);
-        }
-        return res.toString();
-    }
-    public void quickSort(char[] chars,int low,int high,Map<Character,Integer> map){
-        if(low>high){
-            return;
-        }
-        int i=low,j=high;
-        char index=chars[i];
-        while(i<j){
-            while(i<j&&map.get(chars[j])<=map.get(index)){
-                j--;
-            }
-            if(i<j){
-                chars[i++]=chars[j];
-            }
-            while(i<j&&map.get(chars[i])>map.get(index)){
-                i++;
-            }
-            if(i<j){
-                chars[j--]=chars[i];
-            }
-        }
-        chars[i]=index;
-        quickSort(chars,low,i-1,map);
-        quickSort(chars,i+1,high,map);
-    }*/
 
     public static void main(String[] args){
         String s=(new TargetString()).customSortString("cba","abcd");
