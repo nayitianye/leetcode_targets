@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author yyb
@@ -12,24 +10,47 @@ import java.util.Stack;
  */
 public class TargetBackTracking {
 
-    /**
-     * 10. 正则表达式匹配
-     * @param text
-     * @param pattern
-     * @return
-     */
-    private boolean isMatch(String text, String pattern) {
-        if (pattern.isEmpty()) return text.isEmpty();
-        boolean first_match = (!text.isEmpty() &&
-                (pattern.charAt(0) == text.charAt(0) || pattern.charAt(0) == '.'));
-
-        if (pattern.length() >= 2 && pattern.charAt(1) == '*'){
-            return (isMatch(text, pattern.substring(2)) ||
-                    (first_match && isMatch(text.substring(1), pattern)));
-        } else {
-            return first_match && isMatch(text.substring(1), pattern.substring(1));
-        }
-    }
+    //region 17. 电话号码的字母组合  2019/10/11 回溯求解
+    //    /**
+    //     * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+    //     * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+    //     * 2-abc 3-def 4-ghi 5-jkl 6-mno 7-pqrs 8-tuv 9-wxyz
+    //     * 示例:
+    //     * 输入："23"
+    //     * 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+    //     * @param digits
+    //     * @return
+    //     */
+    //    public List<String> letterCombinations(String digits) {
+    //        Map<String,String> map=new HashMap<>();
+    //        map.put("2","abc");
+    //        map.put("3","def");
+    //        map.put("4","ghi");
+    //        map.put("5","jkl");
+    //        map.put("6","mno");
+    //        map.put("7","pqrs");
+    //        map.put("8","tuv");
+    //        map.put("9","wxyz");
+    //        List<String> res=new ArrayList<>();
+    //        if(digits.length()!=0){
+    //            backtrackletterCombinations("",digits,res,map);
+    //        }
+    //        return res;
+    //    }
+    //    private  void backtrackletterCombinations(String conbination,String next_digits,List<String> res,Map<String,String> map){
+    //        if(next_digits.length()==0){
+    //            res.add(conbination);
+    //        }
+    //        else{
+    //            String digit=next_digits.substring(0,1);
+    //            String letters=map.get(digit);
+    //            for(int i=0;i<letters.length();i++){
+    //                String letter=map.get(digit).substring(i,i+1);
+    //                backtrackletterCombinations(conbination+letter,next_digits.substring(1),res,map);
+    //            }
+    //        }
+    //    }
+    //    //endregion
 
     //region 22. 括号生成  2019/10/6  回溯求解
     /**
@@ -67,8 +88,121 @@ public class TargetBackTracking {
     }
     //endregion
 
+    //region 39. 组合总和  2019/10/11  回溯求解
     /**
-     * 46. 全排列
+     * 给定一个无重复元素的数组 candidates 和一个目标数 target ，
+     * 找出 candidates 中所有可以使数字和为 target 的组合。
+     * candidates 中的数字可以无限制重复被选取。
+     * 说明：
+     * 所有数字（包括 target）都是正整数。
+     * 解集不能包含重复的组合。 
+     * 示例 1:
+     * 输入: candidates = [2,3,6,7], target = 7,
+     * 所求解集为:
+     * [
+     *   [7],
+     *   [2,2,3]
+     * ]
+     *
+     * 示例 2:
+     * 输入: candidates = [2,3,5], target = 8,
+     * 所求解集为:
+     * [
+     *   [2,2,2,2],
+     *   [2,3,3],
+     *   [3,5]
+     * ]
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+        int len=candidates.length;
+        Arrays.sort(candidates);
+        findCombinationSum(target,0,new Stack<>(),len,candidates,res);
+        return res;
+    }
+    private void findCombinationSum(int residue,int start,Stack<Integer>pre,int len,int[] candidates,List<List<Integer>> res) {
+        if(residue==0){
+            res.add(new ArrayList<>(pre));
+        }
+        for(int i=start;i<len&&residue-candidates[i]>=0;i++){
+            pre.add(candidates[i]);
+            findCombinationSum(residue-candidates[i],i,pre,len,candidates,res);
+            pre.pop();
+        }
+    }
+    //endregion
+
+    //region 40. 组合总和 II  2019/10/11  回溯求解
+    /**
+     * 给定一个数组 candidates 和一个目标数 target ，
+     * 找出 candidates 中所有可以使数字和为 target 的组合。
+     * candidates 中的每个数字在每个组合中只能使用一次。
+     * 说明：
+     * 所有数字（包括目标数）都是正整数。
+     * 解集不能包含重复的组合。 
+     * 示例 1:
+     * 输入: candidates = [10,1,2,7,6,1,5], target = 8,
+     * 所求解集为:
+     * [
+     *   [1, 7],
+     *   [1, 2, 5],
+     *   [2, 6],
+     *   [1, 1, 6]
+     * ]
+     *
+     * 示例 2:
+     * 输入: candidates = [2,5,2,1,2], target = 5,
+     * 所求解集为:
+     * [
+     *   [1,2,2],
+     *   [5]
+     * ]
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        int len=candidates.length;
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(candidates);
+        findConbinationSum2(target,0,new Stack<>(),candidates,res);
+        return res;
+    }
+    private void findConbinationSum2(int target,int index,Stack<Integer> stack,int[] candidates,List<List<Integer>>res){
+        if(target==0){
+            res.add(new ArrayList<>(stack));
+        }
+        for(int i=index;i<candidates.length&&target-candidates[i]>=0;i++){
+            if(i>index&&candidates[i]==candidates[i-1]){
+                continue;
+            }
+            stack.push(candidates[i]);
+            findConbinationSum2(target-candidates[i],i+1,stack,candidates,res);
+            stack.pop();
+        }
+    }
+    //endregion
+
+    //region 46. 全排列  2019/10/11 回溯求解
+    /**
+     * 给定一个没有重复数字的序列，返回其所有可能的全排列。
+     *
+     * 示例:
+     *
+     * 输入: [1,2,3]
+     * 输出:
+     * [
+     *   [1,2,3],
+     *   [1,3,2],
+     *   [2,1,3],
+     *   [2,3,1],
+     *   [3,1,2],
+     *   [3,2,1]
+     * ]
+     *
      * @param nums
      * @return
      */
@@ -97,6 +231,7 @@ public class TargetBackTracking {
             }
         }
     }
+    //endregion
 
     //region 784. 字母大小写全排列
     /**

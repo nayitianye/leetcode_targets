@@ -7,6 +7,48 @@ import java.util.*;
  */
 public class TargetString {
 
+    //region 17. 电话号码的字母组合  2019/10/11 回溯求解
+    //    /**
+    //     * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+    //     * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+    //     * 2-abc 3-def 4-ghi 5-jkl 6-mno 7-pqrs 8-tuv 9-wxyz
+    //     * 示例:
+    //     * 输入："23"
+    //     * 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+    //     * @param digits
+    //     * @return
+    //     */
+    //    public List<String> letterCombinations(String digits) {
+    //        Map<String,String> map=new HashMap<>();
+    //        map.put("2","abc");
+    //        map.put("3","def");
+    //        map.put("4","ghi");
+    //        map.put("5","jkl");
+    //        map.put("6","mno");
+    //        map.put("7","pqrs");
+    //        map.put("8","tuv");
+    //        map.put("9","wxyz");
+    //        List<String> res=new ArrayList<>();
+    //        if(digits.length()!=0){
+    //            backtrackletterCombinations("",digits,res,map);
+    //        }
+    //        return res;
+    //    }
+    //    private  void backtrackletterCombinations(String conbination,String next_digits,List<String> res,Map<String,String> map){
+    //        if(next_digits.length()==0){
+    //            res.add(conbination);
+    //        }
+    //        else{
+    //            String digit=next_digits.substring(0,1);
+    //            String letters=map.get(digit);
+    //            for(int i=0;i<letters.length();i++){
+    //                String letter=map.get(digit).substring(i,i+1);
+    //                backtrackletterCombinations(conbination+letter,next_digits.substring(1),res,map);
+    //            }
+    //        }
+    //    }
+    //    //endregion
+
     //region 22. 括号生成  2019/10/6  回溯求解
     /**
      * 给出 n 代表生成括号的对数，请你写出一个函数，

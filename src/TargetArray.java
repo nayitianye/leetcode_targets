@@ -89,6 +89,104 @@ public class TargetArray {
     }
     //endregion
 
+    //region 39. 组合总和  2019/10/11  回溯求解
+    /**
+     * 给定一个无重复元素的数组 candidates 和一个目标数 target ，
+     * 找出 candidates 中所有可以使数字和为 target 的组合。
+     * candidates 中的数字可以无限制重复被选取。
+     * 说明：
+     * 所有数字（包括 target）都是正整数。
+     * 解集不能包含重复的组合。 
+     * 示例 1:
+     * 输入: candidates = [2,3,6,7], target = 7,
+     * 所求解集为:
+     * [
+     *   [7],
+     *   [2,2,3]
+     * ]
+     *
+     * 示例 2:
+     * 输入: candidates = [2,3,5], target = 8,
+     * 所求解集为:
+     * [
+     *   [2,2,2,2],
+     *   [2,3,3],
+     *   [3,5]
+     * ]
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+        int len=candidates.length;
+        Arrays.sort(candidates);
+        findCombinationSum(target,0,new Stack<>(),len,candidates,res);
+        return res;
+    }
+    private void findCombinationSum(int residue,int start,Stack<Integer>pre,int len,int[] candidates,List<List<Integer>> res) {
+        if(residue==0){
+            res.add(new ArrayList<>(pre));
+        }
+        for(int i=start;i<len&&residue-candidates[i]>=0;i++){
+            pre.add(candidates[i]);
+            findCombinationSum(residue-candidates[i],i,pre,len,candidates,res);
+            pre.pop();
+        }
+    }
+    //endregion
+
+    //region 40. 组合总和 II  2019/10/11  回溯求解
+    /**
+     * 给定一个数组 candidates 和一个目标数 target ，
+     * 找出 candidates 中所有可以使数字和为 target 的组合。
+     * candidates 中的每个数字在每个组合中只能使用一次。
+     * 说明：
+     * 所有数字（包括目标数）都是正整数。
+     * 解集不能包含重复的组合。 
+     * 示例 1:
+     * 输入: candidates = [10,1,2,7,6,1,5], target = 8,
+     * 所求解集为:
+     * [
+     *   [1, 7],
+     *   [1, 2, 5],
+     *   [2, 6],
+     *   [1, 1, 6]
+     * ]
+     *
+     * 示例 2:
+     * 输入: candidates = [2,5,2,1,2], target = 5,
+     * 所求解集为:
+     * [
+     *   [1,2,2],
+     *   [5]
+     * ]
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        int len=candidates.length;
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(candidates);
+        findConbinationSum2(target,0,new Stack<>(),candidates,res);
+        return res;
+    }
+    private void findConbinationSum2(int target,int index,Stack<Integer> stack,int[] candidates,List<List<Integer>>res){
+        if(target==0){
+            res.add(new ArrayList<>(stack));
+        }
+        for(int i=index;i<candidates.length&&target-candidates[i]>=0;i++){
+            if(i>index&&candidates[i]==candidates[i-1]){
+                continue;
+            }
+            stack.push(candidates[i]);
+            findConbinationSum2(target-candidates[i],i+1,stack,candidates,res);
+            stack.pop();
+        }
+    }
+    //endregion
+
     //region 48. 旋转图像  2017/10/7  数组
     /**
      * 给定一个 n × n 的二维矩阵表示一个图像。
