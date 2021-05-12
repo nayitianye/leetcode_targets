@@ -10,31 +10,6 @@ import java.util.Map;
  */
 public class TargetBitManipulation {
 
-    // region  136. 只出现一次的数字  2021/05/11
-    /**
-     * 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
-     * 说明：
-     * 你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
-     *
-     * 示例 1:
-     * 输入: [2,2,1]
-     * 输出: 1
-     * 示例 2:
-     * 输入: [4,1,2,1,2]
-     * 输出: 4
-     *
-     * @param nums
-     * @return
-     */
-    public int singleNumber(int[] nums) {
-        int res=0;
-        for(int i=0;i<nums.length;i++){
-            res^=nums[i];
-        }
-        return res;
-    }
-    //endregion
-
     //region 169. 求众数   2019/10/22  hashMap解决
     /**
      * 给定一个大小为 n 的数组，找到其中的众数。
@@ -66,51 +41,6 @@ public class TargetBitManipulation {
             }
         }
         return res.getKey();
-    }
-    //endregion
-
-    //region 260. 只出现一次的数字 III  2021/05/11
-    /**
-     * 给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。
-     * 找出只出现一次的那两个元素。你可以按 任意顺序 返回答案。
-     * 进阶：你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？
-     *
-     * 示例 1：
-     * 输入：nums = [1,2,1,3,2,5]
-     * 输出：[3,5]
-     * 解释：[5, 3] 也是有效的答案。
-     * 示例 2：
-     * 输入：nums = [-1,0]
-     * 输出：[-1,0]
-     * 示例 3：
-     * 输入：nums = [0,1]
-     * 输出：[1,0]
-     *
-     * 提示：
-     * 2 <= nums.length <= 3 * 10^4
-     * -2^31 <= nums[i] <= 2^31 - 1
-     * 除两个只出现一次的整数外，nums 中的其他数字都出现两次
-     * @param nums
-     * @return
-     */
-    public int[] singleNumber3(int[] nums) {
-        int ret=0;
-        for(int i=0;i<nums.length;i++){
-            ret^=nums[i];
-        }
-        int div=1;
-        while ((div & ret)==0){
-            div <<= 1;
-        }
-        int a=0,b=0;
-        for(int i=0;i<nums.length;i++){
-            if((div &nums[i])!=0){
-                a^=nums[i];
-            }else{
-                b^=nums[i];
-            }
-        }
-        return new int[]{a,b};
     }
     //endregion
 
@@ -201,4 +131,94 @@ public class TargetBitManipulation {
         return  decode;
     }
     //endregion
+    //region 1720 解码异或后的数组  2021/05/11
+    /**
+     * 未知 整数数组 arr 由 n 个非负整数组成。
+     * 经编码后变为长度为 n - 1 的另一个整数数组 encoded ，其中 encoded[i] = arr[i] XOR arr[i + 1] 。例如，arr = [1,0,2,1] 经编码后得到 encoded = [1,2,3] 。
+     * 给你编码后的数组 encoded 和原数组 arr 的第一个元素 first（arr[0]）。
+     * 请解码返回原数组 arr 。可以证明答案存在并且是唯一的。
+     *
+     * 示例 1：
+     * 输入：encoded = [1,2,3], first = 1
+     * 输出：[1,0,2,1]
+     * 解释：若 arr = [1,0,2,1] ，那么 first = 1 且 encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]
+     * 示例 2：
+     * 输入：encoded = [6,2,7,3], first = 4
+     * 输出：[4,2,0,7,4]
+     *
+     * 提示：
+     * 2 <= n <= 10^4
+     * encoded.length == n - 1
+     * 0 <= encoded[i] <= 10^5
+     * 0 <= first <= 10^5
+     *
+     * @param encoded
+     * @param first
+     * @return
+     */
+    public int[] decode(int[] encoded, int first) {
+        int[] decode=new int[encoded.length+1];
+        decode[0]=first;
+        for(int i=0;i<encoded.length;i++){
+            decode[i+1]=encoded[i]^decode[i];
+        }
+        return decode;
+    }
+    //endregion
+
+    // region  1310. 子数组异或查询 2021/05/12
+
+    /**
+     * 有一个正整数数组arr，现给你一个对应的查询数组queries，其中queries[i] = [Li,Ri]。
+     * 对于每个查询i，请你计算从Li到Ri的XOR值（即arr[Li] xor arr[Li+1] xor ... xor arr[Ri]）作为本次查询的结果。
+     * 并返回一个包含给定查询queries所有结果的数组。
+     *
+     * 示例 1：
+     * 输入：arr = [1,3,4,8], queries = [[0,1],[1,2],[0,3],[3,3]]
+     * 输出：[2,7,14,8]
+     * 解释：
+     * 数组中元素的二进制表示形式是：
+     * 1 = 0001
+     * 3 = 0011
+     * 4 = 0100
+     * 8 = 1000
+     * 查询的 XOR 值为：
+     * [0,1] = 1 xor 3 = 2
+     * [1,2] = 3 xor 4 = 7
+     * [0,3] = 1 xor 3 xor 4 xor 8 = 14
+     * [3,3] = 8
+     * 示例 2：
+     * 输入：arr = [4,8,2,10], queries = [[2,3],[1,3],[0,0],[0,3]]
+     * 输出：[8,0,4,4]
+     *
+     * 提示：
+     * 1 <= arr.length <= 3 * 10^4
+     * 1 <= arr[i] <= 10^9
+     * 1 <= queries.length <= 3 * 10^4
+     * queries[i].length == 2
+     * 0 <= queries[i][0] <= queries[i][1] < arr.length
+     *
+     * @param arr
+     * @param queries
+     * @return
+     */
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        int[] result =new int[arr.length+1];
+        for(int i=0;i< arr.length;i++) {
+            result[i+1] = result[i]^arr[i];
+        }
+        int[] xorQueries=new int[queries.length];
+        for(int i=0;i< queries.length;i++){
+            xorQueries[i]=result[queries[i][0]]^result[queries[i][1]+1];
+        }
+        return xorQueries;
+    }
+    // endregion
+
+    public static void main(String[] args) {
+        int[][] arrays=new int[1][2];
+        int arr[] =new int[]{1,3,4,8};
+        int queries[][] =new int[][] {{0,1},{1,2},{0,3},{3,3}};
+        int num[]=(new TargetBitManipulation()).xorQueries(arr,queries);
+    }
 }
