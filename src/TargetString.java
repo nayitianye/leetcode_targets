@@ -685,9 +685,45 @@ public class TargetString {
     }
     //endregion
 
+    // region
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int maxLength=0;
+        char[] ab=new char[3];
+        int[] index=new int[3];
+        for(int i=0;i<s.length();i++){
+            for(int j=0;j<ab.length;j++){
+                if(ab[j]=='\0'){
+                    ab[j]=s.charAt(i);
+                    index[j]=i;
+                    if(j!=3){
+                        break;
+                    }
+                }
+                if(j==3){
+                    int num=index[2]-index[0];
+                    if(num>maxLength){
+                        maxLength=num;
+                    }
+                    ab[0]=ab[1];
+                    ab[1]=ab[2];
+                    ab[2]='\0';
+                    index[0]=index[1];
+                    index[1]=index[2];
+                    break;
+                }
+                if(ab[j]==s.charAt(i)){
+                    break;
+                }
+            }
+        }
+        return maxLength;
+    }
+    // endregion
+
     public static void main(String[] args){
-        String s=(new TargetString()).customSortString("cba","abcd");
-        String res=(new TargetString()).defangIPaddr("1.1.1.1");
-        System.out.println(res);
+//        String s=(new TargetString()).customSortString("cba","abcd");
+//        String res=(new TargetString()).defangIPaddr("1.1.1.1");
+//        System.out.println(res);
+        int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("eceba");
     }
 }
