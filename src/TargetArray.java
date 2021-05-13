@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.commons.xmlutil.Converter;
+
 import java.util.*;
 /**
  * @author yyb
@@ -474,6 +476,47 @@ public class TargetArray {
         }
         //步骤4
         return Math.max(retCount, tasks.length);
+    }
+    //endregion
+
+    //region 633.平方数之和  2021/04/29
+    /**
+     * 给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a * a + b * b = c
+     *
+     * 示例 1：
+     *
+     * 输入：c = 5
+     * 输出：true
+     * 解释：1 * 1 + 2 * 2 = 5
+     * 示例 2：
+     *
+     * 输入：c = 3
+     * 输出：false
+     * 示例 3：
+     *
+     * 输入：c = 4
+     * 输出：true
+     * 示例 4：
+     *
+     * 输入：c = 2
+     * 输出：true
+     * 示例 5：
+     *
+     * 输入：c = 1
+     * 输出：true
+     *
+     */
+    public boolean judgeSquareSum(int c) {
+        boolean result=false;
+        for(int i=0;i<=Math.sqrt(c);i++){
+            int num1= i * i;
+            int num2= (int)Math.sqrt(c-num1);
+            if(num1 + num2 * num2 == c){
+                result=true;
+                break;
+            }
+        }
+        return result;
     }
     //endregion
 
