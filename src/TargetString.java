@@ -695,11 +695,11 @@ public class TargetString {
                 if(ab[j]=='\0'){
                     ab[j]=s.charAt(i);
                     index[j]=i;
-                    if(j!=3){
+                    if(j!=2){
                         break;
                     }
                 }
-                if(j==3){
+                if(j==2){
                     int num=index[2]-index[0];
                     if(num>maxLength){
                         maxLength=num;
@@ -716,6 +716,9 @@ public class TargetString {
                 }
             }
         }
+        if(s.length()-index[0]>maxLength){
+            maxLength=s.length()-index[0];
+        }
         return maxLength;
     }
     // endregion
@@ -724,6 +727,6 @@ public class TargetString {
 //        String s=(new TargetString()).customSortString("cba","abcd");
 //        String res=(new TargetString()).defangIPaddr("1.1.1.1");
 //        System.out.println(res);
-        int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("eceba");
+        int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("ccaabbb");
     }
 }
