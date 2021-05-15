@@ -201,9 +201,9 @@ public class TargetDynamicProgramming {
     //region 403 青蛙过河
     /**
      * 一只青蛙想要过河。 假定河流被等分为若干个单元格，并且在每一个单元格内都有可能放有一块石子（也有可能没有）。 青蛙可以跳上石子，但是不可以跳入水中。
-     * 给你石子的位置列表 stones（用单元格序号 升序 表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一块石子上）。
-     * 开始时， 青蛙默认已站在第一块石子上，并可以假定它第一步只能跳跃一个单位（即只能从单元格 1 跳至单元格 2 ）。
-     * 如果青蛙上一步跳跃了 k 个单位，那么它接下来的跳跃距离只能选择为 k - 1、k 或 k + 1 个单位。 另请注意，青蛙只能向前方（终点的方向）跳跃。
+     * 给你石子的位置列表 stones（用单元格序号 升序 表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一块石子上）。
+     * 开始时， 青蛙默认已站在第一块石子上，并可以假定它第一步只能跳跃一个单位（即只能从单元格 1 跳至单元格 2 ）。
+     * 如果青蛙上一步跳跃了 k 个单位，那么它接下来的跳跃距离只能选择为 k - 1、k 或 k + 1 个单位。 另请注意，青蛙只能向前方（终点的方向）跳跃。
      *
      * 示例 1：
      * 输入：stones = [0,1,3,5,6,8,12,17]
@@ -213,7 +213,7 @@ public class TargetDynamicProgramming {
      * 输入：stones = [0,1,2,3,4,8,9,11]
      * 输出：false
      * 解释：这是因为第 5 和第 6 个石子之间的间距太大，没有可选的方案供青蛙跳跃过去。
-     *  
+     *
      * 提示：
      * 2 <= stones.length <= 2000
      * 0 <= stones[i] <= 231 - 1
@@ -227,14 +227,13 @@ public class TargetDynamicProgramming {
 
     //region 877. 石子游戏   2019/10/22  动态规划
     /**
-     * 亚历克斯和李用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 piles[i] 。
+     * 亚历克斯和李用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 piles[i] 。
      * 游戏以谁手中的石子最多来决出胜负。石子的总数是奇数，所以没有平局。
      * 亚历克斯和李轮流进行，亚历克斯先开始。
      * 每回合，玩家从行的开始或结束处取走整堆石头。
      * 这种情况一直持续到没有更多的石子堆为止，此时手中石子最多的玩家获胜。
      *
-     * 假设亚历克斯和李都发挥出最佳水平，当亚历克斯赢得比赛时返回 true ，当李赢得比赛时返回 false 。
-      
+     * 假设亚历克斯和李都发挥出最佳水平，当亚历克斯赢得比赛时返回 true ，当李赢得比赛时返回 false。
      *
      * 示例：
      * 输入：[5,3,4,5]
@@ -244,40 +243,96 @@ public class TargetDynamicProgramming {
      * 假设他取了前 5 颗，这一行就变成了 [3,4,5] 。
      * 如果李拿走前 3 颗，那么剩下的是 [4,5]，亚历克斯拿走后 5 颗赢得 10 分。
      * 如果李拿走后 5 颗，那么剩下的是 [3,4]，亚历克斯拿走后 4 颗赢得 9 分。
-     * 这表明，取前 5 颗石子对亚历克斯来说是一个胜利的举动，所以我们返回 true 。 
+     * 这表明，取前 5 颗石子对亚历克斯来说是一个胜利的举动，所以我们返回 true 。
      *
      * 提示：
      * 2 <= piles.length <= 500
      * piles.length 是偶数。
      * 1 <= piles[i] <= 500
-     * sum(piles) 是奇数。
+     * sum(piles) 是奇数。
      * @param piles
      * @return
      */
     public boolean stoneGame(int[] piles) {
         int N = piles.length;
-
-        // dp[i+1][j+1] = the value of the game [piles[i], ..., piles[j]].
         int[][] dp = new int[N+2][N+2];
         for (int size = 1; size <= N; ++size)
             for (int i = 0; i + size <= N; ++i) {
                 int j = i + size - 1;
                 int parity = (j + i + N) % 2;  // j - i - N; but +x = -x (mod 2)
                 if (parity == 1)
+                {
                     dp[i+1][j+1] = Math.max(piles[i] + dp[i+2][j+1], piles[j] + dp[i+1][j]);
+                }
                 else
+                {
                     dp[i+1][j+1] = Math.min(-piles[i] + dp[i+2][j+1], -piles[j] + dp[i+1][j]);
+                }
             }
 
         return dp[1][N] > 0;
     }
     //endregion
 
+    // region 1269. 停在原地的方案数 2021/05/13
+    /**
+     * 有一个长度为 arrLen 的数组，开始有一个指针在索引 0 处。
+     * 每一步操作中，你可以将指针向左或向右移动 1 步，或者停在原地（指针不能被移动到数组范围外）。
+     * 给你两个整数 steps 和arrLen ，请你计算并返回：在恰好执行 steps 次操作以后，指针仍然指向索引 0 处的方案数。
+     * 由于答案可能会很大，请返回方案数 模10^9 + 7 后的结果。
+     *
+     * 示例 1：
+     * 输入：steps = 3, arrLen = 2
+     * 输出：4
+     * 解释：3 步后，总共有 4 种不同的方法可以停在索引 0 处。
+     * 向右，向左，不动
+     * 不动，向右，向左
+     * 向右，不动，向左
+     * 不动，不动，不动
+     * 示例 2：
+     * 输入：steps = 2, arrLen = 4
+     * 输出：2
+     * 解释：2 步后，总共有 2 种不同的方法可以停在索引 0 处。
+     * 向右，向左
+     * 不动，不动
+     * 示例 3：
+     *
+     * 输入：steps = 4, arrLen = 2
+     * 输出：8
+     *
+     * 提示：
+     * 1 <= steps <= 500
+     * 1 <= arrLen <= 10^6
+     *
+     * @param steps
+     * @param arrLen
+     * @return
+     */
+    public int numWays(int steps, int arrLen) {
+        final int MODULO = 1000000007;
+        int maxColums=Math.min(steps,arrLen-1);
+        int[][] numWays=new int[steps+1][maxColums+1];
+        numWays[0][0] = 1;
+        for(int i=1;i<=steps;i++) {
+            for (int j = 0; j <=maxColums; j++) {
+                numWays[i][j] = numWays[i - 1][j];
+                if (j - 1 >= 0) {
+                    numWays[i][j] = (numWays[i][j] + numWays[i - 1][j - 1]) % MODULO ;
+                }
+                if (j + 1 <=maxColums) {
+                    numWays[i][j] = (numWays[i][j] + numWays[i - 1][j + 1]) % MODULO ;
+                }
+            }
+        }
+        return numWays[steps][0];
+    }
+    // endregion
 
     public static void main(String[] args) {
-        int[][] arrays=new int[1][2];
-        arrays[0][0]=1;
-        arrays[0][1]=0;
-        int num=(new TargetDynamicProgramming()).uniquePathsWithObstacles(arrays);
+//        int[][] arrays=new int[1][2];
+//        arrays[0][0]=1;
+//        arrays[0][1]=0;
+//        int num=(new TargetDynamicProgramming()).uniquePathsWithObstacles(arrays);
+//        int num=(new TargetDynamicProgramming()).numWays(4,3);
     }
 }
