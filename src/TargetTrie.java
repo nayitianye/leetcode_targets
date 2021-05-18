@@ -9,7 +9,7 @@ public class TargetTrie {
 
     //region 208. 实现 Trie (前缀树)  2019/10/8  前缀树的实现
     /**
-     * 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+     * 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
      * 示例:
      * Trie trie = new Trie();
      * trie.insert("apple");
@@ -19,7 +19,7 @@ public class TargetTrie {
      * trie.insert("app");
      * trie.search("app");     // 返回 true
      * 说明:
-     * 你可以假设所有的输入都是由小写字母 a-z 构成的。
+     * 你可以假设所有的输入都是由小写字母 a-z 构成的。
      * 保证所有输入均为非空字符串。
      */
     class Trie {
@@ -93,7 +93,7 @@ public class TargetTrie {
      *
      * void addWord(word)
      * bool search(word)
-     * search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 . 或 a-z 。 . 可以表示任何一个字母。
+     * search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 . 或 a-z 。 . 可以表示任何一个字母。
      *
      * 示例:
      *
@@ -187,7 +187,7 @@ public class TargetTrie {
      * 示例 5：
      * 输入：nums = [14,70,53,83,49,91,36,80,92,51,66,70]
      * 输出：127
-     *  
+     *  
      * 提示：
      * 1 <= nums.length <= 2 * 10^4
      * 0 <= nums[i] <= 2^31 - 1
@@ -264,8 +264,8 @@ public class TargetTrie {
 
     //region 677. 键值映射  2019/10/8  字典树+映射
     /**
-     * 实现一个 MapSum 类里的两个方法，insert 和 sum。
-     * 对于方法 insert，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。
+     * 实现一个 MapSum 类里的两个方法，insert 和 sum。
+     * 对于方法 insert，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。
      * 如果键已经存在，那么原来的键值对将被替代成新的键值对。
      * 对于方法 sum，你将得到一个表示前缀的字符串，你需要返回所有以该前缀开头的键的值的总和。
      *
