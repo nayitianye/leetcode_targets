@@ -114,7 +114,6 @@ public class TargetLinkedList {
     }
     //endregion
 
-
     public static void main(String[] args) {
         int[] nums={1,2,6,3,4,6};
         ListNode head=new ListNode(nums);
