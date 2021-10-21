@@ -13,13 +13,13 @@ public class TargetBitManipulation {
     //region 169. 求众数   2019/10/22  hashMap解决
     /**
      * 给定一个大小为 n 的数组，找到其中的众数。
-     * 众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+     * 众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
      * 你可以假设数组是非空的，并且给定的数组总是存在众数。
      *
-     * 示例 1:
+     * 示例 1:
      * 输入: [3,2,3]
      * 输出: 3
-     * 示例 2:
+     * 示例 2:
      * 输入: [2,2,1,1,1,2,2]
      * 输出: 2
      * @param nums
@@ -58,8 +58,8 @@ public class TargetBitManipulation {
      * 输出: ["12345"]
      *
      * 注意：
-     * S 的长度不超过12。
-     * S 仅由数字和字母组成。
+     * S 的长度不超过12。
+     * S 仅由数字和字母组成。
      * @param S
      * @return
      */
@@ -140,56 +140,6 @@ public class TargetBitManipulation {
     }
     // endregion
 
-    //region 1442. 形成两个异或相等数组的三元组数目 2021/5/18
-    /**
-     * 给你一个整数数组 arr 。
-     * 现需要从数组中取三个下标 i、j 和 k ，其中 (0 <= i < j <= k < arr.length) 。
-     * a 和 b 定义如下：
-     * a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1]
-     * b = arr[j] ^ arr[j + 1] ^ ... ^ arr[k]
-     * 注意：^ 表示 按位异或 操作。
-     * 请返回能够令 a == b 成立的三元组 (i, j , k) 的数目。
-     *
-     * 示例 1：
-     * 输入：arr = [2,3,1,6,7]
-     * 输出：4
-     * 解释：满足题意的三元组分别是 (0,1,2), (0,2,2), (2,3,4) 以及 (2,4,4)
-     * 示例 2：
-     * 输入：arr = [1,1,1,1,1]
-     * 输出：10
-     * 示例 3：
-     * 输入：arr = [2,3]
-     * 输出：0
-     * 示例 4：
-     * 输入：arr = [1,3,5,7,9]
-     * 输出：3
-     * 示例 5：
-     * 输入：arr = [7,11,12,9,5,2,7,17,22]
-     * 输出：8
-     * 提示：
-     * 1 <= arr.length <= 300
-     * 1 <= arr[i] <= 10^8
-     * @param arr
-     * @return
-     */
-    public int countTriplets(int[] arr) {
-        int n=arr.length;
-        Map<Integer,Integer> cnt=new HashMap<>();
-        Map<Integer,Integer> total=new HashMap<>();
-        int ans=0,s=0;
-        for(int i=0;i<n;i++){
-            int temp=arr[i];
-            if(cnt.containsKey(s^temp)){
-                ans+=cnt.get(s^temp)*i-total.get(s^temp);
-            }
-            cnt.put(s,cnt.getOrDefault(s,0)+1);
-            total.put(s,total.getOrDefault(s,0)+i);
-            s^=temp;
-        }
-        return ans;
-    }
-    //endregion
-
     // region  1486. 数组异或操作 2021/05/12
     /**
      * 给你两个整数，n 和 start 。
@@ -268,9 +218,9 @@ public class TargetBitManipulation {
     //region  1734. 解码异或后的排列  2021/05/11
 
     /**
-     * 给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。
-     * 它被加密成另一个长度为 n - 1 的整数数组 encoded ，满足 encoded[i] = perm[i] XOR perm[i + 1] 。比方说，如果 perm = [1,3,2] ，那么 encoded = [2,1] 。
-     * 给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。
+     * 给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。
+     * 它被加密成另一个长度为 n - 1 的整数数组 encoded ，满足 encoded[i] = perm[i] XOR perm[i + 1] 。比方说，如果 perm = [1,3,2] ，那么 encoded = [2,1] 。
+     * 给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。
      *
      * 示例 1：
      * 输入：encoded = [3,1]
