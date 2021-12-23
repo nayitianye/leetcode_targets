@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.commons.xmlutil.Converter;
+
 import java.util.*;
 
 /**
@@ -208,6 +210,44 @@ public class TargetString {
         }
     }
     //endregion
+
+    // region  159. 至多包含两个不同字符的最长子串
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int maxLength=0;
+        char[] ab=new char[3];
+        int[] index=new int[3];
+        for(int i=0;i<s.length();i++){
+            for(int j=0;j<ab.length;j++){
+                if(ab[j]=='\0'){
+                    ab[j]=s.charAt(i);
+                    index[j]=i;
+                    if(j!=2){
+                        break;
+                    }
+                }
+                if(j==2){
+                    int num=index[2]-index[0];
+                    if(num>maxLength){
+                        maxLength=num;
+                    }
+                    ab[0]=ab[1];
+                    ab[1]=ab[2];
+                    ab[2]='\0';
+                    index[0]=index[1];
+                    index[1]=index[2];
+                    break;
+                }
+                if(ab[j]==s.charAt(i)){
+                    break;
+                }
+            }
+        }
+        if(s.length()-index[0]>maxLength){
+            maxLength=s.length()-index[0];
+        }
+        return maxLength;
+    }
+    // endregion
 
     //region 186. 翻转字符串里的单词 II  2019/10/6  字符串处理
     /**
@@ -441,6 +481,69 @@ public class TargetString {
             return false;
         }
         return true;
+    }
+    //endregion
+
+    //region 686. 重复叠加字符串匹配  2021/12/22 字符串处理
+    /**
+     * 给定两个字符串 a 和 b，寻找重复叠加字符串 a 的最小次数，使得字符串 b 成为叠加后的字符串 a 的子串，如果不存在则返回 -1。
+     * 注意：字符串 "abc" 重复叠加 0 次是 ""，重复叠加 1 次是 "abc"，重复叠加 2 次是 "abcabc"。
+     *
+     * 示例 1：
+     * 输入：a = "abcd", b = "cdabcdab"
+     * 输出：3
+     * 解释：a 重复叠加三遍后为 "abcdabcdabcd", 此时 b 是其子串。
+     *
+     * 示例 2：
+     * 输入：a = "a", b = "aa"
+     * 输出：2
+     *
+     * 示例 3：
+     * 输入：a = "a", b = "a"
+     * 输出：1
+     *
+     * 示例 4：
+     * 输入：a = "abc", b = "wxyz"
+     * 输出：-1
+     *
+     * 提示：
+     * 1 <= a.length <= 10^4
+     * 1 <= b.length <= 10^4
+     * a 和 b 由小写英文字母组成
+     * @param a
+     * @param b
+     * @return
+     */
+    public int repeatedStringMatch(String a, String b) {
+        int n=b.length() / a.length();
+        if(n>=1){
+            if(b.length()%a.length()!=0){
+                n++;
+            }
+            else{
+                if(a.charAt(0)!=b.charAt(0)){
+                    n++;
+                }
+            }
+        }else{
+            n=1;
+        }
+        //构造a生成的最小串
+        StringBuilder res=new StringBuilder();
+        for(int i=0;i<n;i++){
+            res.append(a);
+        }
+        //如果匹配则返回重复的次数，否则即不匹配返回-1
+        if(res.toString().contains(b)) {
+            return n;
+        }
+        else {
+            if(res.append(a).toString().contains(b)){
+                return n+1;
+            }else{
+                return -1;
+            }
+        }
     }
     //endregion
 
@@ -759,6 +862,87 @@ public class TargetString {
     }
     //endregion
 
+    //region 1154. 一年中的第几天  2021/12/22 字符串处理
+    /**
+     * 给你一个字符串 date ，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。请你计算并返回该日期是当年的第几天。
+     * 通常情况下，我们认为 1 月 1 日是每年的第 1 天，1 月 2 日是每年的第 2 天，依此类推。每个月的天数与现行公元纪年法（格里高利历）一致。
+     *
+     * 示例 1：
+     * 输入：date = "2019-01-09"
+     * 输出：9
+     * 
+     * 示例 2：
+     * 输入：date = "2019-02-10"
+     * 输出：41
+     * 
+     * 示例 3：
+     * 输入：date = "2003-03-01"
+     * 输出：60
+     * 
+     * 示例 4：
+     * 输入：date = "2004-03-01"
+     * 输出：61
+     *  
+     * 提示：
+     * date.length == 10
+     * date[4] == date[7] == '-'，其他的 date[i] 都是数字
+     * date 表示的范围从 1900 年 1 月 1 日至 2019 年 12 月 31 日
+     *
+     * @param date
+     * @return
+     */
+    public int dayOfYear(String date) {
+        int res=0;
+        String[] dateList=date.split("-");
+        switch (dateList[1]){
+            case "01":
+                res=0;
+                break;
+            case "02":
+                res=31;
+                break;
+            case "03":
+                res=59;
+                break;
+            case "04":
+                res=90;
+                break;
+            case "05":
+                res=120;
+                break;
+            case "06":
+                res=151;
+                break;
+            case "07":
+                res=181;
+                break;
+            case "08":
+                res=212;
+                break;
+            case "09":
+                res=243;
+                break;
+            case "10":
+                res=273;
+                break;
+            case "11":
+                res=304;
+                break;
+            case "12":
+                res=334;
+                break;
+            default:
+                break;
+        }
+        int year= Integer.parseInt(dateList[0]);
+        if(((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) && Integer.parseInt(dateList[1]) > 2){
+            res++;
+        }
+        res += Integer.parseInt(dateList[2]);
+        return res;
+    }
+    //endregion
+
     //region 1165. 单行键盘
     /**
      * 我们定制了一款特殊的力扣键盘，所有的键都排列在一行上。
@@ -809,48 +993,10 @@ public class TargetString {
     }
     //endregion
 
-    // region  159. 至多包含两个不同字符的最长子串
-    public int lengthOfLongestSubstringTwoDistinct(String s) {
-        int maxLength=0;
-        char[] ab=new char[3];
-        int[] index=new int[3];
-        for(int i=0;i<s.length();i++){
-            for(int j=0;j<ab.length;j++){
-                if(ab[j]=='\0'){
-                    ab[j]=s.charAt(i);
-                    index[j]=i;
-                    if(j!=2){
-                        break;
-                    }
-                }
-                if(j==2){
-                    int num=index[2]-index[0];
-                    if(num>maxLength){
-                        maxLength=num;
-                    }
-                    ab[0]=ab[1];
-                    ab[1]=ab[2];
-                    ab[2]='\0';
-                    index[0]=index[1];
-                    index[1]=index[2];
-                    break;
-                }
-                if(ab[j]==s.charAt(i)){
-                    break;
-                }
-            }
-        }
-        if(s.length()-index[0]>maxLength){
-            maxLength=s.length()-index[0];
-        }
-        return maxLength;
-    }
-    // endregion
-
     public static void main(String[] args){
-//        String s=(new TargetString()).customSortString("cba","abcd");
-//        String res=(new TargetString()).defangIPaddr("1.1.1.1");
-//        System.out.println(res);
-        int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("ccaabbb");
+        //int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("ccaabbb");
+
+        //int res=(new TargetString().repeatedStringMatch("abccb","cbabccb"));
+        int res=(new TargetString().dayOfYear("1900-3-26"));
     }
 }
