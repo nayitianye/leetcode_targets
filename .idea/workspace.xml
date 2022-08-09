@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
-      <change beforePath="$PROJECT_DIR$/src/TargetArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetBackTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetBackTracking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetBinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetBinarySearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetBitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetBitManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetDepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDepthFirstSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetDivideAndConquer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDivideAndConquer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetGreedy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetGreedy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetHashTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetMath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetMinimax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetMinimax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetRecursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetRecursion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TargetString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetTopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetTopologicalSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetTrie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetTrie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetTwoPointers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetTwoPointers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +47,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="F:\Git\bin\git.exe" />
+    <option name="PATH_TO_GIT" value="E:\Git\bin\git.exe" />
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
         <option value="nayitianye &lt;644631077@qq.com&gt;" />
@@ -112,11 +95,17 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenProjectNavigator">
     <treeState>
       <expand />
       <select />
     </treeState>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-25" />
@@ -171,9 +160,9 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.TargetDynamicProgramming">
+  <component name="RunManager" selected="Application.TargetString">
     <configuration name="TargetDynamicProgramming" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetDynamicProgramming" />
       <module name="leetcode_targets" />
@@ -211,17 +200,17 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TargetTree" />
         <item itemvalue="Application.TargetString" />
-        <item itemvalue="Application.TargetQueue" />
         <item itemvalue="Application.TargetDynamicProgramming" />
+        <item itemvalue="Application.TargetTree" />
+        <item itemvalue="Application.TargetQueue" />
         <item itemvalue="Application.TargetLinkedList" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
-    <configuration>C:\Users\yyb\AppData\Roaming\Subversion</configuration>
+    <configuration>C:\Users\yeyb32016\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -289,6 +278,14 @@
       <workItem from="1634657315018" duration="3151000" />
       <workItem from="1634743634558" duration="5061000" />
       <workItem from="1634822259185" duration="270000" />
+      <workItem from="1640153406942" duration="9468000" />
+      <workItem from="1640164764041" duration="352000" />
+      <workItem from="1640165147944" duration="203000" />
+      <workItem from="1640165403341" duration="2957000" />
+      <workItem from="1646275460056" duration="165000" />
+      <workItem from="1646278261286" duration="615000" />
+      <workItem from="1651800674472" duration="689000" />
+      <workItem from="1651894341650" duration="1660000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -496,7 +493,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="第一次提交" />
@@ -523,7 +519,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>jar://D:/Java/jdk1.8.0_191/src.zip!/java/util/PriorityQueue.java</url>
           <line>612</line>
-          <properties class="java.util.PriorityQueue" method="removeAt">
+          <properties class="java.util.PriorityQueue">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
@@ -540,28 +536,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>548</line>
+          <line>546</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>550</line>
+          <line>548</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetQueue.java</url>
           <line>22</line>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetString.java</url>
-          <line>720</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetString.java</url>
-          <line>722</line>
-          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
