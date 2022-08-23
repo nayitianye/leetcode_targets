@@ -13,13 +13,13 @@ public class TargetBitManipulation {
     //region 169. 求众数   2019/10/22  hashMap解决
     /**
      * 给定一个大小为 n 的数组，找到其中的众数。
-     * 众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+     * 众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
      * 你可以假设数组是非空的，并且给定的数组总是存在众数。
      *
-     * 示例 1:
+     * 示例 1:
      * 输入: [3,2,3]
      * 输出: 3
-     * 示例 2:
+     * 示例 2:
      * 输入: [2,2,1,1,1,2,2]
      * 输出: 2
      * @param nums
@@ -58,8 +58,8 @@ public class TargetBitManipulation {
      * 输出: ["12345"]
      *
      * 注意：
-     * S 的长度不超过12。
-     * S 仅由数字和字母组成。
+     * S 的长度不超过12。
+     * S 仅由数字和字母组成。
      * @param S
      * @return
      */
@@ -218,9 +218,9 @@ public class TargetBitManipulation {
     //region  1734. 解码异或后的排列  2021/05/11
 
     /**
-     * 给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。
-     * 它被加密成另一个长度为 n - 1 的整数数组 encoded ，满足 encoded[i] = perm[i] XOR perm[i + 1] 。比方说，如果 perm = [1,3,2] ，那么 encoded = [2,1] 。
-     * 给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。
+     * 给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。
+     * 它被加密成另一个长度为 n - 1 的整数数组 encoded ，满足 encoded[i] = perm[i] XOR perm[i + 1] 。比方说，如果 perm = [1,3,2] ，那么 encoded = [2,1] 。
+     * 给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。
      *
      * 示例 1：
      * 输入：encoded = [3,1]

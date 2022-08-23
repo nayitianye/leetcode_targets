@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetBackTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetBackTracking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetBitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetBitManipulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetDepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDepthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetDivideAndConquer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDivideAndConquer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetGreedy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetGreedy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetMath.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,6 +291,7 @@
       <workItem from="1646278261286" duration="615000" />
       <workItem from="1651800674472" duration="689000" />
       <workItem from="1651894341650" duration="1660000" />
+      <workItem from="1660115573066" duration="2377000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -548,6 +554,11 @@
           <url>file://$PROJECT_DIR$/src/TargetQueue.java</url>
           <line>22</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetMath.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
