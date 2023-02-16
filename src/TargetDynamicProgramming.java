@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author yyb
@@ -152,6 +154,98 @@ public class TargetDynamicProgramming {
             next = temp;
         }
         return next;
+    }
+    //endregion
+
+    // region 198. 打家劫舍 20230216
+
+    /**
+     * 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+     * 给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
+     * <p>
+     * 示例 1：
+     * 输入：[1,2,3,1]
+     * 输出：4
+     * 解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+     * 偷窃到的最高金额 = 1 + 3 = 4 。
+     * 示例 2：
+     * 输入：[2,7,9,3,1]
+     * 输出：12
+     * 解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+     * 偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 100
+     * 0 <= nums[i] <= 400
+     *
+     * @param nums
+     * @return
+     */
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    // endregion
+
+    // region  213. 打家劫舍 II 20230216
+
+    /**
+     * 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。
+     * 给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [2,3,2]
+     * 输出：3
+     * 解释：你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。
+     * 示例 2：
+     * 输入：nums = [1,2,3,1]
+     * 输出：4
+     * 解释：你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。
+     * 偷窃到的最高金额 = 1 + 3 = 4 。
+     * 示例 3：
+     * 输入：nums = [1,2,3]
+     * 输出：3
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 100
+     * 0 <= nums[i] <= 1000
+     *
+     * @param nums
+     * @return
+     */
+    public int rob2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        if (nums.length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+        return Math.max(maxRob(0, nums.length - 1, nums), maxRob(1, nums.length, nums));
+    }
+
+    public int maxRob(int start, int end, int[] nums) {
+        int first = nums[start], second = Math.max(nums[start], nums[start + 1]);
+        for (int i = start + 2; i < end; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
     }
     //endregion
 
@@ -338,6 +432,70 @@ public class TargetDynamicProgramming {
             hashMapfib.put(n, fib1(n - 1) + fib1(n - 2));
             return fib1(n - 1) + fib1(n - 2);
         }
+    }
+    //endregion
+
+    //region 740. 删除并获得点数 20230216
+
+    /**
+     * 给你一个整数数组 nums ，你可以对它进行一些操作。
+     * 每次操作中，选择任意一个 nums[i] ，删除它并获得 nums[i] 的点数。之后，你必须删除 所有 等于 nums[i] - 1 和 nums[i] + 1 的元素。
+     * 开始你拥有 0 个点数。返回你能通过这些操作获得的最大点数。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [3,4,2]
+     * 输出：6
+     * 解释：
+     * 删除 4 获得 4 个点数，因此 3 也被删除。
+     * 之后，删除 2 获得 2 个点数。总共获得 6 个点数。
+     * 示例 2：
+     * 输入：nums = [2,2,3,3,3,4]
+     * 输出：9
+     * 解释：
+     * 删除 3 获得 3 个点数，接着要删除两个 2 和 4 。
+     * 之后，再次删除 3 获得 3 个点数，再次删除 3 获得 3 个点数。
+     * 总共获得 9 个点数。
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 2 * 104
+     * 1 <= nums[i] <= 104
+     *
+     * @param nums
+     * @return
+     */
+    public int deleteAndEarn(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int max=0;
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.containsKey(nums[i])) {
+                hashMap.put(nums[i], hashMap.get(nums[i]) + nums[i]);
+            } else {
+                hashMap.put(nums[i], nums[i]);
+            }
+            if(max<nums[i]){
+                max=nums[i];
+            }
+        }
+        int[] list = new int[max+1];
+        for(Integer key:hashMap.keySet()){
+            list[key]=hashMap.get(key);
+        }
+        if (list.length == 1) {
+            return list[0];
+        }
+        int first=list[0],second=Math.max(list[0],list[1]);
+        for(int i=2;i< list.length;i++){
+            int temp=second;
+            second=Math.max(first+list[i],second);
+            first=temp;
+        }
+        return second;
     }
     //endregion
 
