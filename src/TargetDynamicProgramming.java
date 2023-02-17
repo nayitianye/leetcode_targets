@@ -9,6 +9,162 @@ import java.util.Map;
  */
 public class TargetDynamicProgramming {
 
+    //region 45. 跳跃游戏 II  20230217
+
+    /**
+     * 给定一个长度为 n 的 0 索引整数数组 nums。初始位置为 nums[0]。
+     * 每个元素 nums[i] 表示从索引 i 向前跳转的最大长度。换句话说，如果你在 nums[i] 处，你可以跳转到任意 nums[i + j] 处:
+     * 0 <= j <= nums[i]
+     * i + j < n
+     * 返回到达 nums[n - 1] 的最小跳跃次数。生成的测试用例可以到达 nums[n - 1]。
+     * <p>
+     * 示例 1:
+     * 输入: nums = [2,3,1,1,4]
+     * 输出: 2
+     * 解释: 跳到最后一个位置的最小跳跃数是 2。
+     * 从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。
+     * 示例 2:
+     * 输入: nums = [2,3,0,1,4]
+     * 输出: 2
+     * <p>
+     * 提示:
+     * 1 <= nums.length <= 10^4
+     * 0 <= nums[i] <= 1000
+     * 题目保证可以到达 nums[n-1]
+     *
+     * @param nums
+     * @return
+     */
+    public int jump(int[] nums) {
+        //下一次跳的位置
+        int end = 0;
+        //最大的跳跃距离
+        int maxPosition = 0;
+        //跳跃次数
+        int steps = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            maxPosition = Math.max(maxPosition, i + nums[i]);
+            if (i == end) {
+                end = maxPosition;
+                steps++;
+            }
+        }
+        return steps;
+    }
+    //endregion
+
+    //region 53. 最大子数组和  20230217
+
+    /**
+     * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     * 子数组 是数组中的一个连续部分。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出：6
+     * 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+     * 示例 2：
+     * 输入：nums = [1]
+     * 输出：1
+     * 示例 3：
+     * 输入：nums = [5,4,-1,7,8]
+     * 输出：23
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 10^5
+     * -10^4 <= nums[i] <= 10^4
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int maxNum = nums[0];
+        int res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            maxNum = Math.max(maxNum + nums[i], nums[i]);
+            if (maxNum > res) {
+                res = maxNum;
+            }
+            if (maxNum < 0) {
+                maxNum = 0;
+            }
+        }
+        return res;
+    }
+    //endregion
+
+    //region 55. 跳跃游戏   20230217
+
+    /**
+     * 给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。
+     * 数组中的每个元素代表你在该位置可以跳跃的最大长度。
+     * 判断你是否能够到达最后一个下标。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [2,3,1,1,4]
+     * 输出：true
+     * 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+     * 示例 2：
+     * 输入：nums = [3,2,1,0,4]
+     * 输出：false
+     * 解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 3 * 104
+     * 0 <= nums[i] <= 105
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canJump(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        if (nums.length == 1) {
+            return true;
+        }
+        if (nums[0] == 0) {
+            return false;
+        }
+        //数组表示第i个元素能够到的最远的距离
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        for (int i = 1; i < nums.length - 1; i++) {
+            dp[i] = Math.max(dp[i - 1], nums[i] + i);
+            if (dp[i] == i) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canJump1(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        //前n-1个元素能够跳到的最远的距离
+        int mostLength = 0;
+        for (int i = 0; i <= mostLength; i++) {
+            //第i个元素能够跳到的最远距离
+            int temp = i + nums[i];
+            //更新最远距离
+            mostLength = Math.max(mostLength, temp);
+            //如果最远距离已经大于或等于最后一个元素的下标，则说明能跳过去，退出，减少循环
+            if (mostLength >= nums.length - 1) {
+                return true;
+            }
+        }
+        //最远距离k不再改变，且没有到末尾元素
+        return false;
+    }
+    //endregion
+
     //region 62. 不同路径   2019/10/7  动态规划+数组
 
     /**
@@ -471,29 +627,29 @@ public class TargetDynamicProgramming {
             return nums[0];
         }
         HashMap<Integer, Integer> hashMap = new HashMap<>();
-        int max=0;
+        int max = 0;
         for (int i = 0; i < nums.length; i++) {
             if (hashMap.containsKey(nums[i])) {
                 hashMap.put(nums[i], hashMap.get(nums[i]) + nums[i]);
             } else {
                 hashMap.put(nums[i], nums[i]);
             }
-            if(max<nums[i]){
-                max=nums[i];
+            if (max < nums[i]) {
+                max = nums[i];
             }
         }
-        int[] list = new int[max+1];
-        for(Integer key:hashMap.keySet()){
-            list[key]=hashMap.get(key);
+        int[] list = new int[max + 1];
+        for (Integer key : hashMap.keySet()) {
+            list[key] = hashMap.get(key);
         }
         if (list.length == 1) {
             return list[0];
         }
-        int first=list[0],second=Math.max(list[0],list[1]);
-        for(int i=2;i< list.length;i++){
-            int temp=second;
-            second=Math.max(first+list[i],second);
-            first=temp;
+        int first = list[0], second = Math.max(list[0], list[1]);
+        for (int i = 2; i < list.length; i++) {
+            int temp = second;
+            second = Math.max(first + list[i], second);
+            first = temp;
         }
         return second;
     }
@@ -588,6 +744,56 @@ public class TargetDynamicProgramming {
             }
 
         return dp[1][N] > 0;
+    }
+    //endregion
+
+    //region  918. 环形子数组的最大和 20230217
+    /**
+     * 给定一个长度为 n 的环形整数数组 nums ，返回 nums 的非空 子数组 的最大可能和 。
+     * 环形数组 意味着数组的末端将会与开头相连呈环状。形式上， nums[i] 的下一个元素是 nums[(i + 1) % n] ， nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
+     * 子数组 最多只能包含固定缓冲区 nums 中的每个元素一次。形式上，对于子数组 nums[i], nums[i + 1], ..., nums[j] ，不存在 i <= k1, k2 <= j 其中 k1 % n == k2 % n 。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [1,-2,3,-2]
+     * 输出：3
+     * 解释：从子数组 [3] 得到最大和 3
+     * 示例 2：
+     * 输入：nums = [5,-3,5]
+     * 输出：10
+     * 解释：从子数组 [5,5] 得到最大和 5 + 5 = 10
+     * 示例 3：
+     * 输入：nums = [3,-2,2,-3]
+     * 输出：3
+     * 解释：从子数组 [3] 和 [3,-2,2] 都可以得到最大和 3
+     * <p>
+     * 提示：
+     * n == nums.length
+     * 1 <= n <= 3 * 10^4
+     * -3 * 10^4 <= nums[i] <= 3 * 10^4
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubarraySumCircular(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int curMax, max, curMin, min, sum;
+        curMax = max = curMin = min = sum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            sum += nums[i];
+            curMax = curMax > 0 ? curMax + nums[i] : nums[i];
+            max = curMax > max ? curMax : max;
+            curMin = curMin < 0 ? curMin + nums[i] : nums[i];
+            min = curMin < min ? curMin : min;
+        }
+        if (max < 0) {
+            return max;
+        }
+        return Math.max(max, sum - min);
     }
     //endregion
 
