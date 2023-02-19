@@ -162,16 +162,16 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Application.TargetString">
-    <configuration name="TargetDynamicProgramming" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetDynamicProgramming" />
+  <component name="RunManager" selected="Application.TargetBinarySearch">
+    <configuration name="TargetBinarySearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetBinarySearch" />
       <module name="leetcode_targets" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetLinkedList" />
+    <configuration name="TargetDynamicProgramming" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetDynamicProgramming" />
       <module name="leetcode_targets" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -200,11 +200,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TargetBinarySearch" />
         <item itemvalue="Application.TargetString" />
         <item itemvalue="Application.TargetDynamicProgramming" />
         <item itemvalue="Application.TargetTree" />
         <item itemvalue="Application.TargetQueue" />
-        <item itemvalue="Application.TargetLinkedList" />
       </list>
     </recent_temporary>
   </component>
@@ -298,7 +298,7 @@
       <workItem from="1676551476685" duration="6957000" />
       <workItem from="1676634857050" duration="10999000" />
       <workItem from="1676721130451" duration="5785000" />
-      <workItem from="1676777309352" duration="181000" />
+      <workItem from="1676777309352" duration="15625000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -461,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676648673178</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数">
+      <created>1676777514187</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1676777514187</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -562,7 +569,8 @@
     <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
     <MESSAGE value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
     <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
-    <option name="LAST_COMMIT_MESSAGE" value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
+    <MESSAGE value="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数" />
+    <option name="LAST_COMMIT_MESSAGE" value="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,9 +609,24 @@
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetMath.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="22" />
+          <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
+          <line>185</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
+          <line>177</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
+          <line>618</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
+          <line>332</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
