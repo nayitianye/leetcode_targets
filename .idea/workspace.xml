@@ -214,7 +214,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="abf4b968-0d30-4221-a3e9-b505e981b11d" name="Changes" comment="" />
+      <changelist id="601a047d-9304-4176-bc95-41b222a52be0" name="Changes" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -296,7 +296,9 @@
       <workItem from="1675086935095" duration="18000" />
       <workItem from="1676471700965" duration="5658000" />
       <workItem from="1676551476685" duration="6957000" />
-      <workItem from="1676634857050" duration="10741000" />
+      <workItem from="1676634857050" duration="10999000" />
+      <workItem from="1676721130451" duration="5785000" />
+      <workItem from="1676777309352" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -452,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676562995238</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和">
+      <created>1676648673178</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1676648673178</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -552,7 +561,8 @@
     <MESSAGE value="1442. 形成两个异或相等数组的三元组数目" />
     <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
     <MESSAGE value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
-    <option name="LAST_COMMIT_MESSAGE" value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
+    <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
+    <option name="LAST_COMMIT_MESSAGE" value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
