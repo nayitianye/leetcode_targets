@@ -314,6 +314,7 @@ public class TargetDynamicProgramming {
     //endregion
 
     //region 121. 买卖股票的最佳时机  20230219
+
     /**
      * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
      * 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
@@ -340,45 +341,68 @@ public class TargetDynamicProgramming {
         if (prices == null || prices.length <= 1) {
             return 0;
         }
-        int min=prices[0],max=0;
-        for(int i=0;i<prices.length;i++){
-            max=Math.max(max,prices[i]-min);
-            min=Math.min(min,prices[i]);
+        int min = prices[0], max = 0;
+        for (int i = 0; i < prices.length; i++) {
+            max = Math.max(max, prices[i] - min);
+            min = Math.min(min, prices[i]);
         }
         return max;
     }
     //endregion
 
-    //region 122. 买卖股票的最佳时机 II 20220219
+    //region 122. 买卖股票的最佳时机 II 20220220
+
     /**
      * 给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。
      * 在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。
      * 返回 你能获得的 最大 利润 。
-     *
+     * <p>
      * 示例 1：
      * 输入：prices = [7,1,5,3,6,4]
      * 输出：7
      * 解释：在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5 - 1 = 4 。
-     *      随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3 。
-     *      总利润为 4 + 3 = 7 。
+     * 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3 。
+     * 总利润为 4 + 3 = 7 。
      * 示例 2：
      * 输入：prices = [1,2,3,4,5]
      * 输出：4
      * 解释：在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5 - 1 = 4 。
-     *      总利润为 4 。
+     * 总利润为 4 。
      * 示例 3：
      * 输入：prices = [7,6,4,3,1]
      * 输出：0
      * 解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为 0 。
-     *
+     * <p>
      * 提示：
      * 1 <= prices.length <= 3 * 10^4
      * 0 <= prices[i] <= 10^4
+     *
      * @param prices
      * @return
      */
     public int maxProfit1(int[] prices) {
-        return 0;
+        //贪心算法
+        int resProfit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                resProfit = resProfit + prices[i] - prices[i - 1];
+            }
+        }
+        return resProfit;
+    }
+
+    public int maxProfit2(int[] prices) {
+        //动态规划
+        int dp0 = 0, dp1 = -prices[0];
+        //dp0表示第i天交易完后手里没有股票的最大利润
+        //dp1表示第i天交易完后手里持有一只股票的最大利润
+        for (int i = 1; i < prices.length; i++) {
+            int newDp0 = Math.max(dp0, dp1 + prices[i]);
+            int newDp1 = Math.max(dp1, dp0 - prices[i]);
+            dp0 = newDp0;
+            dp1 = newDp1;
+        }
+        return dp0;
     }
     //endregion
 
@@ -545,6 +569,47 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 309. 最佳买卖股票时机含冷冻期 20230220
+
+    /**
+     * 给定一个整数数组prices，其中第  prices[i] 表示第 i 天的股票价格 。​
+     * 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
+     * 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+     * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     * <p>
+     * 示例 1:
+     * 输入: prices = [1,2,3,0,2]
+     * 输出: 3
+     * 解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
+     * 示例 2:
+     * 输入: prices = [1]
+     * 输出: 0
+     * <p>
+     * 提示：
+     * 1 <= prices.length <= 5000
+     * 0 <= prices[i] <= 1000[
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit3(int[] prices) {
+        if (prices == null || prices.length <= 1) {
+            return 0;
+        }
+        int[][] f = new int[prices.length][3];
+        //f[i][0]:手上持有股票的最大收益
+        //f[i][1]:手上不持有股票，并且处于冷冻期的累计最大收益
+        //f[i][2]:手上不持有股票，并且不在冷冻期的累计最大收益
+        f[0][0] = -prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            f[i][0] = Math.max(f[i - 1][0], f[i - 1][2] - prices[i]);
+            f[i][1] = f[i - 1][0] + prices[i];
+            f[i][2] = Math.max(f[i - 1][1], f[i - 1][2]);
+        }
+        return Math.max(f[prices.length - 1][1], f[prices.length - 1][2]);
+    }
+    //endregion
+
     //region 392. 判断子序列   2019/10/22
 
     /**
@@ -657,6 +722,51 @@ public class TargetDynamicProgramming {
             hashMapfib.put(n, fib1(n - 1) + fib1(n - 2));
             return fib1(n - 1) + fib1(n - 2);
         }
+    }
+    //endregion
+
+    //region 714. 买卖股票的最佳时机含手续费 20230220
+
+    /**
+     * 给定一个整数数组 prices，其中 prices[i]表示第 i 天的股票价格 ；整数 fee 代表了交易股票的手续费用。
+     * 你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。
+     * 返回获得利润的最大值。
+     * 注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。
+     * <p>
+     * 示例 1：
+     * 输入：prices = [1, 3, 2, 8, 4, 9], fee = 2
+     * 输出：8
+     * 解释：能够达到的最大利润:
+     * 在此处买入 prices[0] = 1
+     * 在此处卖出 prices[3] = 8
+     * 在此处买入 prices[4] = 4
+     * 在此处卖出 prices[5] = 9
+     * 总利润: ((8 - 1) - 2) + ((9 - 4) - 2) = 8
+     * 示例 2：
+     * 输入：prices = [1,3,7,5,10,3], fee = 3
+     * 输出：6
+     * <p>
+     * 提示：
+     * 1 <= prices.length <= 5 * 10^4
+     * 1 <= prices[i] < 5 * 10^4
+     * 0 <= fee < 5 * 10^4
+     *
+     * @param prices
+     * @param fee
+     * @return
+     */
+    public int maxProfit(int[] prices, int fee) {
+        if (prices == null || prices.length <= 1) {
+            return 0;
+        }
+        int dp0 = 0, dp1 = -prices[0] - fee;
+        for (int i = 1; i < prices.length; i++) {
+            int newDp0=Math.max(dp0,dp1+prices[i]);
+            int newDp1=Math.max(dp1,dp0-prices[i]-fee);
+            dp0=newDp0;
+            dp1=newDp1;
+        }
+        return dp0;
     }
     //endregion
 
