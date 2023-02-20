@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author yyb
  * leetcode_tag_binary_search
@@ -187,6 +189,60 @@ public class TargetBinarySearch {
     }
     //endregion
 
+    //region 167. 两数之和 II - 输入有序数组  20230221
+
+    /**
+     * 给你一个下标从 1 开始的整数数组 numbers ，该数组已按 非递减顺序排列  ，
+     * 请你从数组中找出满足相加之和等于目标数 target 的两个数。如果设这两个数分别是 numbers[index1] 和 numbers[index2] ，
+     * 则 1 <= index1 < index2 <= numbers.length 。
+     * 以长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2。
+     * 你可以假设每个输入 只对应唯一的答案 ，而且你 不可以 重复使用相同的元素。
+     * 你所设计的解决方案必须只使用常量级的额外空间。
+     * <p>
+     * <p>
+     * 示例 1：
+     * 输入：numbers = [2,7,11,15], target = 9
+     * 输出：[1,2]
+     * 解释：2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。
+     * 示例 2：
+     * 输入：numbers = [2,3,4], target = 6
+     * 输出：[1,3]
+     * 解释：2 与 4 之和等于目标数 6 。因此 index1 = 1, index2 = 3 。返回 [1, 3] 。
+     * 示例 3：
+     * 输入：numbers = [-1,0], target = -1
+     * 输出：[1,2]
+     * 解释：-1 与 0 之和等于目标数 -1 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。
+     * <p>
+     * 提示：
+     * 2 <= numbers.length <= 3 * 10^4
+     * -1000 <= numbers[i] <= 1000
+     * numbers 按 非递减顺序 排列
+     * -1000 <= target <= 1000
+     * 仅存在一个有效答案
+     *
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        //二分法
+        for (int i = 0; i < numbers.length; i++) {
+            int left = i + 1, right = numbers.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (numbers[mid] == target - numbers[i]) {
+                    return new int[]{i + 1, mid + 1};
+                } else if (numbers[mid] > target - numbers[i]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+    //endregion
+
     //region 278. 第一个错误版本 20211020
 
     /**
@@ -342,6 +398,30 @@ public class TargetBinarySearch {
         return left;
     }
     // endregion
+
+    //region 633. 平方数之和
+
+    /**
+     * 给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
+     * <p>
+     * 示例 1：
+     * 输入：c = 5
+     * 输出：true
+     * 解释：1 * 1 + 2 * 2 = 5
+     * 示例 2：
+     * 输入：c = 3
+     * 输出：false
+     * <p>
+     * 提示：
+     * 0 <= c <= 2^31 - 1
+     *
+     * @param c
+     * @return
+     */
+    public boolean judgeSquareSum(int c) {
+        return false;
+    }
+    //endregion
 
     //region 704. 二分查找 20211020
 
@@ -608,6 +688,163 @@ public class TargetBinarySearch {
         return result;
     }
 
+    //endregion
+
+    //region 1539. 第 k 个缺失的正整数  20230221
+
+    /**
+     * 给你一个 严格升序排列 的正整数数组 arr 和一个整数 k 。
+     * 请你找到这个数组里第 k 个缺失的正整数。
+     * <p>
+     * 示例 1：
+     * 输入：arr = [2,3,4,7,11], k = 5
+     * 输出：9
+     * 解释：缺失的正整数包括 [1,5,6,8,9,10,12,13,...] 。第 5 个缺失的正整数为 9 。
+     * 示例 2：
+     * 输入：arr = [1,2,3,4], k = 2
+     * 输出：6
+     * 解释：缺失的正整数包括 [5,6,7,...] 。第 2 个缺失的正整数为 6 。
+     * <p>
+     * 提示：
+     * 1 <= arr.length <= 1000
+     * 1 <= arr[i] <= 1000
+     * 1 <= k <= 1000
+     * 对于所有 1 <= i < j <= arr.length 的 i 和 j 满足 arr[i] < arr[j]
+     *
+     * @param arr
+     * @param k
+     * @return
+     */
+
+    public int findKthPositive(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return k;
+        }
+        int left = 0, right = arr.length - 1, mid = 0;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            if (arr[mid] - mid - 1 >= k) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return k + right + 1;
+    }
+    //endregion
+
+    //region 1608. 特殊数组的特征值 20230221
+
+    /**
+     * 给你一个非负整数数组 nums 。如果存在一个数 x ，使得 nums 中恰好有 x 个元素 大于或者等于 x ，
+     * 那么就称 nums 是一个 特殊数组 ，而 x 是该数组的 特征值 。
+     * 注意： x 不必 是 nums 的中的元素。
+     * 如果数组 nums 是一个 特殊数组 ，请返回它的特征值 x 。否则，返回 -1 。
+     * 可以证明的是，如果 nums 是特殊数组，那么其特征值 x 是 唯一的 。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [3,5]
+     * 输出：2
+     * 解释：有 2 个元素（3 和 5）大于或等于 2 。
+     * 示例 2：
+     * 输入：nums = [0,0]
+     * 输出：-1
+     * 解释：没有满足题目要求的特殊数组，故而也不存在特征值 x 。
+     * 如果 x = 0，应该有 0 个元素 >= x，但实际有 2 个。
+     * 如果 x = 1，应该有 1 个元素 >= x，但实际有 0 个。
+     * 如果 x = 2，应该有 2 个元素 >= x，但实际有 0 个。
+     * x 不能取更大的值，因为 nums 中只有两个元素。
+     * 示例 3：
+     * 输入：nums = [0,4,3,0,4]
+     * 输出：3
+     * 解释：有 3 个元素大于或等于 3 。
+     * 示例 4：
+     * 输入：nums = [3,6,7,7,0]
+     * 输出：-1
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 100
+     * 0 <= nums[i] <= 1000
+     *
+     * @param nums
+     * @return
+     */
+    public int specialArray(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        if (nums[0] >= n) {
+            return n;
+        }
+        int l = 1, r = n - 1;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (nums[n - mid] >= mid && nums[n - mid - 1] < mid) {
+                return mid;
+            } else if (nums[n - mid] < mid) {
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+            if (l >= r - 1) {
+                if (nums[n - l] >= l && nums[n - l - 1] < l) {
+                    return l;
+                }
+                if (nums[n - r] >= r && nums[n - r - 1] < r) {
+                    return r;
+                }
+                break;
+            }
+        }
+        return -1;
+    }
+
+    public int specialArray1(int[] nums) {
+        //暴力求解
+        for (int i = 1; i <= nums.length; i++) {
+            int count = 0;
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] >= i) {
+                    count++;
+                }
+            }
+            if (count == i) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int specialArray2(int[] nums) {
+        //排序后暴力
+        //降序排序
+        Arrays.sort(nums);
+        if (nums[0] >= nums.length) {
+            return nums.length;
+        }
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[nums.length - i] >= i && nums[nums.length - i - 1] < i) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int specialArray3(int[] nums) {
+        //降序排序 + 一次遍历
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0, j = n - 1; i < j; i++, j--) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        for (int i = 1; i <= n; ++i) {
+            if (nums[i - 1] >= i && (i == n || nums[i] < i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
     //endregion
 
     public static void main(String[] args) {

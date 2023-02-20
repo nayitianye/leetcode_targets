@@ -214,7 +214,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9c0c65e6-5221-420c-88fc-63db91a04881" name="Changes" comment="" />
+      <changelist id="8b5d4831-7924-40ed-87ce-d31d02944656" name="Changes" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -299,7 +299,8 @@
       <workItem from="1676634857050" duration="10999000" />
       <workItem from="1676721130451" duration="5785000" />
       <workItem from="1676777309352" duration="15913000" />
-      <workItem from="1676903120820" duration="4433000" />
+      <workItem from="1676903120820" duration="4594000" />
+      <workItem from="1676983662980" duration="6842000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -476,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676817855206</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="122. 买卖股票的最佳时机 II&#10;309. 最佳买卖股票时机含冷冻期&#10;714. 买卖股票的最佳时机含手续费">
+      <created>1676908727547</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1676908727547</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -536,7 +544,12 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="BEK_SORT_TYPE" value="1" />
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="71" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="38" />
+                </map>
+              </option>
             </State>
           </value>
         </entry>
@@ -579,7 +592,8 @@
     <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
     <MESSAGE value="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数" />
     <MESSAGE value="121. 买卖股票的最佳时机&#10;1385. 两个数组间的距离值&#10;69. x 的平方根&#10;744. 寻找比目标字母大的最小字母&#10;278. 第一个错误的版本 &#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;441. 排列硬币" />
-    <option name="LAST_COMMIT_MESSAGE" value="121. 买卖股票的最佳时机&#10;1385. 两个数组间的距离值&#10;69. x 的平方根&#10;744. 寻找比目标字母大的最小字母&#10;278. 第一个错误的版本 &#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;441. 排列硬币" />
+    <MESSAGE value="122. 买卖股票的最佳时机 II&#10;309. 最佳买卖股票时机含冷冻期&#10;714. 买卖股票的最佳时机含手续费" />
+    <option name="LAST_COMMIT_MESSAGE" value="122. 买卖股票的最佳时机 II&#10;309. 最佳买卖股票时机含冷冻期&#10;714. 买卖股票的最佳时机含手续费" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -619,22 +633,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
-          <line>185</line>
+          <line>187</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
-          <line>177</line>
+          <line>179</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
-          <line>618</line>
+          <line>855</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
-          <line>332</line>
+          <line>388</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
