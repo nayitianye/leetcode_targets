@@ -199,6 +199,42 @@ public class TargetTwoPointers {
     }
     //endregion
 
+    //region 633. 平方数之和 20230222
+
+    /**
+     * 给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
+     * <p>
+     * 示例 1：
+     * 输入：c = 5
+     * 输出：true
+     * 解释：1 * 1 + 2 * 2 = 5
+     * 示例 2：
+     * 输入：c = 3
+     * 输出：false
+     * <p>
+     * 提示：
+     * 0 <= c <= 2^31 - 1
+     *
+     * @param c
+     * @return
+     */
+    public boolean judgeSquareSum(int c) {
+        long left = 0;
+        long right = (long) Math.sqrt(c);
+        while (left <= right) {
+            long sum = left * left + right * right;
+            if (sum == c) {
+                return true;
+            } else if (sum > c) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return false;
+    }
+    //endregion
+
     //region 844. 比较含退格的字符串
     /**
      * 给定 S 和 T 两个字符串，当它们分别被输入到空白的文本编辑器后，

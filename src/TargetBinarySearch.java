@@ -41,6 +41,64 @@ public class TargetBinarySearch {
         }
     }
 
+    // region 33. 搜索旋转排序数组 20230223
+
+    /**
+     * 整数数组 nums 按升序排列，数组中的值 互不相同 。
+     * 在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。
+     * 给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。
+     * 你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [4,5,6,7,0,1,2], target = 0
+     * 输出：4
+     * 示例 2：
+     * 输入：nums = [4,5,6,7,0,1,2], target = 3
+     * 输出：-1
+     * 示例 3：
+     * 输入：nums = [1], target = 0
+     * 输出：-1
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 5000
+     * -104 <= nums[i] <= 104
+     * nums 中的每个值都 独一无二
+     * 题目数据保证 nums 在预先未知的某个下标上进行了旋转
+     * -104 <= target <= 104
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search1(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            //先根据 nums[0] 与 target 的关系判断目标值是在左半段还是右半段
+            if (target >= nums[0]) {
+                //目标值在左半段时，若mid在右半段，则讲mid索引的值该成inf
+                if (nums[mid] < nums[0]) {
+                    nums[mid] = Integer.MAX_VALUE;
+                }
+            } else {
+                // 目标值在右半段时，若 mid 在左半段，则将 mid 索引的值改成 -inf
+                if (nums[mid] >= nums[0]) {
+                    nums[mid] = Integer.MIN_VALUE;
+                }
+            }
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+    //endregion
+
     // region 34. 在排序数组中查找元素的第一个和最后一个位置 20230219
 
     /**
@@ -186,6 +244,63 @@ public class TargetBinarySearch {
             }
         }
         return left;
+    }
+    //endregion
+
+    //region 74. 搜索二维矩阵 20220223
+
+    /**
+     * 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+     * 每行中的整数从左到右按升序排列。
+     * 每行的第一个整数大于前一行的最后一个整数。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+     * 输出：true
+     * 示例 2：
+     * <p>
+     * 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+     * 输出：false
+     * <p>
+     * 提示：
+     * m == matrix.length
+     * n == matrix[i].length
+     * 1 <= m, n <= 100
+     * -104 <= matrix[i][j], target <= 104
+     *
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
+            return false;
+        }
+        int bottom = -1, top = matrix.length - 1, mid = 0;
+        while (bottom < top) {
+            mid = bottom + (top - bottom + 1) / 2;
+            if (matrix[mid][0] <= target) {
+                bottom = mid;
+            } else {
+                top = mid - 1;
+            }
+        }
+        if (bottom == -1) {
+            return false;
+        }
+        int left = 0, right = matrix[0].length - 1;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            if (matrix[bottom][mid] == target) {
+                return true;
+            } else if (matrix[bottom][mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
     }
     //endregion
 
@@ -399,7 +514,7 @@ public class TargetBinarySearch {
     }
     // endregion
 
-    //region 633. 平方数之和
+    //region 633. 平方数之和 20230222
 
     /**
      * 给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
@@ -419,6 +534,26 @@ public class TargetBinarySearch {
      * @return
      */
     public boolean judgeSquareSum(int c) {
+        for (long i = 0; i * i <= c; ++i) {
+            long b = c - i * i;
+            if (binarySearchJudgeSquareSum(0, b, b)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean binarySearchJudgeSquareSum(long left, long right, long target) {
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+            if (mid * mid == target) {
+                return true;
+            } else if (mid * mid < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
         return false;
     }
     //endregion
@@ -626,6 +761,171 @@ public class TargetBinarySearch {
             }
         }
         return right - left + 1 > nums.length / 2;
+    }
+    //endregion
+
+    //region 1337. 矩阵中战斗力最弱的 K 行
+
+    /**
+     * 给你一个大小为 m * n 的矩阵 mat，矩阵由若干军人和平民组成，分别用 1 和 0 表示。
+     * 请你返回矩阵中战斗力最弱的 k 行的索引，按从最弱到最强排序。
+     * 如果第 i 行的军人数量少于第 j 行，或者两行军人数量相同但 i 小于 j，那么我们认为第 i 行的战斗力比第 j 行弱。
+     * 军人 总是 排在一行中的靠前位置，也就是说 1 总是出现在 0 之前。
+     * <p>
+     * 示例 1：
+     * 输入：mat =
+     * [[1,1,0,0,0],
+     * [1,1,1,1,0],
+     * [1,0,0,0,0],
+     * [1,1,0,0,0],
+     * [1,1,1,1,1]],
+     * k = 3
+     * 输出：[2,0,3]
+     * 解释：
+     * 每行中的军人数目：
+     * 行 0 -> 2
+     * 行 1 -> 4
+     * 行 2 -> 1
+     * 行 3 -> 2
+     * 行 4 -> 5
+     * 从最弱到最强对这些行排序后得到 [2,0,3,1,4]
+     * 示例 2：
+     * 输入：mat =
+     * [[1,0,0,0],
+     * [1,1,1,1],
+     * [1,0,0,0],
+     * [1,0,0,0]],
+     * k = 2
+     * 输出：[0,2]
+     * 解释：
+     * 每行中的军人数目：
+     * 行 0 -> 1
+     * 行 1 -> 4
+     * 行 2 -> 1
+     * 行 3 -> 1
+     * 从最弱到最强对这些行排序后得到 [0,2,3,1]
+     * <p>
+     * 提示：
+     * m == mat.length
+     * n == mat[i].length
+     * 2 <= n, m <= 100
+     * 1 <= k <= m
+     * matrix[i][j] 不是 0 就是 1
+     *
+     * @param mat
+     * @param k
+     * @return
+     */
+    public int[] kWeakestRows(int[][] mat, int k) {
+        return null;
+    }
+    //endregion
+
+    //region  1346. 检查整数及其两倍数是否存在 20230222
+
+    /**
+     * 给你一个整数数组 arr，请你检查是否存在两个整数 N 和 M，满足 N 是 M 的两倍（即，N = 2 * M）。
+     * 更正式地，检查是否存在两个下标 i 和 j 满足：
+     * i != j
+     * 0 <= i, j < arr.length
+     * arr[i] == 2 * arr[j]
+     * <p>
+     * <p>
+     * 示例 1：
+     * 输入：arr = [10,2,5,3]
+     * 输出：true
+     * 解释：N = 10 是 M = 5 的两倍，即 10 = 2 * 5 。
+     * 示例 2：
+     * 输入：arr = [7,1,14,11]
+     * 输出：true
+     * 解释：N = 14 是 M = 7 的两倍，即 14 = 2 * 7 。
+     * 示例 3：
+     * 输入：arr = [3,1,7,11]
+     * 输出：false
+     * 解释：在该情况下不存在 N 和 M 满足 N = 2 * M 。
+     * <p>
+     * 提示：
+     * 2 <= arr.length <= 500
+     * -10^3 <= arr[i] <= 10^3
+     *
+     * @param arr
+     * @return
+     */
+    public boolean checkIfExist(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return false;
+        }
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length; i++) {
+            if (binarySearchcheckIfExist(arr, arr[i] * 2, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean binarySearchcheckIfExist(int[] arr, int target, int index) {
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target && mid != index) {
+                return true;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region 1351. 统计有序矩阵中的负数 20230222
+
+    /**
+     * 给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列。 请你统计并返回 grid 中 负数 的数目。
+     * <p>
+     * 示例 1：
+     * 输入：grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]
+     * 输出：8
+     * 解释：矩阵中共有 8 个负数。
+     * 示例 2：
+     * 输入：grid = [[3,2],[1,0]]
+     * 输出：0
+     * <p>
+     * 提示：
+     * m == grid.length
+     * n == grid[i].length
+     * 1 <= m, n <= 100
+     * -100 <= grid[i][j] <= 100
+     * <p>
+     * 进阶：你可以设计一个时间复杂度为 O(n + m) 的解决方案吗？
+     *
+     * @param grid
+     * @return
+     */
+    public int countNegatives(int[][] grid) {
+        if (grid == null || grid.length < 1 || grid[0].length < 1) {
+            return 0;
+        }
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            if (grid[i][grid[i].length - 1] >= 0) {
+                continue;
+            }
+            int left = 0, right = grid[i].length - 1, mid = 0;
+            while (left < right) {
+                mid = left + (right - left) / 2;
+                if (grid[i][mid] >= 0) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            int index = grid[i][mid] < 0 ? mid : mid + 1;
+            res = res + grid[i].length - index;
+        }
+        return res;
     }
     //endregion
 
@@ -853,6 +1153,8 @@ public class TargetBinarySearch {
         //int res = (new TargetBinarySearch()).findTheDistanceValue(arr1, arr2, 2);
         //int res = (new TargetBinarySearch().mySqrt(2147395599));
         //new TargetBinarySearch().searchRange(new int[]{1}, 1);
-        new TargetBinarySearch().arrangeCoins(5);
+        //new TargetBinarySearch().arrangeCoins(5);
+        int[][] res = new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}};
+        new TargetBinarySearch().searchMatrix(new int[][]{{1}}, 1);
     }
 }
