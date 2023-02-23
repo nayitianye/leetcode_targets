@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @author yyb
@@ -247,7 +247,7 @@ public class TargetBinarySearch {
     }
     //endregion
 
-    //region 74. 搜索二维矩阵 20220223
+    //region 74. 搜索二维矩阵 20230223
 
     /**
      * 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
@@ -301,6 +301,59 @@ public class TargetBinarySearch {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region 153. 寻找旋转排序数组中的最小值  20230223
+
+    /**
+     * 已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。例如，原数组 nums = [0,1,2,4,5,6,7] 在变化后可能得到：
+     * 若旋转 4 次，则可以得到 [4,5,6,7,0,1,2]
+     * 若旋转 7 次，则可以得到 [0,1,2,4,5,6,7]
+     * 注意，数组 [a[0], a[1], a[2], ..., a[n-1]] 旋转一次 的结果为数组 [a[n-1], a[0], a[1], a[2], ..., a[n-2]] 。
+     * 给你一个元素值 互不相同 的数组 nums ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。请你找出并返回数组中的 最小元素 。
+     * 你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [3,4,5,1,2]
+     * 输出：1
+     * 解释：原数组为 [1,2,3,4,5] ，旋转 3 次得到输入数组。
+     * 示例 2：
+     * 输入：nums = [4,5,6,7,0,1,2]
+     * 输出：0
+     * 解释：原数组为 [0,1,2,4,5,6,7] ，旋转 4 次得到输入数组。
+     * 示例 3：
+     * 输入：nums = [11,13,15,17]
+     * 输出：11
+     * 解释：原数组为 [11,13,15,17] ，旋转 4 次得到输入数组。
+     * <p>
+     * 提示：
+     * n == nums.length
+     * 1 <= n <= 5000
+     * -5000 <= nums[i] <= 5000
+     * nums 中的所有整数 互不相同
+     * nums 原来是一个升序排序的数组，并进行了 1 至 n 次旋转
+     *
+     * @param nums
+     * @return
+     */
+    public int findMin(int[] nums) {
+        if (nums == null || nums.length < 1) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return nums[left];
     }
     //endregion
 
@@ -764,7 +817,7 @@ public class TargetBinarySearch {
     }
     //endregion
 
-    //region 1337. 矩阵中战斗力最弱的 K 行
+    //region 1337. 矩阵中战斗力最弱的 K 行 20230223
 
     /**
      * 给你一个大小为 m * n 的矩阵 mat，矩阵由若干军人和平民组成，分别用 1 和 0 表示。
@@ -817,8 +870,43 @@ public class TargetBinarySearch {
      * @return
      */
     public int[] kWeakestRows(int[][] mat, int k) {
-        return null;
+        if (mat == null || mat.length == 0 || mat[0].length == 0) {
+            return new int[]{0};
+        }
+        List<int[]> power = new ArrayList<int[]>();
+        for (int i = 0; i < mat.length; i++) {
+            int left = 0, right = mat[i].length - 1, pos = -1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (mat[i][mid] == 0) {
+                    right = mid - 1;
+                } else {
+                    pos = mid;
+                    left = mid + 1;
+                }
+            }
+            power.add(new int[]{pos + 1, i});
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            public int compare(int[] pair1, int[] pair2) {
+                if (pair1[0] != pair2[0]) {
+                    return pair1[0] - pair2[0];
+                } else {
+                    return pair1[1] - pair2[1];
+                }
+            }
+        });
+        for (int[] pair : power) {
+            pq.offer(pair);
+        }
+        int[] ans = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ans[i] = pq.poll()[1];
+        }
+        return ans;
     }
+
     //endregion
 
     //region  1346. 检查整数及其两倍数是否存在 20230222
@@ -1144,6 +1232,66 @@ public class TargetBinarySearch {
             }
         }
         return -1;
+    }
+    //endregion
+
+    //region 1855. 下标对中的最大距离 20230223
+
+    /**
+     * 给你两个 非递增 的整数数组 nums1 和 nums2 ，数组下标均 从 0 开始 计数。
+     * 下标对 (i, j) 中 0 <= i < nums1.length 且 0 <= j < nums2.length 。
+     * 如果该下标对同时满足 i <= j 且 nums1[i] <= nums2[j] ，则称之为 有效 下标对，
+     * 该下标对的 距离 为 j - i 。
+     * 返回所有 有效 下标对 (i, j) 中的 最大距离 。如果不存在有效下标对，返回 0 。
+     * 一个数组 arr ，如果每个 1 <= i < arr.length 均有 arr[i-1] >= arr[i] 成立，
+     * 那么该数组是一个 非递增 数组。
+     * <p>
+     * 示例 1：
+     * 输入：nums1 = [55,30,5,4,2], nums2 = [100,20,10,10,5]
+     * 输出：2
+     * 解释：有效下标对是 (0,0), (2,2), (2,3), (2,4), (3,3), (3,4) 和 (4,4) 。
+     * 最大距离是 2 ，对应下标对 (2,4) 。
+     * 示例 2：
+     * 输入：nums1 = [2,2,2], nums2 = [10,10,1]
+     * 输出：1
+     * 解释：有效下标对是 (0,0), (0,1) 和 (1,1) 。
+     * 最大距离是 1 ，对应下标对 (0,1) 。
+     * 示例 3：
+     * 输入：nums1 = [30,29,19,5], nums2 = [25,25,25,25,25]
+     * 输出：2
+     * 解释：有效下标对是 (2,2), (2,3), (2,4), (3,3) 和 (3,4) 。
+     * 最大距离是 2 ，对应下标对 (2,4) 。
+     * <p>
+     * <p>
+     * 提示：
+     * 1 <= nums1.length <= 10^5
+     * 1 <= nums2.length <= 10^5
+     * 1 <= nums1[i], nums2[j] <= 10^5
+     * nums1 和 nums2 都是 非递增 数组
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int maxDistance(int[] nums1, int[] nums2) {
+        int res = 0;
+        for (int i = 0; i < nums1.length; i++) {
+            if (i > 0 && nums1[i] == nums1[i - 1]) {
+                continue;
+            }
+            int left = i, right = nums2.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+
+                if (nums2[mid] < nums1[i]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                    res = Math.max(res, mid - i);
+                }
+            }
+        }
+        return res;
     }
     //endregion
 
