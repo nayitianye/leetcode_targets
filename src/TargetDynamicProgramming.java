@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author yyb
@@ -313,6 +311,169 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 91. 解码方法
+
+    /**
+     * 一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：
+     * 'A' -> "1"
+     * 'B' -> "2"
+     * ...
+     * 'Z' -> "26"
+     * 要 解码 已编码的消息，所有数字必须基于上述映射的方法，反向映射回字母（可能有多种方法）。例如，"11106" 可以映射为：
+     * "AAJF" ，将消息分组为 (1 1 10 6)
+     * "KJF" ，将消息分组为 (11 10 6)
+     * 注意，消息不能分组为  (1 11 06) ，因为 "06" 不能映射为 "F" ，这是由于 "6" 和 "06" 在映射中并不等价。
+     * 给你一个只含数字的 非空 字符串 s ，请计算并返回 解码 方法的 总数 。
+     * 题目数据保证答案肯定是一个 32 位 的整数。
+     * <p>
+     * <p>
+     * 示例 1：
+     * 输入：s = "12"
+     * 输出：2
+     * 解释：它可以解码为 "AB"（1 2）或者 "L"（12）。
+     * 示例 2：
+     * 输入：s = "226"
+     * 输出：3
+     * 解释：它可以解码为 "BZ" (2 26), "VF" (22 6), 或者 "BBF" (2 2 6) 。
+     * 示例 3：
+     * 输入：s = "06"
+     * 输出：0
+     * 解释："06" 无法映射到 "F" ，因为存在前导零（"6" 和 "06" 并不等价）。
+     * <p>
+     * 提示：
+     * 1 <= s.length <= 100
+     * s 只包含数字，并且可能包含前导零。
+     *
+     * @param s
+     * @return
+     */
+    public int numDecodings(String s) {
+        return 0;
+    }
+
+    public int decodingChar(Character character) {
+        return character - 'A' + 1;
+    }
+    //endregion
+
+    //region  118. 杨辉三角  20230225
+
+    /**
+     * 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。
+     * 在「杨辉三角」中，每个数是它左上方和右上方的数的和。
+     * <p>
+     * 示例 1:
+     * 输入: numRows = 5
+     * 输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+     * 示例 2:
+     * 输入: numRows = 1
+     * 输出: [[1]]
+     * <p>
+     * 提示:
+     * 1 <= numRows <= 30
+     *
+     * @param numRows
+     * @return
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    list.add(1);
+                } else {
+                    list.add(res.get(i - 1).get(j) + res.get(i - 1).get(j - 1));
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+    //endregion
+
+    //region 119. 杨辉三角 II  20230225
+
+    /**
+     * 给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。
+     * 在「杨辉三角」中，每个数是它左上方和右上方的数的和。
+     * <p>
+     * 示例 1:
+     * 输入: rowIndex = 3
+     * 输出: [1,3,3,1]
+     * 示例 2:
+     * 输入: rowIndex = 0
+     * 输出: [1]
+     * 示例 3:
+     * 输入: rowIndex = 1
+     * 输出: [1,1]
+     * <p>
+     * 提示:
+     * 0 <= rowIndex <= 33
+     *
+     * @param rowIndex
+     * @return
+     */
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> cur = new ArrayList<>();
+        cur.add(1);
+        for (int i = 1; i <= rowIndex; i++) {
+            for (int j = i - 1; j > 0; j--) {
+                cur.set(j, cur.get(j - 1) + cur.get(j));
+            }
+            cur.add(1);//部上每层的最后一个1
+        }
+        return cur;
+    }
+    //endregion
+
+    //region 120. 三角形最小路径和  20230225
+
+    /**
+     * 给定一个三角形 triangle ，找出自顶向下的最小路径和。
+     * 每一步只能移动到下一行中相邻的结点上。相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+     * 也就是说，如果正位于当前行的下标 i ，那么下一步可以移动到下一行的下标 i 或 i + 1 。
+     * <p>
+     * 示例 1：
+     * 输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+     * 输出：11
+     * 解释：如下面简图所示：
+     * 2
+     * 3 4
+     * 6 5 7
+     * 4 1 8 3
+     * 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+     * 示例 2：
+     * 输入：triangle = [[-10]]
+     * 输出：-10
+     * <p>
+     * 提示：
+     * 1 <= triangle.length <= 200
+     * triangle[0].length == 1
+     * triangle[i].length == triangle[i - 1].length + 1
+     * -10^4 <= triangle[i][j] <= 10^4
+     *
+     * @param triangle
+     * @return
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] dp = new int[triangle.size()];
+        dp[0] = triangle.get(0).get(0);
+        for (int i = 1; i < triangle.size(); i++) {
+            dp[i] = dp[i - 1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; --j) {
+                dp[j] = Math.min(dp[j - 1], dp[j]) + triangle.get(i).get(j);
+            }
+            dp[0] += triangle.get(i).get(0);
+        }
+        int minTotal = dp[0];
+        for (int i = 1; i < triangle.size(); i++) {
+            minTotal = Math.min(minTotal, dp[i]);
+        }
+        return minTotal;
+    }
+    //endregion
+
     //region 121. 买卖股票的最佳时机  20230219
 
     /**
@@ -405,6 +566,61 @@ public class TargetDynamicProgramming {
         return dp0;
     }
     //endregion
+
+    // region 152. 乘积最大子数组 20230225
+
+    /**
+     * 给你一个整数数组 nums ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+     * 测试用例的答案是一个 32-位 整数。
+     * 子数组 是数组的连续子序列。
+     * <p>
+     * <p>
+     * 示例 1:
+     * 输入: nums = [2,3,-2,4]
+     * 输出: 6
+     * 解释: 子数组 [2,3] 有最大乘积 6。
+     * 示例 2:
+     * 输入: nums = [-2,0,-1]
+     * 输出: 0
+     * 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+     * <p>
+     * 提示:
+     * 1 <= nums.length <= 2 * 104
+     * -10 <= nums[i] <= 10
+     * nums 的任何前缀或后缀的乘积都 保证 是一个 32-位 整数
+     *
+     * @param nums
+     * @return
+     */
+    public int maxProduct(int[] nums) {
+        int length = nums.length;
+        int[] maxdp = new int[length];
+        int[] mindp = new int[length];
+        System.arraycopy(nums, 0, maxdp, 0, length);
+        System.arraycopy(nums, 0, mindp, 0, length);
+        for (int i = 1; i < length; i++) {
+            maxdp[i] = Math.max(maxdp[i - 1] * nums[i], Math.max(nums[i], mindp[i - 1] * nums[i]));
+            mindp[i] = Math.min(mindp[i - 1] * nums[i], Math.min(nums[i], maxdp[i - 1] * nums[i]));
+        }
+        int ans = maxdp[0];
+        for (int i = 1; i < length; i++) {
+            ans = Math.max(ans, maxdp[i]);
+        }
+        return ans;
+    }
+
+    public int maxProduct1(int[] nums) {
+        int maxF = nums[0], minF = nums[0], ans = nums[0];
+        int length = nums.length;
+        for (int i = 1; i < length; ++i) {
+            int mx = maxF, mn = minF;
+            maxF = Math.max(mx * nums[i], Math.max(nums[i], mn * nums[i]));
+            minF = Math.min(mn * nums[i], Math.min(nums[i], mx * nums[i]));
+            ans = Math.max(maxF, ans);
+        }
+        return ans;
+    }
+    // endregion
 
     // region 198. 打家劫舍 20230216
 
@@ -675,6 +891,86 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 413. 等差数列划分 20230225
+
+    /**
+     * 如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列。
+     * <p>
+     * 例如，[1,3,5,7,9]、[7,7,7,7] 和 [3,-1,-5,-9] 都是等差数列。
+     * 给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的 子数组 个数。
+     * 子数组 是数组中的一个连续序列。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [1,2,3,4]
+     * 输出：3
+     * 解释：nums 中有三个子等差数组：[1, 2, 3]、[2, 3, 4] 和 [1,2,3,4] 自身。
+     * 示例 2：
+     * 输入：nums = [1]
+     * 输出：0
+     * 提示：
+     * <p>
+     * 1 <= nums.length <= 5000
+     * -1000 <= nums[i] <= 1000
+     *
+     * @param nums
+     * @return
+     */
+    public int numberOfArithmeticSlices(int[] nums) {
+        if (nums == null || nums.length <= 2) {
+            return 0;
+        }
+        int begin = 0, end = 0, distance = Integer.MIN_VALUE, res = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (distance == Integer.MIN_VALUE) {
+                distance = nums[i] - nums[i - 1];
+            }
+            if (nums[i] - nums[i - 1] == distance) {
+                end = i;
+                continue;
+            } else {
+                if (end - begin >= 2) {
+                    res += calculateNumber(end - begin + 1);
+                }
+                i--;
+                begin = i;
+                end = i;
+                distance = Integer.MIN_VALUE;
+            }
+        }
+        if (end == nums.length - 1 && end - begin >= 2) {
+            res = res + calculateNumber(end - begin + 1);
+        }
+        return res;
+    }
+
+    public int calculateNumber(int n) {
+        int res = 0;
+        for (int i = 1; i <= n - 3 + 1; i++) {
+            res = res + i;
+        }
+        return res;
+    }
+
+    //动态规划的解法
+    public int numberOfArithmeticSlices1(int[] nums) {
+        if (nums == null || nums.length <= 2) {
+            return 0;
+        }
+        int res = 0;
+        //存储增量
+        // 1, 2, 3, 6, 8, 10 原数组
+        // 0  0  1  0  0  1 增量
+        int[] dp = new int[nums.length];
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) {
+                dp[i] = dp[i - 1] + 1;//确定增量
+                res += dp[i];//添加增量
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region 509. 斐波拉契数列  20230215
 
     /**
@@ -761,10 +1057,10 @@ public class TargetDynamicProgramming {
         }
         int dp0 = 0, dp1 = -prices[0] - fee;
         for (int i = 1; i < prices.length; i++) {
-            int newDp0=Math.max(dp0,dp1+prices[i]);
-            int newDp1=Math.max(dp1,dp0-prices[i]-fee);
-            dp0=newDp0;
-            dp1=newDp1;
+            int newDp0 = Math.max(dp0, dp1 + prices[i]);
+            int newDp1 = Math.max(dp1, dp0 - prices[i] - fee);
+            dp0 = newDp0;
+            dp1 = newDp1;
         }
         return dp0;
     }
@@ -878,7 +1174,7 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    //region 877. 石子游戏   2019/10/22  动态规划
+    //region 877. 石子游戏   20191022  动态规划
 
     /**
      * 亚历克斯和李用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 piles[i] 。
@@ -977,6 +1273,90 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region  931. 下降路径最小和  20230225
+
+    /**
+     * 给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。
+     * 下降路径 可以从第一行中的任何元素开始，并从每一行中选择一个元素。
+     * 在下一行选择的元素和当前行所选元素最多相隔一列（即位于正下方或者沿对角线向左或者向右的第一个元素）。
+     * 具体来说，位置 (row, col) 的下一个元素应当是 (row + 1, col - 1)、(row + 1, col) 或者 (row + 1, col + 1) 。
+     * <p>
+     * 示例 1：
+     * 输入：matrix = [[2,1,3],[6,5,4],[7,8,9]]
+     * 输出：13
+     * 解释：如图所示，为和最小的两条下降路径
+     * 示例 2：
+     * <p>
+     * 输入：matrix = [[-19,57],[-40,-5]]
+     * 输出：-59
+     * 解释：如图所示，为和最小的下降路径
+     * <p>
+     * 提示：
+     * n == matrix.length == matrix[i].length
+     * 1 <= n <= 100
+     * -100 <= matrix[i][j] <= 100
+     *
+     * @param matrix
+     * @return
+     */
+    public int minFallingPathSum(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int[][] dp = new int[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (i == 0) {
+                    dp[i][j] = matrix[i][j];
+                } else {
+                    if (j == 0) {
+                        dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j], dp[i - 1][j + 1]);
+                    } else if (j == matrix.length - 1) {
+                        dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j], dp[i - 1][j - 1]);
+                    } else {
+                        dp[i][j] = matrix[i][j] + Math.min(Math.min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i - 1][j + 1]);
+                    }
+                }
+            }
+        }
+        int res = Integer.MAX_VALUE;
+        for (int j = 0; j < dp[dp.length - 1].length; j++) {
+            if (dp[dp.length - 1][j] < res) {
+                res = dp[dp.length - 1][j];
+            }
+        }
+        return res;
+    }
+    //endregion
+
+    //region 1014. 最佳观光组合  20230226
+
+    /**
+     * 给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。
+     * 一对景点（i < j）组成的观光组合的得分为 values[i] + values[j] + i - j ，也就是景点的评分之和 减去 它们两者之间的距离。
+     * 返回一对观光景点能取得的最高分。
+     * <p>
+     * 示例 1：
+     * 输入：values = [8,1,5,2,6]
+     * 输出：11
+     * 解释：i = 0, j = 2, values[i] + values[j] + i - j = 8 + 5 + 0 - 2 = 11
+     * 示例 2：
+     * 输入：values = [1,2]
+     * 输出：2
+     *
+     * @param values
+     * @return
+     */
+    public int maxScoreSightseeingPair(int[] values) {
+        int maxScore = 0, mx = values[0] + 0;
+        for (int i = 1; i < values.length; i++) {
+            maxScore = Math.max(maxScore, mx + values[i] - i);
+            mx = Math.max(mx, values[i] + i);
+        }
+        return maxScore;
+    }
+    //endregion
+
     //region 1137. 第 N 个泰波那契数 20230215
 
     /**
@@ -1019,7 +1399,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    // region 1269. 停在原地的方案数 2021/05/13
+    // region 1269. 停在原地的方案数 20210513
 
     /**
      * 有一个长度为 arrLen 的数组，开始有一个指针在索引 0 处。
@@ -1074,11 +1454,48 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
+    //region 1567. 乘积为正数的最长子数组长度
+
+    /**
+     * 给你一个整数数组 nums ，请你求出乘积为正数的最长子数组的长度。
+     * 一个数组的子数组是由原数组中零个或者更多个连续数字组成的数组。
+     * 请你返回乘积为正数的最长子数组长度。
+     * <p>
+     * <p>
+     * 示例  1：
+     * 输入：nums = [1,-2,-3,4]
+     * 输出：4
+     * 解释：数组本身乘积就是正数，值为 24 。
+     * 示例 2：
+     * 输入：nums = [0,1,-2,-3,-4]
+     * 输出：3
+     * 解释：最长乘积为正数的子数组为 [1,-2,-3] ，乘积为 6 。
+     * 注意，我们不能把 0 也包括到子数组中，因为这样乘积为 0 ，不是正数。
+     * 示例 3：
+     * 输入：nums = [-1,-2,-3,0,1]
+     * 输出：2
+     * 解释：乘积为正数的最长子数组是 [-1,-2] 或者 [-2,-3] 。
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 10^5
+     * -10^9 <= nums[i] <= 10^9
+     *
+     * @param nums
+     * @return
+     */
+    public int getMaxLen(int[] nums) {
+
+        return 0;
+    }
+    //endregion
+
     public static void main(String[] args) {
 //        int[][] arrays=new int[1][2];
 //        arrays[0][0]=1;
 //        arrays[0][1]=0;
 //        int num=(new TargetDynamicProgramming()).uniquePathsWithObstacles(arrays);
 //        int num=(new TargetDynamicProgramming()).numWays(4,3);
+//        int num = new TargetDynamicProgramming().numberOfArithmeticSlices(new int[]{1, 2, 3, 8, 9, 10});
+        int num = new TargetDynamicProgramming().minFallingPathSum(new int[][]{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}});
     }
 }
