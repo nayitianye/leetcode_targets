@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.commons.xmlutil.Converter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,6 +49,36 @@ public class TargetMath {
         int[] ans = new int[n + 1];
         ans[0] = 1;
         return ans;
+    }
+    //endregion
+
+    //region 96. 不同的二叉搜索树  20230226
+
+    /**
+     * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？
+     * 返回满足题意的二叉搜索树的种数。
+     * <p>
+     * 示例 1：
+     * 输入：n = 3
+     * 输出：5
+     * 示例 2：
+     * 输入：n = 1
+     * 输出：1
+     * <p>
+     * 提示：
+     * 1 <= n <= 19
+     *
+     * @param n 整数n
+     * @return
+     */
+    public int numTrees(int n) {
+        //卡塔兰数  C0=1 Cn+1=2*(2*n+1)/(n+2)*Cn
+        // 提示：我们在这里需要用 long 类型防止计算过程中的溢出
+        long C = 1;
+        for (int i = 0; i < n; ++i) {
+            C = C * 2 * (2 * i + 1) / (i + 2);
+        }
+        return (int) C;
     }
     //endregion
 
@@ -146,7 +174,49 @@ public class TargetMath {
     }
     //endregion
 
-    //region 453.最小操作次数使数组元素相等 2021/10/21
+    //region 263. 丑数 20230226
+    /**
+     *丑数 就是只包含质因数 2、3 和 5 的正整数。
+     * 给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
+     *
+     * 示例 1：
+     * 输入：n = 6
+     * 输出：true
+     * 解释：6 = 2 × 3
+     * 示例 2：
+     * 输入：n = 1
+     * 输出：true
+     * 解释：1 没有质因数，因此它的全部质因数是 {2, 3, 5} 的空集。习惯上将其视作第一个丑数。
+     * 示例 3：
+     * 输入：n = 14
+     * 输出：false
+     * 解释：14 不是丑数，因为它包含了另外一个质因数 7 。
+     *
+     * 提示：
+     * -2^31 <= n <= 2^31 - 1
+     * @param n
+     * @return
+     */
+    public boolean isUgly(int n) {
+        if (n < 1) {
+            return false;
+        }
+        while (n > 1) {
+            if (n % 2 == 0) {
+                n = n / 2;
+            } else if (n % 3 == 0) {
+                n = n / 3;
+            } else if (n % 5 == 0) {
+                n = n / 5;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    //endregion
+
+    //region 453.最小操作次数使数组元素相等 20211021
 
     /**
      * 给你一个长度为 n 的整数数组，每次操作将会使 n - 1 个元素增加 1 。返回让数组所有元素相等的最小操作次数。

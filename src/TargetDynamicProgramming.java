@@ -7,6 +7,11 @@ import java.util.*;
  */
 public class TargetDynamicProgramming {
 
+    //region 相关的网址
+    //代码随想录
+    //https://www.bilibili.com/video/BV1pd4y147Rh/
+    //endregion
+
     //region 45. 跳跃游戏 II  20230217
 
     /**
@@ -20,7 +25,7 @@ public class TargetDynamicProgramming {
      * 输入: nums = [2,3,1,1,4]
      * 输出: 2
      * 解释: 跳到最后一个位置的最小跳跃数是 2。
-     * 从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。
+     * 从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步 到达数组的最后一个位置。
      * 示例 2:
      * 输入: nums = [2,3,0,1,4]
      * 输出: 2
@@ -30,8 +35,8 @@ public class TargetDynamicProgramming {
      * 0 <= nums[i] <= 1000
      * 题目保证可以到达 nums[n-1]
      *
-     * @param nums
-     * @return
+     * @param nums 长度为 n 的 0 索引整数数组 nums
+     * @return  最小跳跃数
      */
     public int jump(int[] nums) {
         //下一次跳的位置
@@ -72,8 +77,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 10^5
      * -10^4 <= nums[i] <= 10^4
      *
-     * @param nums
-     * @return
+     * @param nums  整数数组 nums
+     * @return 具有最大和的连续子数组的最大和
      */
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -107,7 +112,7 @@ public class TargetDynamicProgramming {
      * 示例 1：
      * 输入：nums = [2,3,1,1,4]
      * 输出：true
-     * 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+     * 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步 到达最后一个下标。
      * 示例 2：
      * 输入：nums = [3,2,1,0,4]
      * 输出：false
@@ -117,8 +122,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 3 * 104
      * 0 <= nums[i] <= 105
      *
-     * @param nums
-     * @return
+     * @param nums  非负整数数组 nums
+     * @return  是否可达到最后一个下标
      */
     public boolean canJump(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -163,7 +168,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 62. 不同路径   2019/10/7  动态规划+数组
+    //region 62. 不同路径   20191007  动态规划+数组
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -185,9 +190,9 @@ public class TargetDynamicProgramming {
      * 输入: m = 7, n = 3
      * 输出: 28
      *
-     * @param m
-     * @param n
-     * @return
+     * @param m 网格位置 m
+     * @param n 网格位置 n
+     * @return 到达路径数
      */
     public int uniquePaths(int m, int n) {
         int[][] dp = new int[m][n];
@@ -206,7 +211,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 63. 不同路径 II  2019/10/7 动态规划+数组
+    //region 63. 不同路径 II  20191007 动态规划+数组
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -281,17 +286,17 @@ public class TargetDynamicProgramming {
      * @param n
      * @return
      */
-    HashMap<Integer, Integer> hashMapcli = new HashMap<>();
+    HashMap<Integer, Integer> hashmap = new HashMap<>();
 
     public int climbStairs(int n) {
-        if (hashMapcli.containsKey(n)) {
-            return hashMapcli.get(n);
+        if (hashmap.containsKey(n)) {
+            return hashmap.get(n);
         }
         if (n <= 2) {
             return n;
         } else {
-            hashMapcli.put(n, climbStairs(n - 1) + climbStairs(n - 2));
-            return hashMapcli.get(n);
+            hashmap.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+            return hashmap.get(n);
         }
     }
 
@@ -311,7 +316,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 91. 解码方法
+    //region 91. 解码方法 20230226
 
     /**
      * 一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：
@@ -348,11 +353,51 @@ public class TargetDynamicProgramming {
      * @return
      */
     public int numDecodings(String s) {
-        return 0;
+        int n = s.length();
+        int[] f = new int[n + 1];
+        f[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            if (s.charAt(i - 1) != '0') {
+                f[i] += f[i - 1];
+            }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0')) <= 26) {
+                f[i] += f[i - 2];
+            }
+        }
+        return f[n];
     }
 
-    public int decodingChar(Character character) {
-        return character - 'A' + 1;
+    //endregion
+
+    //region 96. 不同的二叉搜索树  20230226
+
+    /**
+     * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？
+     * 返回满足题意的二叉搜索树的种数。
+     * <p>
+     * 示例 1：
+     * 输入：n = 3
+     * 输出：5
+     * 示例 2：
+     * 输入：n = 1
+     * 输出：1
+     * <p>
+     * 提示：
+     * 1 <= n <= 19
+     *
+     * @param n
+     * @return
+     */
+    public int numTrees(int n) {
+        int[] G = new int[n + 1];
+        G[0] = 1;
+        G[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                G[i] += G[j - 1] * G[i - j];
+            }
+        }
+        return G[n];
     }
     //endregion
 
@@ -567,6 +612,52 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region  139. 单词拆分  20230226
+
+    /**
+     * 给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。
+     * 注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。
+     * <p>
+     * 示例 1：
+     * 输入: s = "leetcode", wordDict = ["leet", "code"]
+     * 输出: true
+     * 解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。
+     * 示例 2：
+     * 输入: s = "applepenapple", wordDict = ["apple", "pen"]
+     * 输出: true
+     * 解释: 返回 true 因为 "applepenapple" 可以由 "apple" "pen" "apple" 拼接成。
+     * 注意，你可以重复使用字典中的单词。
+     * 示例 3：
+     * 输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+     * 输出: false
+     * <p>
+     * 提示：
+     * 1 <= s.length <= 300
+     * 1 <= wordDict.length <= 1000
+     * 1 <= wordDict[i].length <= 20
+     * s 和 wordDict[i] 仅有小写英文字母组成
+     * wordDict 中的所有字符串 互不相同
+     *
+     * @param s
+     * @param wordDict
+     * @return
+     */
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> wordDictSet = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+    //endregion
+
     // region 152. 乘积最大子数组 20230225
 
     /**
@@ -754,6 +845,48 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 264. 丑数 II  20230226
+
+    /**
+     * 给你一个整数 n ，请你找出并返回第 n 个 丑数 。
+     * 丑数 就是只包含质因数 2、3 和/或 5 的正整数。
+     * <p>
+     * 示例 1：
+     * 输入：n = 10
+     * 输出：12
+     * 解释：[1, 2, 3, 4, 5, 6, 8, 9, 10, 12] 是由前 10 个丑数组成的序列。
+     * 示例 2：
+     * 输入：n = 1
+     * 输出：1
+     * 解释：1 通常被视为丑数。
+     * <p>
+     * 提示：
+     * 1 <= n <= 1690
+     *
+     * @param n
+     * @return
+     */
+    public int nthUglyNumber(int n) {
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        int p2 = 1, p3 = 1, p5 = 1;
+        for (int i = 2; i <= n; i++) {
+            int num2 = dp[p2] * 2, num3 = dp[p3] * 3, num5 = dp[p5] * 5;
+            dp[i] = Math.min(Math.min(num2, num3), num5);
+            if (dp[i] == num2) {
+                p2++;//当前数和2乘已经放入丑数数组了，下次没意义了，要加一
+            }
+            if (dp[i] == num3) {
+                p3++;//当前数和3乘已经放入丑数数组了，下次没意义了，要加一
+            }
+            if (dp[i] == num5) {
+                p5++;//当前数和3乘已经放入丑数数组了，下次没意义了，要加一
+            }
+        }
+        return dp[n];
+    }
+    //endregion
+
     //region 303. 区域和检索 - 数组不可变
 
     /**
@@ -781,6 +914,53 @@ public class TargetDynamicProgramming {
 
         public int sumRange(int i, int j) {
             return sum[j + 1] - sum[i];
+        }
+    }
+    //endregion
+
+    //region 304. 二维区域和检索 - 矩阵不可变  20230226
+
+    /**
+     * 给定一个二维矩阵 matrix，以下类型的多个请求：
+     * 计算其子矩形范围内元素的总和，该子矩阵的 左上角 为 (row1, col1) ，右下角 为 (row2, col2) 。
+     * 实现 NumMatrix 类：
+     * NumMatrix(int[][] matrix) 给定整数矩阵 matrix 进行初始化
+     * int sumRegion(int row1, int col1, int row2, int col2) 返回 左上角 (row1, col1) 、右下角 (row2, col2) 所描述的子矩阵的元素 总和 。
+     * 示例 1：
+     * <p>
+     * 输入:
+     * ["NumMatrix","sumRegion","sumRegion","sumRegion"]
+     * [[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]
+     * 输出:
+     * [null, 8, 11, 12]
+     * 解释:
+     * NumMatrix numMatrix = new NumMatrix([[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]);
+     * numMatrix.sumRegion(2, 1, 4, 3); // return 8 (红色矩形框的元素总和)
+     * numMatrix.sumRegion(1, 1, 2, 2); // return 11 (绿色矩形框的元素总和)
+     * numMatrix.sumRegion(1, 2, 2, 4); // return 12 (蓝色矩形框的元素总和)
+     */
+    private class NumMatrix {
+        int[][] sums;
+
+        public NumMatrix(int[][] matrix) {
+            int m = matrix.length;
+            if (m > 0) {
+                int n = matrix[0].length;
+                sums = new int[m][n + 1];
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        sums[i][j + 1] = sums[i][j] + matrix[i][j];
+                    }
+                }
+            }
+        }
+
+        public int sumRegion(int row1, int col1, int row2, int col2) {
+            int sum = 0;
+            for (int i = row1; i < row2; i++) {
+                sum += sums[i][col2 + 1] - sums[i][col1];
+            }
+            return sum;
         }
     }
     //endregion
@@ -1454,7 +1634,62 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    //region 1567. 乘积为正数的最长子数组长度
+    //region 1314. 矩阵区域和  20230226
+
+    /**
+     * 给你一个 m x n 的矩阵 mat 和一个整数 k ，请你返回一个矩阵 answer ，其中每个 answer[i][j] 是所有满足下述条件的元素 mat[r][c] 的和：
+     * i - k <= r <= i + k,
+     * j - k <= c <= j + k 且
+     * (r, c) 在矩阵内。
+     * <p>
+     * 示例 1：
+     * 输入：mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1
+     * 输出：[[12,21,16],[27,45,33],[24,39,28]]
+     * 示例 2：
+     * 输入：mat = [[1,2,3],[4,5,6],[7,8,9]], k = 2
+     * 输出：[[45,45,45],[45,45,45],[45,45,45]]
+     * <p>
+     * 提示：
+     * m == mat.length
+     * n == mat[i].length
+     * 1 <= m, n, k <= 100
+     * 1 <= mat[i][j] <= 100
+     *
+     * @param mat
+     * @param k
+     * @return
+     */
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int n = mat.length, m = mat[0].length;
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1] + mat[i - 1][j - 1] - dp[i - 1][j - 1];
+            }
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                int x1 = i - k, y1 = j - k, x2 = i + k, y2 = j + k;
+                if (x1 < 1) {
+                    x1 = 1;
+                }
+                if (y1 < 1) {
+                    y1 = 1;
+                }
+                if (x2 > n) {
+                    x2 = n;
+                }
+                if (y2 > m) {
+                    y2 = m;
+                }
+                mat[i - 1][j - 1] = dp[x2][y2] + dp[x1 - 1][y1 - 1] - dp[x1 - 1][y2] - dp[x2][y1 - 1];
+            }
+        }
+        return mat;
+    }
+    //endregion
+
+    //region 1567. 乘积为正数的最长子数组长度 20230226
 
     /**
      * 给你一个整数数组 nums ，请你求出乘积为正数的最长子数组的长度。
@@ -1484,8 +1719,29 @@ public class TargetDynamicProgramming {
      * @return
      */
     public int getMaxLen(int[] nums) {
-
-        return 0;
+        int length = nums.length;
+        int[] positive = new int[length];
+        int[] negative = new int[length];
+        if (nums[0] > 0) {
+            positive[0] = 1;
+        } else if (nums[0] < 0) {
+            negative[0] = 1;
+        }
+        int maxLength = positive[0];
+        for (int i = 1; i < length; i++) {
+            if (nums[i] > 0) {
+                positive[i] = positive[i - 1] + 1;
+                negative[i] = negative[i - 1] > 0 ? negative[i - 1] + 1 : 0;
+            } else if (nums[i] < 0) {
+                positive[i] = negative[i - 1] > 0 ? negative[i - 1] + 1 : 0;
+                negative[i] = positive[i - 1] + 1;
+            } else {
+                positive[i] = 0;
+                negative[i] = 0;
+            }
+            maxLength = Math.max(maxLength, positive[i]);
+        }
+        return maxLength;
     }
     //endregion
 

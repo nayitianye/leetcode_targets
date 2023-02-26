@@ -214,7 +214,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ca72b6a2-f72c-4a8f-848a-fad190d56d93" name="Changes" comment="" />
+      <changelist id="0dc5bc79-658d-4980-ab99-569fffcac19c" name="Changes" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -304,7 +304,8 @@
       <workItem from="1677077385817" duration="8720000" />
       <workItem from="1677157694587" duration="5851000" />
       <workItem from="1677251656151" duration="142000" />
-      <workItem from="1677313573389" duration="15466000" />
+      <workItem from="1677313573389" duration="15793000" />
+      <workItem from="1677407129839" duration="13767000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -509,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677164444738</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合">
+      <created>1677341046682</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1677341046682</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -596,7 +604,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="第一次提交" />
     <MESSAGE value="第二次提交" />
     <MESSAGE value="增加广度优先搜索" />
     <MESSAGE value="2019/10/3" />
@@ -621,7 +628,8 @@
     <MESSAGE value="1539. 第 k 个缺失的正整数&#10;167. 两数之和 II - 输入有序数组&#10;1608. 特殊数组的特征值" />
     <MESSAGE value="1351. 统计有序矩阵中的负数&#10;1346. 检查整数及其两倍数是否存在&#10;633. 平方数之和&#10;74. 搜索二维矩阵&#10;33. 搜索旋转排序数组" />
     <MESSAGE value="1855. 下标对中的最大距离&#10;1337. 矩阵中战斗力最弱的 K 行&#10;74. 搜索二维矩阵&#10;350. 两个数组的交集 II" />
-    <option name="LAST_COMMIT_MESSAGE" value="1855. 下标对中的最大距离&#10;1337. 矩阵中战斗力最弱的 K 行&#10;74. 搜索二维矩阵&#10;350. 两个数组的交集 II" />
+    <MESSAGE value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
+    <option name="LAST_COMMIT_MESSAGE" value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -681,12 +689,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>1498</line>
+          <line>1754</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>1302</line>
+          <line>1482</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
