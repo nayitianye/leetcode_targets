@@ -36,7 +36,7 @@ public class TargetDynamicProgramming {
      * 题目保证可以到达 nums[n-1]
      *
      * @param nums 长度为 n 的 0 索引整数数组 nums
-     * @return  最小跳跃数
+     * @return 最小跳跃数
      */
     public int jump(int[] nums) {
         //下一次跳的位置
@@ -77,7 +77,7 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 10^5
      * -10^4 <= nums[i] <= 10^4
      *
-     * @param nums  整数数组 nums
+     * @param nums 整数数组 nums
      * @return 具有最大和的连续子数组的最大和
      */
     public int maxSubArray(int[] nums) {
@@ -122,8 +122,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 3 * 104
      * 0 <= nums[i] <= 105
      *
-     * @param nums  非负整数数组 nums
-     * @return  是否可达到最后一个下标
+     * @param nums 非负整数数组 nums
+     * @return 是否可达到最后一个下标
      */
     public boolean canJump(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -258,6 +258,50 @@ public class TargetDynamicProgramming {
             }
         }
         return sum[rowLen - 1][colLen - 1];
+    }
+    //endregion
+
+    //region 64. 最小路径和  20230227
+
+    /**
+     * 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+     * 说明：每次只能向下或者向右移动一步。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：grid = [[1,3,1],[1,5,1],[4,2,1]]
+     * 输出：7
+     * 解释：因为路径 1→3→1→1→1 的总和最小。
+     * 示例 2：
+     * 输入：grid = [[1,2,3],[4,5,6]]
+     * 输出：12
+     * <p>
+     * 提示：
+     * m == grid.length
+     * n == grid[i].length
+     * 1 <= m, n <= 200
+     * 0 <= grid[i][j] <= 100
+     *
+     * @param grid  包含非负整数的 m x n 网格 grid
+     * @return 找出一条从左上角到右下角的路径，使得路径上的数字总和为最小
+     */
+    public int minPathSum(int[][] grid) {
+        int row = grid.length, col = grid[0].length;
+        if (row == 0 || col == 0) {
+            return 0;
+        }
+        for (int i = 1; i < row; i++) {
+            grid[i][0] += grid[i - 1][0];
+        }
+        for (int i = 0; i < col; i++) {
+            grid[0][i] += grid[0][i - 1];
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
+            }
+        }
+        return grid[row - 1][col - 1];
     }
     //endregion
 
@@ -802,6 +846,53 @@ public class TargetDynamicProgramming {
             first = temp;
         }
         return second;
+    }
+    //endregion
+
+    //region 221. 最大正方形  20230227
+
+    /**
+     * 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
+     * 示例 1：
+     * 输入：matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+     * 输出：4
+     * 示例 2：
+     * 输入：matrix = [["0","1"],["1","0"]]
+     * 输出：1
+     * 示例 3：
+     * 输入：matrix = [["0"]]
+     * 输出：0
+     * <p>
+     * 提示：
+     * m == matrix.length
+     * n == matrix[i].length
+     * 1 <= m, n <= 300
+     * matrix[i][j] 为 '0' 或 '1'
+     *
+     * @param matrix 由 '0' 和 '1' 组成的二维矩阵
+     * @return 只包含 '1' 的最大正方形的面积
+     */
+    public int maximalSquare(char[][] matrix) {
+        int maxSide = 0;
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return maxSide;
+        }
+        int row = matrix.length, col = matrix[0].length;
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
+                    }
+                    maxSide = Math.max(maxSide, dp[i][j]);
+                }
+            }
+        }
+        int maxSquare = maxSide * maxSide;
+        return maxSquare;
     }
     //endregion
 
@@ -1576,6 +1667,68 @@ public class TargetDynamicProgramming {
             s = p + q + r;
         }
         return s;
+    }
+    //endregion
+
+    //region 1277. 统计全为 1 的正方形子矩阵  20230227
+
+    /**
+     * 给你一个 m * n 的矩阵，矩阵中的元素不是 0 就是 1，请你统计并返回其中完全由 1 组成的 正方形 子矩阵的个数。
+     * <p>
+     * 示例 1：
+     * 输入：matrix =
+     * [
+     * [0,1,1,1],
+     * [1,1,1,1],
+     * [0,1,1,1]
+     * ]
+     * 输出：15
+     * 解释：
+     * 边长为 1 的正方形有 10 个。
+     * 边长为 2 的正方形有 4 个。
+     * 边长为 3 的正方形有 1 个。
+     * 正方形的总数 = 10 + 4 + 1 = 15.
+     * 示例 2：
+     * 输入：matrix =
+     * [
+     * [1,0,1],
+     * [1,1,0],
+     * [1,1,0]
+     * ]
+     * 输出：7
+     * 解释：
+     * 边长为 1 的正方形有 6 个。
+     * 边长为 2 的正方形有 1 个。
+     * 正方形的总数 = 6 + 1 = 7.
+     * <p>
+     * 提示：
+     * 1 <= arr.length <= 300
+     * 1 <= arr[0].length <= 300
+     * 0 <= arr[i][j] <= 1
+     *
+     * @param matrix m * n 的矩阵
+     * @return 正方形的总数
+     */
+    public int countSquares(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int res = 0;
+        int row = matrix.length, col = matrix[0].length;
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = matrix[i][j];
+                } else if (matrix[i][j] == 0) {
+                    dp[i][j] = 0;
+                } else {
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
+                }
+                res += dp[i][j];
+            }
+        }
+        return res;
     }
     //endregion
 
