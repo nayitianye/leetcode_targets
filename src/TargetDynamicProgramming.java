@@ -12,6 +12,71 @@ public class TargetDynamicProgramming {
     //https://www.bilibili.com/video/BV1pd4y147Rh/
     //endregion
 
+    //region  5. 最长回文子串  20230228
+
+    /**
+     * 给你一个字符串 s，找到 s 中最长的回文子串。
+     * 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
+     * <p>
+     * 示例 1：
+     * 输入：s = "babad"
+     * 输出："bab"
+     * 解释："aba" 同样是符合题意的答案。
+     * 示例 2：
+     * 输入：s = "cbbd"
+     * 输出："bb"
+     * <p>
+     * 提示：
+     * 1 <= s.length <= 1000
+     * s 仅由数字和英文字母组成
+     *
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        int length = s.length();
+        if (length < 2) {
+            return s;
+        }
+        int maxLength = 1;
+        int begin = 0;
+        //d[i][j]表示s[i..j]是否是回文串
+        boolean[][] dp = new boolean[length][length];
+        //初始化：所有长度为1的字串都是回文串
+        for (int i = 0; i < length; i++) {
+            dp[i][i] = true;
+        }
+        char[] charArray = s.toCharArray();
+        //先枚举字串的长度
+        for (int L = 2; L <= length; L++) {
+            //枚举左边界，左边界的上限设置可以宽松一些
+            for (int i = 0; i < length; i++) {
+                //由i和j可以确定右边界，即j-i+1=L得
+                int j = L + i - 1;
+                //如果右边界越界，就可以退出当前循环
+                if (j >= length) {
+                    break;
+                }
+                if (charArray[i] != charArray[j]) {
+                    dp[i][j] = false;
+                } else {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                //只要dp[i][L]==true成立，就表示字串s[i..L]是回文，此时记录回文长度和起始位置
+                if (dp[i][j] && j - i + 1 > maxLength) {
+                    maxLength = j - i + 1;
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, begin + maxLength);
+    }
+    //endregion
+
     //region 45. 跳跃游戏 II  20230217
 
     /**
@@ -282,7 +347,7 @@ public class TargetDynamicProgramming {
      * 1 <= m, n <= 200
      * 0 <= grid[i][j] <= 100
      *
-     * @param grid  包含非负整数的 m x n 网格 grid
+     * @param grid 包含非负整数的 m x n 网格 grid
      * @return 找出一条从左上角到右下角的路径，使得路径上的数字总和为最小
      */
     public int minPathSum(int[][] grid) {
@@ -1289,6 +1354,47 @@ public class TargetDynamicProgramming {
             hashMapfib.put(n, fib1(n - 1) + fib1(n - 2));
             return fib1(n - 1) + fib1(n - 2);
         }
+    }
+    //endregion
+
+    //region 516. 最长回文子序列
+
+    /**
+     * 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。
+     * 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。
+     * <p>
+     * 示例 1：
+     * 输入：s = "bbbab"
+     * 输出：4
+     * 解释：一个可能的最长回文子序列为 "bbbb" 。
+     * 示例 2：
+     * 输入：s = "cbbd"
+     * 输出：2
+     * 解释：一个可能的最长回文子序列为 "bb" 。
+     * <p>
+     * 提示：
+     * 1 <= s.length <= 1000
+     * s 仅由小写英文字母组成
+     *
+     * @param s
+     * @return
+     */
+    public int longestPalindromeSubseq(String s) {
+        int length = s.length();
+        int[][] dp = new int[length][length];
+        for (int i = length - 1; i >= 0; i--) {
+            dp[i][i] = 1;
+            char c1 = s.charAt(i);
+            for (int j = i + 1; j < length; j++) {
+                char c2 = s.charAt(j);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[0][length - 1];
     }
     //endregion
 
