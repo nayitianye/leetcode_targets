@@ -371,6 +371,7 @@ public class TargetDynamicProgramming {
     //endregion
 
     //region 70. 爬楼梯 20230215
+
     /**
      * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
      * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
@@ -406,7 +407,9 @@ public class TargetDynamicProgramming {
             return hashmap.get(n);
         }
     }
+
     HashMap<Integer, Integer> hashmap = new HashMap<>();
+
     public int climbStairs1(int n) {
         if (n <= 2) {
             return n;
@@ -456,8 +459,8 @@ public class TargetDynamicProgramming {
      * 1 <= s.length <= 100
      * s 只包含数字，并且可能包含前导零。
      *
-     * @param s  只含数字的非空字符串 s
-     * @return  计算并返回解码方法的总数
+     * @param s 只含数字的非空字符串 s
+     * @return 计算并返回解码方法的总数
      */
     public int numDecodings(String s) {
         int n = s.length();
@@ -493,7 +496,7 @@ public class TargetDynamicProgramming {
      * 1 <= n <= 19
      *
      * @param n 整数 n
-     * @return  二叉搜索树的种数
+     * @return 二叉搜索树的种数
      */
     public int numTrees(int n) {
         int[] G = new int[n + 1];
@@ -563,8 +566,8 @@ public class TargetDynamicProgramming {
      * 提示:
      * 0 <= rowIndex <= 33
      *
-     * @param rowIndex  非负索引 rowIndex
-     * @return  返回「杨辉三角」的第 rowIndex 行
+     * @param rowIndex 非负索引 rowIndex
+     * @return 返回「杨辉三角」的第 rowIndex 行
      */
     public List<Integer> getRow(int rowIndex) {
         List<Integer> cur = new ArrayList<>();
@@ -605,8 +608,8 @@ public class TargetDynamicProgramming {
      * triangle[i].length == triangle[i - 1].length + 1
      * -10^4 <= triangle[i][j] <= 10^4
      *
-     * @param triangle  三角形 triangle
-     * @return  自顶向下的最小路径和
+     * @param triangle 三角形 triangle
+     * @return 自顶向下的最小路径和
      */
     public int minimumTotal(List<List<Integer>> triangle) {
         int[] dp = new int[triangle.size()];
@@ -647,8 +650,8 @@ public class TargetDynamicProgramming {
      * 1 <= prices.length <= 10^5
      * 0 <= prices[i] <= 10^4
      *
-     * @param prices   一个数组 prices
-     * @return  这笔交易中获取的最大利润
+     * @param prices 一个数组 prices
+     * @return 这笔交易中获取的最大利润
      */
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length <= 1) {
@@ -690,8 +693,8 @@ public class TargetDynamicProgramming {
      * 1 <= prices.length <= 3 * 10^4
      * 0 <= prices[i] <= 10^4
      *
-     * @param prices  整数数组 prices
-     * @return  得的最大利润
+     * @param prices 整数数组 prices
+     * @return 得的最大利润
      */
     public int maxProfit1(int[] prices) {
         //贪心算法
@@ -745,7 +748,7 @@ public class TargetDynamicProgramming {
      * s 和 wordDict[i] 仅有小写英文字母组成
      * wordDict 中的所有字符串 互不相同
      *
-     * @param s 字符串 s
+     * @param s        字符串 s
      * @param wordDict 字符串列表 wordDict
      * @return 判断是否可以利用字典中出现的单词拼接出 s
      */
@@ -787,7 +790,7 @@ public class TargetDynamicProgramming {
      * -10 <= nums[i] <= 10
      * nums 的任何前缀或后缀的乘积都 保证 是一个 32-位 整数
      *
-     * @param nums  整数数组 nums
+     * @param nums 整数数组 nums
      * @return 找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积
      */
     public int maxProduct(int[] nums) {
@@ -841,7 +844,7 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 100
      * 0 <= nums[i] <= 400
      *
-     * @param nums  一个代表每个房屋存放金额的非负整数数
+     * @param nums 一个代表每个房屋存放金额的非负整数数
      * @return 计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
      */
     public int rob(int[] nums) {
@@ -885,8 +888,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 100
      * 0 <= nums[i] <= 1000
      *
-     * @param nums  一个代表每个房屋存放金额的非负整数数组
-     * @return  计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额
+     * @param nums 一个代表每个房屋存放金额的非负整数数组
+     * @return 计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额
      */
     public int rob2(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -1187,7 +1190,7 @@ public class TargetDynamicProgramming {
      * 1 <= prices.length <= 5000
      * 0 <= prices[i] <= 1000[
      *
-     * @param prices  整数数组prices
+     * @param prices 整数数组prices
      * @return 一个算法计算出最大利润
      */
     public int maxProfit3(int[] prices) {
@@ -1236,8 +1239,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 1000
      * 0 <= nums[i] <= 1000
      *
-     * @param nums   整数数组 nums
-     * @return  返回 nums 中作为 摆动序列 的 最长子序列的长度
+     * @param nums 整数数组 nums
+     * @return 返回 nums 中作为 摆动序列 的 最长子序列的长度
      */
     public int wiggleMaxLength(int[] nums) {
         int n = nums.length;
@@ -1348,8 +1351,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 5000
      * -1000 <= nums[i] <= 1000
      *
-     * @param nums  整数数组 nums
-     * @return  返回数组 nums 中所有为等差数组的子数组个数
+     * @param nums 整数数组 nums
+     * @return 返回数组 nums 中所有为等差数组的子数组个数
      */
     public int numberOfArithmeticSlices(int[] nums) {
         if (nums == null || nums.length <= 2) {
@@ -1523,8 +1526,8 @@ public class TargetDynamicProgramming {
      * 1 <= prices[i] < 5 * 10^4
      * 0 <= fee < 5 * 10^4
      *
-     * @param prices  整数数组 prices
-     * @param fee 整数 fee 代表了交易股票的手续费用
+     * @param prices 整数数组 prices
+     * @param fee    整数 fee 代表了交易股票的手续费用
      * @return 利润的最大值
      */
     public int maxProfit(int[] prices, int fee) {
@@ -1567,8 +1570,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 2 * 104
      * 1 <= nums[i] <= 104
      *
-     * @param nums  整数数组 nums
-     * @return  操作获得的最大点数
+     * @param nums 整数数组 nums
+     * @return 操作获得的最大点数
      */
     public int deleteAndEarn(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -1635,8 +1638,8 @@ public class TargetDynamicProgramming {
      * 2 <= cost.length <= 1000
      * 0 <= cost[i] <= 999
      *
-     * @param cost  整数数组 cost
-     * @return  计算并返回达到楼梯顶部的最低花费
+     * @param cost 整数数组 cost
+     * @return 计算并返回达到楼梯顶部的最低花费
      */
     public int minCostClimbingStairs(int[] cost) {
         int length = cost.length;
@@ -1678,7 +1681,7 @@ public class TargetDynamicProgramming {
      * sum(piles) 是奇数。
      *
      * @param piles 正整数颗石子piles
-     * @return  返回输赢
+     * @return 返回输赢
      */
     public boolean stoneGame(int[] piles) {
         int N = piles.length;
@@ -1723,7 +1726,7 @@ public class TargetDynamicProgramming {
      * 1 <= n <= 3 * 10^4
      * -3 * 10^4 <= nums[i] <= 3 * 10^4
      *
-     * @param nums  长度为 n 的环形整数数组 nums
+     * @param nums 长度为 n 的环形整数数组 nums
      * @return 返回 nums 的非空子数组的最大可能和
      */
     public int maxSubarraySumCircular(int[] nums) {
@@ -1772,8 +1775,8 @@ public class TargetDynamicProgramming {
      * 1 <= n <= 100
      * -100 <= matrix[i][j] <= 100
      *
-     * @param matrix  n x n 的 方形 整数数组 matrix
-     * @return  和最小的下降路径
+     * @param matrix n x n 的 方形 整数数组 matrix
+     * @return 和最小的下降路径
      */
     public int minFallingPathSum(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
@@ -1820,8 +1823,8 @@ public class TargetDynamicProgramming {
      * 输入：values = [1,2]
      * 输出：2
      *
-     * @param values  正整数数组 values
-     * @return  观光景点能取得的最高分
+     * @param values 正整数数组 values
+     * @return 观光景点能取得的最高分
      */
     public int maxScoreSightseeingPair(int[] values) {
         int maxScore = 0, mx = values[0];
@@ -1872,6 +1875,53 @@ public class TargetDynamicProgramming {
             s = p + q + r;
         }
         return s;
+    }
+    //endregion
+
+    //region  1143. 最长公共子序列 20230302
+
+    /**
+     * 给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。
+     * 一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
+     * 例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
+     * 两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。
+     * <p>
+     * 示例 1：
+     * 输入：text1 = "abcde", text2 = "ace"
+     * 输出：3
+     * 解释：最长公共子序列是 "ace" ，它的长度为 3 。
+     * 示例 2：
+     * 输入：text1 = "abc", text2 = "abc"
+     * 输出：3
+     * 解释：最长公共子序列是 "abc" ，它的长度为 3 。
+     * 示例 3：
+     * 输入：text1 = "abc", text2 = "def"
+     * 输出：0
+     * 解释：两个字符串没有公共子序列，返回 0 。
+     * <p>
+     * 提示：
+     * 1 <= text1.length, text2.length <= 1000
+     * text1 和 text2 仅由小写英文字符组成。
+     *
+     * @param text1 字符串 text1
+     * @param text2 字符串 text2
+     * @return 两个字符串的最长公共子序列的长度
+     */
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length(), n = text2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            char c1 = text1.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
+                char c2 = text2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[m][n];
     }
     //endregion
 
@@ -1968,9 +2018,9 @@ public class TargetDynamicProgramming {
      * 1 <= steps <= 500
      * 1 <= arrLen <= 10^6
      *
-     * @param steps 整数 steps
+     * @param steps  整数 steps
      * @param arrLen 整数 arrLen
-     * @return  返回方案数 模10^9 + 7 后的结果
+     * @return 返回方案数 模10^9 + 7 后的结果
      */
     public int numWays(int steps, int arrLen) {
         final int MODULO = 1000000007;
@@ -2014,8 +2064,8 @@ public class TargetDynamicProgramming {
      * 1 <= mat[i][j] <= 100
      *
      * @param mat m x n 的矩阵
-     * @param k 整数 k
-     * @return  返回一个矩阵 answer
+     * @param k   整数 k
+     * @return 返回一个矩阵 answer
      */
     public int[][] matrixBlockSum(int[][] mat, int k) {
         int n = mat.length, m = mat[0].length;
@@ -2073,8 +2123,8 @@ public class TargetDynamicProgramming {
      * 1 <= nums.length <= 10^5
      * -10^9 <= nums[i] <= 10^9
      *
-     * @param nums  整数数组 nums
-     * @return  返回乘积为正数的最长子数组长度
+     * @param nums 整数数组 nums
+     * @return 返回乘积为正数的最长子数组长度
      */
     public int getMaxLen(int[] nums) {
         int length = nums.length;

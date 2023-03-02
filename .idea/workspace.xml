@@ -205,7 +205,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="25c5ff80-b9cb-4d6b-9702-a72ceb70158f" name="变更" comment="" />
+      <changelist id="37d08617-ef14-421f-963c-41bcabb34517" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -299,7 +299,8 @@
       <workItem from="1677407129839" duration="13893000" />
       <workItem from="1677508426204" duration="2142000" />
       <workItem from="1677594778439" duration="1807000" />
-      <workItem from="1677681071426" duration="3193000" />
+      <workItem from="1677681071426" duration="4222000" />
+      <workItem from="1677765575000" duration="1776000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -525,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677510566252</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="300. 最长递增子序列&#10;376. 摆动序列">
+      <created>1677684343635</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1677684343635</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -612,7 +620,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2019/10/3" />
     <MESSAGE value="2019/10/3  哈希表练习" />
     <MESSAGE value="2019/10/6 String练习  新增递归类型" />
     <MESSAGE value="2019/10/7 Tree练习  深入优先遍历类型" />
@@ -637,7 +644,8 @@
     <MESSAGE value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
     <MESSAGE value="91. 解码方法&#10;96. 不同的二叉搜索树&#10;139. 单词拆分&#10;263. 丑数&#10;264. 丑数 II&#10;304. 二维区域和检索 - 矩阵不可变&#10;1314. 矩阵区域和&#10;1567. 乘积为正数的最长子数组长度&#10;增加前缀和类别 TargetPrefixSum.java&#10;1292. 元素和小于等于阈值的正方形的最大边长" />
     <MESSAGE value="64. 最小路径和&#10;221. 最大正方形&#10;1277. 统计全为 1 的正方形子矩阵" />
-    <option name="LAST_COMMIT_MESSAGE" value="64. 最小路径和&#10;221. 最大正方形&#10;1277. 统计全为 1 的正方形子矩阵" />
+    <MESSAGE value="300. 最长递增子序列&#10;376. 摆动序列" />
+    <option name="LAST_COMMIT_MESSAGE" value="300. 最长递增子序列&#10;376. 摆动序列" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -697,12 +705,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>2112</line>
+          <line>2162</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>1778</line>
+          <line>1781</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
