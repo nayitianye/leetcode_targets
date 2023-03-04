@@ -77,6 +77,46 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region  42. 接雨水  20230304
+
+    /**
+     * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+     * 示例 1：
+     * 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+     * 输出：6
+     * 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+     * 示例 2：
+     * 输入：height = [4,2,0,3,2,5]
+     * 输出：9
+     * <p>
+     * 提示：
+     * n == height.length
+     * 1 <= n <= 2 * 10^4
+     * 0 <= height[i] <= 10^5
+     *
+     * @param height
+     * @return
+     */
+    public int trap(int[] height) {
+        int sum = 0;
+        int[] max_left = new int[height.length];
+        int[] max_right = new int[height.length];
+        for (int i = 1; i < height.length - 1; i++) {
+            max_left[i] = Math.max(max_left[i - 1], height[i - 1]);
+        }
+        for (int i = height.length - 2; i >= 0; i--) {
+            max_right[i] = Math.max(max_right[i + 1], height[i + 1]);
+        }
+        for (int i = 1; i < height.length - 1; i++) {
+            int min = Math.min(max_left[i], max_right[i]);
+            if (min > height[i]) {
+                sum = sum + (min - height[i]);
+            }
+        }
+        return sum;
+    }
+    //endregion
+
     //region 45. 跳跃游戏 II  20230217
 
     /**
@@ -233,7 +273,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 62. 不同路径   20191007  动态规划+数组
+    //region 62. 不同路径   20191007
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -276,7 +316,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 63. 不同路径 II  20191007 动态规划+数组
+    //region 63. 不同路径 II  20191007
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -367,6 +407,72 @@ public class TargetDynamicProgramming {
             }
         }
         return grid[row - 1][col - 1];
+    }
+    //endregion
+
+    //region 72. 编辑距离 20230304
+
+    /**
+     * 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数  。
+     * 你可以对一个单词进行如下三种操作：
+     * 插入一个字符
+     * 删除一个字符
+     * 替换一个字符
+     * <p>
+     * 示例 1：
+     * 输入：word1 = "horse", word2 = "ros"
+     * 输出：3
+     * 解释：
+     * horse -> rorse (将 'h' 替换为 'r')
+     * rorse -> rose (删除 'r')
+     * rose -> ros (删除 'e')
+     * 示例 2：
+     * 输入：word1 = "intention", word2 = "execution"
+     * 输出：5
+     * 解释：
+     * intention -> inention (删除 't')
+     * inention -> enention (将 'i' 替换为 'e')
+     * enention -> exention (将 'n' 替换为 'x')
+     * exention -> exection (将 'n' 替换为 'c')
+     * exection -> execution (插入 'u')
+     * <p>
+     * 提示：
+     * 0 <= word1.length, word2.length <= 500
+     * word1 和 word2 由小写英文字母组成
+     *
+     * @param word1
+     * @param word2
+     * @return
+     */
+    public int minDistance(String word1, String word2) {
+        int n = word1.length();
+        int m = word2.length();
+        //有一个字符串为空串
+        if (n * m == 0) {
+            return m + n;
+        }
+        //DP数组
+        int[][] dp = new int[n + 1][m + 1];
+        //边界状态初始化
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= m; j++) {
+            dp[0][j] = j;
+        }
+        //计算所有dp的值
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                int left = dp[i - 1][j] + 1;
+                int down = dp[i][j - 1] + 1;
+                int left_down = dp[i - 1][j - 1];
+                if (word1.charAt(i - 1) != word2.charAt(j - 1)) {
+                    left_down += 1;
+                }
+                dp[i][j] = Math.min(left_down, Math.min(left, down));
+            }
+        }
+        return dp[n][m];
     }
     //endregion
 
@@ -1043,6 +1149,20 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 279. 完全平方数  20230304
+    public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j]);
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
+    //endregion
+
     //region  300. 最长递增子序列  20230301
 
     /**
@@ -1211,6 +1331,82 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region 322. 零钱兑换  20230304
+
+    /**
+     * 给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
+     * 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。
+     * 你可以认为每种硬币的数量是无限的。
+     * <p>
+     * 示例 1：
+     * 输入：coins = [1, 2, 5], amount = 11
+     * 输出：3
+     * 解释：11 = 5 + 5 + 1
+     * 示例 2：
+     * 输入：coins = [2], amount = 3
+     * 输出：-1
+     * 示例 3：
+     * 输入：coins = [1], amount = 0
+     * 输出：0
+     * 提示：
+     * 1 <= coins.length <= 12
+     * 1 <= coins[i] <= 231 - 1
+     * 0 <= amount <= 104
+     *
+     * @param coins  整数数组 coins ，表示不同面额的硬币
+     * @param amount 一个整数 amount ，表示总金额
+     * @return 凑成总金额所需的最少的硬币个数
+     */
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i < max; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] < i) {
+                    dp[i] = Math.min(dp[i - 1], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+    //endregion
+
+    //region 343. 整数拆分  20230304
+
+    /**
+     * 给定一个正整数 n ，将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化。
+     * 返回你可以获得的最大乘积 。
+     * <p>
+     * 示例 1:
+     * 输入: n = 2
+     * 输出: 1
+     * 解释: 2 = 1 + 1, 1 × 1 = 1。
+     * 示例 2:
+     * 输入: n = 10
+     * 输出: 36
+     * 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+     * <p>
+     * 提示:
+     * 2 <= n <= 58
+     *
+     * @param n 给定一个正整数 n
+     * @return 返回你可以获得的最大乘积
+     */
+    public int integerBreak(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            int curMax = 0;
+            for (int j = 1; j < i; j++) {
+                curMax = Math.max(curMax, Math.max(j * (i - j), j * dp[i - j]));
+            }
+            dp[i] = curMax;
+        }
+        return dp[n];
+    }
+    //endregion
+
     //region 376. 摆动序列  20230301
 
     /**
@@ -1263,6 +1459,55 @@ public class TargetDynamicProgramming {
             }
         }
         return Math.max(up[n - 1], down[n - 1]);
+    }
+    //endregion
+
+    //region 377. 组合总和 Ⅳ  20230304
+
+    /**
+     * 给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。
+     * 请你从 nums 中找出并返回总和为 target 的元素组合的个数。
+     * 题目数据保证答案符合 32 位整数范围。
+     * <p>
+     * 示例 1：
+     * 输入：nums = [1,2,3], target = 4
+     * 输出：7
+     * 解释：
+     * 所有可能的组合为：
+     * (1, 1, 1, 1)
+     * (1, 1, 2)
+     * (1, 2, 1)
+     * (1, 3)
+     * (2, 1, 1)
+     * (2, 2)
+     * (3, 1)
+     * 请注意，顺序不同的序列被视作不同的组合。
+     * 示例 2：
+     * 输入：nums = [9], target = 3
+     * 输出：0
+     * <p>
+     * 提示：
+     * 1 <= nums.length <= 200
+     * 1 <= nums[i] <= 1000
+     * nums 中的所有元素 互不相同
+     * 1 <= target <= 1000
+     * 进阶：如果给定的数组中含有负数会发生什么？问题会产生何种变化？如果允许负数出现，需要向题目中添加哪些限制条件？
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int combinationSum4(int[] nums, int target) {
+        int dp[] = new int[target + 1];
+        dp[0] = 1;
+        for (int i = 1; i <= target; i++) {
+            for (int num : nums) {
+                if (num <= i) {
+                    dp[i] += dp[i - num];
+                }
+            }
+        }
+        return dp[target];
     }
     //endregion
 
@@ -1497,6 +1742,52 @@ public class TargetDynamicProgramming {
             }
         }
         return dp[0][length - 1];
+    }
+    //endregion
+
+    //region 518. 零钱兑换 II 20230304
+
+    /**
+     * 给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
+     * 请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。
+     * 假设每一种面额的硬币有无限个。
+     * 题目数据保证结果符合 32 位带符号整数。
+     * <p>
+     * 示例 1：
+     * 输入：amount = 5, coins = [1, 2, 5]
+     * 输出：4
+     * 解释：有四种方式可以凑成总金额：
+     * 5=5
+     * 5=2+2+1
+     * 5=2+1+1+1
+     * 5=1+1+1+1+1
+     * 示例 2：
+     * 输入：amount = 3, coins = [2]
+     * 输出：0
+     * 解释：只用面额 2 的硬币不能凑成总金额 3 。
+     * 示例 3：
+     * 输入：amount = 10, coins = [10]
+     * 输出：1
+     * <p>
+     * 提示：
+     * 1 <= coins.length <= 300
+     * 1 <= coins[i] <= 5000
+     * coins 中的所有值 互不相同
+     * 0 <= amount <= 5000
+     *
+     * @param amount 一个整数数组 coins 表示不同面额的硬币
+     * @param coins  一个整数 amount 表示总金额
+     * @return 返回可以凑成总金额的硬币组合数
+     */
+    public int change(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int coin : coins) {
+            for (int i = coin; i <= amount; i++) {
+                dp[i] += dp[i - coin];
+            }
+        }
+        return dp[amount];
     }
     //endregion
 
@@ -2160,6 +2451,7 @@ public class TargetDynamicProgramming {
 //        int num=(new TargetDynamicProgramming()).uniquePathsWithObstacles(arrays);
 //        int num=(new TargetDynamicProgramming()).numWays(4,3);
 //        int num = new TargetDynamicProgramming().numberOfArithmeticSlices(new int[]{1, 2, 3, 8, 9, 10});
-        new TargetDynamicProgramming().minFallingPathSum(new int[][]{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}});
+//        new TargetDynamicProgramming().minFallingPathSum(new int[][]{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}});
+        new TargetDynamicProgramming().combinationSum4(new int[]{1, 2, 3}, 4);
     }
 }
