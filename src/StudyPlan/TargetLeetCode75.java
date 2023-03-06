@@ -1,6 +1,7 @@
 package StudyPlan;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * @author yyb
@@ -9,7 +10,95 @@ import java.util.Arrays;
  */
 public class TargetLeetCode75 {
 
+    //region    20230306    205. 同构字符串
+
+    /**
+     * 给定两个字符串 s 和 t ，判断它们是否是同构的。
+     * 如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。
+     * 每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。
+     * 不同字符不能映射到同一个字符上，相同字符只能映射到同一个字符上，字符可以映射到自己本身。
+     * <p>
+     * 示例 1:
+     * 输入：s = "egg", t = "add"
+     * 输出：true
+     * 示例 2：
+     * 输入：s = "foo", t = "bar"
+     * 输出：false
+     * 示例 3：
+     * 输入：s = "paper", t = "title"
+     * 输出：true
+     * <p>
+     * 提示：
+     * 1 <= s.length <= 5 * 104
+     * t.length == s.length
+     * s 和 t 由任意有效的 ASCII 字符组成
+     *
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return 判断它们是否是同构的
+     */
+    public boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        HashMap<Character, Character> hashMapS = new HashMap<>();
+        HashMap<Character, Character> hashMapT = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char chs = s.charAt(i);
+            char cht = t.charAt(i);
+            if ((hashMapT.containsKey(chs) && hashMapT.get(chs) != cht) ||
+                    (hashMapS.containsKey(cht) && hashMapS.get(cht) != chs)) {
+                return false;
+            }
+            hashMapT.put(chs, cht);
+            hashMapS.put(cht, chs);
+        }
+        return true;
+    }
+    //endregion
+
+    //region    20230306    392. 判断子序列
+
+    /**
+     * 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
+     * 字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+     * 进阶：
+     * 如果有大量输入的 S，称作 S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？
+     * 致谢：
+     * 特别感谢 @pbrother 添加此问题并且创建所有测试用例。
+     * <p>
+     * 示例 1：
+     * 输入：s = "abc", t = "ahbgdc"
+     * 输出：true
+     * 示例 2：
+     * 输入：s = "axc", t = "ahbgdc"
+     * 输出：false
+     * <p>
+     * 提示：
+     * 0 <= s.length <= 100
+     * 0 <= t.length <= 10^4
+     * 两个字符串都只由小写字符组成。
+     *
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return 判断 s 是否为 t 的子序列
+     */
+    public boolean isSubsequence(String s, String t) {
+        int m = s.length();
+        int n = t.length();
+        int i = 0, j = 0;
+        while (i < m && j < n) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == m;
+    }
+    //endregion
+
     //region    20230305    724. 寻找数组的中心下标
+
     /**
      * 给你一个整数数组 nums ，请计算数组的 中心下标 。
      * 数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。
@@ -52,11 +141,11 @@ public class TargetLeetCode75 {
             pivot[i] = pivot[i - 1] + nums[i];
         }
         int left = 0;
-        for (int i = 0; i <pivot.length; i++) {
+        for (int i = 0; i < pivot.length; i++) {
             if (i != 0) {
                 left = pivot[i - 1];
             }
-            if (pivot[nums.length - 1] - pivot[i] ==left) {
+            if (pivot[nums.length - 1] - pivot[i] == left) {
                 return i;
             }
         }
@@ -65,6 +154,7 @@ public class TargetLeetCode75 {
     //endregion
 
     //region    20230305    1480. 一维数组的动态和
+
     /**
      * 给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。
      * 请返回 nums 的动态和。
@@ -100,10 +190,14 @@ public class TargetLeetCode75 {
     //endregion
 
     public static void main(String[] args) {
-        int[] res = new TargetLeetCode75().runningSum(new int[]{1, 2, 3, 4});
-        System.out.println(Arrays.toString(res));
-        int pivotIndex = new TargetLeetCode75().pivotIndex(new int[]{1, 7, 3, 6, 5, 6});
-        System.out.println(pivotIndex);
+        //1480. 一维数组的动态和
+        System.out.println(Arrays.toString(new TargetLeetCode75().runningSum(new int[]{1, 2, 3, 4})));
+        //724. 寻找数组的中心下标
+        System.out.println(new TargetLeetCode75().pivotIndex(new int[]{1, 7, 3, 6, 5, 6}));
+        //205. 同构字符串
+        System.out.println(new TargetLeetCode75().isIsomorphic("badc", "baba"));
+        //392. 判断子序列
+        System.out.println(new TargetLeetCode75().isSubsequence("abc", "abcde"));
     }
 }
 

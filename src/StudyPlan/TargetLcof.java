@@ -12,6 +12,34 @@ import java.util.Stack;
  */
 public class TargetLcof {
 
+    //region    20230306    剑指 Offer 05. 替换空格
+
+    /**
+     * 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+     * <p>
+     * 示例 1：
+     * 输入：s = "We are happy."
+     * 输出："We%20are%20happy."
+     * <p>
+     * 限制：
+     * 0 <= s 的长度 <= 10000
+     *
+     * @param s 字符串 s
+     * @return 字符串 s 中的每个空格替换成"%20"
+     */
+    public String replaceSpace(String s) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                stringBuilder.append(s.charAt(i));
+            } else {
+                stringBuilder.append("%20");
+            }
+        }
+        return stringBuilder.toString();
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 06. 从尾到头打印链表
     public static class ListNode {
         int val;
@@ -109,8 +137,8 @@ public class TargetLcof {
      * 限制：
      * 0 <= 节点个数 <= 5000
      *
-     * @param head  一个链表的头节点
-     * @return  反转该链表并输出反转后链表的头节点
+     * @param head 一个链表的头节点
+     * @return 反转该链表并输出反转后链表的头节点
      */
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
@@ -171,6 +199,7 @@ public class TargetLcof {
     }
 
     HashMap<Node, Node> cachedNode = new HashMap<>();
+
     /**
      * 请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，
      * 还有一个 random 指针指向链表中的任意节点或者 null。
@@ -193,8 +222,9 @@ public class TargetLcof {
      * -10000 <= Node.val <= 10000
      * Node.random 为空（null）或指向链表中的节点。
      * 节点数目不超过 1000 。
-     * @param head  复杂链表
-     * @return  复制一个复杂链表
+     *
+     * @param head 复杂链表
+     * @return 复制一个复杂链表
      */
     public Node copyRandomList(Node head) {
         if (head == null) {
@@ -207,6 +237,31 @@ public class TargetLcof {
             headNew.random = copyRandomList(head.random);
         }
         return cachedNode.get(head);
+    }
+    //endregion
+
+    //region    20230306    剑指 Offer 58 - II. 左旋转字符串
+
+    /**
+     * 字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。
+     * 比如，输入字符串"bcdedit"和数字2，该函数将返回左旋转两位得到的结果"definable"。
+     * 示例 1：
+     * 输入: s = "bcdedit", k = 2
+     * 输出: "definable"
+     * 示例 2：
+     * 输入: s = "closemouthed", k = 6
+     * 输出: "closemouthed"
+     * <p>
+     * 限制：
+     * 1 <= k < s.length <= 10000
+     *
+     * @param s 字符串 s
+     * @param n 数字 n
+     * @return 字符串左旋后的字符串
+     */
+    public String reverseLeftWords(String s, int n) {
+        String stringBuilder = s.substring(n) + s.substring(0, n);
+        return stringBuilder;
     }
     //endregion
 
@@ -230,13 +285,17 @@ public class TargetLcof {
         listNode.next.next = new ListNode(22);
         System.out.println(Arrays.toString(new TargetLcof().reversePrint(listNode)));
         //24. 反转链表
-        ListNode reverseList=new TargetLcof().reverseList(listNode);
+        ListNode reverseList = new TargetLcof().reverseList(listNode);
         System.out.println(reverseList.toString());
         //35. 复杂链表的复制
-        Node head=new Node(11);
-        head.next=new Node(223);
-        head.random=new Node(22);
-        Node res=new TargetLcof().copyRandomList(head);
+        Node head = new Node(11);
+        head.next = new Node(223);
+        head.random = new Node(22);
+        Node res = new TargetLcof().copyRandomList(head);
         System.out.println(res.toString());
+        //05. 替换空格
+        System.out.println(new TargetLcof().replaceSpace("aaa a a   a   aaa"));
+        //58 - II. 左旋转字符串
+        System.out.println(new TargetLcof().reverseLeftWords("abducens",2));
     }
 }

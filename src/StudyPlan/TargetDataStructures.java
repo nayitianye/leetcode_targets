@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class TargetDataStructures {
 
     //region    20230305    1. 两数之和
+
     /**
      * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
      * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
@@ -52,6 +53,7 @@ public class TargetDataStructures {
     //endregion
 
     //region    20230305    53. 最大子数组和
+
     /**
      * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
      * 子数组 是数组中的一个连续部分。
@@ -98,6 +100,7 @@ public class TargetDataStructures {
     //endregion
 
     //region    20230305    88. 合并两个有序数组
+
     /**
      * 给你两个按非递减顺序排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
      * 请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
@@ -147,7 +150,46 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230306    121. 买卖股票的最佳时机
+
+    /**
+     * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+     * 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。
+     * 设计一个算法来计算你所能获取的最大利润。
+     * 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
+     * <p>
+     * 示例 1：
+     * 输入：[7,1,5,3,6,4]
+     * 输出：5
+     * 解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     * 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+     * 示例 2：
+     * 输入：prices = [7,6,4,3,1]
+     * 输出：0
+     * 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
+     * <p>
+     * 提示：
+     * 1 <= prices.length <= 10^5
+     * 0 <= prices[i] <= 10^4
+     *
+     * @param prices  数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格
+     * @return  返回你可以从这笔交易中获取的最大利润
+     */
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int max = 0, min = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            max = Math.max(prices[i] - min, max);
+        }
+        return max;
+    }
+    //endregion
+
     //region    20230305    217. 存在重复元素
+
     /**
      * 给你一个整数数组 nums 。如果任一值在数组中出现至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
      * <p>
@@ -181,14 +223,66 @@ public class TargetDataStructures {
     }
     //endregion
 
-    public static void main(String[] args)                                                                                                                                                                                                                                                                                                                                                                             {
-        //测试用例输入
-        int[] res=new TargetDataStructures().twoSum(new int[]{1,2,7,9,11},11);
-        System.out.println(Arrays.toString(res));
-        boolean res1=new TargetDataStructures().containsDuplicate(new int[]{1,2,3,4,4,6,6});
-        System.out.println(res1);
-        int maxLength=new TargetDataStructures().maxSubArray(new int[]{1,3,4,-10,6,18,-5,12});
-        System.out.println(maxLength);
-        new TargetDataStructures().merge(new int[]{1,2,3,4,4,5,0,0,0,0},6,new int[]{2,3,5,7},4);
+    //region    20230306    350. 两个数组的交集 II
+
+    /**
+     * 给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，
+     * 应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
+     * <p>
+     * 示例 1：
+     * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
+     * 输出：[2,2]
+     * 示例 2:
+     * 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     * 输出：[4,9]
+     * <p>
+     * 提示：
+     * 1 <= nums1.length, nums2.length <= 1000
+     * 0 <= nums1[i], nums2[i] <= 1000
+     * <p>
+     * 进阶：
+     * 如果给定的数组已经排好序呢？你将如何优化你的算法？
+     * 如果 nums1 的大小比 nums2 小，哪种方法更优？
+     * 如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
+     *
+     * @param nums1 整数数组 nums1
+     * @param nums2 整数数组 nums2
+     * @return 以数组形式返回两数组的交集
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int length1 = nums1.length, length2 = nums2.length;
+        int[] intersection = new int[Math.min(length1, length2)];
+        int index1 = 0, index2 = 0, index = 0;
+        while (index1 < length1 && index2 < length2) {
+            if (nums1[index1] < nums2[index2]) {
+                index1++;
+            } else if (nums2[index2] < nums1[index1]) {
+                index2++;
+            } else {
+                intersection[index] = nums1[index1];
+                index1++;
+                index2++;
+                index++;
+            }
+        }
+        return Arrays.copyOfRange(intersection, 0, index);
+    }
+    //endregion
+
+    public static void main(String[] args) {
+        //1. 两数之和
+        System.out.println(Arrays.toString(new TargetDataStructures().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));
+        //217. 存在重复元素
+        System.out.println(new TargetDataStructures().containsDuplicate(new int[]{1, 2, 3, 4, 4, 6, 6}));
+        //53. 最大子数组和
+        System.out.println(new TargetDataStructures().maxSubArray(new int[]{1, 3, 4, -10, 6, 18, -5, 12}));
+        //88. 合并两个有序数组
+        new TargetDataStructures().merge(new int[]{1, 2, 3, 4, 4, 5, 0, 0, 0, 0}, 6, new int[]{2, 3, 5, 7}, 4);
+        //350. 两个数组的交集 II
+        System.out.println(Arrays.toString(new TargetDataStructures().intersect(new int[]{1, 2, 3, 3}, new int[]{1, 2, 4})));
+        //121. 买卖股票的最佳时机
+        System.out.println(new TargetDataStructures().maxProfit(new int[]{7, 5, 4, 3, 2, 1}));
     }
 }
