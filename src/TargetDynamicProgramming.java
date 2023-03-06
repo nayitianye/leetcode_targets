@@ -12,7 +12,7 @@ public class TargetDynamicProgramming {
     //https://www.bilibili.com/video/BV1pd4y147Rh/
     //endregion
 
-    //region  5. 最长回文子串  20230228
+    //region    20230228    5. 最长回文子串
 
     /**
      * 给你一个字符串 s，找到 s 中最长的回文子串。
@@ -77,7 +77,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  42. 接雨水  20230304
+    //region    20230304    42. 接雨水
 
     /**
      * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
@@ -117,7 +117,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 45. 跳跃游戏 II  20230217
+    //region    20230217    45. 跳跃游戏 II
 
     /**
      * 给定一个长度为 n 的 0 索引整数数组 nums。初始位置为 nums[0]。
@@ -161,7 +161,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 53. 最大子数组和  20230217
+    //region    20230217    53. 最大子数组和
 
     /**
      * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
@@ -207,7 +207,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 55. 跳跃游戏   20230217
+    //region    20230217    55. 跳跃游戏
 
     /**
      * 给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。
@@ -273,7 +273,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 62. 不同路径   20191007
+    //region    20191007    62. 不同路径
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -316,7 +316,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 63. 不同路径 II  20191007
+    //region    20191007    63. 不同路径 II
 
     /**
      * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
@@ -366,7 +366,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 64. 最小路径和  20230227
+    //region    20230227    64. 最小路径和
 
     /**
      * 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
@@ -410,7 +410,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 72. 编辑距离 20230304
+    //region    20230304    72. 编辑距离
 
     /**
      * 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数  。
@@ -476,7 +476,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 70. 爬楼梯 20230215
+    //region    20230215    70. 爬楼梯
 
     /**
      * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
@@ -532,7 +532,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 91. 解码方法 20230226
+    //region    20230226    91. 解码方法
 
     /**
      * 一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：
@@ -585,7 +585,7 @@ public class TargetDynamicProgramming {
 
     //endregion
 
-    //region 96. 不同的二叉搜索树  20230226
+    //region    20230226    96. 不同的二叉搜索树
 
     /**
      * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？
@@ -617,7 +617,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  118. 杨辉三角  20230225
+    //region    20230225    118. 杨辉三角
 
     /**
      * 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。
@@ -653,7 +653,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 119. 杨辉三角 II  20230225
+    //region    20230225    119. 杨辉三角 II
 
     /**
      * 给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。
@@ -688,7 +688,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 120. 三角形最小路径和  20230225
+    //region    20230225    120. 三角形最小路径和
 
     /**
      * 给定一个三角形 triangle ，找出自顶向下的最小路径和。
@@ -735,7 +735,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 121. 买卖股票的最佳时机  20230219
+    //region    20230219    121. 买卖股票的最佳时机
 
     /**
      * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
@@ -772,7 +772,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 122. 买卖股票的最佳时机 II 20220220
+    //region    20220220    122. 买卖股票的最佳时机 II
 
     /**
      * 给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。
@@ -828,7 +828,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  139. 单词拆分  20230226
+    //region    20230226    139. 单词拆分
 
     /**
      * 给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。
@@ -874,7 +874,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    // region 152. 乘积最大子数组 20230225
+    //region   20230225    152. 乘积最大子数组
 
     /**
      * 给你一个整数数组 nums ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
@@ -929,7 +929,7 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    // region 198. 打家劫舍 20230216
+    //region    20230216    198. 打家劫舍
 
     /**
      * 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -971,7 +971,7 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    // region  213. 打家劫舍 II 20230216
+    //region   20230216    213. 打家劫舍 II
 
     /**
      * 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。
@@ -1021,7 +1021,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 221. 最大正方形  20230227
+    //region    20230227    221. 最大正方形
 
     /**
      * 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
@@ -1067,7 +1067,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 256. 粉刷房子
+    //region    20230306    256. 粉刷房子
 
     /**
      * 假如有一排房子，共 n 个，每个房子可以被粉刷成红色、蓝色或者绿色这三种颜色中的一种，
@@ -1107,7 +1107,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 264. 丑数 II  20230226
+    //region    20230226    264. 丑数 II
 
     /**
      * 给你一个整数 n ，请你找出并返回第 n 个 丑数 。
@@ -1149,7 +1149,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 279. 完全平方数  20230304
+    //region    20230304    279. 完全平方数
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
         for (int i = 1; i <= n; i++) {
@@ -1163,7 +1163,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  300. 最长递增子序列  20230301
+    //region    20230301    300. 最长递增子序列
 
     /**
      * 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
@@ -1212,7 +1212,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 303. 区域和检索 - 数组不可变
+    //region    20230306    303. 区域和检索 - 数组不可变
 
     /**
      * 给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。
@@ -1243,7 +1243,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 304. 二维区域和检索 - 矩阵不可变  20230226
+    //region    20230226    304. 二维区域和检索 - 矩阵不可变
 
     /**
      * 给定一个二维矩阵 matrix，以下类型的多个请求：
@@ -1290,7 +1290,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 309. 最佳买卖股票时机含冷冻期 20230220
+    //region    20230220    309. 最佳买卖股票时机含冷冻期
 
     /**
      * 给定一个整数数组prices，其中第  prices[i] 表示第 i 天的股票价格 。
@@ -1331,7 +1331,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 322. 零钱兑换  20230304
+    //region    20230304    322. 零钱兑换
 
     /**
      * 给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
@@ -1373,7 +1373,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 343. 整数拆分  20230304
+    //region    20230304    343. 整数拆分
 
     /**
      * 给定一个正整数 n ，将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化。
@@ -1407,7 +1407,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 376. 摆动序列  20230301
+    //region    20230301    376. 摆动序列
 
     /**
      * 如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为 摆动序列 。
@@ -1462,7 +1462,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 377. 组合总和 Ⅳ  20230304
+    //region    20230304    377. 组合总和 Ⅳ
 
     /**
      * 给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。
@@ -1511,7 +1511,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 392. 判断子序列   2019/10/22
+    //region    20191022    392. 判断子序列
 
     /**
      * 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
@@ -1548,7 +1548,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 403 青蛙过河
+    //region    20230306    403 青蛙过河
 
     /**
      * 一只青蛙想要过河。 假定河流被等分为若干个单元格，并且在每一个单元格内都有可能放有一块石子（也有可能没有）。 青蛙可以跳上石子，但是不可以跳入水中。
@@ -1575,7 +1575,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 413. 等差数列划分 20230225
+    //region    20230225    413. 等差数列划分
 
     /**
      * 如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列。
@@ -1654,7 +1654,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 509. 斐波拉契数列  20230215
+    //region    20230215    509. 斐波拉契数列
 
     /**
      * 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
@@ -1704,7 +1704,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 516. 最长回文子序列
+    //region    20230306    516. 最长回文子序列
 
     /**
      * 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。
@@ -1745,7 +1745,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 518. 零钱兑换 II 20230304
+    //region    20230304    518. 零钱兑换 II
 
     /**
      * 给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
@@ -1791,7 +1791,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 714. 买卖股票的最佳时机含手续费 20230220
+    //region    20230220    714. 买卖股票的最佳时机含手续费
 
     /**
      * 给定一个整数数组 prices，其中 prices[i]表示第 i 天的股票价格 ；整数 fee 代表了交易股票的手续费用。
@@ -1836,7 +1836,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 740. 删除并获得点数 20230216
+    //region    20230216    740. 删除并获得点数
 
     /**
      * 给你一个整数数组 nums ，你可以对它进行一些操作。
@@ -1900,7 +1900,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    // region 746. 使用最小花费爬楼梯 20230215
+    //region   20230215    746. 使用最小花费爬楼梯
 
     /**
      * 给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
@@ -1944,7 +1944,7 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    //region 877. 石子游戏   20191022  动态规划
+    //region    20191022    877. 石子游戏
 
     /**
      * 亚历克斯和李用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 piles[i] 。
@@ -1992,7 +1992,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  918. 环形子数组的最大和 20230217
+    //region    20230217    918. 环形子数组的最大和
 
     /**
      * 给定一个长度为 n 的环形整数数组 nums ，返回 nums 的非空 子数组 的最大可能和 。
@@ -2043,7 +2043,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  931. 下降路径最小和  20230225
+    //region    20230225    931. 下降路径最小和
 
     /**
      * 给你一个 n x n 的 方形 整数数组 matrix ，请你找出并返回通过 matrix 的下降路径 的 最小和 。
@@ -2099,7 +2099,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 1014. 最佳观光组合  20230226
+    //region    20230226    1014. 最佳观光组合
 
     /**
      * 给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。
@@ -2127,7 +2127,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 1137. 第 N 个泰波那契数 20230215
+    //region    20230215    1137. 第 N 个泰波那契数
 
     /**
      * 泰波那契序列 Tn 定义如下：
@@ -2169,7 +2169,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region  1143. 最长公共子序列 20230302
+    //region    20230302    1143. 最长公共子序列
 
     /**
      * 给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。
@@ -2216,7 +2216,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 1277. 统计全为 1 的正方形子矩阵  20230227
+    //region    20230227    1277. 统计全为 1 的正方形子矩阵
 
     /**
      * 给你一个 m * n 的矩阵，矩阵中的元素不是 0 就是 1，请你统计并返回其中完全由 1 组成的 正方形 子矩阵的个数。
@@ -2278,7 +2278,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    // region 1269. 停在原地的方案数 20210513
+    //region    20210513    1269. 停在原地的方案数
 
     /**
      * 有一个长度为 arrLen 的数组，开始有一个指针在索引 0 处。
@@ -2333,7 +2333,7 @@ public class TargetDynamicProgramming {
     }
     // endregion
 
-    //region 1314. 矩阵区域和  20230226
+    //region    20230226    1314. 矩阵区域和
 
     /**
      * 给你一个 m x n 的矩阵 mat 和一个整数 k ，请你返回一个矩阵 answer ，其中每个 answer[i][j] 是所有满足下述条件的元素 mat[r][c] 的和：
@@ -2388,7 +2388,7 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
-    //region 1567. 乘积为正数的最长子数组长度 20230226
+    //region    20230226    1567. 乘积为正数的最长子数组长度
 
     /**
      * 给你一个整数数组 nums ，请你求出乘积为正数的最长子数组的长度。
@@ -2441,6 +2441,41 @@ public class TargetDynamicProgramming {
             maxLength = Math.max(maxLength, positive[i]);
         }
         return maxLength;
+    }
+    //endregion
+
+    //region    20230306    1653. 使字符串平衡的最少删除次数
+
+    /**
+     * 给你一个字符串 s ，它仅包含字符 'a' 和 'b' 。
+     * 你可以删除 s 中任意数目的字符，使得 s 平衡 。当不存在下标对 (i,j) 满足 i < j ，
+     * 且 s[i] = 'b' 的同时 s[j]= 'a' ，此时认为 s 是平衡的。
+     * 请你返回使 s 平衡的最少删除次数。
+     * <p>
+     * 示例 1：
+     * 输入：s = "aababbab"
+     * 输出：2
+     * 解释：你可以选择以下任意一种方案：
+     * 下标从 0 开始，删除第 2 和第 6 个字符（"aababbab" -> "aaabbb"），
+     * 下标从 0 开始，删除第 3 和第 6 个字符（"aababbab" -> "aabbbb"）。
+     * 示例 2：
+     * 输入：s = "bbaaaaabb"
+     * 输出：2
+     * 解释：唯一的最优解是删除最前面两个字符。
+     *
+     * @param s 字符串 s ，它仅包含字符 'a' 和 'b'
+     * @return 返回使 s 平衡的最少删除次数
+     */
+    public int minimumDeletions(String s) {
+        int min = 0, cntB = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'b') {
+                cntB++;
+            } else {
+                min = Math.min(min + 1, cntB);
+            }
+        }
+        return min;
     }
     //endregion
 

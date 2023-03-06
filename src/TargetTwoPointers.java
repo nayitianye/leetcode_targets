@@ -6,20 +6,43 @@ import java.util.*;
  * leetcode 标签 双指针
  */
 public class TargetTwoPointers {
-    //region 167. 两数之和 II - 输入有序数组
+
+    //region    20230306    125. 验证回文串
 
     /**
-     * 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
-     * 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。
-     * <p>
-     * 说明:
-     * 返回的下标值（index1 和 index2）不是从零开始的。
-     * 你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。
-     * <p>
-     * 示例:
-     * 输入: numbers = [2, 7, 11, 15], target = 9
-     * 输出: [1,2]
-     * 解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
+     * https://leetcode.cn/problems/valid-palindrome/
+     *
+     * @param s 给你一个字符串 s
+     * @return 判断其是否是回文串
+     */
+    public boolean isPalindrome(String s) {
+        char[] c = s.toLowerCase().toCharArray();
+        int i = 0, j = c.length - 1;
+        while (i < j) {
+            while (!isValid(c[i]) && i < j) {
+                ++i;
+            }
+            while (!isValid(c[j]) && i < j) {
+                --j;
+            }
+            if (c[i] != c[j]) {
+                return false;
+            }
+            ++i;
+            --j;
+        }
+        return true;
+    }
+
+    private boolean isValid(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+    }
+    //endregion
+
+    //region    20230306    167. 两数之和 II - 输入有序数组
+
+    /**
+     * https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
      *
      * @param numbers
      * @param target
@@ -44,20 +67,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 345. 反转字符串中的元音字母
+    //region    20230306    345. 反转字符串中的元音字母
 
     /**
-     * 编写一个函数，以字符串作为输入，反转该字符串中的元音字母。
-     * <p>
-     * 示例 1:
-     * 输入: "hello"
-     * 输出: "holle"
-     * <p>
-     * 示例 2:
-     * 输入: "leetcode"
-     * 输出: "leotcede"
-     * 说明:
-     * 元音字母不包含字母"y"。
+     * https://leetcode.cn/problems/reverse-vowels-of-a-string/
      *
      * @param s
      * @return
@@ -99,22 +112,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 349. 两个数组的交集
+    //region    20230306    349. 两个数组的交集
 
     /**
-     * 给定两个数组，编写一个函数来计算它们的交集。
-     * <p>
-     * 示例 1:
-     * 输入: nums1 = [1,2,2,1], nums2 = [2,2]
-     * 输出: [2]
-     * <p>
-     * 示例 2:
-     * 输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-     * 输出: [9,4]
-     * <p>
-     * 说明:
-     * 输出结果中的每个元素一定是唯一的。
-     * 我们可以不考虑输出结果的顺序。
+     * https://leetcode.cn/problems/intersection-of-two-arrays/
      *
      * @param nums1
      * @param nums2
@@ -144,28 +145,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 350. 两个数组的交集 II  20230223
+    //region    20230223    350. 两个数组的交集 II
 
     /**
-     * 给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。
-     * 返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。
-     * 可以不考虑输出结果的顺序。
-     * <p>
-     * 示例 1：
-     * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
-     * 输出：[2,2]
-     * 示例 2:
-     * 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-     * 输出：[4,9]
-     * <p>
-     * 提示：
-     * 1 <= nums1.length, nums2.length <= 1000
-     * 0 <= nums1[i], nums2[i] <= 1000
-     * <p>
-     * 进阶：
-     * 如果给定的数组已经排好序呢？你将如何优化你的算法？
-     * 如果 nums1 的大小比 nums2 小，哪种方法更优？
-     * 如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
+     * https://leetcode.cn/problems/intersection-of-two-arrays-ii/
      *
      * @param nums1
      * @param nums2
@@ -193,31 +176,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 475. 供暖器 20211222
+    //region    20211222    475. 供暖器
 
     /**
-     * 冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。
-     * 在加热器的加热半径范围内的每个房屋都可以获得供暖。
-     * 现在，给出位于一条水平线上的房屋 houses 和供暖器 heaters 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。
-     * 说明：所有供暖器都遵循你的半径标准，加热的半径也一样。
-     * <p>
-     * 示例 1:
-     * 输入: houses = [1,2,3], heaters = [2]
-     * 输出: 1
-     * 解释: 仅在位置2上有一个供暖器。如果我们将加热半径设为1，那么所有房屋就都能得到供暖。
-     * <p>
-     * 示例 2:
-     * 输入: houses = [1,2,3,4], heaters = [1,4]
-     * 输出: 1
-     * 解释: 在位置1, 4上有两个供暖器。我们需要将加热半径设为1，这样所有房屋就都能得到供暖。
-     * <p>
-     * 示例 3：
-     * 输入：houses = [1,5], heaters = [2]
-     * 输出：3
-     * <p>
-     * 提示：
-     * 1 <= houses.length, heaters.length <= 3 * 10^4
-     * 1 <= houses[i], heaters[i] <= 10^9
+     * https://leetcode.cn/problems/heaters/
      *
      * @param houses
      * @param heaters
@@ -248,21 +210,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 633. 平方数之和 20230222
+    //region    20230222    633. 平方数之和
 
     /**
-     * 给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
-     * <p>
-     * 示例 1：
-     * 输入：c = 5
-     * 输出：true
-     * 解释：1 * 1 + 2 * 2 = 5
-     * 示例 2：
-     * 输入：c = 3
-     * 输出：false
-     * <p>
-     * 提示：
-     * 0 <= c <= 2^31 - 1
+     * https://leetcode.cn/problems/sum-of-square-numbers/
      *
      * @param c
      * @return
@@ -284,36 +235,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 844. 比较含退格的字符串
+    //region    20230306    844. 比较含退格的字符串
 
     /**
-     * 给定 S 和 T 两个字符串，当它们分别被输入到空白的文本编辑器后，
-     * 判断二者是否相等，并返回结果。 # 代表退格字符。
-     * <p>
-     * 示例 1：
-     * 输入：S = "ab#c", T = "ad#c"
-     * 输出：true
-     * 解释：S 和 T 都会变成 “ac”。
-     * <p>
-     * 示例 2：
-     * 输入：S = "ab##", T = "c#d#"
-     * 输出：true
-     * 解释：S 和 T 都会变成 “”。
-     * <p>
-     * 示例 3：
-     * 输入：S = "a##c", T = "#a#c"
-     * 输出：true
-     * 解释：S 和 T 都会变成 “c”。
-     * <p>
-     * 示例 4：
-     * 输入：S = "a#c", T = "b"
-     * 输出：false
-     * 解释：S 会变成 “c”，但 T 仍然是 “b”。
-     * <p>
-     * 提示：
-     * 1 <= S.length <= 200
-     * 1 <= T.length <= 200
-     * S 和 T 只含有小写字母以及字符 '#'。
+     * https://leetcode.cn/problems/backspace-string-compare/
      *
      * @param S
      * @param T
@@ -343,39 +268,10 @@ public class TargetTwoPointers {
     }
     //endregion
 
-    //region 1855. 下标对中的最大距离 20230223
+    //region    20230223    1855. 下标对中的最大距离
 
     /**
-     * 给你两个 非递增 的整数数组 nums1 和 nums2 ，数组下标均 从 0 开始 计数。
-     * 下标对 (i, j) 中 0 <= i < nums1.length 且 0 <= j < nums2.length 。
-     * 如果该下标对同时满足 i <= j 且 nums1[i] <= nums2[j] ，则称之为 有效 下标对，
-     * 该下标对的 距离 为 j - i 。
-     * 返回所有 有效 下标对 (i, j) 中的 最大距离 。如果不存在有效下标对，返回 0 。
-     * 一个数组 arr ，如果每个 1 <= i < arr.length 均有 arr[i-1] >= arr[i] 成立，
-     * 那么该数组是一个 非递增 数组。
-     * <p>
-     * 示例 1：
-     * 输入：nums1 = [55,30,5,4,2], nums2 = [100,20,10,10,5]
-     * 输出：2
-     * 解释：有效下标对是 (0,0), (2,2), (2,3), (2,4), (3,3), (3,4) 和 (4,4) 。
-     * 最大距离是 2 ，对应下标对 (2,4) 。
-     * 示例 2：
-     * 输入：nums1 = [2,2,2], nums2 = [10,10,1]
-     * 输出：1
-     * 解释：有效下标对是 (0,0), (0,1) 和 (1,1) 。
-     * 最大距离是 1 ，对应下标对 (0,1) 。
-     * 示例 3：
-     * 输入：nums1 = [30,29,19,5], nums2 = [25,25,25,25,25]
-     * 输出：2
-     * 解释：有效下标对是 (2,2), (2,3), (2,4), (3,3) 和 (3,4) 。
-     * 最大距离是 2 ，对应下标对 (2,4) 。
-     * <p>
-     * <p>
-     * 提示：
-     * 1 <= nums1.length <= 10^5
-     * 1 <= nums2.length <= 10^5
-     * 1 <= nums1[i], nums2[j] <= 10^5
-     * nums1 和 nums2 都是 非递增 数组
+     * https://leetcode.cn/problems/maximum-distance-between-a-pair-of-values/
      *
      * @param nums1
      * @param nums2
@@ -399,7 +295,7 @@ public class TargetTwoPointers {
     //endregion
 
     public static void main(String[] args) {
-        System.out.println(reverseVowels("hello"));
+        System.out.println(new TargetTwoPointers().isPalindrome("0p"));
     }
 }
 
