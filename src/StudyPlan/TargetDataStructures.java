@@ -65,6 +65,34 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230308    73. 矩阵置零
+
+    /**
+     * https://leetcode.cn/problems/set-matrix-zeroes/
+     * @param board 数组 board
+     * 将数组中值为 0 的行和列的值置为 0 并返回
+     */
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = col[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+    //endregion
+
     //region    20230305    88. 合并两个有序数组
 
     /**

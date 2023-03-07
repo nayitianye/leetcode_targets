@@ -10,14 +10,14 @@ import java.util.HashMap;
  */
 public class TargetLeetCode75 {
 
-
     //region    20230307    21. 合并两个有序链表
 
     /**
      * https://leetcode.cn/problems/merge-two-sorted-lists/
+     *
      * @param list1 有序链表 list1
      * @param list2 有序链表 list1
-     * @return  返回合并后的有序链表
+     * @return 返回合并后的有序链表
      */
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null) {
@@ -55,6 +55,7 @@ public class TargetLeetCode75 {
 
     /**
      * https://leetcode.cn/problems/isomorphic-strings/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
      * @return 判断它们是否是同构的
@@ -80,10 +81,12 @@ public class TargetLeetCode75 {
     //endregion
 
     //region    20230307    206. 反转链表
+
     /**
      * https://leetcode.cn/problems/reverse-linked-list/
-     * @param head  链表 head
-     * @return  反转链表 heed 并返回
+     *
+     * @param head 链表 head
+     * @return 反转链表 heed 并返回
      */
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
@@ -102,6 +105,7 @@ public class TargetLeetCode75 {
 
     /**
      * https://leetcode.cn/problems/is-subsequence/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
      * @return 判断 s 是否为 t 的子序列
@@ -124,6 +128,7 @@ public class TargetLeetCode75 {
 
     /**
      * https://leetcode.cn/problems/find-pivot-index/
+     *
      * @param nums 整数数组 nums
      * @return 计算数组的 中心下标
      */
@@ -146,10 +151,34 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230308    876. 链表的中间结点
+
+    /**
+     * https://leetcode.cn/problems/middle-of-the-linked-list/
+     * @param head  链表 head
+     * @return  返回链表 head 的中间结点
+     */
+    public ListNode middleNode(ListNode head) {
+        int nums = 0;
+        ListNode listNode = head;
+        while (listNode != null) {
+            listNode = listNode.next;
+            nums++;
+        }
+        int mid = nums / 2;
+        while (mid != 0) {
+            head = head.next;
+            mid--;
+        }
+        return head;
+    }
+    //endregion
+
     //region    20230305    1480. 一维数组的动态和
 
     /**
      * https://leetcode.cn/problems/running-sum-of-1d-array/
+     *
      * @param nums 数组 nums
      * @return 数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) . 请返回 nums 的动态和
      */
@@ -163,6 +192,7 @@ public class TargetLeetCode75 {
         return nums;
     }
     //endregion
+
 
     public static void main(String[] args) {
 

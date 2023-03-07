@@ -12,10 +12,35 @@ import java.util.Stack;
  */
 public class TargetLcof {
 
+    //region    20230308    剑指 Offer 50. 第一个只出现一次的字符
+
+    /**
+     * https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
+     *
+     * @param s 字符串 s
+     * @return 返回字符串第一个只出现一次的字符
+     */
+    public char firstUniqChar(String s) {
+        HashMap<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return s.charAt(i);
+            }
+        }
+        return ' ';
+    }
+    //endregion
+
     //region    20230307    剑指 Offer 03. 数组中重复的数字
+
     /**
      * https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
-     * @param nums  数组 nums
+     *
+     * @param nums 数组 nums
      * @return 找出数组中的重复数字
      */
     public int findRepeatNumber(int[] nums) {
@@ -35,6 +60,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ti-huan-kong-ge-lcof/
+     *
      * @param s 字符串 s
      * @return 字符串 s 中的每个空格替换成"%20"
      */
@@ -63,6 +89,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ti-huan-kong-ge-lcof/
+     *
      * @param head 链表的头节点
      * @return 尾到头反过来返回每个节点的值（用数组返回）
      */
@@ -113,10 +140,35 @@ public class TargetLcof {
 
     //endregion
 
+    //region    20230308    剑指 Offer 11. 旋转数组的最小数字
+
+    /**
+     * https://leetcode.cn/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+     *
+     * @param numbers 旋转数组 nums
+     * @return 旋转数组 nums 中的最小数字
+     */
+    public int minArray(int[] numbers) {
+        int left = 0, right = numbers.length - 1, mid;
+        while (left < right) {
+            mid = left + (right - left) / 2;
+            if (numbers[mid] > numbers[right]) {
+                left = mid + 1;
+            } else if (numbers[mid] < numbers[right]) {
+                right = mid;
+            } else {
+                right -= 1;
+            }
+        }
+        return numbers[left];
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 24. 反转链表
 
     /**
      * https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof/
+     *
      * @param head 一个链表的头节点
      * @return 反转该链表并输出反转后链表的头节点
      */
@@ -134,6 +186,7 @@ public class TargetLcof {
     //endregion
 
     //region    20230305    剑指 Offer 30. 包含min函数的栈
+
     /**
      * https://leetcode.cn/problems/bao-han-minhan-shu-de-zhan-lcof/
      */
@@ -185,6 +238,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/fu-za-lian-biao-de-fu-zhi-lcof/
+     *
      * @param head 复杂链表
      * @return 复制一个复杂链表
      */
@@ -206,6 +260,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
+     *
      * @param s 字符串 s
      * @param n 数字 n
      * @return 字符串左旋后的字符串
@@ -252,6 +307,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/
+     *
      * @param nums 0-n-1 数组
      * @return 数组中缺失的数字
      */
@@ -270,6 +326,6 @@ public class TargetLcof {
     //endregion
 
     public static void main(String[] args) {
-        new TargetLcof().missingNumber(new int[]{0,1,3});
+        new TargetLcof().missingNumber(new int[]{0, 1, 3});
     }
 }
