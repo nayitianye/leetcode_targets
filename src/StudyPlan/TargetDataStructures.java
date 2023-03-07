@@ -1,7 +1,9 @@
 package StudyPlan;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author yyb
@@ -13,27 +15,7 @@ public class TargetDataStructures {
     //region    20230305    1. 两数之和
 
     /**
-     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
-     * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
-     * 你可以按任意顺序返回答案。
-     * <p>
-     * 示例 1：
-     * 输入：nums = [2,7,11,15], target = 9
-     * 输出：[0,1]
-     * 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
-     * 示例 2：
-     * 输入：nums = [3,2,4], target = 6
-     * 输出：[1,2]
-     * 示例 3：
-     * 输入：nums = [3,3], target = 6
-     * 输出：[0,1]
-     * <p>
-     * 提示：
-     * 2 <= nums.length <= 10^4
-     * -10^9 <= nums[i] <= 10^9
-     * -10^9 <= target <= 10^9
-     * 只会存在一个有效答案
-     * 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
+     * https://leetcode.cn/problems/two-sum/
      *
      * @param nums   一个整数数组 nums
      * @param target 一个整数目标值 target
@@ -55,23 +37,7 @@ public class TargetDataStructures {
     //region    20230305    53. 最大子数组和
 
     /**
-     * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
-     * 子数组 是数组中的一个连续部分。
-     * <p>
-     * 示例 1：
-     * 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
-     * 输出：6
-     * 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
-     * 示例 2：
-     * 输入：nums = [1]
-     * 输出：1
-     * 示例 3：
-     * 输入：nums = [5,4,-1,7,8]
-     * 输出：23
-     * <p>
-     * 提示：
-     * 1 <= nums.length <= 10^5
-     * -10^4 <= nums[i] <= 10^4
+     * https://leetcode.cn/problems/maximum-subarray/
      *
      * @param nums 整数数组 nums
      * @return 找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和
@@ -102,35 +68,7 @@ public class TargetDataStructures {
     //region    20230305    88. 合并两个有序数组
 
     /**
-     * 给你两个按非递减顺序排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
-     * 请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
-     * 注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
-     * <p>
-     * 示例 1：
-     * 输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-     * 输出：[1,2,2,3,5,6]
-     * 解释：需要合并 [1,2,3] 和 [2,5,6] 。
-     * 合并结果是 [1,2,2,3,5,6] ，其中斜体加粗标注的为 nums1 中的元素。
-     * 示例 2：
-     * 输入：nums1 = [1], m = 1, nums2 = [], n = 0
-     * 输出：[1]
-     * 解释：需要合并 [1] 和 [] 。
-     * 合并结果是 [1] 。
-     * 示例 3：
-     * 输入：nums1 = [0], m = 0, nums2 = [1], n = 1
-     * 输出：[1]
-     * 解释：需要合并的数组是 [] 和 [1] 。
-     * 合并结果是 [1] 。
-     * 注意，因为 m = 0 ，所以 nums1 中没有元素。nums1 中仅存的 0 仅仅是为了确保合并结果可以顺利存放到 nums1 中。
-     * <p>
-     * 提示：
-     * nums1.length == m + n
-     * nums2.length == n
-     * 0 <= m, n <= 200
-     * 1 <= m + n <= 200
-     * -10^9 <= nums1[i], nums2[j] <= 10^9
-     * <p>
-     * 进阶：你可以设计实现一个时间复杂度为 O(m + n) 的算法解决此问题吗？
+     * https://leetcode.cn/problems/merge-sorted-array/
      *
      * @param nums1 递减顺序排列的整数数组 nums1
      * @param m     表示 nums1 中的元素数目
@@ -150,30 +88,38 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230307    118. 杨辉三角
+
+    /**
+     * https://leetcode.cn/problems/pascals-triangle/
+     *
+     * @param numRows 杨辉三角的行数
+     * @return 返回n行的杨辉三角组成的list
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    list.add(1);
+                } else {
+                    list.add(res.get(i - 1).get(j) + res.get(i - 1).get(j - 1));
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230306    121. 买卖股票的最佳时机
 
     /**
-     * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
-     * 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。
-     * 设计一个算法来计算你所能获取的最大利润。
-     * 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
-     * <p>
-     * 示例 1：
-     * 输入：[7,1,5,3,6,4]
-     * 输出：5
-     * 解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
-     * 注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
-     * 示例 2：
-     * 输入：prices = [7,6,4,3,1]
-     * 输出：0
-     * 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
-     * <p>
-     * 提示：
-     * 1 <= prices.length <= 10^5
-     * 0 <= prices[i] <= 10^4
+     * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
      *
-     * @param prices  数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格
-     * @return  返回你可以从这笔交易中获取的最大利润
+     * @param prices 数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格
+     * @return 返回你可以从这笔交易中获取的最大利润
      */
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) {
@@ -191,21 +137,7 @@ public class TargetDataStructures {
     //region    20230305    217. 存在重复元素
 
     /**
-     * 给你一个整数数组 nums 。如果任一值在数组中出现至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
-     * <p>
-     * 示例 1：
-     * 输入：nums = [1,2,3,1]
-     * 输出：true
-     * 示例 2：
-     * 输入：nums = [1,2,3,4]
-     * 输出：false
-     * 示例 3：
-     * 输入：nums = [1,1,1,3,3,4,3,2,4,2]
-     * 输出：true
-     * <p>
-     * 提示：
-     * 1 <= nums.length <= 105
-     * -109 <= nums[i] <= 109
+     * https://leetcode.cn/problems/contains-duplicate/
      *
      * @param nums 整数数组 nums
      * @return 如果任一数值在数组中出现至少两次 ，返回 true ；如果数组中每个元素互不相同 ，返回 false 。
@@ -226,24 +158,7 @@ public class TargetDataStructures {
     //region    20230306    350. 两个数组的交集 II
 
     /**
-     * 给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，
-     * 应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
-     * <p>
-     * 示例 1：
-     * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
-     * 输出：[2,2]
-     * 示例 2:
-     * 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-     * 输出：[4,9]
-     * <p>
-     * 提示：
-     * 1 <= nums1.length, nums2.length <= 1000
-     * 0 <= nums1[i], nums2[i] <= 1000
-     * <p>
-     * 进阶：
-     * 如果给定的数组已经排好序呢？你将如何优化你的算法？
-     * 如果 nums1 的大小比 nums2 小，哪种方法更优？
-     * 如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
+     * https://leetcode.cn/problems/intersection-of-two-arrays-ii/
      *
      * @param nums1 整数数组 nums1
      * @param nums2 整数数组 nums2
@@ -271,6 +186,31 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230307    566. 重塑矩阵
+
+    /**
+     * https://leetcode.cn/problems/reshape-the-matrix/
+     *
+     * @param mat 数组 mat
+     * @param r   r 行
+     * @param c   c 列
+     * @return 将数组 mat 重塑成 r 行 c 列的数组
+     */
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if (m * n != r * c) {
+            return mat;
+        }
+
+        int[][] ans = new int[r][c];
+        for (int x = 0; x < m * n; ++x) {
+            ans[x / c][x % c] = mat[x / n][x % n];
+        }
+        return ans;
+    }
+    //endregion
+
     public static void main(String[] args) {
         //1. 两数之和
         System.out.println(Arrays.toString(new TargetDataStructures().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));
@@ -284,5 +224,7 @@ public class TargetDataStructures {
         System.out.println(Arrays.toString(new TargetDataStructures().intersect(new int[]{1, 2, 3, 3}, new int[]{1, 2, 4})));
         //121. 买卖股票的最佳时机
         System.out.println(new TargetDataStructures().maxProfit(new int[]{7, 5, 4, 3, 2, 1}));
+        //566. 重塑矩阵
+        System.out.println(new TargetDataStructures().matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4));
     }
 }

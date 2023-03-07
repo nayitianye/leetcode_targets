@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +58,11 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -166,9 +167,22 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetTwoPointers">
+  <component name="RunManager" selected="应用程序.TargetLcof">
     <configuration name="TargetDataStructures" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructures" />
+      <module name="leetcode_targets" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StudyPlan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TargetLcof" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetLcof" />
       <module name="leetcode_targets" />
       <extension name="coverage">
         <pattern>
@@ -193,13 +207,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetString" />
-      <module name="leetcode_targets" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TargetTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetTree" />
       <module name="leetcode_targets" />
@@ -216,9 +223,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetLcof" />
+        <item itemvalue="应用程序.TargetDataStructures" />
         <item itemvalue="应用程序.TargetTwoPointers" />
         <item itemvalue="应用程序.TargetLeetCode75" />
-        <item itemvalue="应用程序.TargetDataStructures" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +236,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fe4799e8-b940-42dd-a453-e48b62958ef8" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -327,6 +334,7 @@
       <workItem from="1677987780850" duration="4369000" />
       <workItem from="1677992802760" duration="9035000" />
       <workItem from="1678110090081" duration="8458000" />
+      <workItem from="1678199852998" duration="5098000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -754,14 +762,24 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
-          <line>197</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetTwoPointers.java</url>
           <line>7</line>
           <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java</url>
+          <line>227</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
+          <line>272</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
+          <line>258</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
