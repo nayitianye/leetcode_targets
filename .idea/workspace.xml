@@ -60,10 +60,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -237,6 +237,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="5e2a5352-8bf5-438e-9198-7ee9e67a1e8a" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -335,7 +336,8 @@
       <workItem from="1677987780850" duration="4369000" />
       <workItem from="1677992802760" duration="9035000" />
       <workItem from="1678110090081" duration="8458000" />
-      <workItem from="1678199852998" duration="8773000" />
+      <workItem from="1678199852998" duration="8879000" />
+      <workItem from="1678279253887" duration="6514000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -589,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678205019729</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符">
+      <created>1678208718423</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1678208718423</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -676,7 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2019/10/17  队列相关的练习  增加贪心算法" />
     <MESSAGE value="2019/10/22  添加二分查找的traget  练习了相关的题目" />
     <MESSAGE value="2019/10/22  添加极小化极大的类别  练习了部分题目" />
     <MESSAGE value="记录更新内容文本" />
@@ -701,7 +709,8 @@
     <MESSAGE value="学习计划_数据结构初级&#10;121. 买卖股票的最佳时机&#10;350. 两个数组的交集 II&#10;学习计划_LeetCode 75&#10;205. 同构字符串&#10;392. 判断子序列&#10;学习计划_剑指 Offer&#10;剑指 Offer 05. 替换空格&#10;剑指 Offer 58 - II. 左旋转字符串&#10;每日一题:&#10;1653. 使字符串平衡的最少删除次数&#10;125. 验证回文串" />
     <MESSAGE value="学习计划_数据结构初级&#10;118. 杨辉三角&#10;566. 重塑矩阵&#10;学习计划_LeetCode 75&#10;21. 合并两个有序链表&#10;206. 反转链表&#10;学习计划_剑指 Offer&#10;剑指 Offer 03. 数组中重复的数字&#10;剑指 Offer 53 - I. 在排序数组中查找数字 I&#10;剑指 Offer 53 - II. 0～n-1中缺失的数字" />
     <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75&#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75&#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
+    <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -761,12 +770,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>2488</line>
+          <line>2514</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>2072</line>
+          <line>2098</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -776,17 +785,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java</url>
-          <line>255</line>
+          <line>284</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
-          <line>328</line>
+          <line>352</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
-          <line>314</line>
+          <line>324</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>

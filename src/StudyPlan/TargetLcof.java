@@ -12,28 +12,6 @@ import java.util.Stack;
  */
 public class TargetLcof {
 
-    //region    20230308    剑指 Offer 50. 第一个只出现一次的字符
-
-    /**
-     * https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
-     *
-     * @param s 字符串 s
-     * @return 返回字符串第一个只出现一次的字符
-     */
-    public char firstUniqChar(String s) {
-        HashMap<Character, Integer> frequency = new HashMap<Character, Integer>();
-        for (int i = 0; i < s.length(); ++i) {
-            char ch = s.charAt(i);
-            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
-        }
-        for (int i = 0; i < s.length(); ++i) {
-            if (frequency.get(s.charAt(i)) == 1) {
-                return s.charAt(i);
-            }
-        }
-        return ' ';
-    }
-    //endregion
 
     //region    20230307    剑指 Offer 03. 数组中重复的数字
 
@@ -53,6 +31,29 @@ public class TargetLcof {
             }
         }
         return -1;
+    }
+    //endregion
+
+    //region    20230308    剑指 Offer 04. 二维数组中的查找
+
+    /**
+     * https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+     * @param matrix  数组 matrix
+     * @param target  目标值 target
+     * @return  判断数组 matrix 是否存在目标值 target
+     */
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        int i = matrix.length - 1, j = 0;
+        while (i >= 0 && j < matrix[0].length) {
+            if (matrix[i][j] > target) {
+                i--;
+            } else if (matrix[i][j] < target) {
+                j++;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
     //endregion
 
@@ -256,17 +257,26 @@ public class TargetLcof {
     }
     //endregion
 
-    //region    20230306    剑指 Offer 58 - II. 左旋转字符串
+    //region    20230308    剑指 Offer 50. 第一个只出现一次的字符
 
     /**
-     * https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
+     * https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
      *
      * @param s 字符串 s
-     * @param n 数字 n
-     * @return 字符串左旋后的字符串
+     * @return 返回字符串第一个只出现一次的字符
      */
-    public String reverseLeftWords(String s, int n) {
-        return s.substring(n) + s.substring(0, n);
+    public char firstUniqChar(String s) {
+        HashMap<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return s.charAt(i);
+            }
+        }
+        return ' ';
     }
     //endregion
 
@@ -322,6 +332,20 @@ public class TargetLcof {
             }
         }
         return nums[left] - left == 0 ? left + 1 : left;
+    }
+    //endregion
+
+    //region    20230306    剑指 Offer 58 - II. 左旋转字符串
+
+    /**
+     * https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
+     *
+     * @param s 字符串 s
+     * @param n 数字 n
+     * @return 字符串左旋后的字符串
+     */
+    public String reverseLeftWords(String s, int n) {
+        return s.substring(n) + s.substring(0, n);
     }
     //endregion
 

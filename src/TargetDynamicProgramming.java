@@ -161,6 +161,32 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230308    剑指 Offer 47. 礼物的最大价值
+
+    /**
+     * https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/description/
+     *
+     * @param grid m*n 的 grid 棋盘
+     * @return 可以拿到最多价值的礼物
+     */
+    public int maxValue(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
+                }
+                if (j > 0) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i][j - 1]);
+                }
+                dp[i][j] += grid[i][j];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+    //endregion
+
     //region    20230217    53. 最大子数组和
 
     /**
