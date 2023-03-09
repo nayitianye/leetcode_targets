@@ -51,10 +51,32 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230309    121. 买卖股票的最佳时机
+
+    /**
+     * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
+     *
+     * @param prices 一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格
+     * @return 这笔交易中获取的最大利润
+     */
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int max = 0, min = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            max = Math.max(prices[i] - min, max);
+        }
+        return max;
+    }
+    //endregion
+
     //region    20230308    142. 环形链表 II
 
     /**
      * https://leetcode.cn/problems/linked-list-cycle-ii/description/
+     *
      * @param head
      * @return
      */
@@ -148,6 +170,35 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230309    409. 最长回文串
+
+    /**
+     * https://leetcode.cn/problems/longest-palindrome/
+     * @param s 给定一个包含大写字母和小写字母的字符串 s
+     * @return 通过这些字母构造成的最长的回文串
+     */
+    public int longestPalindrome(String s) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
+            } else {
+                hashMap.put(s.charAt(i), 1);
+            }
+        }
+        int res = 0, maxSinge = 0;
+        for (Integer value : hashMap.values()) {
+            if (value % 2 == 0) {
+                res += value;
+            } else {
+                res += value / 2 * 2;
+                maxSinge = 1;
+            }
+        }
+        return res + maxSinge;
+    }
+    //endregion
+
     //region    20230305    724. 寻找数组的中心下标
 
     /**
@@ -179,8 +230,9 @@ public class TargetLeetCode75 {
 
     /**
      * https://leetcode.cn/problems/middle-of-the-linked-list/
-     * @param head  链表 head
-     * @return  返回链表 head 的中间结点
+     *
+     * @param head 链表 head
+     * @return 返回链表 head 的中间结点
      */
     public ListNode middleNode(ListNode head) {
         int nums = 0;
@@ -217,9 +269,8 @@ public class TargetLeetCode75 {
     }
     //endregion
 
-
     public static void main(String[] args) {
-
+        new TargetLeetCode75().longestPalindrome("abccccdd");
     }
 }
 

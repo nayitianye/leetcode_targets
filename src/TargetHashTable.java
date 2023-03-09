@@ -133,4 +133,8 @@ public class TargetHashTable {
         return res;
     }
     //endregion
+
+    public static void main(String[] args) {
+
+    }
 }

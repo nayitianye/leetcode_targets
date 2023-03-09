@@ -1,9 +1,6 @@
 package StudyPlan;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yyb
@@ -35,10 +32,12 @@ public class TargetDataStructures {
     //endregion
 
     //region    20230308    36. 有效的数独
+
     /**
      * https://leetcode.cn/problems/valid-sudoku/
+     *
      * @param board 数组 board
-     * @return  判断数组是否符合数独的形式
+     * @return 判断数组是否符合数独的形式
      */
     public boolean isValidSudoku(char[][] board) {
         int[][] rows = new int[9][9];
@@ -212,6 +211,41 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230309    242. 有效的字母异位词
+
+    /**
+     * https://leetcode.cn/problems/valid-anagram/
+     * @param  s 字符串 s
+     * @param  t 字符串 t
+     * @return  判断 t 是否是 s 的字母异位词
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
+            } else {
+                hashMap.put(s.charAt(i), 1);
+            }
+        }
+        for (int i = 0; i < t.length(); i++) {
+            if(hashMap.containsKey(t.charAt(i))){
+                if(hashMap.get(t.charAt(i))==1){
+                    hashMap.remove(t.charAt(i));
+                }else{
+                    hashMap.put(t.charAt(i),hashMap.get(t.charAt(i))-1);
+                }
+            }else{
+                return false;
+            }
+        }
+        return hashMap.isEmpty();
+    }
+    //endregion
+
     //region    20230306    350. 两个数组的交集 II
 
     /**
@@ -240,6 +274,65 @@ public class TargetDataStructures {
             }
         }
         return Arrays.copyOfRange(intersection, 0, index);
+    }
+    //endregion
+
+    //region    20230309    383. 赎金信
+
+    /**
+     * https://leetcode.cn/problems/ransom-note/
+     *
+     * @param ransomNote 字符串：ransomNote
+     * @param magazine   字符串：magazine
+     * @return 判断 ransomNote 能不能由 magazine 里面的字符构成
+     */
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < magazine.length(); i++) {
+            if (hashMap.containsKey(magazine.charAt(i))) {
+                hashMap.put(magazine.charAt(i), hashMap.get(magazine.charAt(i)) + 1);
+            } else {
+                hashMap.put(magazine.charAt(i), 1);
+            }
+        }
+        for (int i = 0; i < ransomNote.length(); i++) {
+            if (hashMap.containsKey(ransomNote.charAt(i))) {
+                if (hashMap.get(ransomNote.charAt(i)) == 1) {
+                    hashMap.remove(ransomNote.charAt(i));
+                } else {
+                    hashMap.put(ransomNote.charAt(i), hashMap.get(ransomNote.charAt(i)) - 1);
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    //endregion
+
+    //region    20230309    387. 字符串中的第一个唯一字符
+
+    /**
+     * https://leetcode.cn/problems/first-unique-character-in-a-string/
+     *
+     * @param s 给定一个字符串 s
+     * @return 找到 它的第一个不重复的字符，并返回它的索引
+     */
+    public int firstUniqChar(String s) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
+            } else {
+                hashMap.put(s.charAt(i), 1);
+            }
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
     }
     //endregion
 

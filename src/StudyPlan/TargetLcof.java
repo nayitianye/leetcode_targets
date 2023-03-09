@@ -1,9 +1,6 @@
 package StudyPlan;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author yyb
@@ -12,6 +9,17 @@ import java.util.Stack;
  */
 public class TargetLcof {
 
+    //region    20230309    自定义类  树节点
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+    //endregion
 
     //region    20230307    剑指 Offer 03. 数组中重复的数字
 
@@ -38,9 +46,10 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
-     * @param matrix  数组 matrix
-     * @param target  目标值 target
-     * @return  判断数组 matrix 是否存在目标值 target
+     *
+     * @param matrix 数组 matrix
+     * @param target 目标值 target
+     * @return 判断数组 matrix 是否存在目标值 target
      */
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
         int i = matrix.length - 1, j = 0;
@@ -219,6 +228,114 @@ public class TargetLcof {
         public int min() {
             return minStack.peek();
         }
+    }
+    //endregion
+
+    //region    20230309    剑指 Offer 32 - I. 从上到下打印二叉树
+
+    /**
+     * https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+     *
+     * @param root 树的根节点
+     * @return https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+     */
+    public int[] levelOrder(TreeNode root) {
+        if (root == null) {
+            return new int[0];
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>() {{
+            add(root);
+        }};
+        ArrayList<Integer> ans = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            ans.add(node.val);
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230309    剑指 Offer 32 - II. 从上到下打印二叉树 II
+
+    /**
+     * https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
+     * @param root  树的根节点 root
+     * @return  从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+     */
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (root == null) {
+            return res;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<Integer>();
+            int currentLevelSize = queue.size();
+            for (int i = 1; i <= currentLevelSize; ++i) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            res.add(level);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230309    剑指 Offer 32 - III. 从上到下打印二叉树 III
+    /**
+     * https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
+     * @param root   树的根节点 root
+     * @return  请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+     */
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<List<Integer>>();
+        if (root == null) {
+            return ans;
+        }
+
+        Queue<TreeNode> nodeQueue = new ArrayDeque<TreeNode>();
+        nodeQueue.offer(root);
+        boolean isOrderLeft = true;
+
+        while (!nodeQueue.isEmpty()) {
+            Deque<Integer> levelList = new LinkedList<Integer>();
+            int size = nodeQueue.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode curNode = nodeQueue.poll();
+                if (isOrderLeft) {
+                    levelList.offerLast(curNode.val);
+                } else {
+                    levelList.offerFirst(curNode.val);
+                }
+                if (curNode.left != null) {
+                    nodeQueue.offer(curNode.left);
+                }
+                if (curNode.right != null) {
+                    nodeQueue.offer(curNode.right);
+                }
+            }
+            ans.add(new LinkedList<Integer>(levelList));
+            isOrderLeft = !isOrderLeft;
+        }
+        return ans;
     }
     //endregion
 

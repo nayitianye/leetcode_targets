@@ -4,9 +4,6 @@ import java.util.*;
  * @author yyb
  * leetcode_tag_backtracking
  * leetcode 标签 回溯算法
- * 10 17 22 37 39 40 44 46 47 51 52 60 77 78 79 89 90 93 126 131
- * 140 211 212 216 254 267 291 294 306 320 351 357 404 411 425
- * 526 691 784 842 980 996 1066 1079 1087 1088
  */
 public class TargetBackTracking {
 

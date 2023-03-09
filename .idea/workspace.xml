@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点" />
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +171,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetLcof">
+  <component name="RunManager" selected="应用程序.TargetString">
     <configuration name="TargetDataStructures" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructures" />
       <module name="leetcode_targets" />
@@ -208,8 +211,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetTree" />
+    <configuration name="TargetString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetString" />
       <module name="leetcode_targets" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -224,10 +227,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetString" />
+        <item itemvalue="应用程序.TargetLeetCode75" />
         <item itemvalue="应用程序.TargetLcof" />
         <item itemvalue="应用程序.TargetDataStructures" />
         <item itemvalue="应用程序.TargetTwoPointers" />
-        <item itemvalue="应用程序.TargetLeetCode75" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +241,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5e2a5352-8bf5-438e-9198-7ee9e67a1e8a" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -337,7 +340,8 @@
       <workItem from="1677992802760" duration="9035000" />
       <workItem from="1678110090081" duration="8458000" />
       <workItem from="1678199852998" duration="8879000" />
-      <workItem from="1678279253887" duration="6514000" />
+      <workItem from="1678279253887" duration="6606000" />
+      <workItem from="1678369033508" duration="8870000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -598,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678208718423</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="学习计划_数据结构初级&#10;36. 有效的数独&#10;学习计划_LeetCode 75 &#10;142. 环形链表 II&#10;学习计划_剑指 Offer&#10;剑指 Offer 04. 二维数组中的查找&#10;每日一题:&#10;剑指 Offer 47. 礼物的最大价值&#10;2215. 找出两数组的不同">
+      <created>1678291896955</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1678291896955</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -685,7 +696,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2019/10/22  添加二分查找的traget  练习了相关的题目" />
     <MESSAGE value="2019/10/22  添加极小化极大的类别  练习了部分题目" />
     <MESSAGE value="记录更新内容文本" />
     <MESSAGE value="解决冲突文件，合并冲突代码" />
@@ -710,7 +720,8 @@
     <MESSAGE value="学习计划_数据结构初级&#10;118. 杨辉三角&#10;566. 重塑矩阵&#10;学习计划_LeetCode 75&#10;21. 合并两个有序链表&#10;206. 反转链表&#10;学习计划_剑指 Offer&#10;剑指 Offer 03. 数组中重复的数字&#10;剑指 Offer 53 - I. 在排序数组中查找数字 I&#10;剑指 Offer 53 - II. 0～n-1中缺失的数字" />
     <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75&#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
     <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
+    <MESSAGE value="学习计划_数据结构初级&#10;36. 有效的数独&#10;学习计划_LeetCode 75 &#10;142. 环形链表 II&#10;学习计划_剑指 Offer&#10;剑指 Offer 04. 二维数组中的查找&#10;每日一题:&#10;剑指 Offer 47. 礼物的最大价值&#10;2215. 找出两数组的不同" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -784,19 +795,19 @@
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java</url>
-          <line>284</line>
-          <option name="timeStamp" value="63" />
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
+          <line>272</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
-          <line>352</line>
-          <option name="timeStamp" value="69" />
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
+          <line>180</line>
+          <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
-          <line>324</line>
-          <option name="timeStamp" value="70" />
+          <url>file://$PROJECT_DIR$/src/TargetString.java</url>
+          <line>1077</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
