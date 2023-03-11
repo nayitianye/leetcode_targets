@@ -341,7 +341,7 @@
       <workItem from="1678199852998" duration="8879000" />
       <workItem from="1678279253887" duration="6606000" />
       <workItem from="1678369033508" duration="8998000" />
-      <workItem from="1678506112307" duration="4919000" />
+      <workItem from="1678506112307" duration="8707000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -623,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678550208019</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字">
+      <created>1678550314995</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1678550314995</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -810,13 +817,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
-          <line>272</line>
+          <line>323</line>
           <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
-          <line>180</line>
-          <option name="timeStamp" value="76" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

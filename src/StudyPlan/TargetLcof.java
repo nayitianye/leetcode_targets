@@ -150,6 +150,69 @@ public class TargetLcof {
 
     //endregion
 
+    //region    20230312    剑指 Offer 10- I. 斐波那契数列
+
+    /**
+     * https://leetcode.cn/problems/fei-bo-na-qi-shu-lie-lcof/
+     *
+     * @param n 输入 n
+     * @return 求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）
+     */
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        if (hashMap.containsKey(n)) {
+            return hashMap.get(n);
+        }
+        hashMap.put(n, (fib(n - 1) + fib(n - 2)) % 1000000007);
+        return hashMap.get(n);
+    }
+
+    HashMap<Integer, Integer> hashMap = new HashMap<>();
+    //endregion
+
+    //region    20230312    剑指 Offer 10- II. 青蛙跳台阶问题
+
+    /**
+     * https://leetcode.cn/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
+     *
+     * @param n 青蛙跳上一个 n 级的台阶
+     * @return 有多少种跳法
+     */
+    public int numWays(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        if (hashMap1.containsKey(n)) {
+            return hashMap1.get(n);
+        } else {
+            hashMap1.put(n, (numWays(n - 1) + numWays(n - 2)) % 1000000007);
+        }
+        return hashMap1.get(n);
+    }
+
+    HashMap<Integer, Integer> hashMap1 = new HashMap<>();
+    //endregion
+
+    //region    20230312    剑指 Offer 63. 股票的最大利润
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxPrice = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > maxPrice) {
+                maxPrice = prices[i] - minPrice;
+            }
+        }
+        return maxPrice;
+    }
+    //endregion
+
     //region    20230308    剑指 Offer 11. 旋转数组的最小数字
 
     /**
@@ -269,8 +332,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
-     * @param root  树的根节点 root
-     * @return  从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+     *
+     * @param root 树的根节点 root
+     * @return 从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
      */
     public List<List<Integer>> levelOrder2(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -300,10 +364,12 @@ public class TargetLcof {
     //endregion
 
     //region    20230309    剑指 Offer 32 - III. 从上到下打印二叉树 III
+
     /**
      * https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
-     * @param root   树的根节点 root
-     * @return  请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+     *
+     * @param root 树的根节点 root
+     * @return 请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
      */
     public List<List<Integer>> levelOrder3(TreeNode root) {
         List<List<Integer>> ans = new LinkedList<List<Integer>>();
@@ -371,6 +437,43 @@ public class TargetLcof {
             headNew.random = copyRandomList(head.random);
         }
         return cachedNode.get(head);
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 42. 连续子数组的最大和
+    public int maxSubArray(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 47. 礼物的最大价值
+
+    /**
+     * https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/
+     * @param grid 一个 m*n 的棋盘的每一格都放有一个礼物
+     * @return 最多能拿到多少价值的礼物
+     */
+    public int maxValue(int[][] grid) {
+        int[][] dp = new int[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (i > 0) {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j]);
+                }
+                if (j > 0) {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i][j]);
+                }
+                dp[i][j] += grid[i][j];
+            }
+        }
+        return dp[grid.length - 1][grid[0].length - 1];
     }
     //endregion
 
