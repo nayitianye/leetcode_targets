@@ -258,6 +258,85 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230312    剑指 Offer 26. 树的子结构
+    /**
+     * https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/
+     * @param A 二叉树 A
+     * @param B 二叉树 B
+     * @return  判断B是不是A的子结构
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        // 若A与B其中一个为空,立即返回false
+        if(A == null || B == null) {
+            return false;
+        }
+        // B为A的子结构有3种情况,满足任意一种即可:
+        // 1.B的子结构起点为A的根节点,此时结果为recur(A,B)
+        // 2.B的子结构起点隐藏在A的左子树中,而不是直接为A的根节点,此时结果为isSubStructure(A.left, B)
+        // 3.B的子结构起点隐藏在A的右子树中,此时结果为isSubStructure(A.right, B)
+        return recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+    }
+
+    /*
+    判断B是否为A的子结构,其中B子结构的起点为A的根节点
+    */
+    private boolean recur(TreeNode A, TreeNode B) {
+        // 若B走完了,说明查找完毕,B为A的子结构
+        if(B == null) {
+            return true;
+        }
+        // 若B不为空并且A为空或者A与B的值不相等,直接可以判断B不是A的子结构
+        if(A == null || A.val != B.val) {
+            return false;
+        }
+        // 当A与B当前节点值相等,若要判断B为A的子结构
+        // 还需要判断B的左子树是否为A左子树的子结构 && B的右子树是否为A右子树的子结构
+        // 若两者都满足就说明B是A的子结构,并且该子结构以A根节点为起点
+        return recur(A.left, B.left) && recur(A.right, B.right);
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 27. 二叉树的镜像
+
+    /**
+     * https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/
+     * @param root  二叉树的根结点
+     * @return  返回二叉树的镜像
+     */
+    public TreeNode mirrorTree(TreeNode root) {
+        if(root==null){
+            return root;
+        }
+        TreeNode left=mirrorTree(root.left);
+        TreeNode right=mirrorTree(root.right);
+        root.left=right;
+        root.right=left;
+        return root;
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 28. 对称的二叉树
+    /**
+     * https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/
+     * @param root 二叉树根结点 root
+     * @return  一棵二叉树和它的镜像一样，那么它是对称的
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return check(root,root);
+    }
+
+    public boolean check(TreeNode p,TreeNode q){
+        if(p==null &&q==null){
+            return true;
+        }
+        if(p==null ||q==null){
+            return false;
+        }
+        return p.val==q.val&&check(p.left,q.right)&&check(p.right,q.left);
+    }
+
+    //endregion
+
     //region    20230305    剑指 Offer 30. 包含min函数的栈
 
     /**

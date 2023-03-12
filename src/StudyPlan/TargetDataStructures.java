@@ -9,6 +9,29 @@ import java.util.*;
  */
 public class TargetDataStructures {
 
+    //region    自定义数据接口
+
+    /**
+     * ListNode 链表类
+     */
+    public class ListNode {
+        public int val;
+        public ListNode next;
+
+        public ListNode() {
+        }
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    //endregion
+
     //region    20230305    1. 两数之和
 
     /**
@@ -28,6 +51,57 @@ public class TargetDataStructures {
             }
         }
         return new int[]{-1, -1};
+    }
+    //endregion
+
+    //region    20230312    20. 有效的括号
+
+    /**
+     * https://leetcode.cn/problems/valid-parentheses/
+     *
+     * @param s 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s
+     * @return 判断字符串是否有效
+     */
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
+                stack.push(s.charAt(i));
+            } else if (s.charAt(i) == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (s.charAt(i) == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
+            } else if (s.charAt(i) == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+    //endregion
+
+    //region    20230312    21. 合并两个有序链表
+
+    /**
+     * https://leetcode.cn/problems/merge-two-sorted-lists/
+     *
+     * @param list1 链表 list1
+     * @param list2 链表 list2
+     * @return 返回 list1 和 list2 合并后的链表
+     */
+    public ListNode MergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        } else if (list2 == null) {
+            return list1;
+        } else if (list1.val < list2.val) {
+            list1.next = MergeTwoLists(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = MergeTwoLists(list1, list2.next);
+            return list2;
+        }
     }
     //endregion
 
@@ -121,6 +195,33 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230312    83. 删除排序链表中的重复元素
+
+    /**
+     * https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
+     *
+     * @param head 已排序的链表的头 head
+     * @return 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        ListNode curr = head;
+        hashMap.put(curr.val, 1);
+        while (curr.next != null) {
+            if (hashMap.containsKey(curr.next.val)) {
+                curr.next = curr.next.next;
+            } else {
+                hashMap.put(curr.next.val, 1);
+                curr = curr.next;
+            }
+        }
+        return head;
+    }
+    //endregion
+
     //region    20230305    88. 合并两个有序数组
 
     /**
@@ -190,6 +291,78 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230312    141. 环形链表
+
+    /**
+     * https://leetcode.cn/problems/linked-list-cycle/
+     *
+     * @param head 链表的头节点 head
+     * @return 判断链表中是否有环
+     */
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (fast == null || slow == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+    }
+    //endregion
+
+    //region    20230312    203. 移除链表元素
+
+    /**
+     * https://leetcode.cn/problems/remove-linked-list-elements/
+     *
+     * @param head 链表的头节点 head
+     * @param val  一个整数 val
+     * @return 删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。
+     */
+    public ListNode removeElements(ListNode head, int val) {
+        //创建一个虚拟头结点
+        ListNode dummyNode = new ListNode(val - 1);
+        dummyNode.next = head;
+        ListNode prev = dummyNode;
+        //确保当前结点后还有结点
+        while (prev.next != null) {
+            if (prev.next.val == val) {
+                prev.next = prev.next.next;
+            } else {
+                prev = prev.next;
+            }
+        }
+        return dummyNode.next;
+    }
+    //endregion
+
+    //region    20230312    206. 反转链表
+
+    /**
+     * https://leetcode.cn/problems/reverse-linked-list/
+     *
+     * @param head 单链表的头节点 head
+     * @return 反转链表，并返回反转后的链表
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    //endregion
+
     //region    20230305    217. 存在重复元素
 
     /**
@@ -211,13 +384,56 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230312    232. 用栈实现队列
+    /**
+     * https://leetcode.cn/problems/implement-queue-using-stacks/
+     * 用栈实现队列
+     */
+    class MyQueue {
+
+        Stack<Integer> inStack;
+        Stack<Integer> outStack;
+        public MyQueue() {
+            inStack=new Stack<>();
+            outStack =new Stack<>();
+        }
+
+        public void push(int x) {
+            inStack.push(x);
+        }
+
+        public int pop() {
+            if(outStack.isEmpty()){
+                while (!inStack.isEmpty()){
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.pop();
+        }
+
+        public int peek() {
+            if(outStack.isEmpty()){
+                while (!inStack.isEmpty()){
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.peek();
+        }
+
+        public boolean empty() {
+            return inStack.isEmpty()&&outStack.isEmpty();
+        }
+    }
+    //endregion
+
     //region    20230309    242. 有效的字母异位词
 
     /**
      * https://leetcode.cn/problems/valid-anagram/
-     * @param  s 字符串 s
-     * @param  t 字符串 t
-     * @return  判断 t 是否是 s 的字母异位词
+     *
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return 判断 t 是否是 s 的字母异位词
      */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) {
@@ -232,13 +448,13 @@ public class TargetDataStructures {
             }
         }
         for (int i = 0; i < t.length(); i++) {
-            if(hashMap.containsKey(t.charAt(i))){
-                if(hashMap.get(t.charAt(i))==1){
+            if (hashMap.containsKey(t.charAt(i))) {
+                if (hashMap.get(t.charAt(i)) == 1) {
                     hashMap.remove(t.charAt(i));
-                }else{
-                    hashMap.put(t.charAt(i),hashMap.get(t.charAt(i))-1);
+                } else {
+                    hashMap.put(t.charAt(i), hashMap.get(t.charAt(i)) - 1);
                 }
-            }else{
+            } else {
                 return false;
             }
         }
