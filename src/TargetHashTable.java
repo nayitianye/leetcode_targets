@@ -7,13 +7,86 @@ import java.util.*;
  */
 public class TargetHashTable {
 
+    //region    20230312    217. 存在重复元素
+
+    /**
+     * https://leetcode.cn/problems/contains-duplicate/
+     *
+     * @param nums 整数数组 nums
+     * @return 如果任一数值在数组中出现至少两次 ，返回 true ；如果数组中每个元素互不相同 ，返回 false 。
+     */
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int num : nums) {
+            if (hashMap.containsKey(num)) {
+                return true;
+            } else {
+                hashMap.put(num, 1);
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region    20230312    219. 存在重复元素 II
+
+    /**
+     * https://leetcode.cn/problems/contains-duplicate-ii/
+     *
+     * @param nums 整数数组 nums
+     * @param k    整数 k
+     * @return 判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。如果存在，返回 true ；否则，返回 false 。
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.containsKey(nums[i])) {
+                if (i - hashMap.get(nums[i]) <= k) {
+                    return true;
+                } else {
+                    hashMap.put(nums[i], i);
+                }
+            } else {
+                hashMap.put(nums[i], i);
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region    20230312    220. 存在重复元素 III
+
+    /**
+     * https://leetcode.cn/problems/contains-duplicate-iii/
+     *
+     * @param nums      整数数组 nums
+     * @param indexDiff 下标间距
+     * @param valueDiff 值间距
+     * @return 存在 两个不同下标 i 和 j，使得 abs(nums[i] - nums[j]) <= valueDiff ，同时又满足 abs(i - j) <= indexDiff ; 如果存在则返回 true，不存在返回 false。
+     */
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j - i > indexDiff) {
+                    break;
+                }
+                if (Math.abs(nums[j] - nums[i]) <= valueDiff) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //endregion
+
     //region    20191003    349. 两个数组的交集
 
     /**
      * https://leetcode.cn/problems/intersection-of-two-arrays/
+     *
      * @param nums1 数组 nums1
      * @param nums2 数组 nums2
-     * @return  找出数组 nums1 和数组 nums2 的交集
+     * @return 找出数组 nums1 和数组 nums2 的交集
      */
     private int[] intersection(int[] nums1, int[] nums2) {
         TreeSet<Integer> set = new TreeSet<>();
@@ -39,9 +112,10 @@ public class TargetHashTable {
 
     /**
      * https://leetcode.cn/problems/intersection-of-two-arrays-ii/
+     *
      * @param nums1 数组 nums1
      * @param nums2 数组 nums2
-     * @return  找出数组 nums1 和数组 nums2 的交集
+     * @return 找出数组 nums1 和数组 nums2 的交集
      */
     private int[] intersect(int[] nums1, int[] nums2) {
         TreeMap<Integer, Integer> map = new TreeMap<>();
@@ -71,11 +145,13 @@ public class TargetHashTable {
     //endregion
 
     //region    20191022    771. 宝石与石头
+
     /**
      * https://leetcode.cn/problems/jewels-and-stones/
+     *
      * @param jewels 字符串 jewels 代表石头中宝石的类型
      * @param stones 字符串 stones 代表你拥有的石头
-     * @return  你拥有的石头中有多少是宝石
+     * @return 你拥有的石头中有多少是宝石
      */
     public int numJewelsInStones(String jewels, String stones) {
         HashSet<Character> hashSet = new HashSet<>();
@@ -96,9 +172,10 @@ public class TargetHashTable {
 
     /**
      * https://leetcode.cn/problems/find-the-difference-of-two-arrays/
+     *
      * @param nums1 数组 nums1
      * @param nums2 数组 nums2
-     * @return  找出不同并返回
+     * @return 找出不同并返回
      */
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         HashMap<Integer, Integer> hashMap1 = new HashMap<>();
@@ -135,6 +212,6 @@ public class TargetHashTable {
     //endregion
 
     public static void main(String[] args) {
-
+        new TargetHashTable().containsNearbyAlmostDuplicate(new int[]{1, 5, 9, 1, 5, 9}, 2, 3);
     }
 }

@@ -2470,6 +2470,60 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230312    1617. 统计子树中城市之间最大距离
+    int mask;
+    int diameter;
+    /**
+     *
+     * @param n 给你 n 个城市，编号为从 1 到 n 。
+     * @param edges 同时给你一个大小为 n-1 的数组 edges ，其中 edges[i] = [ui, vi] 表示城市 ui 和 vi 之间有一条双向边
+     * @return  对于 d 从 1 到 n-1 ，请你找到城市间 最大距离 恰好为 d 的所有子树数目
+     */
+    public int[] countSubgraphsForEachDiameter(int n, int[][] edges) {
+        List<Integer>[] adj = new List[n];
+        for (int i = 0; i < n; i++) {
+            adj[i] = new ArrayList<Integer>();
+        }
+        for (int[] edge : edges) {
+            int x = edge[0] - 1;
+            int y = edge[1] - 1;
+            adj[x].add(y);
+            adj[y].add(x);
+        }
+
+        int[] ans = new int[n - 1];
+        for (int i = 1; i < (1 << n); i++) {
+            int root = 32 - Integer.numberOfLeadingZeros(i) - 1;
+            mask = i;
+            diameter = 0;
+            dfs(root, adj);
+            if (mask == 0 && diameter > 0) {
+                ans[diameter - 1]++;
+            }
+        }
+        return ans;
+    }
+
+    public int dfs(int root, List<Integer>[] adj) {
+        int first = 0, second = 0;
+        mask &= ~(1 << root);
+        for (int vertex : adj[root]) {
+            if ((mask & (1 << vertex)) != 0) {
+                mask &= ~(1 << vertex);
+                int distance = 1 + dfs(vertex, adj);
+                if (distance > first) {
+                    second = first;
+                    first = distance;
+                } else if (distance > second) {
+                    second = distance;
+                }
+            }
+        }
+        diameter = Math.max(diameter, first + second);
+        return first;
+    }
+    //endregion
+
     //region    20230306    1653. 使字符串平衡的最少删除次数
 
     /**
@@ -2506,13 +2560,6 @@ public class TargetDynamicProgramming {
     //endregion
 
     public static void main(String[] args) {
-//        int[][] arrays=new int[1][2];
-//        arrays[0][0]=1;
-//        arrays[0][1]=0;
-//        int num=(new TargetDynamicProgramming()).uniquePathsWithObstacles(arrays);
-//        int num=(new TargetDynamicProgramming()).numWays(4,3);
-//        int num = new TargetDynamicProgramming().numberOfArithmeticSlices(new int[]{1, 2, 3, 8, 9, 10});
-//        new TargetDynamicProgramming().minFallingPathSum(new int[][]{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}});
         new TargetDynamicProgramming().combinationSum4(new int[]{1, 2, 3}, 4);
     }
 }

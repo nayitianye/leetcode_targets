@@ -67,6 +67,7 @@
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkills.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
@@ -160,16 +161,10 @@
     <property name="GitStage.ChangesTree.GroupingKeys" value="directory&#10;module&#10;repository" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager" selected="应用程序.TargetDataStructures">
-    <configuration name="TargetDataStructures" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructures" />
+  <component name="RunManager" selected="应用程序.TargetHashTable">
+    <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
       <module name="leetcode_targets" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StudyPlan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -214,6 +209,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.TargetHashTable" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -613,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678550314995</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历">
+      <created>1678623898379</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1678623898379</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -700,7 +707,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="解决冲突文件，合并冲突代码" />
     <MESSAGE value="993. 二叉树的堂兄弟节点" />
     <MESSAGE value="1442. 形成两个异或相等数组的三元组数目" />
     <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
@@ -725,7 +731,8 @@
     <MESSAGE value="学习计划_数据结构初级&#10;36. 有效的数独&#10;学习计划_LeetCode 75 &#10;142. 环形链表 II&#10;学习计划_剑指 Offer&#10;剑指 Offer 04. 二维数组中的查找&#10;每日一题:&#10;剑指 Offer 47. 礼物的最大价值&#10;2215. 找出两数组的不同" />
     <MESSAGE value="学习计划_数据结构初级&#10;350. 两个数组的交集 II&#10;383. 赎金信&#10;387. 字符串中的第一个唯一字符&#10;学习计划_LeetCode 75&#10;121. 买卖股票的最佳时机&#10;409. 最长回文串&#10;学习计划_剑指 Offer&#10;剑指 Offer 32 - I. 从上到下打印二叉树&#10;剑指 Offer 32 - II. 从上到下打印二叉树 II&#10;剑指 Offer 32 - III. 从上到下打印二叉树 III&#10;每日一题:&#10;2379. 得到 K 个黑块的最少涂色次数" />
     <MESSAGE value="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -785,11 +792,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
-          <line>2514</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetDynamicProgramming.java</url>
           <line>2098</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
@@ -802,6 +804,21 @@
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
           <line>468</line>
           <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
+          <line>214</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
