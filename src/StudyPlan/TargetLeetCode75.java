@@ -1,7 +1,6 @@
 package StudyPlan;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * @author yyb
@@ -9,6 +8,44 @@ import java.util.HashMap;
  * leetcode 学习计划 LeetCode 75
  */
 public class TargetLeetCode75 {
+
+    //region    自定义数据结构
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+    //endregion
 
     //region    20230307    21. 合并两个有序链表
 
@@ -48,6 +85,62 @@ public class TargetLeetCode75 {
             this.val = val;
             this.next = next;
         }
+    }
+    //endregion
+
+    //region    20230312    98. 验证二叉搜索树
+
+    /**
+     * https://leetcode.cn/problems/validate-binary-search-tree/description/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 判断其是否是一个有效的二叉搜索树
+     */
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+    }
+    //endregion
+
+    //region    20230312    102. 二叉树的层序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-level-order-traversal/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 二叉树的根节点 root
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode treeNode = queue.poll();
+                level.add(treeNode.val);
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+            }
+            res.add(level);
+        }
+        return res;
     }
     //endregion
 
@@ -147,28 +240,54 @@ public class TargetLeetCode75 {
     }
     //endregion
 
-    //region    20230312    278. 第一个错误的版本
+    //region    20230312    235. 二叉搜索树的最近公共祖先
+
     /**
-     * https://leetcode.cn/problems/first-bad-version/
-     * @param n n 个版本 [1, 2, ..., n]
-     * @return  导致之后所有版本出错的第一个错误的版本
+     * https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+     *
+     * @param root 二叉搜索树根节点 root
+     * @param p    节点 p
+     * @param q    节点 q
+     * @return 找出对于有根树 root 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大
      */
-    public int firstBadVersion(int n) {
-        int first=0,last=n,mid=0;
-        while(first<last){
-            mid=first+(last-first)/2;
-            if(isBadVersion(mid)){
-                last=mid;
-            }
-            else{
-                first=mid+1;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor = root;
+        while (true) {
+            if (p.val < ancestor.val && q.val < ancestor.val) {
+                ancestor = ancestor.left;
+            } else if (p.val > ancestor.val && q.val > ancestor.val) {
+                ancestor = ancestor.right;
+            } else {
+                break;
             }
         }
-        return isBadVersion(mid)?mid:mid+1;
+        return ancestor;
+    }
+    //endregion
+
+    //region    20230312    278. 第一个错误的版本
+
+    /**
+     * https://leetcode.cn/problems/first-bad-version/
+     *
+     * @param n n 个版本 [1, 2, ..., n]
+     * @return 导致之后所有版本出错的第一个错误的版本
+     */
+    public int firstBadVersion(int n) {
+        int first = 0, last = n, mid = 0;
+        while (first < last) {
+            mid = first + (last - first) / 2;
+            if (isBadVersion(mid)) {
+                last = mid;
+            } else {
+                first = mid + 1;
+            }
+        }
+        return isBadVersion(mid) ? mid : mid + 1;
     }
 
-    public boolean isBadVersion(int n){
-        return n==10;
+    public boolean isBadVersion(int n) {
+        return n == 10;
     }
     //endregion
 
@@ -222,6 +341,32 @@ public class TargetLeetCode75 {
             }
         }
         return res + maxSinge;
+    }
+    //endregion
+
+    //region    20230312    589. N 叉树的前序遍历
+
+    /**
+     * https://leetcode.cn/problems/n-ary-tree-preorder-traversal/
+     *
+     * @param root n 叉树的根节点  root
+     * @return n 叉树的根节点  root
+     */
+    public List<Integer> preorder(Node root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Deque<Node> queue = new ArrayDeque<>();
+        queue.push(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            res.add(node.val);
+            for (int i = node.children.size() - 1; i >= 0; --i) {
+                queue.push(node.children.get(i));
+            }
+        }
+        return res;
     }
     //endregion
 
