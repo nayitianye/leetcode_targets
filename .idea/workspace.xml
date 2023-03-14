@@ -334,7 +334,7 @@
       <workItem from="1678506112307" duration="8707000" />
       <workItem from="1678612513260" duration="103000" />
       <workItem from="1678720564743" duration="1531000" />
-      <workItem from="1678809098980" duration="638000" />
+      <workItem from="1678809098980" duration="8059000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -637,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678637253492</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列">
+      <created>1678809806233</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1678809806233</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -724,7 +731,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1442. 形成两个异或相等数组的三元组数目" />
     <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
     <MESSAGE value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
     <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
@@ -749,7 +755,8 @@
     <MESSAGE value="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字" />
     <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
     <MESSAGE value="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

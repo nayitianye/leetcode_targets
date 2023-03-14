@@ -88,10 +88,37 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230315    62. 不同路径
+
+    /**
+     * https://leetcode.cn/problems/unique-paths/
+     *
+     * @param m 网格位置 m
+     * @param n 网格位置 n
+     * @return 到达路径数
+     */
+    public int uniquePaths(int m, int n) {
+        int dp[][] = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 1;
+                    continue;
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+    //endregion
+
     //region    20230314    70. 爬楼梯
     HashMap<Integer, Integer> hashMapClimbStairs = new HashMap<>();
+
     /**
      * https://leetcode.cn/problems/climbing-stairs/
+     *
      * @param n n 阶楼梯
      * @return 多少种方法
      */
@@ -516,6 +543,25 @@ public class TargetLeetCode75 {
         helper(image, sr, sc + 1, newColor, oldColor);
     }
     //endregion
+
+    //region   20230315    746. 使用最小花费爬楼梯
+
+    /**
+     * https://leetcode.cn/problems/min-cost-climbing-stairs/
+     *
+     * @param cost 整数数组 cost
+     * @return 计算并返回达到楼梯顶部的最低花费
+     */
+    public int minCostClimbingStairs(int[] cost) {
+        int[] dp = new int[cost.length];
+        dp[0] = 0;
+        dp[1] = Math.min(cost[0], cost[1]);
+        for (int i = 2; i < cost.length; i++) {
+            dp[i] = Math.min(dp[i - 1] + cost[i], dp[i - 2] + cost[i - 1]);
+        }
+        return dp[cost.length - 1];
+    }
+    // endregion
 
     //region    20230308    876. 链表的中间结点
 

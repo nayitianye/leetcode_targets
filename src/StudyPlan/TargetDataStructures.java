@@ -30,6 +30,28 @@ public class TargetDataStructures {
             this.next = next;
         }
     }
+
+    /**
+     * TreeNode 二叉树
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
     //endregion
 
     //region    20230305    1. 两数之和
@@ -245,6 +267,111 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230315    101. 对称二叉树
+
+    /**
+     * https://leetcode.cn/problems/symmetric-tree/description/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 判断他是否轴对称
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        //调用递归函数，比较左节点，右节点
+        return dfs(root.left, root.right);
+    }
+
+    boolean dfs(TreeNode left, TreeNode right) {
+        //递归的终止条件是两个节点都为空
+        //或者两个节点中有一个为空
+        //或者两个节点的值不相等
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        //再递归的比较 左节点的左孩子 和 右节点的右孩子
+        //以及比较  左节点的右孩子 和 右节点的左孩子
+        return dfs(left.left, right.right) && dfs(left.right, right.left);
+    }
+    //endregion
+
+    //region    20230315    102. 二叉树的层序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-level-order-traversal/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 二叉树的根节点 root
+     */
+    public List<List<Integer>> levelOrder(TargetLeetCode75.TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TargetLeetCode75.TreeNode> queue = new ArrayDeque<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TargetLeetCode75.TreeNode treeNode = queue.poll();
+                level.add(treeNode.val);
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+            }
+            res.add(level);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230315    104. 二叉树的最大深度
+
+    /**
+     * https://leetcode.cn/problems/maximum-depth-of-binary-tree/
+     * @param root 二叉树 root
+     * @return 返回其最大深度
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+        }
+    }
+    //endregion
+
+    //region    20230315    112. 路径总和
+
+    /**
+     * https://leetcode.cn/problems/path-sum/
+     *
+     * @param root      二叉树根节点 root
+     * @param targetSum 目标值 targetSum
+     * @return 判断二叉树根节点 root 到叶子节点的所有节点值是否等于目标值
+     */
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null) {
+            return root.val == targetSum;
+        } else {
+            return hasPathSum(root.right, targetSum - root.val) || hasPathSum(root.left, targetSum - root.val);
+        }
+    }
+    //endregion
+
     //region    20230307    118. 杨辉三角
 
     /**
@@ -384,7 +511,27 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230315    226. 翻转二叉树
+
+    /**
+     * https://leetcode.cn/problems/invert-binary-tree/
+     *
+     * @param root 二叉树根节点 root
+     * @return 翻转这棵二叉树，并返回其根节点
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        TreeNode left = root.left, right = root.right;
+        root.left = invertTree(right);
+        root.right = invertTree(left);
+        return root;
+    }
+    //endregion
+
     //region    20230312    232. 用栈实现队列
+
     /**
      * https://leetcode.cn/problems/implement-queue-using-stacks/
      * 用栈实现队列
@@ -393,9 +540,10 @@ public class TargetDataStructures {
 
         Stack<Integer> inStack;
         Stack<Integer> outStack;
+
         public MyQueue() {
-            inStack=new Stack<>();
-            outStack =new Stack<>();
+            inStack = new Stack<>();
+            outStack = new Stack<>();
         }
 
         public void push(int x) {
@@ -403,8 +551,8 @@ public class TargetDataStructures {
         }
 
         public int pop() {
-            if(outStack.isEmpty()){
-                while (!inStack.isEmpty()){
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
                     outStack.push(inStack.pop());
                 }
             }
@@ -412,8 +560,8 @@ public class TargetDataStructures {
         }
 
         public int peek() {
-            if(outStack.isEmpty()){
-                while (!inStack.isEmpty()){
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
                     outStack.push(inStack.pop());
                 }
             }
@@ -421,7 +569,7 @@ public class TargetDataStructures {
         }
 
         public boolean empty() {
-            return inStack.isEmpty()&&outStack.isEmpty();
+            return inStack.isEmpty() && outStack.isEmpty();
         }
     }
     //endregion

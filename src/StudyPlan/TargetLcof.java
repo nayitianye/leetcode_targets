@@ -198,21 +198,6 @@ public class TargetLcof {
     HashMap<Integer, Integer> hashMap1 = new HashMap<>();
     //endregion
 
-    //region    20230312    剑指 Offer 63. 股票的最大利润
-    public int maxProfit(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int maxPrice = 0;
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
-            } else if (prices[i] - minPrice > maxPrice) {
-                maxPrice = prices[i] - minPrice;
-            }
-        }
-        return maxPrice;
-    }
-    //endregion
-
     //region    20230308    剑指 Offer 11. 旋转数组的最小数字
 
     /**
@@ -237,6 +222,72 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230315    剑指 Offer 18. 删除链表的节点
+
+    /**
+     * https://leetcode.cn/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+     *
+     * @param head 链表头节点 head
+     * @param val  节点值 val
+     * @return 删除后的链表的头节点
+     */
+    public ListNode deleteNode(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        if (head.val == val) {
+            return head.next;
+        } else {
+            head.next = deleteNode(head.next, val);
+        }
+        return head;
+    }
+    //endregion
+
+    //region    20230315    剑指 Offer 22. 链表中倒数第k个节点
+
+    /**
+     * https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/solutions/
+     *
+     * @param head 链表头节点 head  单指针法
+     * @param k    倒数 k 个节点
+     * @return 返回倒数 k 个节点
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode cur = head;
+        int count = 0;
+        while (cur != null) {
+            count++;
+            cur = cur.next;
+        }
+        count = count - k;
+        while (count > 0) {
+            head = head.next;
+            count--;
+        }
+        return head;
+    }
+
+    /**
+     * https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/solutions/
+     *
+     * @param head 链表头节点 head  双指针法
+     * @param k    倒数 k 个节点
+     * @return 返回倒数 k 个节点
+     */
+    public ListNode getKthFromEnd1(ListNode head, int k) {
+        ListNode former = head, latter = head;
+        for (int i = 0; i < k; i++) {
+            former = former.next;
+        }
+        while (former != null) {
+            former = former.next;
+            latter = latter.next;
+        }
+        return latter;
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 24. 反转链表
 
     /**
@@ -258,16 +309,43 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230315    剑指 Offer 25. 合并两个排序的链表
+
+    /**
+     * https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/
+     *
+     * @param l1 有序链表 l1
+     * @param l2 有序链表 l2
+     * @return 返回链表 l1 和 l2 合并后的链表
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        } else if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+    }
+
+    //endregion
+
     //region    20230312    剑指 Offer 26. 树的子结构
+
     /**
      * https://leetcode.cn/problems/shu-de-zi-jie-gou-lcof/
+     *
      * @param A 二叉树 A
      * @param B 二叉树 B
-     * @return  判断B是不是A的子结构
+     * @return 判断B是不是A的子结构
      */
     public boolean isSubStructure(TreeNode A, TreeNode B) {
         // 若A与B其中一个为空,立即返回false
-        if(A == null || B == null) {
+        if (A == null || B == null) {
             return false;
         }
         // B为A的子结构有3种情况,满足任意一种即可:
@@ -282,11 +360,11 @@ public class TargetLcof {
     */
     private boolean recur(TreeNode A, TreeNode B) {
         // 若B走完了,说明查找完毕,B为A的子结构
-        if(B == null) {
+        if (B == null) {
             return true;
         }
         // 若B不为空并且A为空或者A与B的值不相等,直接可以判断B不是A的子结构
-        if(A == null || A.val != B.val) {
+        if (A == null || A.val != B.val) {
             return false;
         }
         // 当A与B当前节点值相等,若要判断B为A的子结构
@@ -300,42 +378,45 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/
-     * @param root  二叉树的根结点
-     * @return  返回二叉树的镜像
+     *
+     * @param root 二叉树的根结点
+     * @return 返回二叉树的镜像
      */
     public TreeNode mirrorTree(TreeNode root) {
-        if(root==null){
+        if (root == null) {
             return root;
         }
-        TreeNode left=mirrorTree(root.left);
-        TreeNode right=mirrorTree(root.right);
-        root.left=right;
-        root.right=left;
+        TreeNode left = mirrorTree(root.left);
+        TreeNode right = mirrorTree(root.right);
+        root.left = right;
+        root.right = left;
         return root;
     }
     //endregion
 
     //region    20230312    剑指 Offer 28. 对称的二叉树
+
     /**
      * https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/
+     *
      * @param root 二叉树根结点 root
-     * @return  一棵二叉树和它的镜像一样，那么它是对称的
+     * @return 一棵二叉树和它的镜像一样，那么它是对称的
      */
     public boolean isSymmetric(TreeNode root) {
-        return check(root,root);
+        return check(root, root);
     }
 
-    public boolean check(TreeNode p,TreeNode q){
-        if(p==null &&q==null){
+    public boolean check(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
             return true;
         }
-        if(p==null ||q==null){
+        if (p == null || q == null) {
             return false;
         }
-        return p.val==q.val&&check(p.left,q.right)&&check(p.right,q.left);
+        return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
     }
 
-    //endregion
+//endregion
 
     //region    20230305    剑指 Offer 30. 包含min函数的栈
 
@@ -482,7 +563,7 @@ public class TargetLcof {
         }
         return ans;
     }
-    //endregion
+//endregion
 
     //region    20230305    剑指 Offer 35. 复杂链表的复制
     static class Node {
@@ -495,6 +576,7 @@ public class TargetLcof {
             this.next = null;
             this.random = null;
         }
+
     }
 
     HashMap<Node, Node> cachedNode = new HashMap<>();
@@ -536,8 +618,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/
-     * @param num  一个数字 num
-     * @return  按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法
+     *
+     * @param num 一个数字 num
+     * @return 按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法
      */
     public int translateNum(int num) {
         return 0;
@@ -548,6 +631,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/
+     *
      * @param grid 一个 m*n 的棋盘的每一格都放有一个礼物
      * @return 最多能拿到多少价值的礼物
      */
@@ -588,6 +672,28 @@ public class TargetLcof {
             }
         }
         return ' ';
+    }
+    //endregion
+
+    //region    20230315    剑指 Offer 52. 两个链表的第一个公共节点
+
+    /**
+     * https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/
+     *
+     * @param headA 链表 headA
+     * @param headB 链表 headB
+     * @return 找出链表 headA 和链表 headB 的公共头节点的值
+     */
+    ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode pA = headA, pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
     }
     //endregion
 
@@ -657,6 +763,21 @@ public class TargetLcof {
      */
     public String reverseLeftWords(String s, int n) {
         return s.substring(n) + s.substring(0, n);
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 63. 股票的最大利润
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxPrice = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > maxPrice) {
+                maxPrice = prices[i] - minPrice;
+            }
+        }
+        return maxPrice;
     }
     //endregion
 
