@@ -88,6 +88,29 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230314    70. 爬楼梯
+    HashMap<Integer, Integer> hashMapClimbStairs = new HashMap<>();
+    /**
+     * https://leetcode.cn/problems/climbing-stairs/
+     * @param n n 阶楼梯
+     * @return 多少种方法
+     */
+    public int climbStairs(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 2;
+        } else {
+            if (hashMapClimbStairs.containsKey(n)) {
+                return hashMapClimbStairs.get(n);
+            } else {
+                hashMapClimbStairs.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+                return hashMapClimbStairs.get(n);
+            }
+        }
+    }
+    //endregion
+
     //region    20230312    98. 验证二叉搜索树
 
     /**
@@ -208,8 +231,7 @@ public class TargetLeetCode75 {
         for (int i = 0; i < s.length(); i++) {
             char chs = s.charAt(i);
             char cht = t.charAt(i);
-            if ((hashMapT.containsKey(chs) && hashMapT.get(chs) != cht) ||
-                    (hashMapS.containsKey(cht) && hashMapS.get(cht) != chs)) {
+            if ((hashMapT.containsKey(chs) && hashMapT.get(chs) != cht) || (hashMapS.containsKey(cht) && hashMapS.get(cht) != chs)) {
                 return false;
             }
             hashMapT.put(chs, cht);
@@ -344,6 +366,56 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230314    509. 斐波拉契数列
+
+    /**
+     * 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
+     * F(0) = 0，F(1) = 1
+     * F(n) = F(n - 1) + F(n - 2)，其中 n > 1
+     * 给定 n ，请计算 F(n) 。
+     * <p>
+     * 示例 1：
+     * 输入：n = 2
+     * 输出：1
+     * 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
+     * 示例 2：
+     * 输入：n = 3
+     * 输出：2
+     * 解释：F(3) = F(2) + F(1) = 1 + 1 = 2
+     * 示例 3：
+     * 输入：n = 4
+     * 输出：3
+     * 解释：F(4) = F(3) + F(2) = 2 + 1 = 3
+     * <p>
+     * 提示：
+     * 0 <= n <= 30
+     *
+     * @param n 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列
+     * @return 计算 F(n)
+     */
+    public int fib(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        } else {
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+
+    HashMap<Integer, Integer> hashMapfib = new HashMap<>();
+
+    public int fib1(int n) {
+        if (hashMapfib.containsKey(n)) {
+            return hashMapfib.get(n);
+        }
+        if (n == 0 || n == 1) {
+            return n;
+        } else {
+            hashMapfib.put(n, fib1(n - 1) + fib1(n - 2));
+            return fib1(n - 1) + fib1(n - 2);
+        }
+    }
+    //endregion
+
     //region    20230312    589. N 叉树的前序遍历
 
     /**
@@ -419,6 +491,29 @@ public class TargetLeetCode75 {
             }
         }
         return -1;
+    }
+    //endregion
+
+    //region    20230313    733. 图像渲染
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+
+        helper(image, sr, sc, newColor, image[sr][sc]);
+
+        return image;
+
+    }
+
+    public void helper(int[][] image, int sr, int sc, int newColor, int oldColor) {
+
+        if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length || image[sr][sc] != oldColor || newColor == oldColor) {
+            return;
+        }
+
+        image[sr][sc] = newColor;
+        helper(image, sr - 1, sc, newColor, oldColor);
+        helper(image, sr + 1, sc, newColor, oldColor);
+        helper(image, sr, sc - 1, newColor, oldColor);
+        helper(image, sr, sc + 1, newColor, oldColor);
     }
     //endregion
 

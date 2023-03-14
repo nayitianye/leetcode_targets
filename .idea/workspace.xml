@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,10 +158,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="GitStage.ChangesTree.GroupingKeys" value="directory&#10;module&#10;repository" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
+    ]
+  }
+}</component>
   <component name="RunManager" selected="应用程序.TargetHashTable">
     <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
@@ -221,7 +230,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="de5931b5-1d56-414b-9716-5f6edb141986" name="Changes" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -325,6 +333,8 @@
       <workItem from="1678369033508" duration="8998000" />
       <workItem from="1678506112307" duration="8707000" />
       <workItem from="1678612513260" duration="103000" />
+      <workItem from="1678720564743" duration="1531000" />
+      <workItem from="1678809098980" duration="638000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -620,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678623898379</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III">
+      <created>1678637253492</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1678637253492</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -707,7 +724,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="993. 二叉树的堂兄弟节点" />
     <MESSAGE value="1442. 形成两个异或相等数组的三元组数目" />
     <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
     <MESSAGE value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
@@ -732,7 +748,8 @@
     <MESSAGE value="学习计划_数据结构初级&#10;350. 两个数组的交集 II&#10;383. 赎金信&#10;387. 字符串中的第一个唯一字符&#10;学习计划_LeetCode 75&#10;121. 买卖股票的最佳时机&#10;409. 最长回文串&#10;学习计划_剑指 Offer&#10;剑指 Offer 32 - I. 从上到下打印二叉树&#10;剑指 Offer 32 - II. 从上到下打印二叉树 II&#10;剑指 Offer 32 - III. 从上到下打印二叉树 III&#10;每日一题:&#10;2379. 得到 K 个黑块的最少涂色次数" />
     <MESSAGE value="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字" />
     <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
+    <MESSAGE value="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -799,16 +816,6 @@
           <url>file://$PROJECT_DIR$/src/TargetTwoPointers.java</url>
           <line>7</line>
           <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
-          <line>468</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
