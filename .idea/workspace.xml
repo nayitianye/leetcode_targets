@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetArray.java" afterDir="false" />
-    </list>
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -335,6 +330,7 @@
       <workItem from="1678612513260" duration="103000" />
       <workItem from="1678720564743" duration="1531000" />
       <workItem from="1678809098980" duration="8059000" />
+      <workItem from="1678878901979" duration="7567000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -644,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678809806233</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩">
+      <created>1678896033507</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1678896033507</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -731,7 +734,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯" />
     <MESSAGE value="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数" />
     <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
     <MESSAGE value="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数" />
@@ -756,7 +758,8 @@
     <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
     <MESSAGE value="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III" />
     <MESSAGE value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
+    <MESSAGE value="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -267,6 +267,30 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230315    94. 二叉树的中序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-inorder-traversal/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 二叉树的根节点 root
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        inorder(root, res);
+        return res;
+    }
+
+    public void inorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, res);
+        res.add(root.val);
+        inorder(root.right, res);
+    }
+    //endregion
+
     //region    20230315    101. 对称二叉树
 
     /**
@@ -339,6 +363,7 @@ public class TargetDataStructures {
 
     /**
      * https://leetcode.cn/problems/maximum-depth-of-binary-tree/
+     *
      * @param root 二叉树 root
      * @return 返回其最大深度
      */
@@ -440,6 +465,54 @@ public class TargetDataStructures {
             fast = fast.next.next;
         }
         return true;
+    }
+    //endregion
+
+    //region    20230315    144. 二叉树的前序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-preorder-traversal/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 返回它节点值的 前序 遍历
+     */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        preorder(root, res);
+        return res;
+    }
+
+    public void preorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        res.add(root.val);
+        preorder(root.left, res);
+        preorder(root.right, res);
+    }
+    //endregion
+
+    //region    20230315    145. 二叉树的后序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-postorder-traversal/description/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 返回其节点值的 后序遍历
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        postOrder(root, res);
+        return res;
+    }
+
+    public void postOrder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        postOrder(root.left, res);
+        postOrder(root.right, res);
+        res.add(root.val);
     }
     //endregion
 
