@@ -798,6 +798,67 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230316    700. 二叉搜索树中的搜索
+
+    /**
+     * https://leetcode.cn/problems/search-in-a-binary-search-tree/
+     *
+     * @param root 二叉搜索树（BST）的根节点 root
+     * @param val  一个整数值 val
+     * @return 一个整数值 val
+     */
+    public TreeNode searchBST(TreeNode root, int val) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode treeNode = stack.pop();
+            if(treeNode==null){
+                continue;
+            }
+            if (treeNode.val == val) {
+                return treeNode;
+            }
+            stack.push(treeNode.left);
+            stack.push(treeNode.right);
+        }
+        return null;
+    }
+    //endregion
+
+    //region    20230316    701. 二叉搜索树中的插入操作
+
+    /**
+     * https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/
+     * @param root  二叉搜索树（BST）的根节点 root
+     * @param val   插入树中的值 value
+     * @return  将值插入二叉搜索树。 返回插入后二叉搜索树的根节点
+     */
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root==null){
+            return new TreeNode(val);
+        }
+        TreeNode pos=root;
+        while (pos!=null){
+            if(val<pos.val){
+                if(pos.left==null){
+                    pos.left=new TreeNode(val);
+                    break;
+                }else{
+                    pos=pos.left;
+                }
+            }else{
+                if(pos.right==null){
+                    pos.right=new TreeNode(val);
+                    break;
+                }else{
+                    pos=pos.right;
+                }
+            }
+        }
+        return root;
+    }
+    //endregion
+
     public static void main(String[] args) {
         //1. 两数之和
         System.out.println(Arrays.toString(new TargetDataStructures().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));

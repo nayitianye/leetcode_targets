@@ -244,6 +244,35 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230316    剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+
+    /**
+     * https://leetcode.cn/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
+     *
+     * @param nums 一个整数数组 nums
+     * @return 一个函数来调整该数组中数字的顺序，使得所有奇数在数组的前半部分，所有偶数在数组的后半部分。
+     */
+    public int[] exchange(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] % 2 == 1) {
+                left++;
+                continue;
+            }
+            if (nums[right] % 2 == 0) {
+                right--;
+                continue;
+            }
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+        return nums;
+    }
+    //endregion
+
     //region    20230315    剑指 Offer 22. 链表中倒数第k个节点
 
     /**
@@ -749,6 +778,61 @@ public class TargetLcof {
             }
         }
         return nums[left] - left == 0 ? left + 1 : left;
+    }
+    //endregion
+
+    //region    20230316    剑指 Offer 57. 和为s的两个数字
+
+    /**
+     * https://leetcode.cn/problems/he-wei-sde-liang-ge-shu-zi-lcof/
+     *
+     * @param nums   数组 nums
+     * @param target 数字s
+     * @return 数组中查找两个数，使得它们的和正好是s
+     */
+    public int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > target) {
+                break;
+            }
+            if (findNum(nums, target - nums[i])) {
+                return new int[]{nums[i], target - nums[i]};
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+    public boolean findNum(int[] nums, int target) {
+        int left = 0, right = nums.length - 1, mid;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return true;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region    20230316    剑指 Offer 58 - I. 翻转单词顺序
+
+    /**
+     * https://leetcode.cn/problems/fan-zhuan-dan-ci-shun-xu-lcof/
+     *
+     * @param s 输入字符串s
+     * @return 反转字符串
+     */
+    public String reverseWords(String s) {
+        // 除去开头和末尾的空白字符
+        s = s.trim();
+        // 正则匹配连续的空白字符作为分隔符分割
+        List<String> wordList = Arrays.asList(s.split("\\s+"));
+        Collections.reverse(wordList);
+        return String.join(" ", wordList);
     }
     //endregion
 

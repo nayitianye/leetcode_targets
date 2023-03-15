@@ -55,6 +55,32 @@ public class TargetProgrammingSkills {
     }
     //endregion
 
+    //region    20230316    589. N 叉树的前序遍历
+
+    /**
+     * https://leetcode.cn/problems/n-ary-tree-preorder-traversal/
+     *
+     * @param root n 叉树的根节点  root
+     * @return n 叉树的根节点  root
+     */
+    public List<Integer> preorder(TargetLeetCode75.Node root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Deque<TargetLeetCode75.Node> queue = new ArrayDeque<>();
+        queue.push(root);
+        while (!queue.isEmpty()) {
+            TargetLeetCode75.Node node = queue.poll();
+            res.add(node.val);
+            for (int i = node.children.size() - 1; i >= 0; --i) {
+                queue.push(node.children.get(i));
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230315    1281. 整数的各位积和之差
 
     /**
