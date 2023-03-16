@@ -47,6 +47,28 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230317    1. 两数之和
+
+    /**
+     * https://leetcode.cn/problems/two-sum/
+     *
+     * @param nums   一个整数数组 nums
+     * @param target 一个整数目标值 target
+     * @return 返回它们的数组下标
+     */
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.containsKey(target - nums[i])) {
+                return new int[]{i, hashMap.get(target - nums[i])};
+            } else {
+                hashMap.put(nums[i], i);
+            }
+        }
+        return new int[]{-1, -1};
+    }
+    //endregion
+
     //region    20230307    21. 合并两个有序链表
 
     /**
@@ -340,6 +362,34 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230317    299. 猜数字游戏
+
+    /**
+     * https://leetcode.cn/problems/bulls-and-cows/
+     *
+     * @param secret 秘密数字 secret
+     * @param guess  猜测的数字 guess
+     * @return 返回对朋友这次猜测的提示
+     */
+    public String getHint(String secret, String guess) {
+        int BullsNum = 0, CowsNum = 0;
+        int[] cntS = new int[10];
+        int[] cntG = new int[10];
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                BullsNum++;
+            } else {
+                ++cntS[secret.charAt(i) - '0'];
+                ++cntG[guess.charAt(i) - '0'];
+            }
+        }
+        for (int i = 0; i < 10; i++) {
+            CowsNum += Math.min(cntS[i], cntG[i]);
+        }
+        return Integer.toString(BullsNum) + "A" + Integer.toString(CowsNum) + "B";
+    }
+    //endregion
+
     //region    20230306    392. 判断子序列
 
     /**
@@ -447,36 +497,36 @@ public class TargetLeetCode75 {
         if (slen < plen) {
             return new ArrayList<>();
         }
-        List<Integer> res=new ArrayList<>();
-        int[] count=new int[26];
+        List<Integer> res = new ArrayList<>();
+        int[] count = new int[26];
         for (int i = 0; i < p.length(); i++) {
-            ++count[s.charAt(i)-'a'];
-            --count[p.charAt(i)-'a'];
+            ++count[s.charAt(i) - 'a'];
+            --count[p.charAt(i) - 'a'];
         }
-        int differ=0;
+        int differ = 0;
         for (int i = 0; i < 26; i++) {
-            if(count[i]!=0){
+            if (count[i] != 0) {
                 ++differ;
             }
         }
-        if(differ==0){
+        if (differ == 0) {
             res.add(0);
         }
-        for (int i = 0; i < slen-plen; i++) {
-            if(count[s.charAt(i)-'a']==1){
+        for (int i = 0; i < slen - plen; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
                 --differ;
-            } else if (count[s.charAt(i)-'a']==0) {
+            } else if (count[s.charAt(i) - 'a'] == 0) {
                 ++differ;
             }
-            --count[s.charAt(i)-'a'];
-            if(count[s.charAt(i+plen)-'a']==-1){
+            --count[s.charAt(i) - 'a'];
+            if (count[s.charAt(i + plen) - 'a'] == -1) {
                 --differ;
-            }else if (count[s.charAt(i+plen)-'a']==0){
+            } else if (count[s.charAt(i + plen) - 'a'] == 0) {
                 ++differ;
             }
             ++count[s.charAt(i + plen) - 'a'];
-            if(differ==0){
-                res.add(i+1);
+            if (differ == 0) {
+                res.add(i + 1);
             }
         }
         return res;

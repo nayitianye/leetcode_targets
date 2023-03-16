@@ -331,7 +331,7 @@
       <workItem from="1678720564743" duration="1531000" />
       <workItem from="1678809098980" duration="8059000" />
       <workItem from="1678878901979" duration="10763000" />
-      <workItem from="1678974964834" duration="5466000" />
+      <workItem from="1678974964834" duration="8935000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <created>1569466089897</created>
@@ -655,7 +655,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678896885500</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="学习计划_LeetCode 75&#10;424. 替换后的最长重复字符&#10;438. 找到字符串中所有字母异位词&#10;学习计划_剑指 Offer&#10;剑指 Offer 48. 最长不含重复字符的子字符串">
+      <created>1678982684409</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1678982684409</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -742,7 +749,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和" />
     <MESSAGE value="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数" />
     <MESSAGE value="121. 买卖股票的最佳时机&#10;1385. 两个数组间的距离值&#10;69. x 的平方根&#10;744. 寻找比目标字母大的最小字母&#10;278. 第一个错误的版本 &#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;441. 排列硬币" />
     <MESSAGE value="122. 买卖股票的最佳时机 II&#10;309. 最佳买卖股票时机含冷冻期&#10;714. 买卖股票的最佳时机含手续费" />
@@ -767,7 +773,8 @@
     <MESSAGE value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
     <MESSAGE value="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩" />
     <MESSAGE value="学习计划_数据结构初级&#10;学习计划_编程能力入门&#10;每日一题：" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构初级&#10;学习计划_编程能力入门&#10;每日一题：" />
+    <MESSAGE value="学习计划_LeetCode 75&#10;424. 替换后的最长重复字符&#10;438. 找到字符串中所有字母异位词&#10;学习计划_剑指 Offer&#10;剑指 Offer 48. 最长不含重复字符的子字符串" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode 75&#10;424. 替换后的最长重复字符&#10;438. 找到字符串中所有字母异位词&#10;学习计划_剑指 Offer&#10;剑指 Offer 48. 最长不含重复字符的子字符串" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

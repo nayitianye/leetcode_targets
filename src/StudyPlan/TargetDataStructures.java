@@ -291,6 +291,29 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230317    98. 验证二叉搜索树
+
+    /**
+     * https://leetcode.cn/problems/validate-binary-search-tree/description/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 判断其是否是一个有效的二叉搜索树
+     */
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
+    }
+    //endregion
+
     //region    20230315    101. 对称二叉树
 
     /**
@@ -647,6 +670,31 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230317    235. 二叉搜索树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+     *
+     * @param root 二叉搜索树根节点 root
+     * @param p    节点 p
+     * @param q    节点 q
+     * @return 找出对于有根树 root 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor = root;
+        while (true) {
+            if (p.val < ancestor.val && q.val < ancestor.val) {
+                ancestor = ancestor.left;
+            } else if (p.val > ancestor.val && q.val > ancestor.val) {
+                ancestor = ancestor.right;
+            } else {
+                break;
+            }
+        }
+        return ancestor;
+    }
+    //endregion
+
     //region    20230309    242. 有效的字母异位词
 
     /**
@@ -798,6 +846,29 @@ public class TargetDataStructures {
     }
     //endregion
 
+    //region    20230317    653. 两数之和 IV - 输入二叉搜索树
+
+    /**
+     * https://leetcode.cn/problems/two-sum-iv-input-is-a-bst/
+     *
+     * @param root 二叉搜索树 root
+     * @param k    一个目标结果 k
+     * @return 如果二叉搜索树中存在两个元素且它们的和等于给定的目标结果，则返回 true
+     */
+    public boolean findTarget(TreeNode root, int k) {
+        if (root == null) {
+            return false;
+        }
+        if (integerHashSet.contains(k - root.val)) {
+            return true;
+        }
+        integerHashSet.add(root.val);
+        return findTarget(root.left, k) || findTarget(root.right, k);
+    }
+
+    HashSet<Integer> integerHashSet = new HashSet<>();
+    //endregion
+
     //region    20230316    700. 二叉搜索树中的搜索
 
     /**
@@ -812,7 +883,7 @@ public class TargetDataStructures {
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode treeNode = stack.pop();
-            if(treeNode==null){
+            if (treeNode == null) {
                 continue;
             }
             if (treeNode.val == val) {
@@ -829,29 +900,30 @@ public class TargetDataStructures {
 
     /**
      * https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/
-     * @param root  二叉搜索树（BST）的根节点 root
-     * @param val   插入树中的值 value
-     * @return  将值插入二叉搜索树。 返回插入后二叉搜索树的根节点
+     *
+     * @param root 二叉搜索树（BST）的根节点 root
+     * @param val  插入树中的值 value
+     * @return 将值插入二叉搜索树。 返回插入后二叉搜索树的根节点
      */
     public TreeNode insertIntoBST(TreeNode root, int val) {
-        if(root==null){
+        if (root == null) {
             return new TreeNode(val);
         }
-        TreeNode pos=root;
-        while (pos!=null){
-            if(val<pos.val){
-                if(pos.left==null){
-                    pos.left=new TreeNode(val);
+        TreeNode pos = root;
+        while (pos != null) {
+            if (val < pos.val) {
+                if (pos.left == null) {
+                    pos.left = new TreeNode(val);
                     break;
-                }else{
-                    pos=pos.left;
+                } else {
+                    pos = pos.left;
                 }
-            }else{
-                if(pos.right==null){
-                    pos.right=new TreeNode(val);
+            } else {
+                if (pos.right == null) {
+                    pos.right = new TreeNode(val);
                     break;
-                }else{
-                    pos=pos.right;
+                } else {
+                    pos = pos.right;
                 }
             }
         }
