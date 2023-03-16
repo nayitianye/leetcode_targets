@@ -445,7 +445,7 @@ public class TargetLcof {
         return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
     }
 
-//endregion
+   //endregion
 
     //region    20230305    剑指 Offer 30. 包含min函数的栈
 
@@ -592,7 +592,7 @@ public class TargetLcof {
         }
         return ans;
     }
-//endregion
+    //endregion
 
     //region    20230305    剑指 Offer 35. 复杂链表的复制
     static class Node {
@@ -678,6 +678,35 @@ public class TargetLcof {
             }
         }
         return dp[grid.length - 1][grid[0].length - 1];
+    }
+    //endregion
+
+    //region    20230316    剑指 Offer 48. 最长不含重复字符的子字符串
+
+    /**
+     * https://leetcode.cn/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/
+     * @param s 字符串 s
+     * @return 找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int maxLength=0;
+        HashSet<Character> hashSet=new HashSet<>();
+        // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+        int rk = -1, ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if(i!=0){
+                //左指令向右移动一格，一出一个字符
+                hashSet.remove(s.charAt(i-1));
+            }
+            while (rk+1<s.length()&&!hashSet.contains(s.charAt(rk+1))){
+                // 不断地移动右指针
+                hashSet.add(s.charAt(rk + 1));
+                ++rk;
+            }
+            //第i到rk个字符是一个极长无重复字符字串
+            maxLength=Math.max(maxLength,rk-i+1);
+        }
+        return maxLength;
     }
     //endregion
 

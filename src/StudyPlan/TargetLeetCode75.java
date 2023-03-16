@@ -393,6 +393,96 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230316    424. 替换后的最长重复字符
+
+    /**
+     * https://leetcode.cn/problems/longest-repeating-character-replacement/
+     *
+     * @param s 字符串 s
+     * @param k 整数 k
+     * @return 含相同字母的最长子字符串的长度
+     */
+    public int characterReplacement(String s, int k) {
+        int[] nums = new int[26];
+        int n = s.length();
+        int maxn = 0;
+        //left:左边界，用于滑动时减去头部或者计算长度
+        //right:右边界，用于加上滑动窗口的尾巴或者计算长度
+        int left = 0, right = 0;
+        while (right < n) {
+            int indexR = s.charAt(right) - 'A';
+            nums[indexR]++;
+            //求窗口中曾出现某字母的最大次数
+            //计算某字母出现在某窗口中的最大次数，窗口长度自能增大或者不变（注意后面lef指针只移动了0-1次）
+            //这样做的意义：我们求的是最长，如果找不到更长的
+            maxn = Math.max(maxn, nums[indexR]);
+            //长度len=right-left+1,以下简称len
+            //len-字母出现最大次数>替换数目 => len>字母出现最大次数+替换数目
+            //分析一下，替换数目是不变的=k,字母出现最大次数可能是变化的，因此，只有字母出现最大次数增加的情况
+            //有不满足条件的情况下，left和right一起移动，len不变的
+            if (right - left + 1 - maxn > k) {
+                //这里要减的，因为left越过该点，会对最大值有影响
+                nums[s.charAt(left) - 'A']--;
+                left++;
+            }
+            //走完这里的时候，其实right会多走一步
+            right++;
+        }
+        //因为right多走一步，结果为（right-1）-left+1=right-left;
+        return right - left;
+    }
+    //endregion
+
+    //region    20230316    438. 找到字符串中所有字母异位词
+
+    /**
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string/
+     *
+     * @param s 字符串 s
+     * @param p 字符串 p
+     * @return 找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        int slen = s.length(), plen = p.length();
+        if (slen < plen) {
+            return new ArrayList<>();
+        }
+        List<Integer> res=new ArrayList<>();
+        int[] count=new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            ++count[s.charAt(i)-'a'];
+            --count[p.charAt(i)-'a'];
+        }
+        int differ=0;
+        for (int i = 0; i < 26; i++) {
+            if(count[i]!=0){
+                ++differ;
+            }
+        }
+        if(differ==0){
+            res.add(0);
+        }
+        for (int i = 0; i < slen-plen; i++) {
+            if(count[s.charAt(i)-'a']==1){
+                --differ;
+            } else if (count[s.charAt(i)-'a']==0) {
+                ++differ;
+            }
+            --count[s.charAt(i)-'a'];
+            if(count[s.charAt(i+plen)-'a']==-1){
+                --differ;
+            }else if (count[s.charAt(i+plen)-'a']==0){
+                ++differ;
+            }
+            ++count[s.charAt(i + plen) - 'a'];
+            if(differ==0){
+                res.add(i+1);
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230314    509. 斐波拉契数列
 
     /**
