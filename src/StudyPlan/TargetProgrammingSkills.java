@@ -13,8 +13,9 @@ public class TargetProgrammingSkills {
 
     /**
      * https://leetcode.cn/problems/number-of-1-bits/description/
+     *
      * @param n 输入是一个无符号整数（以二进制串的形式）
-     * @return  返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）
+     * @return 返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）
      */
     public int hammingWeight(int n) {
         int ret = 0;
@@ -52,6 +53,58 @@ public class TargetProgrammingSkills {
             n = n / 10;
         }
         return sum;
+    }
+    //endregion
+
+    //region    20230317    283. 移动零
+
+    /**
+     * https://leetcode.cn/problems/move-zeroes/
+     * @param nums  一个数组 nums,编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+     */
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        while(right<n){
+            if(nums[right]!=0){
+                swap(nums,left,right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+    //endregion
+
+    //region    20230317    496. 下一个更大元素 I
+
+    /**
+     * https://leetcode.cn/problems/next-greater-element-i/description/
+     *
+     * @param nums1 没有重复元素 的数组 nums1
+     * @param nums2 没有重复元素 的数组 nums2
+     * @return 每个 0 <= i < nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1。
+     */
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            int num = nums2[i];
+            while (!stack.isEmpty() && num >= stack.peek()) {
+                stack.pop();
+            }
+            hashMap.put(num, stack.isEmpty() ? -1 : stack.peek());
+            stack.push(num);
+        }
+        int[] res = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            res[i] = hashMap.get(nums1[i]);
+        }
+        return res;
     }
     //endregion
 
@@ -95,11 +148,11 @@ public class TargetProgrammingSkills {
         }
         int sum = 0, multi = 1;
         while (n > 0) {
-            sum+=n%10;
-            multi*=n%10;
-            n=n/10;
+            sum += n % 10;
+            multi *= n % 10;
+            n = n / 10;
         }
-        return multi-sum;
+        return multi - sum;
     }
     //endregion
 
@@ -141,6 +194,50 @@ public class TargetProgrammingSkills {
             }
         }
         return true;
+    }
+    //endregion
+
+    //region    20230317    1588. 所有奇数长度子数组的和
+
+    /**
+     * https://leetcode.cn/problems/sum-of-all-odd-length-subarrays/description/
+     *
+     * @param arr 正整数数组 arr
+     * @return 计算所有可能的奇数长度子数组的和
+     */
+    public int sumOddLengthSubarrays(int[] arr) {
+        int[] prefixSum = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            prefixSum[i + 1] = prefixSum[i] + arr[i];
+        }
+        int sum = 0;
+        for (int start = 0; start < arr.length; start++) {
+            for (int length = 1; length + start <= arr.length; length = length + 2) {
+                int end = start + length;
+                sum += prefixSum[end] - prefixSum[start];
+            }
+        }
+        return sum;
+    }
+    //endregion
+
+    //region    20230317    1672. 最富有客户的资产总量
+
+    /**
+     * https://leetcode.cn/problems/richest-customer-wealth/description/
+     * @param accounts  m x n 的整数网格 accounts
+     * @return  其中 accounts[i][j] 是第 i 位客户在第 j 家银行托管的资产数量。返回最富有客户所拥有的 资产总量
+     */
+    public int maximumWealth(int[][] accounts) {
+        int maxWeath=0;
+        for (int i = 0; i < accounts.length; i++) {
+            int sum=0;
+            for (int j = 0; j < accounts[i].length; j++) {
+                sum+=accounts[i][j];
+            }
+            maxWeath=Math.max(maxWeath,sum);
+        }
+        return maxWeath;
     }
     //endregion
 
@@ -230,4 +327,6 @@ public class TargetProgrammingSkills {
         return sign;
     }
     //endregion
+
+
 }

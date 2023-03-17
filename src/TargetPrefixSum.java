@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class TargetPrefixSum {
     // 一文讲懂一维前缀和、二维前缀和、二维子矩阵和...
     // https://leetcode.cn/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/solutions/1277018/yi-wen-jiang-dong-yi-wei-qian-zhui-he-er-hwm0/
 
-    //region 1292. 元素和小于等于阈值的正方形的最大边长  20230226
+    //region    20230226    1292. 元素和小于等于阈值的正方形的最大边长
 
     /**
      * https://leetcode.cn/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/
@@ -83,6 +84,33 @@ public class TargetPrefixSum {
             }
         }
         return res == nums.length ? -1 : res;
+    }
+    //endregion
+
+    //region    20230317    2389. 和有限的最长子序列
+
+    /**
+     * https://leetcode.cn/problems/longest-subsequence-with-limited-sum/
+     * @param nums  长度为 n 的整数数组 nums
+     * @param queries   一个长度为 m 的整数数组 queries
+     * @return  一个长度为 m 的数组 answer ，其中 answer[i] 是 nums 中 元素之和小于等于 queries[i] 的 子序列 的 最大 长度
+     */
+    public int[] answerQueries(int[] nums, int[] queries) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            nums[i]=nums[i-1]+nums[i];
+        }
+        int[] res=new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if(queries[i]>=nums[j]){
+                    res[i]=j+1;
+                }else{
+                    break;
+                }
+            }
+        }
+        return res;
     }
     //endregion
 }
