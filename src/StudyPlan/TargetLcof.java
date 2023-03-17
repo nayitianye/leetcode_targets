@@ -235,7 +235,7 @@ public class TargetLcof {
         char[] words = word.toCharArray();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (dfsExist(board,words,i,j,0)){
+                if (dfsExist(board, words, i, j, 0)) {
                     return true;
                 }
             }
@@ -250,10 +250,10 @@ public class TargetLcof {
         if (k == words.length - 1) {
             return true;
         }
-        board[i][j]='\0';
-        boolean res=dfsExist(board,words,i+1,j,k+1) || dfsExist(board,words,i-1,j,k+1) ||
-                    dfsExist(board,words,i,j+1,k+1) || dfsExist(board,words,i,j-1,k+1);
-        board[i][j]=words[k];
+        board[i][j] = '\0';
+        boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) ||
+                dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
+        board[i][j] = words[k];
         return res;
     }
     //endregion
@@ -845,6 +845,34 @@ public class TargetLcof {
         }
         return nums[left] - left == 0 ? left + 1 : left;
     }
+    //endregion
+
+    //region    20230318    剑指 Offer 54. 二叉搜索树的第k大节点
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+     *
+     * @param root 二叉搜索树根节点 root
+     * @param k    第 k 大的节点
+     * @return 第 k 大的节点的值
+     */
+    public int kthLargest(TreeNode root, int k) {
+        count=k;
+        preOrder(root);
+        return res;
+    }
+
+    public void preOrder(TreeNode root) {
+        if (root == null ||count<=0) {
+            return;
+        }
+        preOrder(root.right);
+        if(--count==0){
+            res=root.val;
+        }
+        preOrder(root.left);
+    }
+    int count,res;
     //endregion
 
     //region    20230316    剑指 Offer 57. 和为s的两个数字

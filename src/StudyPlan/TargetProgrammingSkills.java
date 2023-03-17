@@ -60,13 +60,14 @@ public class TargetProgrammingSkills {
 
     /**
      * https://leetcode.cn/problems/move-zeroes/
-     * @param nums  一个数组 nums,编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+     *
+     * @param nums 一个数组 nums,编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
      */
     public void moveZeroes(int[] nums) {
         int n = nums.length, left = 0, right = 0;
-        while(right<n){
-            if(nums[right]!=0){
-                swap(nums,left,right);
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
                 left++;
             }
             right++;
@@ -197,6 +198,20 @@ public class TargetProgrammingSkills {
     }
     //endregion
 
+    //region    202303018   1572. 矩阵对角线元素的和
+    public int diagonalSum(int[][] mat) {
+        int res = 0;
+        for (int i = 0; i < mat.length; i++) {
+            res = res + mat[i][i] + mat[i][mat.length - i - 1];
+        }
+        // 若矩阵阶数为偶数，由于主副对角线无交点因此不需要剔除重复的交点位置元素
+        // 但若矩阵阶数为奇数，则需要去除多加一次交点处的元素
+        // 5&1 => 0101 & 0001 = 0001 -> sum - mat[mid][mid] * 1
+        // &1 => 0010 & 0001 = 0000 -> sum
+        return res - mat[mat.length / 2][mat.length / 2] * (mat.length & 1);
+    }
+    //endregion
+
     //region    20230317    1588. 所有奇数长度子数组的和
 
     /**
@@ -225,17 +240,18 @@ public class TargetProgrammingSkills {
 
     /**
      * https://leetcode.cn/problems/richest-customer-wealth/description/
-     * @param accounts  m x n 的整数网格 accounts
-     * @return  其中 accounts[i][j] 是第 i 位客户在第 j 家银行托管的资产数量。返回最富有客户所拥有的 资产总量
+     *
+     * @param accounts m x n 的整数网格 accounts
+     * @return 其中 accounts[i][j] 是第 i 位客户在第 j 家银行托管的资产数量。返回最富有客户所拥有的 资产总量
      */
     public int maximumWealth(int[][] accounts) {
-        int maxWeath=0;
+        int maxWeath = 0;
         for (int i = 0; i < accounts.length; i++) {
-            int sum=0;
+            int sum = 0;
             for (int j = 0; j < accounts[i].length; j++) {
-                sum+=accounts[i][j];
+                sum += accounts[i][j];
             }
-            maxWeath=Math.max(maxWeath,sum);
+            maxWeath = Math.max(maxWeath, sum);
         }
         return maxWeath;
     }
