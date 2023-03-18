@@ -9,7 +9,8 @@ import java.util.*;
  */
 public class TargetLcof {
 
-    //region    20230309    自定义类  树节点
+    //region    20230309    自定义类
+    //二叉树
     public class TreeNode {
         int val;
         TreeNode left;
@@ -19,6 +20,28 @@ public class TargetLcof {
             val = x;
         }
     }
+
+    //双向链表
+    public class DoubleNode {
+        public int val;
+        public DoubleNode left;
+        public DoubleNode right;
+
+        public DoubleNode() {
+        }
+
+        public DoubleNode(int _val) {
+            val = _val;
+        }
+
+        public DoubleNode(int _val, DoubleNode _left, DoubleNode _right) {
+            val = _val;
+            left = _left;
+            right = _right;
+        }
+    }
+
+    ;
     //endregion
 
     //region    20230307    剑指 Offer 03. 数组中重复的数字
@@ -254,6 +277,50 @@ public class TargetLcof {
         boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) ||
                 dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
         board[i][j] = words[k];
+        return res;
+    }
+    //endregion
+
+    //region    20230318    面试题13. 机器人的运动范围
+
+    /**
+     * https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
+     * @param m m行
+     * @param n n列
+     * @param k 行坐标和列坐标的数位之和小于等于k
+     * @return
+     */
+    public int movingCount(int m, int n, int k) {
+        if (k == 0) {
+            return 1;
+        }
+        boolean[][] vis = new boolean[m][n];
+        int ans = 1;
+        vis[0][0] = true;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i == 0 && j == 0) || get(i) + get(j) > k) {
+                    continue;
+                }
+                //边界值判断
+                if (i - 1 >= 0) {
+                    vis[i][j] |= vis[i - 1][j];
+                }
+                if (j - 1 >= 0) {
+                    vis[i][j] |= vis[i][j - 1];
+                }
+                ans += vis[i][j] ? 1 : 0;
+            }
+        }
+        return ans;
+    }
+
+    public int get(int x) {
+        int res = 0;
+        while (x != 0) {
+            res += x % 10;
+            x /= 10;
+        }
         return res;
     }
     //endregion
@@ -630,6 +697,39 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230318    剑指 Offer 34. 二叉树中和为某一值的路径
+
+    /**
+     * https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/
+     *
+     * @param root   二叉树的根节点 root
+     * @param target 整数目标和 targetSum
+     * @return 找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        recur(root, target);
+        return res;
+    }
+
+    public void recur(TreeNode root, int target) {
+        if (root == null) {
+            return;
+        }
+        path.add(root.val);
+        target -= root.val;
+        if (target == 0 && root.left == null && root.right == null) {
+            res.add(new LinkedList<>(path));
+        }
+        recur(root.left, target);
+        recur(root.right, target);
+        path.removeLast();
+    }
+
+    LinkedList<List<Integer>> res = new LinkedList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+
+    //endregion
+
     //region    20230305    剑指 Offer 35. 复杂链表的复制
     static class Node {
         int val;
@@ -641,7 +741,6 @@ public class TargetLcof {
             this.next = null;
             this.random = null;
         }
-
     }
 
     HashMap<Node, Node> cachedNode = new HashMap<>();
@@ -663,6 +762,43 @@ public class TargetLcof {
             headNew.random = copyRandomList(head.random);
         }
         return cachedNode.get(head);
+    }
+    //endregion
+
+    //region    20230318    剑指 Offer 36. 二叉搜索树与双向链表
+    DoubleNode head, pre;
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
+     *
+     * @param root 二叉搜索树 root
+     * @return 二叉搜索树转换成一个排序的循环双向链表
+     */
+    public DoubleNode treeToDoublyList(DoubleNode root) {
+        if (root == null) {
+            return null;
+        }
+        dfs(root);
+        pre.right = head;
+        head.left = pre;//进行头节点和尾节点的相互指向，这两句的顺序也是可以颠倒的
+        return head;
+    }
+
+    public void dfs(DoubleNode cur) {
+        if (cur == null) {
+            return;
+        }
+        dfs(cur.left);
+        //pre用于记录双向链表中位于cur左侧的节点，即上一次迭代中的cur,当pre==null时，cur左侧没有节点,即此时cur为双向链表中的头节点
+        if (pre == null) {
+            head = cur;
+        }//反之，pre!=null时，cur左侧存在节点pre，需要进行pre.right=cur的操作。
+        else {
+            pre.right = cur;
+        }
+        cur.left = pre;//pre是否为null对这句没有影响,且这句放在上面两句if else之前也是可以的。
+        pre = cur;//pre指向当前的cur
+        dfs(cur.right);//全部迭代完成后，pre指向双向链表中的尾节点
     }
     //endregion
 
@@ -857,22 +993,23 @@ public class TargetLcof {
      * @return 第 k 大的节点的值
      */
     public int kthLargest(TreeNode root, int k) {
-        count=k;
+        count = k;
         preOrder(root);
-        return res;
+        return res1;
     }
 
     public void preOrder(TreeNode root) {
-        if (root == null ||count<=0) {
+        if (root == null || count <= 0) {
             return;
         }
         preOrder(root.right);
-        if(--count==0){
-            res=root.val;
+        if (--count == 0) {
+            res1 = root.val;
         }
         preOrder(root.left);
     }
-    int count,res;
+
+    int count, res1;
     //endregion
 
     //region    20230316    剑指 Offer 57. 和为s的两个数字

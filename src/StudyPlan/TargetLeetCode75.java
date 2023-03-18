@@ -262,6 +262,42 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230318    200. 岛屿数量
+
+    /**
+     * https://leetcode.cn/problems/number-of-islands/
+     *
+     * @param grid 由 '1'（陆地）和 '0'（水）组成的的二维网格 grid
+     * @return 计算岛屿的数量
+     */
+    public int numIslands(char[][] grid) {
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == '1') {
+                    area(grid,i,j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public void area(char[][] grid, int row, int col) {
+        if (row >= grid.length || col >= grid[0].length || row < 0 || col < 0) {
+            return;
+        }
+        if (grid[row][col] != '1'){
+            return;
+        }
+        grid[row][col] = '2';
+        area(grid, row - 1, col);
+        area(grid, row + 1, col);
+        area(grid, row, col - 1);
+        area(grid, row, col + 1);
+    }
+    //endregion
+
     //region    20230306    205. 同构字符串
 
     /**
@@ -698,6 +734,16 @@ public class TargetLeetCode75 {
     //endregion
 
     //region    20230313    733. 图像渲染
+
+    /**
+     * https://leetcode.cn/problems/flood-fill/
+     *
+     * @param image    一幅以 m x n 的二维整数数组表示的图画 image ，其中 image[i][j] 表示该图画的像素值大小
+     * @param sr       整数 sr
+     * @param sc       整数 sc
+     * @param newColor 整数 newColor
+     * @return 从像素 image[sr][sc] 开始对图像进行上色填充,返回经过上色渲染后的图像。
+     */
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
 
         helper(image, sr, sc, newColor, image[sr][sc]);

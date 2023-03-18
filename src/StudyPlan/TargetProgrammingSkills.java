@@ -109,6 +109,31 @@ public class TargetProgrammingSkills {
     }
     //endregion
 
+    //region    20230317    566. 重塑矩阵
+
+    /**
+     * https://leetcode.cn/problems/reshape-the-matrix/
+     *
+     * @param mat 数组 mat
+     * @param r   r 行
+     * @param c   c 列
+     * @return 将数组 mat 重塑成 r 行 c 列的数组
+     */
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if (m * n != r * c) {
+            return mat;
+        }
+
+        int[][] ans = new int[r][c];
+        for (int x = 0; x < m * n; ++x) {
+            ans[x / c][x % c] = mat[x / n][x % n];
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230316    589. N 叉树的前序遍历
 
     /**
@@ -132,6 +157,51 @@ public class TargetProgrammingSkills {
             }
         }
         return res;
+    }
+    //endregion
+
+    //region    20230318    976. 三角形的最大周长
+
+    /**
+     * https://leetcode.cn/problems/largest-perimeter-triangle/description/
+     *
+     * @param nums 数组 nums
+     * @return 返回 由其中三个长度组成的、面积不为零的三角形的最大周长
+     */
+    public int largestPerimeter(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = nums.length - 1; i >= 2; i--) {
+            if (nums[i] < nums[i - 1] + nums[i - 2]) {
+                return nums[i] + nums[i - 1] + nums[i - 2];
+            }
+        }
+        return 0;
+    }
+    //endregion
+
+    //region    20230318    1232. 缀点成线
+
+    /**
+     * https://leetcode.cn/problems/check-if-it-is-a-straight-line/
+     *
+     * @param coordinates 数组 coordinates
+     * @return 其中 coordinates[i] = [x, y] ， [x, y] 表示横坐标为 x、纵坐标为 y 的点。请你来判断，这些点是否在该坐标系中属于同一条直线上
+     */
+    public boolean checkStraightLine(int[][] coordinates) {
+        int deltaX = coordinates[0][0], deltaY = coordinates[0][1];
+        int n = coordinates.length;
+        for (int i = 0; i < n; i++) {
+            coordinates[i][0] -= deltaX;
+            coordinates[i][1] -= deltaY;
+        }
+        int A = coordinates[1][1], B = -coordinates[1][0];
+        for (int i = 2; i < n; i++) {
+            int x = coordinates[i][0], y = coordinates[i][1];
+            if (A * x + B * y != 0) {
+                return false;
+            }
+        }
+        return true;
     }
     //endregion
 
@@ -198,7 +268,7 @@ public class TargetProgrammingSkills {
     }
     //endregion
 
-    //region    202303018   1572. 矩阵对角线元素的和
+    //region    20230318    1572. 矩阵对角线元素的和
     public int diagonalSum(int[][] mat) {
         int res = 0;
         for (int i = 0; i < mat.length; i++) {
@@ -343,6 +413,5 @@ public class TargetProgrammingSkills {
         return sign;
     }
     //endregion
-
 
 }
