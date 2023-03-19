@@ -4,10 +4,10 @@ import java.util.*;
 
 /**
  * @author yyb
- * leetcode_studyplan_ProgrammingSkills
- * leetcode 学习计划 编程能力
+ * leetcode_studyplan_ProgrammingSkillsBasic
+ * leetcode 学习计划 编程能力基础
  */
-public class TargetProgrammingSkills {
+public class TargetProgrammingSkillsBasic {
 
     //region    自定义数据结构
     public class Node {

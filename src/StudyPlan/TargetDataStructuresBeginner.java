@@ -4,10 +4,10 @@ import java.util.*;
 
 /**
  * @author yyb
- * leetcode_studyplan_data_structures
- * leetcode 学习计划 数据结构
+ * leetcode_studyplan_data_structures_Beginners
+ * leetcode 学习计划 数据结构入门
  */
-public class TargetDataStructures {
+public class TargetDataStructuresBeginner {
 
     //region    自定义数据接口
 
@@ -933,18 +933,18 @@ public class TargetDataStructures {
 
     public static void main(String[] args) {
         //1. 两数之和
-        System.out.println(Arrays.toString(new TargetDataStructures().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));
+        System.out.println(Arrays.toString(new TargetDataStructuresBeginner().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));
         //217. 存在重复元素
-        System.out.println(new TargetDataStructures().containsDuplicate(new int[]{1, 2, 3, 4, 4, 6, 6}));
+        System.out.println(new TargetDataStructuresBeginner().containsDuplicate(new int[]{1, 2, 3, 4, 4, 6, 6}));
         //53. 最大子数组和
-        System.out.println(new TargetDataStructures().maxSubArray(new int[]{1, 3, 4, -10, 6, 18, -5, 12}));
+        System.out.println(new TargetDataStructuresBeginner().maxSubArray(new int[]{1, 3, 4, -10, 6, 18, -5, 12}));
         //88. 合并两个有序数组
-        new TargetDataStructures().merge(new int[]{1, 2, 3, 4, 4, 5, 0, 0, 0, 0}, 6, new int[]{2, 3, 5, 7}, 4);
+        new TargetDataStructuresBeginner().merge(new int[]{1, 2, 3, 4, 4, 5, 0, 0, 0, 0}, 6, new int[]{2, 3, 5, 7}, 4);
         //350. 两个数组的交集 II
-        System.out.println(Arrays.toString(new TargetDataStructures().intersect(new int[]{1, 2, 3, 3}, new int[]{1, 2, 4})));
+        System.out.println(Arrays.toString(new TargetDataStructuresBeginner().intersect(new int[]{1, 2, 3, 3}, new int[]{1, 2, 4})));
         //121. 买卖股票的最佳时机
-        System.out.println(new TargetDataStructures().maxProfit(new int[]{7, 5, 4, 3, 2, 1}));
+        System.out.println(new TargetDataStructuresBeginner().maxProfit(new int[]{7, 5, 4, 3, 2, 1}));
         //566. 重塑矩阵
-        System.out.println(new TargetDataStructures().matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4));
+        System.out.println(new TargetDataStructuresBeginner().matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4));
     }
 }
