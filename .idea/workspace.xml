@@ -341,20 +341,6 @@
       <workItem from="1679112317140" duration="170000" />
       <workItem from="1679114769549" duration="10736000" />
     </task>
-    <task id="LOCAL-00002" summary="第二次提交">
-      <created>1569557843482</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1569557843482</updated>
-    </task>
-    <task id="LOCAL-00003" summary="增加广度优先搜索">
-      <created>1569558002798</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1569558002798</updated>
-    </task>
     <task id="LOCAL-00004" summary="2019/10/3">
       <created>1570086171119</created>
       <option name="number" value="00004" />
@@ -684,7 +670,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679240314010</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="文件重命名">
+      <created>1679240717116</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1679240717116</updated>
+    </task>
+    <task id="LOCAL-00052" summary="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找">
+      <created>1679242111440</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1679242111440</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -771,8 +771,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1539. 第 k 个缺失的正整数&#10;167. 两数之和 II - 输入有序数组&#10;1608. 特殊数组的特征值" />
-    <MESSAGE value="1351. 统计有序矩阵中的负数&#10;1346. 检查整数及其两倍数是否存在&#10;633. 平方数之和&#10;74. 搜索二维矩阵&#10;33. 搜索旋转排序数组" />
     <MESSAGE value="1855. 下标对中的最大距离&#10;1337. 矩阵中战斗力最弱的 K 行&#10;74. 搜索二维矩阵&#10;350. 两个数组的交集 II" />
     <MESSAGE value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
     <MESSAGE value="91. 解码方法&#10;96. 不同的二叉搜索树&#10;139. 单词拆分&#10;263. 丑数&#10;264. 丑数 II&#10;304. 二维区域和检索 - 矩阵不可变&#10;1314. 矩阵区域和&#10;1567. 乘积为正数的最长子数组长度&#10;增加前缀和类别 TargetPrefixSum.java&#10;1292. 元素和小于等于阈值的正方形的最大边长" />
@@ -796,7 +794,9 @@
     <MESSAGE value="学习计划_编程能力入门&#10;283. 移动零&#10;496. 下一个更大元素 I&#10;1281. 整数的各位积和之差&#10;1588. 所有奇数长度子数组的和&#10;每日一题&#10;2389. 和有限的最长子序列" />
     <MESSAGE value="学习计划_剑指 Offer&#10;剑指 Offer 54. 二叉搜索树的第k大节点&#10;学习计划_LeetCode 75&#10;394. 字符串解码&#10;844. 比较含退格的字符串&#10;学习计划_编程能力入门&#10;1572. 矩阵对角线元素的和" />
     <MESSAGE value="学习计划_剑指 Offer&#10;面试题45. 把数组排成最小的数&#10;面试题61. 扑克牌中的顺子&#10;剑指 Offer 46. 把数字翻译成字符串&#10;学习计划_LeetCode 75&#10;692. 前K个高频单词&#10;1046. 最后一块石头的重量&#10;学习计划_编程能力入门&#10;389. 找不同&#10;1678. 设计 Goal 解析器&#10;1768. 交替合并字符串" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_剑指 Offer&#10;面试题45. 把数组排成最小的数&#10;面试题61. 扑克牌中的顺子&#10;剑指 Offer 46. 把数字翻译成字符串&#10;学习计划_LeetCode 75&#10;692. 前K个高频单词&#10;1046. 最后一块石头的重量&#10;学习计划_编程能力入门&#10;389. 找不同&#10;1678. 设计 Goal 解析器&#10;1768. 交替合并字符串" />
+    <MESSAGE value="文件重命名" />
+    <MESSAGE value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -833,11 +833,6 @@
           <url>file://$PROJECT_DIR$/src/TargetQueue.java</url>
           <line>22</line>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
-          <line>245</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetBinarySearch.java</url>
@@ -878,11 +873,6 @@
           <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
           <line>67</line>
           <option name="timeStamp" value="107" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="111" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

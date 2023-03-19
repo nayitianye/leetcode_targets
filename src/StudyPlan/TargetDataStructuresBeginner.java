@@ -931,6 +931,87 @@ public class TargetDataStructuresBeginner {
     }
     //endregion
 
+    //region    20230320    709. 转换成小写字母
+
+    /**
+     * https://leetcode.cn/problems/to-lower-case/
+     *
+     * @param s 字符串 s
+     * @return 字符串中的大写字母转换成相同的小写字母，返回新的字符串
+     */
+    public String toLowerCase(String s) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) <= 'Z' && s.charAt(i) >= 'A') {
+                char ch = s.charAt(i);
+                ch |= 32;
+                res.append(ch);
+            } else {
+                res.append(s.charAt(i));
+            }
+        }
+        return res.toString();
+    }
+    //endregion
+
+    //region    20230320    953. 验证外星语词典
+
+    /**
+     * https://leetcode.cn/problems/verifying-an-alien-dictionary/
+     *
+     * @param words 外星语书写的单词 words
+     * @param order 其字母表的顺序 order
+     * @return 当给定的单词在这种外星语中按字典序排列时，返回 true；否则，返回 false
+     */
+    public boolean isAlienSorted(String[] words, String order) {
+        int[] index = new int[26];
+        for (int i = 0; i < order.length(); i++) {
+            index[order.charAt(i) - 'a'] = i;
+        }
+        for (int i = 1; i < words.length; i++) {
+            boolean valid=false;
+            for (int j = 0; j < words[i-1].length() && j<words[i].length(); j++) {
+                int prev=index[words[i-1].charAt(j)-'a'];
+                int curr=index[words[i].charAt(j)-'a'];
+                if(prev<curr){
+                    valid=true;
+                    break;
+                } else if (prev>curr) {
+                    return false;
+                }
+            }
+            if(!valid){
+                if(words[i-1].length()>words[i].length()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    //endregion
+
+    //region    20230320    1309. 解码字母到整数映射
+
+    /**
+     * https://leetcode.cn/problems/decrypt-string-from-alphabet-to-integer-mapping/
+     *
+     * @param s 字符串 s
+     * @return 字符串 s
+     */
+    public String freqAlphabets(String s) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (i + 2 < s.length() && s.charAt(i + 2) == '#') {
+                res.append((char) ((s.charAt(i) - '0') * 10 + (s.charAt(i + 1) - '1') + 'a'));
+                i += 2;
+            } else {
+                res.append((char) (s.charAt(i) - '1' + 'a'));
+            }
+        }
+        return res.toString();
+    }
+    //endregion
+
     public static void main(String[] args) {
         //1. 两数之和
         System.out.println(Arrays.toString(new TargetDataStructuresBeginner().twoSum(new int[]{1, 2, 7, 9, 11}, 11)));

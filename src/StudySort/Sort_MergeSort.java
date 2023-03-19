@@ -1,4 +1,4 @@
-package Study.Sort;
+package StudySort;
 
 //排序_归并排序
 public class Sort_MergeSort {
