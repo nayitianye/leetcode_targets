@@ -9,6 +9,25 @@ import java.util.*;
  */
 public class TargetProgrammingSkills {
 
+    //region    自定义数据结构
+    public class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+    //endregion
+
     //region    20230315    191. 位1的个数
 
     /**
@@ -81,6 +100,38 @@ public class TargetProgrammingSkills {
     }
     //endregion
 
+    //region    20230319    389. 找不同
+
+    /**
+     * https://leetcode.cn/problems/find-the-difference/
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return  找出在 t 中被添加的字母
+     */
+    public char findTheDifference(String s, String t) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
+            } else {
+                hashMap.put(s.charAt(i), 1);
+            }
+        }
+        for (int i = 0; i < t.length(); i++) {
+            if (hashMap.containsKey(t.charAt(i))) {
+                if (hashMap.get(t.charAt(i)) == 1) {
+                    hashMap.remove(t.charAt(i));
+                } else {
+                    hashMap.put(t.charAt(i), hashMap.get(t.charAt(i)) - 1);
+                }
+            } else {
+                return t.charAt(i);
+            }
+        }
+        return t.charAt(0);
+    }
+    //endregion
+
     //region    20230317    496. 下一个更大元素 I
 
     /**
@@ -142,15 +193,15 @@ public class TargetProgrammingSkills {
      * @param root n 叉树的根节点  root
      * @return n 叉树的根节点  root
      */
-    public List<Integer> preorder(TargetLeetCode75.Node root) {
+    public List<Integer> preorder(Node root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
-        Deque<TargetLeetCode75.Node> queue = new ArrayDeque<>();
+        Deque<Node> queue = new ArrayDeque<>();
         queue.push(root);
         while (!queue.isEmpty()) {
-            TargetLeetCode75.Node node = queue.poll();
+            Node node = queue.poll();
             res.add(node.val);
             for (int i = node.children.size() - 1; i >= 0; --i) {
                 queue.push(node.children.get(i));
@@ -324,6 +375,58 @@ public class TargetProgrammingSkills {
             maxWeath = Math.max(maxWeath, sum);
         }
         return maxWeath;
+    }
+    //endregion
+
+    //region    20230319    1678. 设计 Goal 解析器
+
+    /**
+     * https://leetcode.cn/problems/goal-parser-interpretation/
+     * @param command   字符串 command
+     * @return  返回 Goal 解析器对 command 的解释结果
+     */
+    public String interpret(String command) {
+        StringBuilder res=new StringBuilder();
+        for (int i = 0; i < command.length(); i++) {
+            if(command.charAt(i)=='G'){
+                res.append('G');
+            }
+            else if(command.charAt(i)=='('){
+                if(command.charAt(i+1)==')'){
+                    res.append("o");
+                }else{
+                    res.append("al");
+                }
+            }
+        }
+        return res.toString();
+    }
+    //endregion
+
+    //region    20230319    1768. 交替合并字符串
+
+    /**
+     * https://leetcode.cn/problems/merge-strings-alternately
+     *
+     * @param word1 字符串 word1
+     * @param word2 字符串 word2
+     * @return 返回 合并后的字符串
+     */
+    public String mergeAlternately(String word1, String word2) {
+        int m = word1.length(), n = word2.length();
+        int i = 0, j = 0;
+        StringBuilder ans = new StringBuilder();
+        while (i < m || j < n) {
+            if (i < m) {
+                ans.append(word1.charAt(i));
+                i++;
+            }
+            if (j < n) {
+                ans.append(word2.charAt(j));
+                j++;
+            }
+        }
+        return ans.toString();
     }
     //endregion
 

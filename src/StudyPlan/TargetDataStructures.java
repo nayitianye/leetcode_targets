@@ -357,9 +357,9 @@ public class TargetDataStructures {
      * @param root 二叉树的根节点 root
      * @return 二叉树的根节点 root
      */
-    public List<List<Integer>> levelOrder(TargetLeetCode75.TreeNode root) {
+    public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        Queue<TargetLeetCode75.TreeNode> queue = new ArrayDeque<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         if (root != null) {
             queue.add(root);
         }
@@ -367,7 +367,7 @@ public class TargetDataStructures {
             int n = queue.size();
             List<Integer> level = new ArrayList<>();
             for (int i = 0; i < n; i++) {
-                TargetLeetCode75.TreeNode treeNode = queue.poll();
+                TreeNode treeNode = queue.poll();
                 level.add(treeNode.val);
                 if (treeNode.left != null) {
                     queue.add(treeNode.left);

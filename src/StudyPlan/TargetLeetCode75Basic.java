@@ -4,10 +4,10 @@ import java.util.*;
 
 /**
  * @author yyb
- * leetcode_studyplan_LeetCode 75
- * leetcode 学习计划 LeetCode 75
+ * leetcode_studyplan_LeetCode_75_基础
+ * leetcode 学习计划 LeetCode 75 Level1
  */
-public class TargetLeetCode75 {
+public class TargetLeetCode75Basic {
 
     //region    自定义数据结构
     public class TreeNode {
@@ -275,7 +275,7 @@ public class TargetLeetCode75 {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == '1') {
-                    area(grid,i,j);
+                    area(grid, i, j);
                     res++;
                 }
             }
@@ -287,7 +287,7 @@ public class TargetLeetCode75 {
         if (row >= grid.length || col >= grid[0].length || row < 0 || col < 0) {
             return;
         }
-        if (grid[row][col] != '1'){
+        if (grid[row][col] != '1') {
             return;
         }
         grid[row][col] = '2';
@@ -681,6 +681,42 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230319    692. 前K个高频单词
+
+    /**
+     * https://leetcode.cn/problems/top-k-frequent-words/
+     * @param words 单词列表 words
+     * @param k 一个整数 k
+     * @return  返回前 k 个出现次数最多的单词
+     */
+    public List<String> topKFrequent(String[] words, int k) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (String word : words) {
+            hashMap.put(word, hashMap.getOrDefault(word, 0) + 1);
+        }
+        PriorityQueue<Map.Entry<String, Integer>> priorityQueue = new PriorityQueue<Map.Entry<String, Integer>>(
+                new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return o1.getValue() == o2.getValue() ? o2.getKey().compareTo(o1.getKey()) : o1.getValue() - o2.getValue();
+                    }
+                }
+        );
+        for (Map.Entry<String,Integer> entry:hashMap.entrySet()){
+            priorityQueue.offer(entry);
+            if(priorityQueue.size()>k){
+                priorityQueue.poll();
+            }
+        }
+        List<String> res=new ArrayList<>();
+        while (!priorityQueue.isEmpty()){
+            res.add(priorityQueue.poll().getKey());
+        }
+        Collections.reverse(res);
+        return res;
+    }
+    //endregion
+
     //region    20230312    704. 二分查找
 
     /**
@@ -851,6 +887,30 @@ public class TargetLeetCode75 {
     }
     //endregion
 
+    //region    20230319    1046. 最后一块石头的重量
+
+    /**
+     * https://leetcode.cn/problems/last-stone-weight/
+     *
+     * @param stones 一堆石头 stones
+     * @return 每次取最大的两个石头对撞，求剩余的石头 stone 重量
+     */
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> (b - a));
+        for (int i = 0; i < stones.length; i++) {
+            priorityQueue.offer(stones[i]);
+        }
+        while (priorityQueue.size() > 1) {
+            int a = priorityQueue.poll();
+            int b = priorityQueue.poll();
+            if (a > b) {
+                priorityQueue.offer(a - b);
+            }
+        }
+        return priorityQueue.isEmpty() ? 0 : priorityQueue.poll();
+    }
+    //endregion
+
     //region    20230305    1480. 一维数组的动态和
 
     /**
@@ -871,7 +931,7 @@ public class TargetLeetCode75 {
     //endregion
 
     public static void main(String[] args) {
-        new TargetLeetCode75().longestPalindrome("abccccdd");
+        new TargetLeetCode75Basic().longestPalindrome("abccccdd");
     }
 }
 

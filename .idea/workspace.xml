@@ -65,7 +65,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructures.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Basic.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkills.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
   </component>
@@ -156,19 +156,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="应用程序.TargetTwoPointers">
     <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetHashTable" />

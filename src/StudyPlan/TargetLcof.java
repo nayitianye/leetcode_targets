@@ -285,6 +285,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
+     *
      * @param m m行
      * @param n n列
      * @param k 行坐标和列坐标的数位之和小于等于k
@@ -815,7 +816,29 @@ public class TargetLcof {
     }
     //endregion
 
-    //region    20230313    剑指 Offer 46. 把数字翻译成字符串
+    //region    20230319    面试题45. 把数组排成最小的数
+
+    /**
+     * https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/description/
+     *
+     * @param nums 数组 nums
+     * @return 返回数组组成的最小字符串
+     */
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
+        StringBuilder res = new StringBuilder();
+        for (String str : strs) {
+            res.append(str);
+        }
+        return res.toString();
+    }
+    //endregion
+
+    //region    20230319    剑指 Offer 46. 把数字翻译成字符串
 
     /**
      * https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/
@@ -824,7 +847,20 @@ public class TargetLcof {
      * @return 按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法
      */
     public int translateNum(int num) {
-        return 0;
+        char[] ch = String.valueOf(num).toCharArray();
+        int len = ch.length;
+        int[] dp = new int[len + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= len; i++) {
+            int n = (ch[i - 2] - '0') * 10 + (ch[i - 1] - '0');
+            if (n >= 10 && n <= 25) {
+                dp[i] = dp[i - 1] + dp[i - 2];
+            } else {
+                dp[i] = dp[i - 1];
+            }
+        }
+        return dp[len];
     }
     //endregion
 
@@ -1078,6 +1114,32 @@ public class TargetLcof {
      */
     public String reverseLeftWords(String s, int n) {
         return s.substring(n) + s.substring(0, n);
+    }
+    //endregion
+
+    //region    20230319    面试题61. 扑克牌中的顺子
+
+    /**
+     * https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/
+     *
+     * @param nums 数组 nums 表示随机的 5 张扑克牌
+     * @return 判断5张牌是不是连续的
+     */
+    public boolean isStraight(int[] nums) {
+        Set<Integer> repeat = new HashSet<>();
+        int max = 0, min = 14;
+        for (int num : nums) {
+            if (num == 0) {
+                continue;
+            }
+            max = Math.max(max, num);
+            min = Math.min(min, num);
+            if (repeat.contains(num)) {
+                return false;
+            }
+            repeat.add(num);
+        }
+        return max - min < 5;
     }
     //endregion
 
