@@ -803,6 +803,69 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230320    剑指 Offer 40. 最小的k个数
+
+    /**
+     * https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/
+     *
+     * @param arr 整数数组 arr
+     * @param k   最小的 k 个数
+     * @return 最小的 k 个数组成的数组
+     */
+    public int[] getLeastNumbers(int[] arr, int k) {
+        if (k >= arr.length) {
+            return arr;
+        }
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        for (int i = 0; i < arr.length; i++) {
+            priorityQueue.add(arr[i]);
+        }
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++) {
+            res[i] = priorityQueue.poll();
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20303020    剑指 Offer 41. 数据流中的中位数
+
+    /**
+     * https://leetcode.cn/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/
+     */
+    private class MedianFinder {
+
+        PriorityQueue<Integer> queueMin;
+        PriorityQueue<Integer> queueMax;
+
+        public MedianFinder() {
+            queueMin = new PriorityQueue<>((a, b) -> (b - a));
+            queueMax = new PriorityQueue<>((a, b) -> (a - b));
+        }
+
+        public void addNum(int num) {
+            if (queueMin.isEmpty() || num <= queueMin.peek()) {
+                queueMin.offer(num);
+                if (queueMax.size() + 1 < queueMin.size()) {
+                    queueMax.offer(queueMin.poll());
+                }
+            } else {
+                queueMax.offer(num);
+                if (queueMax.size() > queueMin.size()) {
+                    queueMin.offer(queueMax.poll());
+                }
+            }
+        }
+
+        public double findMedian() {
+            if (queueMin.size() > queueMax.size()) {
+                return queueMin.peek();
+            }
+            return (queueMin.peek() + queueMax.peek()) / 2.0;
+        }
+    }
+    //endregion
+
     //region    20230312    剑指 Offer 42. 连续子数组的最大和
     public int maxSubArray(int[] nums) {
         int[] dp = new int[nums.length];

@@ -169,16 +169,9 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetTwoPointers">
-    <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
-      <module name="leetcode_targets" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TargetLcof" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetLcof" />
+  <component name="RunManager" selected="应用程序.TaegetBinarySearchBasic">
+    <configuration name="TaegetBinarySearchBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StudyPlan.TaegetBinarySearchBasic" />
       <module name="leetcode_targets" />
       <extension name="coverage">
         <pattern>
@@ -186,6 +179,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
+      <module name="leetcode_targets" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -219,6 +219,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TaegetBinarySearchBasic" />
         <item itemvalue="应用程序.TargetTwoPointers" />
         <item itemvalue="应用程序.TargetHashTable" />
       </list>
@@ -230,6 +231,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="a616ec18-3a8a-46f9-a9a1-7d4419f7f491" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -340,13 +342,7 @@
       <workItem from="1679055456492" duration="7260000" />
       <workItem from="1679112317140" duration="170000" />
       <workItem from="1679114769549" duration="10736000" />
-    </task>
-    <task id="LOCAL-00004" summary="2019/10/3">
-      <created>1570086171119</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1570086171119</updated>
+      <workItem from="1679324245578" duration="5944000" />
     </task>
     <task id="LOCAL-00005" summary="2019/10/3  哈希表练习">
       <created>1570093989602</created>
@@ -684,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679242111440</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射">
+      <created>1679245856512</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1679245856512</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -771,7 +774,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1855. 下标对中的最大距离&#10;1337. 矩阵中战斗力最弱的 K 行&#10;74. 搜索二维矩阵&#10;350. 两个数组的交集 II" />
     <MESSAGE value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
     <MESSAGE value="91. 解码方法&#10;96. 不同的二叉搜索树&#10;139. 单词拆分&#10;263. 丑数&#10;264. 丑数 II&#10;304. 二维区域和检索 - 矩阵不可变&#10;1314. 矩阵区域和&#10;1567. 乘积为正数的最长子数组长度&#10;增加前缀和类别 TargetPrefixSum.java&#10;1292. 元素和小于等于阈值的正方形的最大边长" />
     <MESSAGE value="64. 最小路径和&#10;221. 最大正方形&#10;1277. 统计全为 1 的正方形子矩阵" />
@@ -796,7 +798,8 @@
     <MESSAGE value="学习计划_剑指 Offer&#10;面试题45. 把数组排成最小的数&#10;面试题61. 扑克牌中的顺子&#10;剑指 Offer 46. 把数字翻译成字符串&#10;学习计划_LeetCode 75&#10;692. 前K个高频单词&#10;1046. 最后一块石头的重量&#10;学习计划_编程能力入门&#10;389. 找不同&#10;1678. 设计 Goal 解析器&#10;1768. 交替合并字符串" />
     <MESSAGE value="文件重命名" />
     <MESSAGE value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
+    <MESSAGE value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -873,6 +876,11 @@
           <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
           <line>67</line>
           <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="112" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

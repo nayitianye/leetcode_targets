@@ -2125,6 +2125,44 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230320    1012. 至少有 1 位重复的数字
+
+    /**
+     * https://leetcode.cn/problems/numbers-with-repeated-digits/
+     *
+     * @param n 正整数 n
+     * @return 返回在 [1, n] 范围内具有 至少 1 位 重复数字的正整数的个数
+     */
+    public int numDupDigitsAtMostN(int n) {
+        String sn = String.valueOf(n);
+        int dp[][] = new int[sn.length()][1 << 10];
+        for (int i = 0; i < sn.length(); i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        return n + 1 - dpSameDigits(0, sn, 0, true, dp);
+    }
+
+    public int dpSameDigits(int mask, String sn, int i, boolean same, int[][] dp) {
+        if (i == sn.length()) {
+            return 1;
+        }
+        if (!same && dp[i][mask] >= 0) {
+            return dp[i][mask];
+        }
+        int res = 0, t = same ? (sn.charAt(i) - '0') : 9;
+        for (int k = 0; k <= t; k++) {
+            if ((mask & (1 << k)) != 0) {
+                continue;
+            }
+            res += dpSameDigits(mask == 0 && k == 0 ? mask : mask | (1 << k), sn, i + 1, same && t == k, dp);
+        }
+        if (!same) {
+            dp[i][mask] = res;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230226    1014. 最佳观光组合
 
     /**
@@ -2473,11 +2511,11 @@ public class TargetDynamicProgramming {
     //region    20230312    1617. 统计子树中城市之间最大距离
     int mask;
     int diameter;
+
     /**
-     *
-     * @param n 给你 n 个城市，编号为从 1 到 n 。
+     * @param n     给你 n 个城市，编号为从 1 到 n 。
      * @param edges 同时给你一个大小为 n-1 的数组 edges ，其中 edges[i] = [ui, vi] 表示城市 ui 和 vi 之间有一条双向边
-     * @return  对于 d 从 1 到 n-1 ，请你找到城市间 最大距离 恰好为 d 的所有子树数目
+     * @return 对于 d 从 1 到 n-1 ，请你找到城市间 最大距离 恰好为 d 的所有子树数目
      */
     public int[] countSubgraphsForEachDiameter(int n, int[][] edges) {
         List<Integer>[] adj = new List[n];
