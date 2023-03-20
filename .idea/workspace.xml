@@ -342,14 +342,7 @@
       <workItem from="1679055456492" duration="7260000" />
       <workItem from="1679112317140" duration="170000" />
       <workItem from="1679114769549" duration="10736000" />
-      <workItem from="1679324245578" duration="5944000" />
-    </task>
-    <task id="LOCAL-00005" summary="2019/10/3  哈希表练习">
-      <created>1570093989602</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1570093989602</updated>
+      <workItem from="1679324245578" duration="8686000" />
     </task>
     <task id="LOCAL-00006" summary="2019/10/6 String练习  新增递归类型">
       <created>1570368552655</created>
@@ -687,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679245856512</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字">
+      <created>1679330254298</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1679330254298</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -774,7 +774,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="118. 杨辉三角&#10;119. 杨辉三角 II&#10;120. 三角形最小路径和&#10;152. 乘积最大子数组&#10;413. 等差数列划分&#10;931. 下降路径最小和&#10;1014. 最佳观光组合" />
     <MESSAGE value="91. 解码方法&#10;96. 不同的二叉搜索树&#10;139. 单词拆分&#10;263. 丑数&#10;264. 丑数 II&#10;304. 二维区域和检索 - 矩阵不可变&#10;1314. 矩阵区域和&#10;1567. 乘积为正数的最长子数组长度&#10;增加前缀和类别 TargetPrefixSum.java&#10;1292. 元素和小于等于阈值的正方形的最大边长" />
     <MESSAGE value="64. 最小路径和&#10;221. 最大正方形&#10;1277. 统计全为 1 的正方形子矩阵" />
     <MESSAGE value="300. 最长递增子序列&#10;376. 摆动序列" />
@@ -799,7 +798,8 @@
     <MESSAGE value="文件重命名" />
     <MESSAGE value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
     <MESSAGE value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
+    <MESSAGE value="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

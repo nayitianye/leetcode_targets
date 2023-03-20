@@ -26,6 +26,65 @@ public class TargetProgrammingSkillsBasic {
             children = _children;
         }
     }
+
+    /**
+     * 单链表
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    /**
+     * TreeNode 二叉树
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    //endregion
+
+    //region    20230321    104. 二叉树的最大深度
+
+    /**
+     * https://leetcode.cn/problems/maximum-depth-of-binary-tree/
+     *
+     * @param root 二叉树 root
+     * @return 返回其最大深度
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+        }
+    }
     //endregion
 
     //region    20230315    191. 位1的个数
@@ -104,9 +163,10 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/find-the-difference/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
-     * @return  找出在 t 中被添加的字母
+     * @return 找出在 t 中被添加的字母
      */
     public char findTheDifference(String s, String t) {
         HashMap<Character, Integer> hashMap = new HashMap<>();
@@ -129,6 +189,34 @@ public class TargetProgrammingSkillsBasic {
             }
         }
         return t.charAt(0);
+    }
+    //endregion
+
+    //region    20230321    404. 左叶子之和
+
+    /**
+     * https://leetcode.cn/problems/sum-of-left-leaves/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 二叉树的根节点 root
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        return root != null ? dfs(root) : 0;
+    }
+
+    public int dfs(TreeNode root) {
+        int ans = 0;
+        if (root.left != null) {
+            ans += isLeafNode(root.left) ? root.left.val : dfs(root.left);
+        }
+        if (root.right != null) {
+            ans += dfs(root.right);
+        }
+        return ans;
+    }
+
+    public boolean isLeafNode(TreeNode node) {
+        return node.left == null && node.right == null;
     }
     //endregion
 
@@ -211,6 +299,30 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230321    876. 链表的中间结点
+
+    /**
+     * https://leetcode.cn/problems/middle-of-the-linked-list/
+     *
+     * @param head 链表 head
+     * @return 返回链表 head 的中间结点
+     */
+    public ListNode middleNode(ListNode head) {
+        int nums = 0;
+        ListNode listNode = head;
+        while (listNode != null) {
+            listNode = listNode.next;
+            nums++;
+        }
+        int mid = nums / 2;
+        while (mid != 0) {
+            head = head.next;
+            mid--;
+        }
+        return head;
+    }
+    //endregion
+
     //region    20230318    976. 三角形的最大周长
 
     /**
@@ -275,6 +387,27 @@ public class TargetProgrammingSkillsBasic {
             n = n / 10;
         }
         return multi - sum;
+    }
+    //endregion
+
+    //region    20230321    1290. 二进制链表转整数
+
+    /**
+     * https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/
+     *
+     * @param head 单链表的引用结点 head
+     * @return 该链表所表示数字的 十进制值
+     */
+    public int getDecimalValue(ListNode head) {
+        if (head == null) {
+            return 0;
+        }
+        int res = 0;
+        while (head != null) {
+            res = res * 2 + head.val;
+            head = head.next;
+        }
+        return res;
     }
     //endregion
 
@@ -382,19 +515,19 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/goal-parser-interpretation/
-     * @param command   字符串 command
-     * @return  返回 Goal 解析器对 command 的解释结果
+     *
+     * @param command 字符串 command
+     * @return 返回 Goal 解析器对 command 的解释结果
      */
     public String interpret(String command) {
-        StringBuilder res=new StringBuilder();
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < command.length(); i++) {
-            if(command.charAt(i)=='G'){
+            if (command.charAt(i) == 'G') {
                 res.append('G');
-            }
-            else if(command.charAt(i)=='('){
-                if(command.charAt(i+1)==')'){
+            } else if (command.charAt(i) == '(') {
+                if (command.charAt(i + 1) == ')') {
                     res.append("o");
-                }else{
+                } else {
                     res.append("al");
                 }
             }

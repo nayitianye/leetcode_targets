@@ -40,6 +40,33 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230321     167. 两数之和 II - 输入有序数组
+
+    /**
+     * https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/
+     * @param numbers   整数数组 numbers
+     * @param target    目标数 target
+     * @return  长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        //二分法
+        for (int i = 0; i < numbers.length; i++) {
+            int left = i + 1, right = numbers.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (numbers[mid] == target - numbers[i]) {
+                    return new int[]{i + 1, mid + 1};
+                } else if (numbers[mid] > target - numbers[i]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+    //endregion
+
     //region    20230320    189. 轮转数组
 
     /**
@@ -89,6 +116,31 @@ public class TargetAlgorithmsBeginner {
 
     public boolean isBadVersion(int n) {
         return n == 10;
+    }
+    //endregion
+
+    //region    20230321    283. 移动零
+
+    /**
+     * https://leetcode.cn/problems/move-zeroes/
+     *
+     * @param nums 一个数组 nums,编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+     */
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
     }
     //endregion
 

@@ -1111,6 +1111,46 @@ public class TargetLcof {
     int count, res1;
     //endregion
 
+    //region    20230321    剑指 Offer 55 - I. 二叉树的深度
+
+    /**
+     * https://leetcode.cn/problems/er-cha-shu-de-shen-du-lcof/
+     *
+     * @param root 二叉树的根节点 root
+     * @return 该树的最长深度
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+    //endregion
+
+    //region    20230321    剑指 Offer 55 - II. 平衡二叉树
+
+    /**
+     * https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/description/
+     * @param root  二叉树的根节点 root
+     * @return  判断它是否为平衡二叉树
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        } else {
+            return Math.abs(height(root.left) - height(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+        }
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return Math.max(height(root.left), height(root.right)) + 1;
+        }
+    }
+    //endregion
+
     //region    20230316    剑指 Offer 57. 和为s的两个数字
 
     /**

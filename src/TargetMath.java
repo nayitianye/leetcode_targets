@@ -175,10 +175,11 @@ public class TargetMath {
     //endregion
 
     //region 263. 丑数 20230226
+
     /**
-     *丑数 就是只包含质因数 2、3 和 5 的正整数。
+     * 丑数 就是只包含质因数 2、3 和 5 的正整数。
      * 给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
-     *
+     * <p>
      * 示例 1：
      * 输入：n = 6
      * 输出：true
@@ -191,9 +192,10 @@ public class TargetMath {
      * 输入：n = 14
      * 输出：false
      * 解释：14 不是丑数，因为它包含了另外一个质因数 7 。
-     *
+     * <p>
      * 提示：
      * -2^31 <= n <= 2^31 - 1
+     *
      * @param n
      * @return
      */
@@ -667,6 +669,18 @@ public class TargetMath {
         int last = S.length() - left;
         sum = sum + last * (last + 1) / 2;
         return sum;
+    }
+    //endregion
+
+    //region    20230321    2469. 温度转换
+
+    /**
+     * https://leetcode.cn/problems/convert-the-temperature/
+     * @param celsius  摄氏度（Celsius）为单位
+     * @return  将摄氏度转换为 开氏度（Kelvin）和 华氏度（Fahrenheit），并以数组 ans = [kelvin, fahrenheit] 的形式返回结果
+     */
+    public double[] convertTemperature(double celsius) {
+        return new double[]{celsius + 273.15, celsius * 1.8 + 32.00};
     }
     //endregion
 
