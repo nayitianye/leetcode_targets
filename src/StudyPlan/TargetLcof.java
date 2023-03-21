@@ -1131,8 +1131,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/description/
-     * @param root  二叉树的根节点 root
-     * @return  判断它是否为平衡二叉树
+     *
+     * @param root 二叉树的根节点 root
+     * @return 判断它是否为平衡二叉树
      */
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -1220,6 +1221,20 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230322    剑指 Offer 64. 求1+2+…+n
+
+    /**
+     * https://leetcode.cn/problems/qiu-12n-lcof/
+     *
+     * @param n 求1+2+…+n
+     * @return
+     */
+    public int sumNums(int n) {
+        boolean flag = n > 0 && (n += sumNums(n - 1)) > 0;
+        return n;
+    }
+    //endregion
+
     //region    20230319    面试题61. 扑克牌中的顺子
 
     /**
@@ -1258,6 +1273,58 @@ public class TargetLcof {
             }
         }
         return maxPrice;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof
+     *
+     * @param root 二叉树根结点 root
+     * @param p    结点 p
+     * @param q    结点 q
+     * @return 该树中两个指定节点的最近公共祖先
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor = root;
+        while (true) {
+            if (p.val < ancestor.val && q.val < ancestor.val) {
+                ancestor = ancestor.left;
+            } else if (p.val > ancestor.val && q.val > ancestor.val) {
+                ancestor = ancestor.right;
+            } else {
+                break;
+            }
+        }
+        return ancestor;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 68 - II. 二叉树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
+     *
+     * @param root 二叉树根结点 root
+     * @param p    结点 p
+     * @param q    结点 q
+     * @return 该树中两个指定节点的最近公共祖先且 x 的深度尽可能大
+     */
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null && right == null) {
+            return null; // 1.
+        }
+        if (left == null) {
+            return right; // 3.
+        }
+        if (right == null) {
+            return left; // 4.
+        }
+        return root; // 2. if(left != null and right != null)
     }
     //endregion
 

@@ -1,5 +1,6 @@
 package StudyPlan;
 
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 /**
@@ -44,9 +45,10 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/
-     * @param numbers   整数数组 numbers
-     * @param target    目标数 target
-     * @return  长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2
+     *
+     * @param numbers 整数数组 numbers
+     * @param target  目标数 target
+     * @return 长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2
      */
     public int[] twoSum(int[] numbers, int target) {
         //二分法
@@ -90,6 +92,62 @@ public class TargetAlgorithmsBeginner {
             start++;
             end--;
         }
+    }
+    //endregion
+
+    //region    20230322    217. 存在重复元素
+
+    /**
+     * https://leetcode.cn/problems/contains-duplicate/
+     *
+     * @param nums 整数数组 nums
+     * @return 如果任一数值在数组中出现至少两次 ，返回 true ；如果数组中每个元素互不相同 ，返回 false 。
+     */
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int num : nums) {
+            if (hashMap.containsKey(num)) {
+                return true;
+            } else {
+                hashMap.put(num, 1);
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region    20230322    242. 有效的字母异位词
+
+    /**
+     * https://leetcode.cn/problems/valid-anagram/
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return  判断 t 是否是 s 的字母异位词
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
+            } else {
+                hashMap.put(s.charAt(i), 1);
+            }
+        }
+        for (int i = 0; i < t.length(); i++) {
+            if(hashMap.containsKey(t.charAt(i))){
+                if(hashMap.get(t.charAt(i))==1){
+                    hashMap.remove(t.charAt(i));
+                }else{
+                    hashMap.put(t.charAt(i),hashMap.get(t.charAt(i))-1);
+                }
+            }else{
+                return false;
+            }
+        }
+        return hashMap.isEmpty();
     }
     //endregion
 
@@ -141,6 +199,54 @@ public class TargetAlgorithmsBeginner {
         int temp = nums[left];
         nums[left] = nums[right];
         nums[right] = temp;
+    }
+    //endregion
+
+    //region    20230322    344. 反转字符串
+
+    /**
+     * https://leetcode.cn/problems/reverse-string/
+     *
+     * @param s 字符数组 s
+     */
+    public void reverseString(char[] s) {
+        int left = 0, right = s.length - 1;
+        while (left < right) {
+            char ch = s[left];
+            s[left] = s[right];
+            s[right] = ch;
+            left++;
+            right--;
+        }
+    }
+    //endregion
+
+    //region    20230322    557. 反转字符串中的单词 III
+
+    /**
+     * https://leetcode.cn/problems/reverse-words-in-a-string-iii/
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        String[] strs = s.split(" ");
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < strs.length; i++) {
+            res.append(reverseWord(strs[i]));
+            if (i != strs.length - 1) {
+                res.append(" ");
+            }
+        }
+        return res.toString();
+    }
+
+    public String reverseWord(String s) {
+        StringBuilder res = new StringBuilder();
+        for (int i = s.length() - 1; i >= 0; i--) {
+            res.append(s.charAt(i));
+        }
+        return res.toString();
     }
     //endregion
 

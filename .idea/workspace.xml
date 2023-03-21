@@ -65,7 +65,7 @@
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBeginner.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Basic.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBeginner.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
@@ -342,14 +342,7 @@
       <workItem from="1679112317140" duration="170000" />
       <workItem from="1679114769549" duration="10736000" />
       <workItem from="1679324245578" duration="9685000" />
-      <workItem from="1679409307466" duration="4420000" />
-    </task>
-    <task id="LOCAL-00007" summary="2019/10/7 Tree练习  深入优先遍历类型">
-      <created>1570451835300</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1570451835300</updated>
+      <workItem from="1679409307466" duration="9029000" />
     </task>
     <task id="LOCAL-00008" summary="2019/10/7 Trie 字典树的练习与学习">
       <created>1570542373387</created>
@@ -687,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679333038266</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号">
+      <created>1679415356009</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1679415356009</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -774,7 +774,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="64. 最小路径和&#10;221. 最大正方形&#10;1277. 统计全为 1 的正方形子矩阵" />
     <MESSAGE value="300. 最长递增子序列&#10;376. 摆动序列" />
     <MESSAGE value="1. 两数之和&#10;53. 最大子数组和&#10;88. 合并两个有序数组&#10;217. 存在重复元素&#10;724. 寻找数组的中心下标&#10;1480. 一维数组的动态和&#10;剑指 Offer 06. 从尾到头打印链表&#10;剑指 Offer 09. 用两个栈实现队列&#10;剑指 Offer 24. 反转链表\&#10;剑指 Offer 30. 包含min函数的栈&#10;剑指 Offer 35. 复杂链表的复制" />
     <MESSAGE value="代码同步" />
@@ -799,7 +798,8 @@
     <MESSAGE value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
     <MESSAGE value="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字" />
     <MESSAGE value="学习计划_算法入门：&#10;167. 两数之和 II - 输入有序数组&#10;283. 移动零&#10;学习计划_编程能力入门：&#10;104. 二叉树的最大深度&#10;404. 左叶子之和&#10;876. 链表的中间结点&#10;1290. 二进制链表转整数&#10;学习计划_剑指offer:&#10;剑指 Offer 55 - I. 二叉树的深度&#10;剑指 Offer 55 - II. 平衡二叉树&#10;每日一题：&#10;2469. 温度转换" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;167. 两数之和 II - 输入有序数组&#10;283. 移动零&#10;学习计划_编程能力入门：&#10;104. 二叉树的最大深度&#10;404. 左叶子之和&#10;876. 链表的中间结点&#10;1290. 二进制链表转整数&#10;学习计划_剑指offer:&#10;剑指 Offer 55 - I. 二叉树的深度&#10;剑指 Offer 55 - II. 平衡二叉树&#10;每日一题：&#10;2469. 温度转换" />
+    <MESSAGE value="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
