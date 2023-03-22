@@ -203,6 +203,27 @@ public class TargetProgrammingSkillsBeginner {
     }
     //endregion
 
+    //region    20230322    303. 区域和检索 - 数组不可变
+
+    /**
+     * https://leetcode.cn/problems/range-sum-query-immutable/
+     */
+    class NumArray {
+
+        int[] presum;
+        public NumArray(int[] nums) {
+            presum=new int[nums.length+1];
+            for (int i = 0; i < nums.length; i++) {
+                presum[i+1]=presum[i]+nums[i];
+            }
+        }
+
+        public int sumRange(int left, int right) {
+            return presum[right+1]-presum[left];
+        }
+    }
+    //endregion
+
     //region    20230319    389. 找不同
 
     /**
@@ -563,6 +584,43 @@ public class TargetProgrammingSkillsBeginner {
             }
         }
         return sum;
+    }
+    //endregion
+
+    //region    20230323    1603. 设计停车系统
+
+    /**
+     * https://leetcode.cn/problems/design-parking-system/
+     */
+    class ParkingSystem {
+
+        int big, medium, small;
+
+        public ParkingSystem(int big, int medium, int small) {
+            this.big = big;
+            this.medium = medium;
+            this.small = small;
+        }
+
+        public boolean addCar(int carType) {
+            if (carType == 1) {
+                if (big > 0) {
+                    big--;
+                    return true;
+                }
+            } else if (carType == 2) {
+                if (medium > 0) {
+                    medium--;
+                    return true;
+                }
+            } else if (carType == 3) {
+                if (small > 0) {
+                    small--;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
     //endregion
 

@@ -340,14 +340,7 @@
       <workItem from="1679114769549" duration="10736000" />
       <workItem from="1679324245578" duration="9685000" />
       <workItem from="1679409307466" duration="9029000" />
-      <workItem from="1679494439189" duration="3769000" />
-    </task>
-    <task id="LOCAL-00008" summary="2019/10/7 Trie 字典树的练习与学习">
-      <created>1570542373387</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1570542373387</updated>
+      <workItem from="1679494439189" duration="7792000" />
     </task>
     <task id="LOCAL-00009" summary="2019/10/7 Trie 回溯算法的练习，增加了位运算类型题目">
       <created>1570775564982</created>
@@ -685,7 +678,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679415356009</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="学习计划_二分查找基础:&#10;300. 最长递增子序列&#10;1760. 袋子里最少数目的球">
+      <created>1679500133543</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1679500133543</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -772,7 +772,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="300. 最长递增子序列&#10;376. 摆动序列" />
     <MESSAGE value="1. 两数之和&#10;53. 最大子数组和&#10;88. 合并两个有序数组&#10;217. 存在重复元素&#10;724. 寻找数组的中心下标&#10;1480. 一维数组的动态和&#10;剑指 Offer 06. 从尾到头打印链表&#10;剑指 Offer 09. 用两个栈实现队列&#10;剑指 Offer 24. 反转链表\&#10;剑指 Offer 30. 包含min函数的栈&#10;剑指 Offer 35. 复杂链表的复制" />
     <MESSAGE value="代码同步" />
     <MESSAGE value="学习计划_数据结构初级&#10;121. 买卖股票的最佳时机&#10;350. 两个数组的交集 II&#10;学习计划_LeetCode 75&#10;205. 同构字符串&#10;392. 判断子序列&#10;学习计划_剑指 Offer&#10;剑指 Offer 05. 替换空格&#10;剑指 Offer 58 - II. 左旋转字符串&#10;每日一题:&#10;1653. 使字符串平衡的最少删除次数&#10;125. 验证回文串" />
@@ -797,7 +796,8 @@
     <MESSAGE value="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字" />
     <MESSAGE value="学习计划_算法入门：&#10;167. 两数之和 II - 输入有序数组&#10;283. 移动零&#10;学习计划_编程能力入门：&#10;104. 二叉树的最大深度&#10;404. 左叶子之和&#10;876. 链表的中间结点&#10;1290. 二进制链表转整数&#10;学习计划_剑指offer:&#10;剑指 Offer 55 - I. 二叉树的深度&#10;剑指 Offer 55 - II. 平衡二叉树&#10;每日一题：&#10;2469. 温度转换" />
     <MESSAGE value="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号" />
+    <MESSAGE value="学习计划_二分查找基础:&#10;300. 最长递增子序列&#10;1760. 袋子里最少数目的球" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找基础:&#10;300. 最长递增子序列&#10;1760. 袋子里最少数目的球" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,7 @@
 package StudyPlan;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -9,6 +10,92 @@ import java.util.PriorityQueue;
  * leetcode 学习计划 算法入门
  */
 public class TargetAlgorithmsBeginner {
+
+    //region    自定义数据结构
+    public class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+
+    /**
+     * 单链表
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    /**
+     * TreeNode 二叉树
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    //endregion
+
+    //region    20230322    19. 删除链表的倒数第 N 个结点
+
+    /**
+     * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
+     * @param head  头结点 head
+     * @param n 删除倒数第 n 个结点
+     * @return  返回删除倒数第 n 个结点的头结点
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummy;
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        ListNode ans = dummy.next;
+        return ans;
+    }
+    //endregion
 
     //region    20230319    35. 搜索插入位置
 
@@ -41,7 +128,7 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
-    //region    20230321     167. 两数之和 II - 输入有序数组
+    //region    20230321    167. 两数之和 II - 输入有序数组
 
     /**
      * https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/
@@ -120,9 +207,10 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/valid-anagram/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
-     * @return  判断 t 是否是 s 的字母异位词
+     * @return 判断 t 是否是 s 的字母异位词
      */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) {
@@ -137,13 +225,13 @@ public class TargetAlgorithmsBeginner {
             }
         }
         for (int i = 0; i < t.length(); i++) {
-            if(hashMap.containsKey(t.charAt(i))){
-                if(hashMap.get(t.charAt(i))==1){
+            if (hashMap.containsKey(t.charAt(i))) {
+                if (hashMap.get(t.charAt(i)) == 1) {
                     hashMap.remove(t.charAt(i));
-                }else{
-                    hashMap.put(t.charAt(i),hashMap.get(t.charAt(i))-1);
+                } else {
+                    hashMap.put(t.charAt(i), hashMap.get(t.charAt(i)) - 1);
                 }
-            }else{
+            } else {
                 return false;
             }
         }
@@ -272,6 +360,30 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return -1;
+    }
+    //endregion
+
+    //region    20230323    876. 链表的中间结点
+
+    /**
+     * https://leetcode.cn/problems/middle-of-the-linked-list/
+     *
+     * @param head 链表 head
+     * @return 返回链表 head 的中间结点
+     */
+    public ListNode middleNode(ListNode head) {
+        int nums = 0;
+        ListNode listNode = head;
+        while (listNode != null) {
+            listNode = listNode.next;
+            nums++;
+        }
+        int mid = nums / 2;
+        while (mid != 0) {
+            head = head.next;
+            mid--;
+        }
+        return head;
     }
     //endregion
 
