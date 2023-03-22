@@ -1,9 +1,7 @@
 package StudyPlan;
 
-import java.nio.file.ClosedWatchServiceException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,12 +43,49 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230322    300. 最长递增子序列
+
+    /**
+     * https://leetcode.cn/problems/longest-increasing-subsequence/
+     *
+     * @param nums 整数数组 nums
+     * @return 找到其中最长严格递增子序列的长度
+     */
+    public int lengthOfLIS(int[] nums) {
+        int len = 1, n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        int[] d = new int[n + 1];
+        d[len] = nums[0];
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > d[len]) {
+                d[++len] = nums[i];
+            } else {
+                int left = 1, right = len, pos = 0;
+                while (left <= right) {
+                    int mid = left + (right - left) / 2;
+                    if (d[mid] < nums[i]) {
+                        pos = mid;
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
+                    }
+                }
+                d[pos + 1] = nums[i];
+            }
+        }
+        return len;
+    }
+    //endregion
+
     //region    20230321    611. 有效三角形的个数
 
     /**
      * https://leetcode.cn/problems/valid-triangle-number/
-     * @param nums  含非负整数的数组 nums
-     * @return  其中可以组成三角形三条边的三元组个数
+     *
+     * @param nums 含非负整数的数组 nums
+     * @return 其中可以组成三角形三条边的三元组个数
      */
     public int triangleNumber(int[] nums) {
         int n = nums.length;
@@ -76,12 +111,14 @@ public class TaegetBinarySearchBasic {
     //endregion
 
     //region    20230321    658. 找到 K 个最接近的元素
+
     /**
      * https://leetcode.cn/problems/find-k-closest-elements/
-     * @param arr   一个 排序好 的数组 arr
-     * @param k 整数 k
-     * @param x 整数 x
-     * @return  数组中找到最靠近 x（两数之差最小）的 k 个数
+     *
+     * @param arr 一个 排序好 的数组 arr
+     * @param k   整数 k
+     * @param x   整数 x
+     * @return 数组中找到最靠近 x（两数之差最小）的 k 个数
      */
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         int right = binarySearch1(arr, x);
@@ -115,6 +152,35 @@ public class TaegetBinarySearchBasic {
             }
         }
         return low;
+    }
+    //endregion
+
+    //region    20230322    1760. 袋子里最少数目的球
+
+    /**
+     * https://leetcode.cn/problems/minimum-limit-of-balls-in-a-bag/
+     *
+     * @param nums          一个整数数组 nums ，其中 nums[i] 表示第 i 个袋子里球的数目。
+     * @param maxOperations 一个整数 maxOperations
+     * @return 最小开销
+     */
+    public int minimumSize(int[] nums, int maxOperations) {
+        int left = 1, right = Arrays.stream(nums).max().getAsInt();
+        int ans = 0;
+        while (left <= right) {
+            int y = (left + right) / 2;
+            long ops = 0;
+            for (int x : nums) {
+                ops += (x - 1) / y;
+            }
+            if (ops <= maxOperations) {
+                ans = y;
+                right = y - 1;
+            } else {
+                left = y + 1;
+            }
+        }
+        return ans;
     }
     //endregion
 
