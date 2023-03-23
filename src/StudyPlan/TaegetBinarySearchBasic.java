@@ -155,6 +155,76 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230324    875. 爱吃香蕉的珂珂
+
+    /**
+     * https://leetcode.cn/problems/koko-eating-bananas/
+     *
+     * @param piles 有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉
+     * @param h     h 小时
+     * @return h 小时内吃掉所有香蕉的最小速度 k
+     */
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = 0;
+        for (int i = 0; i < piles.length; i++) {
+            high = Math.max(high, piles[i]);
+        }
+        int k = high;
+        while (low < high) {
+            int speed = low + (high - low) / 2;
+            long time = getTime(piles, speed);
+            if (time <= h) {
+                k = speed;
+                high = speed;
+            } else {
+                low = speed + 1;
+            }
+        }
+        return k;
+    }
+
+    public long getTime(int[] piles, int speed) {
+        long time = 0;
+        for (int i = 0; i < piles.length; i++) {
+            int curTime = (piles[i] + speed - 1) / speed;
+            time += curTime;
+        }
+        return time;
+    }
+    //endregion
+
+    //region    202303024   1283. 使结果不超过阈值的最小除数
+
+    /**
+     * https://leetcode.cn/problems/find-the-smallest-divisor-given-a-threshold/description/
+     *
+     * @param nums      整数数组 nums
+     * @param threshold 正整数 threshold
+     * @return 小于等于阈值 threshold 的除数中 最小 的那个
+     */
+    public int smallestDivisor(int[] nums, int threshold) {
+        int left = 1, right = 1000000;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (!possible(nums,mid,threshold)){
+                left=mid+1;
+            }else{
+                right=mid;
+            }
+        }
+        return left;
+    }
+
+    public boolean possible(int[] nums, int divisor, int threshold) {
+        int count = 0;
+        for (int num : nums) {
+            count += (num - 1) / divisor + 1;
+        }
+        return count <= threshold;
+    }
+    //endregion
+
     //region    20230322    1760. 袋子里最少数目的球
 
     /**

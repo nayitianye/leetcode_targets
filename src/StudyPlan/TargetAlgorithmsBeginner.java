@@ -76,9 +76,10 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
-     * @param head  头结点 head
-     * @param n 删除倒数第 n 个结点
-     * @return  返回删除倒数第 n 个结点的头结点
+     *
+     * @param head 头结点 head
+     * @param n    删除倒数第 n 个结点
+     * @return 返回删除倒数第 n 个结点的头结点
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0, head);
@@ -335,6 +336,39 @@ public class TargetAlgorithmsBeginner {
             res.append(s.charAt(i));
         }
         return res.toString();
+    }
+    //endregion
+
+    //region    20230324    567. 字符串的排列
+
+    /**
+     * https://leetcode.cn/problems/permutation-in-string/
+     * @param s1    字符串 s1
+     * @param s2    字符串 s2
+     * @return  判断 s2 是否包含 s1 的排列
+     */
+    public boolean checkInclusion(String s1, String s2) {
+        int n = s1.length(), m = s2.length();
+        if (n > m) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (int i = 0; i < n; i++) {
+            --cnt[s1.charAt(i) - 'a'];
+        }
+        int left = 0;
+        for (int right = 0; right < m; right++) {
+            int x = s2.charAt(right) - 'a';
+            ++cnt[x];
+            while (cnt[x] > 0) {
+                --cnt[s2.charAt(left) - 'a'];
+                ++left;
+            }
+            if (right - left + 1 == n) {
+                return true;
+            }
+        }
+        return false;
     }
     //endregion
 

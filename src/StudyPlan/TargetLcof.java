@@ -144,8 +144,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zhong-jian-er-cha-shu-lcof
-     * @param preorder  二叉树前序遍历数组 perorder
-     * @param inorder   二叉树中序遍历数组 inorder
+     *
+     * @param preorder 二叉树前序遍历数组 perorder
+     * @param inorder  二叉树中序遍历数组 inorder
      * @return
      */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -157,6 +158,7 @@ public class TargetLcof {
         }
         return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
     }
+
     private Map<Integer, Integer> indexMap;
 
     public TreeNode myBuildTree(int[] preorder, int[] inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right) {
@@ -369,13 +371,32 @@ public class TargetLcof {
     }
     //endregion、
 
+    //region    20230324    剑指 Offer 15. 二进制中1的个数
+
+    /**
+     * https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof
+     *
+     * @param n 一个无符号整数（以二进制串的形式） n
+     * @return 返回其二进制表达式中数字位数为 '1' 的个数
+     */
+    public int hammingWeight(int n) {
+        int ret = 0;
+        while (n != 0) {
+            n &= n - 1;
+            ret++;
+        }
+        return ret;
+    }
+    //endregion
+
     //region    20230322    剑指 Offer 16. 数值的整数次方
 
     /**
      * https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
-     * @param x  数字 x
-     * @param n  n 次方
-     * @return  计算 x 的 n 次幂函数
+     *
+     * @param x 数字 x
+     * @param n n 次方
+     * @return 计算 x 的 n 次幂函数
      */
     public double myPow(double x, int n) {
         long N = n;
@@ -1297,6 +1318,25 @@ public class TargetLcof {
     public int sumNums(int n) {
         boolean flag = n > 0 && (n += sumNums(n - 1)) > 0;
         return n;
+    }
+    //endregion
+
+    //region    20230324    剑指 Offer 65. 不用加减乘除做加法
+
+    /**
+     * https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
+     *
+     * @param a 整数 a
+     * @param b 整数 b
+     * @return 求两个整数之和
+     */
+    public int add(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b) << 1;
+            a = a ^ b;
+            b = carry;
+        }
+        return a;
     }
     //endregion
 
