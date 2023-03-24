@@ -784,6 +784,34 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230324    剑指 Offer 33. 二叉搜索树的后序遍历序列
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/
+     *
+     * @param postorder 一个整数数组 postorder
+     * @return 判断该数组是不是某二叉搜索树的后序遍历结果
+     */
+    public boolean verifyPostorder(int[] postorder) {
+        return recur(postorder, 0, postorder.length - 1);
+    }
+
+    public boolean recur(int[] postorder, int i, int j) {
+        if (i >= j) {
+            return true;
+        }
+        int p = i;
+        while (postorder[p] < postorder[j]) {
+            p++;
+        }
+        int m = p;
+        while (postorder[p] > postorder[j]) {
+            p++;
+        }
+        return p == j && recur(postorder, i, m - 1) && recur(postorder, m, j - 1);
+    }
+    //endregion
+
     //region    20230318    剑指 Offer 34. 二叉树中和为某一值的路径
 
     /**

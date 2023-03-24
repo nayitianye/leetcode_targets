@@ -43,6 +43,36 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230324    287. 寻找重复数
+
+    /**
+     * https://leetcode.cn/problems/find-the-duplicate-number/description/
+     *
+     * @param nums 包含 n + 1 个整数的数组 nums
+     * @return 返回 这个重复的数
+     */
+    public int findDuplicate(int[] nums) {
+        int n = nums.length;
+        int left = 0, right = n - 1, ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int cnt = 0;
+            for (int i = 0; i < n; i++) {
+                if (nums[i] <= mid) {
+                    cnt++;
+                }
+            }
+            if (cnt <= mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+                ans = mid;
+            }
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230322    300. 最长递增子序列
 
     /**
@@ -194,7 +224,7 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
-    //region    202303024   1283. 使结果不超过阈值的最小除数
+    //region    20230324    1283. 使结果不超过阈值的最小除数
 
     /**
      * https://leetcode.cn/problems/find-the-smallest-divisor-given-a-threshold/description/
@@ -207,10 +237,10 @@ public class TaegetBinarySearchBasic {
         int left = 1, right = 1000000;
         while (left < right) {
             int mid = left + (right - left) / 2;
-            if (!possible(nums,mid,threshold)){
-                left=mid+1;
-            }else{
-                right=mid;
+            if (!possible(nums, mid, threshold)) {
+                left = mid + 1;
+            } else {
+                right = mid;
             }
         }
         return left;
@@ -222,6 +252,41 @@ public class TaegetBinarySearchBasic {
             count += (num - 1) / divisor + 1;
         }
         return count <= threshold;
+    }
+    //endregion
+
+    //region    20230324    1552. 两球之间的磁力
+
+    /**
+     * https://leetcode.cn/problems/magnetic-force-between-two-balls/
+     * @param position 整数数组 position, 有 n 个空的篮子，第 i 个篮子的位置在 position[i]
+     * @param m 一个整数 m  m 个球
+     * @return  最大化的最小磁力
+     */
+    public int maxDistance(int[] position, int m) {
+        Arrays.sort(position);
+        int left = 1, right = position[position.length - 1] - position[0], ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (check(mid, position, m)) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    public boolean check(int x, int[] position, int m) {
+        int pre = position[0], cnt = 1;
+        for (int i = 1; i < position.length; i++) {
+            if (position[i] - pre >= x) {
+                pre = position[i];
+                cnt += 1;
+            }
+        }
+        return cnt >= m;
     }
     //endregion
 
