@@ -1266,6 +1266,59 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230325    剑指 Offer 56 - I. 数组中数字出现的次数
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
+     *
+     * @param nums 整型数组 nums
+     * @return 找出这两个只出现一次的数字
+     */
+    public int[] singleNumbers(int[] nums) {
+        int res = 0;
+        for (int n : nums) {
+            res ^= n;
+        }
+        int div = 1;
+        while ((div & res) == 0) {
+            div <<= 1;
+        }
+        int a = 0, b = 0;
+        for (int n : nums) {
+            if ((div & n) != 0) {
+                a ^= n;
+            } else {
+                b ^= n;
+            }
+        }
+        return new int[]{a, b};
+    }
+    //endregion
+
+    //region    20230325    剑指 Offer 56 - II. 数组中数字出现的次数 II
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
+     * @param nums  数组 nums
+     * @return  请找出那个只出现一次的数字
+     */
+    public int singleNumber(int[] nums) {
+        int[] counts = new int[32];
+        for(int num : nums) {
+            for(int j = 0; j < 32; j++) {
+                counts[j] += num & 1;
+                num >>>= 1;
+            }
+        }
+        int res = 0, m = 3;
+        for(int i = 0; i < 32; i++) {
+            res <<= 1;
+            res |= counts[31 - i] % m;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230316    剑指 Offer 57. 和为s的两个数字
 
     /**

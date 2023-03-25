@@ -404,6 +404,43 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230325    695. 岛屿的最大面积
+
+    /**
+     * https://leetcode.cn/problems/max-area-of-island/
+     *
+     * @param grid 大小为 m x n 的二进制矩阵 grid
+     * @return 计算并返回 grid 中最大的岛屿面积
+     */
+    public int maxAreaOfIsland(int[][] grid) {
+        int maxArea = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                int tempArea = 0;
+                if (grid[i][j] == 1) {
+                    tempArea = AreaOfIsLand(grid, i, j);
+                }
+                maxArea = Math.max(tempArea, maxArea);
+            }
+        }
+        return maxArea;
+    }
+
+    public int AreaOfIsLand(int[][] grid, int row, int col) {
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) {
+            return 0;
+        }
+        if (grid[row][col] != 1) {
+            return 0;
+        }
+        grid[row][col] = 2;
+        return 1 + AreaOfIsLand(grid, row - 1, col)
+                + AreaOfIsLand(grid, row + 1, col)
+                + AreaOfIsLand(grid, row, col + 1)
+                + AreaOfIsLand(grid, row, col - 1);
+    }
+    //endregion
+
     //region    20230319    704. 二分查找
 
     /**
@@ -426,6 +463,33 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return -1;
+    }
+    //endregion
+
+    //region    20230325    733. 图像渲染
+
+    /**
+     * https://leetcode.cn/problems/flood-fill/
+     * @param image  m x n 的二维整数数组表示的图画 image
+     * @param sr    整数 sr
+     * @param sc    整数 sc
+     * @param color  颜色 color
+     * @return  像素 image[sr][sc] 开始对图像进行 上色填充
+     */
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        floodFill(image, sr, sc, color, image[sr][sc]);
+        return image;
+    }
+
+    public void floodFill(int[][] image, int sr, int sc, int newColor, int oldColor) {
+        if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || image[sr][sc] != oldColor || newColor == oldColor) {
+            return;
+        }
+        image[sr][sc] = newColor;
+        floodFill(image, sr + 1, sc, newColor, oldColor);
+        floodFill(image, sr - 1, sc, newColor, oldColor);
+        floodFill(image, sr, sc + 1, newColor, oldColor);
+        floodFill(image, sr, sc - 1, newColor, oldColor);
     }
     //endregion
 

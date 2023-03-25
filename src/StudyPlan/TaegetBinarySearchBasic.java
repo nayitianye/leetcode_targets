@@ -259,9 +259,10 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/magnetic-force-between-two-balls/
+     *
      * @param position 整数数组 position, 有 n 个空的篮子，第 i 个篮子的位置在 position[i]
-     * @param m 一个整数 m  m 个球
-     * @return  最大化的最小磁力
+     * @param m        一个整数 m  m 个球
+     * @return 最大化的最小磁力
      */
     public int maxDistance(int[] position, int m) {
         Arrays.sort(position);
@@ -319,6 +320,37 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230325    1870. 准时到达的列车最小时速
+
+    /**
+     * @param dist 长度为 n 的整数数组 dist ，其中 dist[i] 表示第 i 趟列车的行驶距离（单位是千米）
+     * @param hour 浮点数 hour ，表示你到达办公室可用的总通勤时间
+     * @return 返回能满足你准时到达办公室所要求全部列车的 最小正整数 时速（单位：千米每小时），如果无法准时到达，则返回 -1。
+     */
+    public int minSpeedOnTime(int[] dist, double hour) {
+        int i = 1;//最小速度
+        int j = Arrays.stream(dist).max().getAsInt() * 100;//最大速度
+        while (i <= j) {
+            int m = i + (j - i) / 2;
+            if (costtime(m, dist) > hour) {
+                i = m + 1;
+            } else {
+                j = m - 1;
+            }
+        }
+        return i > Arrays.stream(dist).max().getAsInt() * 100 ? -1 : i;
+    }
+
+    public double costtime(double speed, int[] dist) {
+        int len = dist.length;
+        double result = 0;
+        for (int i = 0; i < len - 1; i++) {
+            result += Math.ceil(dist[i] / speed);
+        }
+        return result + dist[len - 1] / speed;
+    }
+    //endregion
+
     //region    20230321    1894. 找到需要补充粉笔的学生编号
 
     /**
@@ -356,6 +388,48 @@ public class TaegetBinarySearchBasic {
         return left;
     }
 
+    //endregion
+
+    //region    20230325    1898. 可移除字符的最大数目
+
+    /**
+     * https://leetcode.cn/problems/maximum-number-of-removable-characters/
+     *
+     * @param s         字符串 s
+     * @param p         字符串 p
+     * @param removable 一个元素 互不相同 且下标 从 0 开始 计数的整数数组 removable ，该数组是 s 中下标的一个子集
+     * @return 返回你可以找出的 最大 k
+     */
+    public int maximumRemovals(String s, String p, int[] removable) {
+        int left = 0, right = removable.length - 1;
+        while (left <= right) {
+            int mid = left + (right -left) / 2;
+            if (!isSubsequence(s, p, mid, removable)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return right + 1;
+    }
+
+    public boolean isSubsequence(String s, String p, int k, int[] removable) {
+        int m = s.length();
+        int n = p.length();
+        int i = 0;
+        int j = 0;
+        boolean[] state = new boolean[m];
+        for (int x = 0; x <= k; x++) {
+            state[removable[x]] = true;
+        }
+        while (i < m && j < n) {
+            if (s.charAt(i) == p.charAt(j) && !state[i]) {
+                j++;
+            }
+            i++;
+        }
+        return j == n;
+    }
     //endregion
 
     public static void main(String[] args) {
