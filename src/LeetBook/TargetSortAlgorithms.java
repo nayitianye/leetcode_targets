@@ -1,6 +1,7 @@
 package LeetBook;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * @author yyb
@@ -9,6 +10,8 @@ import java.util.Arrays;
  * @url https://leetcode.cn/leetbook/detail/sort-algorithms/
  */
 public class TargetSortAlgorithms {
+
+    //region 冒泡排序
 
     //region    20230326    剑指 Offer 45. 把数组排成最小的数
     public String minNumber(int[] nums) {
@@ -70,6 +73,10 @@ public class TargetSortAlgorithms {
     }
     //endregion
 
+    //endregion
+
+    //region    选择排序
+
     //region    20230326    215. 数组中的第 K 个最大元素
     public int findKthLargest(int[] nums, int k) {
         int maxIndex = 0;
@@ -115,6 +122,152 @@ public class TargetSortAlgorithms {
         }
         return nums;
     }
+    //endregion
+
+    //endregion
+
+    //region    插入排序
+
+    //region    20230326    912. 排序数组
+    public int[] sortArray1(int[] nums) {
+        insertSort(nums);
+        return nums;
+    }
+
+    public static void insertSort(int[] arr) {
+        // 从第二个数开始，往前插入数字
+        for (int i = 1; i < arr.length; i++) {
+            int currentNumber = arr[i];
+            int j = i - 1;
+            while (j >= 0 && currentNumber < arr[j]) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            // 两种情况会跳出循环：1. 遇到一个小于或等于 currentNumber 的数字，跳出循环，currentNumber 就坐到它后面。
+            // 2. 已经走到数列头部，仍然没有遇到小于或等于 currentNumber 的数字，也会跳出循环，此时 j 等于 -1，currentNumber 就坐到数列头部。
+            arr[j] = currentNumber;
+        }
+    }
+    //endregion
+
+    //region    20230326    147. 对链表进行插入排序
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        // 创建哑结点，用于将在 head 前插入结点转换为在哑结点后插入，统一处理，更方便
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+        // 记录已排序完成的结点末尾
+        ListNode lastSorted = head;
+        // 当前需要新插入的结点
+        ListNode current = head.next;
+        while (current != null) {
+            if (lastSorted.val <= current.val) {
+                // 新插入的值正好时最大值，直接插入链表末尾
+                lastSorted = lastSorted.next;
+            } else {
+                // 从头开始寻找插入位置
+                ListNode previous = dummyHead;
+                while (previous.next.val <= current.val) {
+                    previous = previous.next;
+                }
+                // 将新结点插入链表
+                lastSorted.next = current.next;
+                current.next = previous.next;
+                previous.next = current;
+            }
+            //更新新结点
+            current = lastSorted.next;
+        }
+        return dummyHead.next;
+    }
+    //endregion
+
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    //endregion
+
+    //region    希尔排序
+
+    //region    20230326    912. 排序数组
+    public int[] sortArray2(int[] nums) {
+        shellSort(nums);
+        return nums;
+    }
+
+    public static void shellSort(int[] arr) {
+        for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < arr.length; i++) {
+                int currentNumber = arr[i];
+                int preIndex = i - gap;
+                while (preIndex >= 0 && currentNumber < arr[preIndex]) {
+                    arr[preIndex + gap] = arr[preIndex];
+                    preIndex -= gap;
+                }
+                arr[preIndex + gap] = currentNumber;
+            }
+        }
+    }
+
+    //endregion\
+
+    //region    20230326    506. 相对名次
+    public String[] findRelativeRanks(int[] score) {
+        int[] arr = score.clone();
+        shellSortSorces(arr);
+        //建立每位运动员和名次的映射关系
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            map.put(arr[i], i + 1);
+        }
+        String[] res = Arrays.stream(score).mapToObj(String::valueOf).toArray(String[]::new);
+        //Arrays.stream(nums) :把 nums整型数组变成流
+        //.mapToObj(String::valueOf) 流中的为一个整型元素变成String类型
+        //.toArray(String[]::new) 将流中元素重新搜集为一个整型数组。
+        for (int i = 0; i < score.length; i++) {
+            if (score[i] == arr[0]) {
+                res[i] = "Gold Medal";
+            } else if (score[i] == arr[1]) {
+                res[i] = "Silver Medal";
+            } else if (score[i] == arr[2]) {
+                res[i] = "Bronze Medal";
+            } else {
+                res[i] = String.valueOf(map.get(score[i]));
+            }
+        }
+        return res;
+    }
+
+    public static void shellSortSorces(int[] arr) {
+        for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < arr.length; i++) {
+                int currentNumber = arr[i];
+                int prdIndex = i - gap;
+                while (prdIndex >= 0 && currentNumber > arr[prdIndex]) {
+                    arr[prdIndex + gap] = arr[prdIndex];
+                    prdIndex -= gap;
+                }
+                arr[prdIndex + gap] = currentNumber;
+            }
+        }
+    }
+    //endregion
+
     //endregion
 
     public static void main(String[] args) {
