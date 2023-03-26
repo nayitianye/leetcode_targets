@@ -43,6 +43,64 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230327    240. 搜索二维矩阵 II
+
+    /**
+     * https://leetcode.cn/problems/search-a-2d-matrix-ii/
+     *
+     * @param matrix m x n 矩阵 matrix
+     * @param target 目标值 target
+     * @return 判断目标值是否在数组中
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int[] row : matrix) {
+            int index = search(row, target);
+            if (index >= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int search(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int num = nums[mid];
+            if (num == target) {
+                return mid;
+            } else if (num < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+    //endregion
+
+    //region    20230327    275. H 指数 II
+
+    /**
+     * https://leetcode.cn/problems/h-index-ii/
+     *
+     * @param citations 整数数组 citations ，其中 citations[i] 表示研究者的第 i 篇论文被引用的次数
+     * @return 返回该研究者的 h 指数
+     */
+    public int hIndex(int[] citations) {
+        int letf = 0, right = citations.length - 1;
+        while (letf <= right) {
+            int mid = letf + (right - letf) / 2;
+            if (citations[mid] >= citations.length - mid) {
+                right = mid - 1;
+            } else {
+                letf = mid + 1;
+            }
+        }
+        return citations.length - letf;
+    }
+    //endregion
+
     //region    20230324    287. 寻找重复数
 
     /**
@@ -403,7 +461,7 @@ public class TaegetBinarySearchBasic {
     public int maximumRemovals(String s, String p, int[] removable) {
         int left = 0, right = removable.length - 1;
         while (left <= right) {
-            int mid = left + (right -left) / 2;
+            int mid = left + (right - left) / 2;
             if (!isSubsequence(s, p, mid, removable)) {
                 right = mid - 1;
             } else {

@@ -371,6 +371,27 @@ public class TargetLcof {
     }
     //endregion、
 
+    //region    20230327    剑指 Offer 14- I. 剪绳子
+
+    /**
+     * https://leetcode.cn/problems/jian-sheng-zi-lcof/
+     *
+     * @param n 长度为 n 的绳子
+     * @return 请把绳子剪成整数长度的 m 段,并返回最大乘积。
+     */
+    public int cuttingRope(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            int curMax = 0;
+            for (int j = 1; j < i; j++) {
+                curMax = Math.max(curMax, Math.max(j * (i - j), j * dp[i - j]));
+            }
+            dp[i] = curMax;
+        }
+        return dp[n];
+    }
+    //endregion
+
     //region    20230324    剑指 Offer 15. 二进制中1的个数
 
     /**
@@ -921,8 +942,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof
+     *
      * @param nums 整数数组 nums
-     * @return  返回数组中超过一半的数字
+     * @return 返回数组中超过一半的数字
      */
     public int majorityElement(int[] nums) {
         Arrays.sort(nums);
@@ -1370,6 +1392,34 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230327    剑指 Offer 57 - II. 和为s的连续正数序列
+
+    /**
+     * https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+     * @param target    正整数 target
+     * @return  输出所有和为 target 的连续正整数序列（至少含有两个数）
+     */
+    public int[][] findContinuousSequence(int target) {
+        List<int[]> vec = new ArrayList<int[]>();
+        for (int left = 1, right = 2; left < right; ) {
+            int sum = (left + right) * (right - left + 1) / 2;
+            if (sum == target) {
+                int[] res = new int[right - left + 1];
+                for (int i = left; i <= right; i++) {
+                    res[i - left] = i;
+                }
+                vec.add(res);
+                left++;
+            } else if (sum < target) {
+                right++;
+            } else {
+                left++;
+            }
+        }
+        return vec.toArray(new int[vec.size()][]);
+    }
+    //endregion
+
     //region    20230316    剑指 Offer 58 - I. 翻转单词顺序
 
     /**
@@ -1399,6 +1449,28 @@ public class TargetLcof {
      */
     public String reverseLeftWords(String s, int n) {
         return s.substring(n) + s.substring(0, n);
+    }
+    //endregion
+
+    //region    20230327    剑指 Offer 62. 圆圈中最后剩下的数字
+
+    /**
+     * https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
+     *
+     * @param n 0-n-1 n个数字
+     * @param m 每轮删除第m个数字
+     * @return 最后剩下的数字
+     */
+    public int lastRemaining(int n, int m) {
+        return fn(n, m);
+    }
+
+    public int fn(int n, int m) {
+        if (n == 1) {
+            return 0;
+        }
+        int x = fn(n - 1, m);
+        return (m + x) % n;
     }
     //endregion
 

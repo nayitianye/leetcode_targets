@@ -352,14 +352,7 @@
       <workItem from="1679670021568" duration="6708000" />
       <workItem from="1679745599281" duration="13541000" />
       <workItem from="1679807958330" duration="12074000" />
-      <workItem from="1679844961274" duration="1466000" />
-    </task>
-    <task id="LOCAL-00013" summary="2019/10/22  添加极小化极大的类别  练习了部分题目">
-      <created>1577530874794</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1577530874794</updated>
+      <workItem from="1679844961274" duration="5710000" />
     </task>
     <task id="LOCAL-00014" summary="记录更新内容文本">
       <created>1619624486295</created>
@@ -697,7 +690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679810560053</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="学习计划_剑指offer:&#10;剑指 Offer 39. 数组中出现次数超过一半的数字&#10;剑指 Offer 66. 构建乘积数组&#10;每日一题：&#10;2395. 和相等的子数组">
+      <created>1679846446260</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1679846446260</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -784,7 +784,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75&#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
     <MESSAGE value="学习计划_数据结构初级&#10;73. 矩阵置零&#10;学习计划_LeetCode 75 &#10;876. 链表的中间结点&#10;学习计划_剑指 Offer&#10;剑指 Offer 11. 旋转数组的最小数字&#10;剑指 Offer 50. 第一个只出现一次的字符" />
     <MESSAGE value="学习计划_数据结构初级&#10;36. 有效的数独&#10;学习计划_LeetCode 75 &#10;142. 环形链表 II&#10;学习计划_剑指 Offer&#10;剑指 Offer 04. 二维数组中的查找&#10;每日一题:&#10;剑指 Offer 47. 礼物的最大价值&#10;2215. 找出两数组的不同" />
     <MESSAGE value="学习计划_数据结构初级&#10;350. 两个数组的交集 II&#10;383. 赎金信&#10;387. 字符串中的第一个唯一字符&#10;学习计划_LeetCode 75&#10;121. 买卖股票的最佳时机&#10;409. 最长回文串&#10;学习计划_剑指 Offer&#10;剑指 Offer 32 - I. 从上到下打印二叉树&#10;剑指 Offer 32 - II. 从上到下打印二叉树 II&#10;剑指 Offer 32 - III. 从上到下打印二叉树 III&#10;每日一题:&#10;2379. 得到 K 个黑块的最少涂色次数" />
@@ -809,7 +808,8 @@
     <MESSAGE value="LeetBook：排序算法图算法_冒泡算法" />
     <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 56 - I. 数组中数字出现的次数&#10;剑指 Offer 56 - II. 数组中数字出现的次数 II&#10;学习计划_算法入门：&#10;695. 岛屿的最大面积&#10;733. 图像渲染&#10;学习计划_二分查找基础&#10;1870. 准时到达的列车最小时速&#10;1898. 可移除字符的最大数目&#10;每日一题：&#10;1574. 删除最短的子数组使剩余数组有序" />
     <MESSAGE value="LeetBook：&#10;排序算法图文学：&#10;剑指 Offer 45. 把数组排成最小的数&#10;215. 数组中的第 K 个最大元素&#10;283. 移动零&#10;912. 排序数组&#10;排序算法_选择排序" />
-    <option name="LAST_COMMIT_MESSAGE" value="LeetBook：&#10;排序算法图文学：&#10;剑指 Offer 45. 把数组排成最小的数&#10;215. 数组中的第 K 个最大元素&#10;283. 移动零&#10;912. 排序数组&#10;排序算法_选择排序" />
+    <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 39. 数组中出现次数超过一半的数字&#10;剑指 Offer 66. 构建乘积数组&#10;每日一题：&#10;2395. 和相等的子数组" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -404,6 +404,28 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230327    617. 合并二叉树
+
+    /**
+     * https://leetcode.cn/problems/merge-two-binary-trees/
+     * @param root1 二叉树： root1
+     * @param root2 二叉树： root1
+     * @return  返回合并后的二叉树
+     */
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if (root1 == null) {
+            return root2;
+        }
+        if (root2 == null) {
+            return root1;
+        }
+        TreeNode merged = new TreeNode(root1.val + root2.val);
+        merged.left = mergeTrees(root1.left, root2.left);
+        merged.right = mergeTrees(root1.right, root2.right);
+        return merged;
+    }
+    //endregion
+
     //region    20230325    695. 岛屿的最大面积
 
     /**
@@ -470,11 +492,12 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/flood-fill/
-     * @param image  m x n 的二维整数数组表示的图画 image
+     *
+     * @param image m x n 的二维整数数组表示的图画 image
      * @param sr    整数 sr
      * @param sc    整数 sc
-     * @param color  颜色 color
-     * @return  像素 image[sr][sc] 开始对图像进行 上色填充
+     * @param color 颜色 color
+     * @return 像素 image[sr][sc] 开始对图像进行 上色填充
      */
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         floodFill(image, sr, sc, color, image[sr][sc]);
