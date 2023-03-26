@@ -917,6 +917,19 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230326    剑指 Offer 39. 数组中出现次数超过一半的数字
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof
+     * @param nums 整数数组 nums
+     * @return  返回数组中超过一半的数字
+     */
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+    //endregion
+
     //region    20230320    剑指 Offer 40. 最小的k个数
 
     /**
@@ -1299,19 +1312,20 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
-     * @param nums  数组 nums
-     * @return  请找出那个只出现一次的数字
+     *
+     * @param nums 数组 nums
+     * @return 请找出那个只出现一次的数字
      */
     public int singleNumber(int[] nums) {
         int[] counts = new int[32];
-        for(int num : nums) {
-            for(int j = 0; j < 32; j++) {
+        for (int num : nums) {
+            for (int j = 0; j < 32; j++) {
                 counts[j] += num & 1;
                 num >>>= 1;
             }
         }
         int res = 0, m = 3;
-        for(int i = 0; i < 32; i++) {
+        for (int i = 0; i < 32; i++) {
             res <<= 1;
             res |= counts[31 - i] % m;
         }
@@ -1388,6 +1402,21 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230312    剑指 Offer 63. 股票的最大利润
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxPrice = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > maxPrice) {
+                maxPrice = prices[i] - minPrice;
+            }
+        }
+        return maxPrice;
+    }
+    //endregion
+
     //region    20230322    剑指 Offer 64. 求1+2+…+n
 
     /**
@@ -1447,18 +1476,43 @@ public class TargetLcof {
     }
     //endregion
 
-    //region    20230312    剑指 Offer 63. 股票的最大利润
-    public int maxProfit(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int maxPrice = 0;
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
-            } else if (prices[i] - minPrice > maxPrice) {
-                maxPrice = prices[i] - minPrice;
-            }
+    //region    20230326    剑指 Offer 66. 构建乘积数组
+
+    /**
+     * https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/
+     *
+     * @param a 数组 a
+     * @return 建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]
+     */
+    public int[] constructArr(int[] a) {
+        int length = a.length;
+        //L和R分别表示左右两侧的乘积列表
+        int[] L = new int[length];
+        int[] R = new int[length];
+
+        int[] answer = new int[length];
+
+        if (length == 0) {
+            return answer;
         }
-        return maxPrice;
+        //L[i] 为索引i左侧所有元素的乘积
+        //对于索引为0的元素，因为左侧没有元素，所以L[0]=1
+        L[0] = 1;
+        for (int i = 1; i < length; i++) {
+            L[i] = a[i - 1] * L[i - 1];
+        }
+
+        //R[i] 为索引i右侧所有元素的乘积
+        //对于索引为 length-1 的元素，因为右侧没有元素，所以R[length-1]=1
+        R[length - 1] = 1;
+        for (int i = length - 2; i >= 0; i--) {
+            R[i] = a[i + 1] * R[i + 1];
+        }
+        //对于索引 i,除 a[i] 之外其余各元素的乘积
+        for (int i = 0; i < length; i++) {
+            answer[i] = R[i] * L[i];
+        }
+        return answer;
     }
     //endregion
 

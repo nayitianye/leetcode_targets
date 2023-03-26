@@ -233,7 +233,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4b96fc66-0a44-45c8-8cd6-0f4959f48e25" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -352,7 +351,8 @@
       <workItem from="1679669321976" duration="78000" />
       <workItem from="1679670021568" duration="6708000" />
       <workItem from="1679745599281" duration="13541000" />
-      <workItem from="1679807958330" duration="11962000" />
+      <workItem from="1679807958330" duration="12074000" />
+      <workItem from="1679844961274" duration="1466000" />
     </task>
     <task id="LOCAL-00013" summary="2019/10/22  添加极小化极大的类别  练习了部分题目">
       <created>1577530874794</created>
@@ -874,7 +874,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
-          <line>214</line>
+          <line>234</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
