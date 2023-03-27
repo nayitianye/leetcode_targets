@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -353,6 +351,7 @@
       <workItem from="1679745599281" duration="13541000" />
       <workItem from="1679807958330" duration="12074000" />
       <workItem from="1679844961274" duration="5710000" />
+      <workItem from="1679929216832" duration="3306000" />
     </task>
     <task id="LOCAL-00014" summary="记录更新内容文本">
       <created>1619624486295</created>

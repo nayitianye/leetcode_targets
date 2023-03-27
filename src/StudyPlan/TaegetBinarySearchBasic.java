@@ -313,6 +313,55 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230327    1482. 制作 m 束花所需的最少天数
+
+    /**
+     * https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets
+     * @param bloomDay  整数数组 bloomDay
+     * @param m 整数 m
+     * @param k 整数 k
+     * @return  请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1
+     */
+    public int minDays(int[] bloomDay, int m, int k) {
+        if (m > bloomDay.length / k) {
+            return -1;
+        }
+        int low = Integer.MAX_VALUE, high = 0;
+        int length = bloomDay.length;
+        for (int i = 0; i < length; i++) {
+            low = Math.min(low, bloomDay[i]);
+            high = Math.max(high, bloomDay[i]);
+        }
+        while (low < high) {
+            int days = (high - low) / 2 + low;
+            if (canMake(bloomDay, days, m, k)) {
+                high = days;
+            } else {
+                low = days + 1;
+            }
+        }
+        return low;
+    }
+
+    public boolean canMake(int[] bloomDay, int days, int m, int k) {
+        int bouquets = 0;
+        int flowers = 0;
+        int length = bloomDay.length;
+        for (int i = 0; i < length && bouquets < m; i++) {
+            if (bloomDay[i] <= days) {
+                flowers++;
+                if (flowers == k) {
+                    bouquets++;
+                    flowers = 0;
+                }
+            } else {
+                flowers = 0;
+            }
+        }
+        return bouquets >= m;
+    }
+    //endregion
+
     //region    20230324    1552. 两球之间的磁力
 
     /**
@@ -375,6 +424,53 @@ public class TaegetBinarySearchBasic {
             }
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230327    1818. 绝对差值和
+
+    /**
+     * https://leetcode.cn/problems/minimum-absolute-sum-difference/
+     *
+     * @param nums1 数组 nums1
+     * @param nums2 数组 nums2
+     * @return 在替换数组 nums1 中最多一个元素 之后 ，返回最小绝对差值和
+     */
+    public int minAbsoluteSumDiff(int[] nums1, int[] nums2) {
+        final int MOD = 1000000007;
+        int n = nums1.length;
+        int[] rec = new int[n];
+        System.arraycopy(nums1, 0, rec, 0, n);
+        Arrays.sort(rec);
+        int sum = 0, maxn = 0;
+        for (int i = 0; i < n; i++) {
+            int diff = Math.abs(nums1[i] - nums2[i]);
+            sum = (sum + diff) % MOD;
+            int j = binarySearch2(rec, nums2[i]);
+            if (j < n) {
+                maxn = Math.max(maxn, diff - (rec[j] - nums2[i]));
+            }
+            if (j > 0) {
+                maxn = Math.max(maxn, diff - (nums2[i] - rec[j - 1]));
+            }
+        }
+        return (sum - maxn + MOD) % MOD;
+    }
+
+    public int binarySearch2(int[] rec, int target) {
+        int left = 0, right = rec.length - 1;
+        if (rec[right] < target) {
+            return right + 1;
+        }
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (rec[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
     }
     //endregion
 
