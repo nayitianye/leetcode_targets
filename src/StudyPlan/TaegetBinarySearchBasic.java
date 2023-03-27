@@ -167,6 +167,28 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230328    540. 有序数组中的单一元素
+
+    /**
+     * https://leetcode.cn/problems/single-element-in-a-sorted-array/
+     *
+     * @param nums 整数组成的有序数组 nums，其中每个元素都会出现两次，唯有一个数只会出现一次。
+     * @return 找出并返回只出现一次的那个数
+     */
+    public int singleNonDuplicate(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] == nums[mid ^ 1]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left];
+    }
+    //endregion
+
     //region    20230321    611. 有效三角形的个数
 
     /**
@@ -317,10 +339,11 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets
-     * @param bloomDay  整数数组 bloomDay
-     * @param m 整数 m
-     * @param k 整数 k
-     * @return  请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1
+     *
+     * @param bloomDay 整数数组 bloomDay
+     * @param m        整数 m
+     * @param k        整数 k
+     * @return 请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1
      */
     public int minDays(int[] bloomDay, int m, int k) {
         if (m > bloomDay.length / k) {
@@ -471,6 +494,52 @@ public class TaegetBinarySearchBasic {
             }
         }
         return left;
+    }
+    //endregion
+
+    //region    20230328    1838. 最高频元素的频数
+
+    /**
+     * https://leetcode.cn/problems/frequency-of-the-most-frequent-element/
+     * @param nums  整数数组 nums
+     * @param k 一个整数 k
+     * @return  返回数组中最高频元素的 最大可能频数
+     */
+    public int maxFrequency(int[] nums, int k) {
+        /*
+        排序+滑窗+前缀和+二分:
+        1.因为要求的是频数,也就是要操作使得最接近某个数的数字优先变成该数字,因此用到排序
+        2.滑窗是固定窗口右边界,寻找左边界的过程
+        3.前缀和用于求解某段区间需要填充的操作次数,ss = nums[r] * len - sum[r - k + 1, r]
+        4.二分用于寻找适合符合要求的窗口长度的最大值->最大频数
+         */
+        Arrays.sort(nums);
+        int len = nums.length;
+        int[] sum = new int[len + 1];
+        for (int i = 0; i < len; i++) {
+            sum[i + 1] = sum[i] + nums[i];
+        }
+        int l = 0, r = len; // 窗口长度
+        while (l < r) {
+            int mid = l + (r - l + 1) / 2;
+            if (check(mid, k, len, nums, sum)) {
+                l = mid;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return l;   // l==r
+    }
+
+    // nums内是否存在以curLen为长度的窗口,窗口内可以用k填充成完全相等的元素
+    private boolean check(int curLen, int k, int len, int[] nums, int[] sum) {
+        // 遍历所有长度为curLen的窗口
+        for (int i = 0; i + curLen - 1 < len; i++) {
+            int j = i + curLen - 1; // 窗口右端索引
+            int ss = nums[j] * curLen - (sum[j + 1] - sum[i]);  // 要填充的部分
+            if (k >= ss) return true;   // k可以满足要填充的部分
+        }
+        return false;   // 无法完成填充
     }
     //endregion
 

@@ -129,6 +129,29 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230228    21. 合并两个有序链表
+
+    /**
+     * https://leetcode.cn/problems/merge-two-sorted-lists
+     * @param list1 链表 list1
+     * @param list2 链表 list2
+     * @return 返回两个链表的合并链表
+     */
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        } else if (list2 == null) {
+            return list1;
+        } else if (list1.val < list2.val) {
+            list1.next = mergeTwoLists(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = mergeTwoLists(list1, list2.next);
+            return list2;
+        }
+    }
+    //endregion
+
     //region    20230319    35. 搜索插入位置
 
     /**
@@ -211,6 +234,26 @@ public class TargetAlgorithmsBeginner {
             start++;
             end--;
         }
+    }
+    //endregion
+
+    //region    20230328    206. 反转链表
+
+    /**
+     * https://leetcode.cn/problems/reverse-linked-list
+     * @param head  单链表的头节点 head
+     * @return  反转链表，并返回反转后的链表
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
     }
     //endregion
 

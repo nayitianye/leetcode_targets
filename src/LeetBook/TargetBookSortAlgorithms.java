@@ -9,7 +9,7 @@ import java.util.HashMap;
  * leetbook 排序算法图文学
  * @url https://leetcode.cn/leetbook/detail/sort-algorithms/
  */
-public class TargetSortAlgorithms {
+public class TargetBookSortAlgorithms {
 
     //region 冒泡排序
 
@@ -271,6 +271,6 @@ public class TargetSortAlgorithms {
     //endregion
 
     public static void main(String[] args) {
-        TargetSortAlgorithms.sortArray(new int[]{5, 2, 3, 1});
+        TargetBookSortAlgorithms.sortArray(new int[]{5, 2, 3, 1});
     }
 }

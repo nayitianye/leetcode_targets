@@ -658,6 +658,46 @@ public class TargetLcof {
 
     //endregion
 
+    //region    20230328    剑指 Offer 29. 顺时针打印矩阵
+
+    /**
+     * https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
+     *
+     * @param matrix 矩阵 matrix
+     * @return 按照从外向里以顺时针的顺序依次打印出每一个数字
+     */
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
+        int rows = matrix.length, columns = matrix[0].length;
+        int[] order = new int[rows * columns];
+        int index = 0;
+        int left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+        while (left <= right && top <= bottom) {
+            for (int column = left; column <= right; column++) {
+                order[index++] = matrix[top][column];
+            }
+            for (int row = top + 1; row <= bottom; row++) {
+                order[index++] = matrix[row][right];
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    order[index++] = matrix[bottom][column];
+                }
+                for (int row = bottom; row > top; row--) {
+                    order[index++] = matrix[row][left];
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return order;
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 30. 包含min函数的栈
 
     /**
@@ -691,6 +731,28 @@ public class TargetLcof {
         public int min() {
             return minStack.peek();
         }
+    }
+    //endregion
+
+    //region    20230328    剑指 Offer 31. 栈的压入、弹出序列
+
+    /**
+     * https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+     * @param pushed 入栈序列
+     * @param popped 出栈序列
+     * @return 判断第二个序列是否为该栈的弹出顺序
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int n = pushed.length;
+        for (int i = 0, j = 0; i < n; i++) {
+            stack.push(pushed[i]);
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
     }
     //endregion
 
@@ -1396,8 +1458,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
-     * @param target    正整数 target
-     * @return  输出所有和为 target 的连续正整数序列（至少含有两个数）
+     *
+     * @param target 正整数 target
+     * @return 输出所有和为 target 的连续正整数序列（至少含有两个数）
      */
     public int[][] findContinuousSequence(int target) {
         List<int[]> vec = new ArrayList<int[]>();
