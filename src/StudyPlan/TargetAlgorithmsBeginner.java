@@ -1,9 +1,6 @@
 package StudyPlan;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @author yyb
@@ -15,6 +12,10 @@ public class TargetAlgorithmsBeginner {
     //region    自定义数据结构
     public class Node {
         public int val;
+
+        public Node left;
+        public Node right;
+        public Node next;
         public List<Node> children;
 
         public Node() {
@@ -27,6 +28,13 @@ public class TargetAlgorithmsBeginner {
         public Node(int _val, List<Node> _children) {
             val = _val;
             children = _children;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
         }
     }
 
@@ -133,6 +141,7 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/merge-two-sorted-lists
+     *
      * @param list1 链表 list1
      * @param list2 链表 list2
      * @return 返回两个链表的合并链表
@@ -180,6 +189,50 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return nums[right] < target ? right + 1 : right;
+    }
+    //endregion
+
+    //region    20230328    116. 填充每个节点的下一个右侧节点指针
+
+    /**
+     * https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/description/
+     * @param root  完美二叉树 root
+     * @return
+     */
+    public Node connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        // 初始化队列同时将第一层节点加入队列中，即根节点
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        // 外层的 while 循环迭代的是层数
+        while (!queue.isEmpty()) {
+            // 记录当前队列大小
+            int size = queue.size();
+            // 遍历这一层的所有节点
+            for (int i = 0; i < size; i++) {
+
+                // 从队首取出元素
+                Node node = queue.poll();
+
+                // 连接
+                if (i < size - 1) {
+                    node.next = queue.peek();
+                }
+
+                // 拓展下一层节点
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+        }
+        // 返回根节点
+        return root;
     }
     //endregion
 
@@ -241,8 +294,9 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/reverse-linked-list
-     * @param head  单链表的头节点 head
-     * @return  反转链表，并返回反转后的链表
+     *
+     * @param head 单链表的头节点 head
+     * @return 反转链表，并返回反转后的链表
      */
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
@@ -384,6 +438,47 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230328    542. 01 矩阵
+
+    /**
+     * https://leetcode.cn/problems/01-matrix/
+     *
+     * @param mat 由 0 和 1 组成的矩阵 mat
+     * @return 请输出一个大小相同的矩阵，其中每一个格子是 mat 中对应位置元素到最近的 0 的距离。
+     */
+    public int[][] updateMatrix(int[][] mat) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int m = mat.length, n = mat[0].length;
+        int[][] dist = new int[m][n];
+        boolean[][] seen = new boolean[m][n];
+        Queue<int[]> queue = new LinkedList<int[]>();
+        // 将所有的 0 添加进初始队列中
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                    seen[i][j] = true;
+                }
+            }
+        }
+        // 广度优先搜索
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            int i = cell[0], j = cell[1];
+            for (int k = 0; k < 4; k++) {
+                int ni = i + dirs[k][0];
+                int nj = j + dirs[k][1];
+                if (ni >= 0 && ni < m && nj >= 0 && nj < n && !seen[ni][nj]) {
+                    dist[ni][nj] = dist[i][j] + 1;
+                    queue.offer(new int[]{ni, nj});
+                    seen[ni][nj] = true;
+                }
+            }
+        }
+        return dist;
+    }
+    //endregion
+
     //region    20230322    557. 反转字符串中的单词 III
 
     /**
@@ -451,9 +546,10 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/merge-two-binary-trees/
+     *
      * @param root1 二叉树： root1
      * @param root2 二叉树： root1
-     * @return  返回合并后的二叉树
+     * @return 返回合并后的二叉树
      */
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
@@ -605,6 +701,56 @@ public class TargetAlgorithmsBeginner {
             pos--;
         }
         return res;
+    }
+    //endregion
+
+    //region    20230328    994. 腐烂的橘子
+
+    /**
+     * https://leetcode.cn/problems/rotting-oranges/
+     *
+     * @param grid 定的 m x n 网格 grid
+     * @return 直到单元格中没有新鲜橘子为止所必须经过的最小分钟数.
+     */
+    public int orangesRotting(int[][] grid) {
+        int[] dr = new int[]{-1, 0, 1, 0};
+        int[] dc = new int[]{0, -1, 0, 1};
+        int row = grid.length, col = grid[0].length;
+        Queue<Integer> queue = new ArrayDeque<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 2) {
+                    int code = i * col + j;
+                    queue.add(code);
+                    map.put(code, 0);
+                }
+            }
+        }
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int code = queue.remove();
+            int r = code / col, c = code % col;
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                if (0 <= nr && nr < row && 0 <= nc && nc < col && grid[nr][nc] == 1) {
+                    grid[nr][nc] = 2;
+                    int ncode = nr * col + nc;
+                    queue.add(ncode);
+                    map.put(ncode, map.get(code) + 1);
+                    ans = map.get(ncode);
+                }
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    return -1;
+                }
+            }
+        }
+        return ans;
     }
     //endregion
 

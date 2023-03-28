@@ -231,6 +231,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="4eb660ca-8742-4250-ac77-ae69f3636cb0" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -351,14 +352,8 @@
       <workItem from="1679745599281" duration="13541000" />
       <workItem from="1679807958330" duration="12074000" />
       <workItem from="1679844961274" duration="5710000" />
-      <workItem from="1679929216832" duration="7127000" />
-    </task>
-    <task id="LOCAL-00015" summary="记录更新内容文本">
-      <created>1620836680318</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1620836680318</updated>
+      <workItem from="1679929216832" duration="7176000" />
+      <workItem from="1680016971264" duration="2179000" />
     </task>
     <task id="LOCAL-00016" summary="记录更新内容文本">
       <created>1621087000739</created>
@@ -696,7 +691,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679932642952</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表">
+      <created>1679936744695</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1679936744695</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -783,7 +785,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_数据结构初级&#10;36. 有效的数独&#10;学习计划_LeetCode 75 &#10;142. 环形链表 II&#10;学习计划_剑指 Offer&#10;剑指 Offer 04. 二维数组中的查找&#10;每日一题:&#10;剑指 Offer 47. 礼物的最大价值&#10;2215. 找出两数组的不同" />
     <MESSAGE value="学习计划_数据结构初级&#10;350. 两个数组的交集 II&#10;383. 赎金信&#10;387. 字符串中的第一个唯一字符&#10;学习计划_LeetCode 75&#10;121. 买卖股票的最佳时机&#10;409. 最长回文串&#10;学习计划_剑指 Offer&#10;剑指 Offer 32 - I. 从上到下打印二叉树&#10;剑指 Offer 32 - II. 从上到下打印二叉树 II&#10;剑指 Offer 32 - III. 从上到下打印二叉树 III&#10;每日一题:&#10;2379. 得到 K 个黑块的最少涂色次数" />
     <MESSAGE value="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字" />
     <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
@@ -808,7 +809,8 @@
     <MESSAGE value="LeetBook：&#10;排序算法图文学：&#10;剑指 Offer 45. 把数组排成最小的数&#10;215. 数组中的第 K 个最大元素&#10;283. 移动零&#10;912. 排序数组&#10;排序算法_选择排序" />
     <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 39. 数组中出现次数超过一半的数字&#10;剑指 Offer 66. 构建乘积数组&#10;每日一题：&#10;2395. 和相等的子数组" />
     <MESSAGE value="学习计划_二分查找：&#10;1482. 制作 m 束花所需的最少天数&#10;1818. 绝对差值和&#10;每日一题：&#10;1638. 统计只差一个字符的子串数目" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找：&#10;1482. 制作 m 束花所需的最少天数&#10;1818. 绝对差值和&#10;每日一题：&#10;1638. 统计只差一个字符的子串数目" />
+    <MESSAGE value="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
