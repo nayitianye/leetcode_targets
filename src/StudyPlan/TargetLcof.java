@@ -140,6 +140,51 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230322    剑指 Offer 07. 重建二叉树
+
+    /**
+     * https://leetcode.cn/problems/zhong-jian-er-cha-shu-lcof
+     *
+     * @param preorder 二叉树前序遍历数组 perorder
+     * @param inorder  二叉树中序遍历数组 inorder
+     * @return
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int n = preorder.length;
+        // 构造哈希映射，帮助我们快速定位根节点
+        indexMap = new HashMap<Integer, Integer>();
+        for (int i = 0; i < n; i++) {
+            indexMap.put(inorder[i], i);
+        }
+        return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+    }
+
+    private Map<Integer, Integer> indexMap;
+
+    public TreeNode myBuildTree(int[] preorder, int[] inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right) {
+        if (preorder_left > preorder_right) {
+            return null;
+        }
+
+        // 前序遍历中的第一个节点就是根节点
+        int preorder_root = preorder_left;
+        // 在中序遍历中定位根节点
+        int inorder_root = indexMap.get(preorder[preorder_root]);
+
+        // 先把根节点建立出来
+        TreeNode root = new TreeNode(preorder[preorder_root]);
+        // 得到左子树中的节点数目
+        int size_left_subtree = inorder_root - inorder_left;
+        // 递归地构造左子树，并连接到根节点
+        // 先序遍历中「从 左边界+1 开始的 size_left_subtree」个元素就对应了中序遍历中「从 左边界 开始到 根节点定位-1」的元素
+        root.left = myBuildTree(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree, inorder_left, inorder_root - 1);
+        // 递归地构造右子树，并连接到根节点
+        // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
+        root.right = myBuildTree(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
+        return root;
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 09. 用两个栈实现队列
 
     /**
@@ -323,6 +368,68 @@ public class TargetLcof {
             x /= 10;
         }
         return res;
+    }
+    //endregion、
+
+    //region    20230327    剑指 Offer 14- I. 剪绳子
+
+    /**
+     * https://leetcode.cn/problems/jian-sheng-zi-lcof/
+     *
+     * @param n 长度为 n 的绳子
+     * @return 请把绳子剪成整数长度的 m 段,并返回最大乘积。
+     */
+    public int cuttingRope(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            int curMax = 0;
+            for (int j = 1; j < i; j++) {
+                curMax = Math.max(curMax, Math.max(j * (i - j), j * dp[i - j]));
+            }
+            dp[i] = curMax;
+        }
+        return dp[n];
+    }
+    //endregion
+
+    //region    20230324    剑指 Offer 15. 二进制中1的个数
+
+    /**
+     * https://leetcode.cn/problems/er-jin-zhi-zhong-1de-ge-shu-lcof
+     *
+     * @param n 一个无符号整数（以二进制串的形式） n
+     * @return 返回其二进制表达式中数字位数为 '1' 的个数
+     */
+    public int hammingWeight(int n) {
+        int ret = 0;
+        while (n != 0) {
+            n &= n - 1;
+            ret++;
+        }
+        return ret;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 16. 数值的整数次方
+
+    /**
+     * https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
+     *
+     * @param x 数字 x
+     * @param n n 次方
+     * @return 计算 x 的 n 次幂函数
+     */
+    public double myPow(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
+    }
+
+    public double quickMul(double x, long N) {
+        if (N == 0) {
+            return 1.0;
+        }
+        double y = quickMul(x, N / 2);
+        return N % 2 == 0 ? y * y : y * y * x;
     }
     //endregion
 
@@ -551,6 +658,46 @@ public class TargetLcof {
 
     //endregion
 
+    //region    20230328    剑指 Offer 29. 顺时针打印矩阵
+
+    /**
+     * https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
+     *
+     * @param matrix 矩阵 matrix
+     * @return 按照从外向里以顺时针的顺序依次打印出每一个数字
+     */
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
+        int rows = matrix.length, columns = matrix[0].length;
+        int[] order = new int[rows * columns];
+        int index = 0;
+        int left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+        while (left <= right && top <= bottom) {
+            for (int column = left; column <= right; column++) {
+                order[index++] = matrix[top][column];
+            }
+            for (int row = top + 1; row <= bottom; row++) {
+                order[index++] = matrix[row][right];
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    order[index++] = matrix[bottom][column];
+                }
+                for (int row = bottom; row > top; row--) {
+                    order[index++] = matrix[row][left];
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return order;
+    }
+    //endregion
+
     //region    20230305    剑指 Offer 30. 包含min函数的栈
 
     /**
@@ -584,6 +731,28 @@ public class TargetLcof {
         public int min() {
             return minStack.peek();
         }
+    }
+    //endregion
+
+    //region    20230328    剑指 Offer 31. 栈的压入、弹出序列
+
+    /**
+     * https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+     * @param pushed 入栈序列
+     * @param popped 出栈序列
+     * @return 判断第二个序列是否为该栈的弹出顺序
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int n = pushed.length;
+        for (int i = 0, j = 0; i < n; i++) {
+            stack.push(pushed[i]);
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
     }
     //endregion
 
@@ -698,6 +867,34 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230324    剑指 Offer 33. 二叉搜索树的后序遍历序列
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/
+     *
+     * @param postorder 一个整数数组 postorder
+     * @return 判断该数组是不是某二叉搜索树的后序遍历结果
+     */
+    public boolean verifyPostorder(int[] postorder) {
+        return recur(postorder, 0, postorder.length - 1);
+    }
+
+    public boolean recur(int[] postorder, int i, int j) {
+        if (i >= j) {
+            return true;
+        }
+        int p = i;
+        while (postorder[p] < postorder[j]) {
+            p++;
+        }
+        int m = p;
+        while (postorder[p] > postorder[j]) {
+            p++;
+        }
+        return p == j && recur(postorder, i, m - 1) && recur(postorder, m, j - 1);
+    }
+    //endregion
+
     //region    20230318    剑指 Offer 34. 二叉树中和为某一值的路径
 
     /**
@@ -800,6 +997,20 @@ public class TargetLcof {
         cur.left = pre;//pre是否为null对这句没有影响,且这句放在上面两句if else之前也是可以的。
         pre = cur;//pre指向当前的cur
         dfs(cur.right);//全部迭代完成后，pre指向双向链表中的尾节点
+    }
+    //endregion
+
+    //region    20230326    剑指 Offer 39. 数组中出现次数超过一半的数字
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof
+     *
+     * @param nums 整数数组 nums
+     * @return 返回数组中超过一半的数字
+     */
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
     }
     //endregion
 
@@ -1131,8 +1342,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ping-heng-er-cha-shu-lcof/description/
-     * @param root  二叉树的根节点 root
-     * @return  判断它是否为平衡二叉树
+     *
+     * @param root 二叉树的根节点 root
+     * @return 判断它是否为平衡二叉树
      */
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -1148,6 +1360,60 @@ public class TargetLcof {
         } else {
             return Math.max(height(root.left), height(root.right)) + 1;
         }
+    }
+    //endregion
+
+    //region    20230325    剑指 Offer 56 - I. 数组中数字出现的次数
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
+     *
+     * @param nums 整型数组 nums
+     * @return 找出这两个只出现一次的数字
+     */
+    public int[] singleNumbers(int[] nums) {
+        int res = 0;
+        for (int n : nums) {
+            res ^= n;
+        }
+        int div = 1;
+        while ((div & res) == 0) {
+            div <<= 1;
+        }
+        int a = 0, b = 0;
+        for (int n : nums) {
+            if ((div & n) != 0) {
+                a ^= n;
+            } else {
+                b ^= n;
+            }
+        }
+        return new int[]{a, b};
+    }
+    //endregion
+
+    //region    20230325    剑指 Offer 56 - II. 数组中数字出现的次数 II
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
+     *
+     * @param nums 数组 nums
+     * @return 请找出那个只出现一次的数字
+     */
+    public int singleNumber(int[] nums) {
+        int[] counts = new int[32];
+        for (int num : nums) {
+            for (int j = 0; j < 32; j++) {
+                counts[j] += num & 1;
+                num >>>= 1;
+            }
+        }
+        int res = 0, m = 3;
+        for (int i = 0; i < 32; i++) {
+            res <<= 1;
+            res |= counts[31 - i] % m;
+        }
+        return res;
     }
     //endregion
 
@@ -1188,6 +1454,35 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230327    剑指 Offer 57 - II. 和为s的连续正数序列
+
+    /**
+     * https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+     *
+     * @param target 正整数 target
+     * @return 输出所有和为 target 的连续正整数序列（至少含有两个数）
+     */
+    public int[][] findContinuousSequence(int target) {
+        List<int[]> vec = new ArrayList<int[]>();
+        for (int left = 1, right = 2; left < right; ) {
+            int sum = (left + right) * (right - left + 1) / 2;
+            if (sum == target) {
+                int[] res = new int[right - left + 1];
+                for (int i = left; i <= right; i++) {
+                    res[i - left] = i;
+                }
+                vec.add(res);
+                left++;
+            } else if (sum < target) {
+                right++;
+            } else {
+                left++;
+            }
+        }
+        return vec.toArray(new int[vec.size()][]);
+    }
+    //endregion
+
     //region    20230316    剑指 Offer 58 - I. 翻转单词顺序
 
     /**
@@ -1220,6 +1515,76 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230327    剑指 Offer 62. 圆圈中最后剩下的数字
+
+    /**
+     * https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
+     *
+     * @param n 0-n-1 n个数字
+     * @param m 每轮删除第m个数字
+     * @return 最后剩下的数字
+     */
+    public int lastRemaining(int n, int m) {
+        return fn(n, m);
+    }
+
+    public int fn(int n, int m) {
+        if (n == 1) {
+            return 0;
+        }
+        int x = fn(n - 1, m);
+        return (m + x) % n;
+    }
+    //endregion
+
+    //region    20230312    剑指 Offer 63. 股票的最大利润
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxPrice = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > maxPrice) {
+                maxPrice = prices[i] - minPrice;
+            }
+        }
+        return maxPrice;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 64. 求1+2+…+n
+
+    /**
+     * https://leetcode.cn/problems/qiu-12n-lcof/
+     *
+     * @param n 求1+2+…+n
+     * @return
+     */
+    public int sumNums(int n) {
+        boolean flag = n > 0 && (n += sumNums(n - 1)) > 0;
+        return n;
+    }
+    //endregion
+
+    //region    20230324    剑指 Offer 65. 不用加减乘除做加法
+
+    /**
+     * https://leetcode.cn/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
+     *
+     * @param a 整数 a
+     * @param b 整数 b
+     * @return 求两个整数之和
+     */
+    public int add(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b) << 1;
+            a = a ^ b;
+            b = carry;
+        }
+        return a;
+    }
+    //endregion
+
     //region    20230319    面试题61. 扑克牌中的顺子
 
     /**
@@ -1246,18 +1611,95 @@ public class TargetLcof {
     }
     //endregion
 
-    //region    20230312    剑指 Offer 63. 股票的最大利润
-    public int maxProfit(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int maxPrice = 0;
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
-            } else if (prices[i] - minPrice > maxPrice) {
-                maxPrice = prices[i] - minPrice;
+    //region    20230326    剑指 Offer 66. 构建乘积数组
+
+    /**
+     * https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/
+     *
+     * @param a 数组 a
+     * @return 建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]
+     */
+    public int[] constructArr(int[] a) {
+        int length = a.length;
+        //L和R分别表示左右两侧的乘积列表
+        int[] L = new int[length];
+        int[] R = new int[length];
+
+        int[] answer = new int[length];
+
+        if (length == 0) {
+            return answer;
+        }
+        //L[i] 为索引i左侧所有元素的乘积
+        //对于索引为0的元素，因为左侧没有元素，所以L[0]=1
+        L[0] = 1;
+        for (int i = 1; i < length; i++) {
+            L[i] = a[i - 1] * L[i - 1];
+        }
+
+        //R[i] 为索引i右侧所有元素的乘积
+        //对于索引为 length-1 的元素，因为右侧没有元素，所以R[length-1]=1
+        R[length - 1] = 1;
+        for (int i = length - 2; i >= 0; i--) {
+            R[i] = a[i + 1] * R[i + 1];
+        }
+        //对于索引 i,除 a[i] 之外其余各元素的乘积
+        for (int i = 0; i < length; i++) {
+            answer[i] = R[i] * L[i];
+        }
+        return answer;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof
+     *
+     * @param root 二叉树根结点 root
+     * @param p    结点 p
+     * @param q    结点 q
+     * @return 该树中两个指定节点的最近公共祖先
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor = root;
+        while (true) {
+            if (p.val < ancestor.val && q.val < ancestor.val) {
+                ancestor = ancestor.left;
+            } else if (p.val > ancestor.val && q.val > ancestor.val) {
+                ancestor = ancestor.right;
+            } else {
+                break;
             }
         }
-        return maxPrice;
+        return ancestor;
+    }
+    //endregion
+
+    //region    20230322    剑指 Offer 68 - II. 二叉树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
+     *
+     * @param root 二叉树根结点 root
+     * @param p    结点 p
+     * @param q    结点 q
+     * @return 该树中两个指定节点的最近公共祖先且 x 的深度尽可能大
+     */
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null && right == null) {
+            return null; // 1.
+        }
+        if (left == null) {
+            return right; // 3.
+        }
+        if (right == null) {
+            return left; // 4.
+        }
+        return root; // 2. if(left != null and right != null)
     }
     //endregion
 

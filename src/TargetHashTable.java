@@ -211,6 +211,26 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230326    2395. 和相等的子数组
+
+    /**
+     * https://leetcode.cn/problems/find-subarrays-with-equal-sum/
+     * @param nums  下标从 0 开始的整数数组 nums
+     * @return 判断是否存在 两个 长度为 2 的子数组且它们的 和 相等。注意，这两个子数组起始位置的下标必须 不相同
+     */
+    public boolean findSubarrays(int[] nums) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int i = 1; i < nums.length; i++) {
+            if (hashSet.contains(nums[i] + nums[i - 1])) {
+                return true;
+            } else {
+                hashSet.add(nums[i] + nums[i - 1]);
+            }
+        }
+        return false;
+    }
+    //endregion
+
     public static void main(String[] args) {
         new TargetHashTable().containsNearbyAlmostDuplicate(new int[]{1, 5, 9, 1, 5, 9}, 2, 3);
     }

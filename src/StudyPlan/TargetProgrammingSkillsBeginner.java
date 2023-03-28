@@ -4,10 +4,10 @@ import java.util.*;
 
 /**
  * @author yyb
- * leetcode_studyplan_ProgrammingSkillsBasic
- * leetcode 学习计划 编程能力基础
+ * leetcode_studyplan_ProgrammingSkillsBeginner
+ * leetcode 学习计划 编程能力入门
  */
-public class TargetProgrammingSkillsBasic {
+public class TargetProgrammingSkillsBeginner {
 
     //region    自定义数据结构
     public class Node {
@@ -134,6 +134,50 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230322    232. 用栈实现队列
+
+    /**
+     * https://leetcode.cn/problems/implement-queue-using-stacks/
+     * 用栈实现队列
+     */
+    class MyQueue {
+
+        Stack<Integer> inStack;
+        Stack<Integer> outStack;
+
+        public MyQueue() {
+            inStack = new Stack<>();
+            outStack = new Stack<>();
+        }
+
+        public void push(int x) {
+            inStack.push(x);
+        }
+
+        public int pop() {
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.pop();
+        }
+
+        public int peek() {
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.peek();
+        }
+
+        public boolean empty() {
+            return inStack.isEmpty() && outStack.isEmpty();
+        }
+    }
+    //endregion
+
     //region    20230317    283. 移动零
 
     /**
@@ -156,6 +200,27 @@ public class TargetProgrammingSkillsBasic {
         int temp = nums[left];
         nums[left] = nums[right];
         nums[right] = temp;
+    }
+    //endregion
+
+    //region    20230322    303. 区域和检索 - 数组不可变
+
+    /**
+     * https://leetcode.cn/problems/range-sum-query-immutable/
+     */
+    class NumArray {
+
+        int[] presum;
+        public NumArray(int[] nums) {
+            presum=new int[nums.length+1];
+            for (int i = 0; i < nums.length; i++) {
+                presum[i+1]=presum[i]+nums[i];
+            }
+        }
+
+        public int sumRange(int left, int right) {
+            return presum[right+1]-presum[left];
+        }
     }
     //endregion
 
@@ -411,6 +476,38 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230322    1356. 根据数字二进制下 1 的数目排序
+
+    /**
+     * https://leetcode.cn/problems/sort-integers-by-the-number-of-1-bits/
+     * @param arr   整数数组 arr
+     * @return 将数组中的元素按照其二进制表示中数字 1 的数目升序排序, 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。
+     */
+    public int[] sortByBits(int[] arr) {
+        List<Integer> list = new ArrayList<Integer>();
+        for (int x : arr) {
+            list.add(x);
+        }
+        int[] bit = new int[10001];
+        for (int i = 1; i <= 10000; ++i) {
+            bit[i] = bit[i >> 1] + (i & 1);
+        }
+        Collections.sort(list, new Comparator<Integer>() {
+            public int compare(Integer x, Integer y) {
+                if (bit[x] != bit[y]) {
+                    return bit[x] - bit[y];
+                } else {
+                    return x - y;
+                }
+            }
+        });
+        for (int i = 0; i < arr.length; ++i) {
+            arr[i] = list.get(i);
+        }
+        return arr;
+    }
+    //endregion
+
     //region    20230312    1491. 去掉最低工资和最高工资后的工资平均值
 
     /**
@@ -487,6 +584,43 @@ public class TargetProgrammingSkillsBasic {
             }
         }
         return sum;
+    }
+    //endregion
+
+    //region    20230323    1603. 设计停车系统
+
+    /**
+     * https://leetcode.cn/problems/design-parking-system/
+     */
+    class ParkingSystem {
+
+        int big, medium, small;
+
+        public ParkingSystem(int big, int medium, int small) {
+            this.big = big;
+            this.medium = medium;
+            this.small = small;
+        }
+
+        public boolean addCar(int carType) {
+            if (carType == 1) {
+                if (big > 0) {
+                    big--;
+                    return true;
+                }
+            } else if (carType == 2) {
+                if (medium > 0) {
+                    medium--;
+                    return true;
+                }
+            } else if (carType == 3) {
+                if (small > 0) {
+                    small--;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
     //endregion
 

@@ -2562,6 +2562,72 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230322    1626. 无矛盾的最佳球队
+
+    /**
+     * https://leetcode.cn/problems/best-team-with-no-conflicts/
+     *
+     * @param scores 列表 scores
+     * @param ages   列表 ages
+     * @return 返回 所有可能的无矛盾球队中得分最高那支的分数。
+     */
+    public int bestTeamScore(int[] scores, int[] ages) {
+        int n = scores.length;
+        int[][] people = new int[n][2];
+        for (int i = 0; i < n; ++i) {
+            people[i] = new int[]{scores[i], ages[i]};
+        }
+        Arrays.sort(people, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
+        int[] dp = new int[n];
+        int res = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = i - 1; j >= 0; --j) {
+                if (people[j][1] <= people[i][1]) {
+                    dp[i] = Math.max(dp[i], dp[j]);
+                }
+            }
+            dp[i] += people[i][0];
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230327    1638. 统计只差一个字符的子串数目
+
+    /**
+     * https://leetcode.cn/problems/count-substrings-that-differ-by-one-character/
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return  请你找到 s 和 t 串中 恰好 只有一个字符不同的子字符串对的数目
+     */
+    public int countSubstrings(String s, String t) {
+        int m = s.length(), n = t.length();
+        int[][] dpl = new int[m + 1][n + 1];
+        int[][] dpr = new int[m + 1][n + 1];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                dpl[i + 1][j + 1] = s.charAt(i) == t.charAt(j) ? (dpl[i][j] + 1) : 0;
+            }
+        }
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                dpr[i][j] = s.charAt(i) == t.charAt(j) ? (dpr[i][j] + 1) : 0;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (s.charAt(i) != t.charAt(j)) {
+                    ans += (dpl[i][j] + 1) * (dpr[i + 1][j + 1] + 1);
+                }
+            }
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230306    1653. 使字符串平衡的最少删除次数
 
     /**
