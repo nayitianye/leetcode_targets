@@ -227,6 +227,31 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230330    70. 爬楼梯
+    HashMap<Integer, Integer> hashMapClimbStairs = new HashMap<>();
+
+    /**
+     * https://leetcode.cn/problems/climbing-stairs/
+     *
+     * @param n n 阶楼梯
+     * @return 多少种方法
+     */
+    public int climbStairs(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 2;
+        } else {
+            if (hashMapClimbStairs.containsKey(n)) {
+                return hashMapClimbStairs.get(n);
+            } else {
+                hashMapClimbStairs.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+                return hashMapClimbStairs.get(n);
+            }
+        }
+    }
+    //endregion
+
     //region    20230329    77. 组合
 
     /**
@@ -307,6 +332,32 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230330    120. 三角形最小路径和
+
+    /**
+     * https://leetcode.cn/problems/triangle/
+     *
+     * @param triangle 三角形 triangle
+     * @return 自顶向下的最小路径和
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] dp = new int[triangle.size()];
+        dp[0] = triangle.get(0).get(0);
+        for (int i = 1; i < triangle.size(); i++) {
+            dp[i] = dp[i - 1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; --j) {
+                dp[j] = Math.min(dp[j - 1], dp[j]) + triangle.get(i).get(j);
+            }
+            dp[0] += triangle.get(i).get(0);
+        }
+        int minTotal = dp[0];
+        for (int i = 1; i < triangle.size(); i++) {
+            minTotal = Math.min(minTotal, dp[i]);
+        }
+        return minTotal;
+    }
+    //endregion
+
     //region    20230321    167. 两数之和 II - 输入有序数组
 
     /**
@@ -360,6 +411,32 @@ public class TargetAlgorithmsBeginner {
         }
     }
     //endregion
+
+    //region    20230330    198. 打家劫舍
+
+    /**
+     * https://leetcode.cn/problems/house-robber/
+     *
+     * @param nums 一个代表每个房屋存放金额的非负整数数
+     * @return 计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
+     */
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    // endregion
 
     //region    20230328    206. 反转链表
 
