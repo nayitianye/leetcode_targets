@@ -455,6 +455,40 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230329    剑指 Offer 20. 表示数值的字符串
+
+    /**
+     * https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof
+     * @param s 字符串 s
+     * @return  判断字符串是否表示数值
+     */
+    public boolean isNumber(String s) {
+        Map[] states = {
+                new HashMap<Character,Integer>() {{ put(' ', 0); put('s', 1); put('d', 2); put('.', 4); }}, // 0.
+                new HashMap<Character,Integer>() {{ put('d', 2); put('.', 4); }},                           // 1.
+                new HashMap<Character,Integer>() {{ put('d', 2); put('.', 3); put('e', 5); put(' ', 8); }}, // 2.
+                new HashMap<Character,Integer>() {{ put('d', 3); put('e', 5); put(' ', 8); }},              // 3.
+                new HashMap<Character,Integer>() {{ put('d', 3); }},                                        // 4.
+                new HashMap<Character,Integer>() {{ put('s', 6); put('d', 7); }},                           // 5.
+                new HashMap<Character,Integer>() {{ put('d', 7); }},                                        // 6.
+                new HashMap<Character,Integer>() {{ put('d', 7); put(' ', 8); }},                           // 7.
+                new HashMap<Character,Integer>() {{ put(' ', 8); }}                                         // 8.
+        };
+        int p = 0;
+        char t;
+        for(char c : s.toCharArray()) {
+            if(c >= '0' && c <= '9') t = 'd';
+            else if(c == '+' || c == '-') t = 's';
+            else if(c == 'e' || c == 'E') t = 'e';
+            else if(c == '.' || c == ' ') t = c;
+            else t = '?';
+            if(!states[p].containsKey(t)) return false;
+            p = (int)states[p].get(t);
+        }
+        return p == 2 || p == 3 || p == 7 || p == 8;
+    }
+    //endregion
+
     //region    20230316    剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
 
     /**
@@ -1648,6 +1682,43 @@ public class TargetLcof {
             answer[i] = R[i] * L[i];
         }
         return answer;
+    }
+    //endregion
+
+    //region    20230329    面试题67. 把字符串转换成整数
+
+    /**
+     * https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof
+     * @param str  字符串
+     * @return  一个函数 StrToInt，实现把字符串转换成整数这个功能
+     */
+    public int strToInt(String str) {
+        int res = 0, bndry = Integer.MAX_VALUE / 10;
+        int i = 0, sign = 1, length = str.length();
+        if(length == 0){
+            return 0;
+        }
+        while(str.charAt(i) == ' '){
+            if(++i == length) {
+                return 0;
+            }
+        }
+        if(str.charAt(i) == '-') {
+            sign = -1;
+        }
+        if(str.charAt(i) == '-' || str.charAt(i) == '+') {
+            i++;
+        }
+        for(int j = i; j < length; j++) {
+            if(str.charAt(j) < '0' || str.charAt(j) > '9') {
+                break;
+            }
+            if(res > bndry || res == bndry && str.charAt(j) > '7'){
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + (str.charAt(j) - '0');
+        }
+        return sign * res;
     }
     //endregion
 

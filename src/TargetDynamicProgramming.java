@@ -436,6 +436,62 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230215    70. 爬楼梯
+
+    /**
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     * <p>
+     * 示例 1：
+     * 输入：n = 2
+     * 输出：2
+     * 解释：有两种方法可以爬到楼顶。
+     * 1. 1 阶 + 1 阶
+     * 2. 2 阶
+     * 示例 2：
+     * 输入：n = 3
+     * 输出：3
+     * 解释：有三种方法可以爬到楼顶。
+     * 1. 1 阶 + 1 阶 + 1 阶
+     * 2. 1 阶 + 2 阶
+     * 3. 2 阶 + 1 阶
+     * <p>
+     * 提示：
+     * 1 <= n <= 45
+     *
+     * @param n 爬楼梯。需要 n 阶你才能到达楼顶
+     * @return 多少种不同的方法可以爬到楼顶
+     */
+    public int climbStairs(int n) {
+        if (hashmap.containsKey(n)) {
+            return hashmap.get(n);
+        }
+        if (n <= 2) {
+            return n;
+        } else {
+            hashmap.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+            return hashmap.get(n);
+        }
+    }
+
+    HashMap<Integer, Integer> hashmap = new HashMap<>();
+
+    public int climbStairs1(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        int curr = 1;
+        int next = 2;
+        int temp;
+        for (int i = 3; i <= n; i++) {
+            temp = curr + next;
+            curr = next;
+            next = temp;
+        }
+        return next;
+    }
+    //endregion
+
     //region    20230304    72. 编辑距离
 
     /**
@@ -499,62 +555,6 @@ public class TargetDynamicProgramming {
             }
         }
         return dp[n][m];
-    }
-    //endregion
-
-    //region    20230215    70. 爬楼梯
-
-    /**
-     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
-     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
-     * <p>
-     * 示例 1：
-     * 输入：n = 2
-     * 输出：2
-     * 解释：有两种方法可以爬到楼顶。
-     * 1. 1 阶 + 1 阶
-     * 2. 2 阶
-     * 示例 2：
-     * 输入：n = 3
-     * 输出：3
-     * 解释：有三种方法可以爬到楼顶。
-     * 1. 1 阶 + 1 阶 + 1 阶
-     * 2. 1 阶 + 2 阶
-     * 3. 2 阶 + 1 阶
-     * <p>
-     * 提示：
-     * 1 <= n <= 45
-     *
-     * @param n 爬楼梯。需要 n 阶你才能到达楼顶
-     * @return 多少种不同的方法可以爬到楼顶
-     */
-    public int climbStairs(int n) {
-        if (hashmap.containsKey(n)) {
-            return hashmap.get(n);
-        }
-        if (n <= 2) {
-            return n;
-        } else {
-            hashmap.put(n, climbStairs(n - 1) + climbStairs(n - 2));
-            return hashmap.get(n);
-        }
-    }
-
-    HashMap<Integer, Integer> hashmap = new HashMap<>();
-
-    public int climbStairs1(int n) {
-        if (n <= 2) {
-            return n;
-        }
-        int curr = 1;
-        int next = 2;
-        int temp;
-        for (int i = 3; i <= n; i++) {
-            temp = curr + next;
-            curr = next;
-            next = temp;
-        }
-        return next;
     }
     //endregion
 
@@ -2597,9 +2597,10 @@ public class TargetDynamicProgramming {
 
     /**
      * https://leetcode.cn/problems/count-substrings-that-differ-by-one-character/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
-     * @return  请你找到 s 和 t 串中 恰好 只有一个字符不同的子字符串对的数目
+     * @return 请你找到 s 和 t 串中 恰好 只有一个字符不同的子字符串对的数目
      */
     public int countSubstrings(String s, String t) {
         int m = s.length(), n = t.length();
@@ -2625,6 +2626,25 @@ public class TargetDynamicProgramming {
             }
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230329    1641. 统计字典序元音字符串的数目
+
+    /**
+     * https://leetcode.cn/problems/count-sorted-vowel-strings/
+     * @param n  一个整数 n
+     * @return  返回长度为 n 、仅由元音 (a, e, i, o, u) 组成且按 字典序排列 的字符串数量
+     */
+    public int countVowelStrings(int n) {
+        int[] dp = new int[5];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < 5; j++) {
+                dp[j] += dp[j - 1];
+            }
+        }
+        return Arrays.stream(dp).sum();
     }
     //endregion
 

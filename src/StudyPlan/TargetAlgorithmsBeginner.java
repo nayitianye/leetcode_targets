@@ -192,11 +192,82 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230329    46. 全排列
+
+    /**
+     * https://leetcode.cn/problems/permutations/
+     *
+     * @param nums 不含重复数字的数组 num
+     * @return 返回其 所有可能的全排列
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int num : nums) {
+            output.add(num);
+        }
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
+    }
+
+    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
+        //所有数都填完了
+        if (first == n) {
+            res.add(new ArrayList<>(output));
+        }
+        for (int i = first; i < n; i++) {
+            //动态维护数组
+            Collections.swap(output, first, i);
+            //继续递归填下一个数
+            backtrack(n, output, res, first + 1);
+            //撤销操作
+            Collections.swap(output, first, i);
+        }
+    }
+    //endregion
+
+    //region    20230329    77. 组合
+
+    /**
+     * https://leetcode.cn/problems/combinations/
+     *
+     * @param n 整数 n
+     * @param k 整数 k
+     * @return 回范围 [1, n] 中所有可能的 k 个数的组合
+     */
+    public List<List<Integer>> combine(int n, int k) {
+        dfs(1, n, k);
+        return ans;
+    }
+
+    public void dfs(int cur, int n, int k) {
+        //剪枝；temp 长度加上区间【cur,n】的长度小于 k, 不可能构造出长度为 k 的temp;
+        if (temp.size() + (n - cur + 1) < k) {
+            return;
+        }
+        // 记录合法的答案
+        if (temp.size() == k) {
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        //考虑选择当前位置
+        temp.add(cur);
+        dfs(cur + 1, n, k);
+        temp.remove(temp.size() - 1);
+        dfs(cur + 1, n, k);
+    }
+
+    List<Integer> temp = new ArrayList<>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    //endregion
+
     //region    20230328    116. 填充每个节点的下一个右侧节点指针
 
     /**
      * https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/description/
-     * @param root  完美二叉树 root
+     *
+     * @param root 完美二叉树 root
      * @return
      */
     public Node connect(Node root) {
@@ -652,6 +723,35 @@ public class TargetAlgorithmsBeginner {
         floodFill(image, sr - 1, sc, newColor, oldColor);
         floodFill(image, sr, sc + 1, newColor, oldColor);
         floodFill(image, sr, sc - 1, newColor, oldColor);
+    }
+    //endregion
+
+    //region    20230329    784. 字母大小写全排列
+
+    /**
+     * https://leetcode.cn/problems/letter-case-permutation
+     *
+     * @param s 字符串 s
+     * @return 通过将字符串 s 中的每个字母转变大小写，我们可以获得一个新的字符串,返回 所有可能得到的字符串集合
+     */
+    public List<String> letterCasePermutation(String s) {
+        List<String> ans = new ArrayList<>();
+        dfsPermutation(s.toCharArray(), 0, ans);
+        return ans;
+    }
+
+    public void dfsPermutation(char[] arr, int pos, List<String> res) {
+        while (pos < arr.length && Character.isDigit(arr[pos])) {
+            pos++;
+        }
+        if (pos == arr.length) {
+            res.add(new String(arr));
+            return;
+        }
+        arr[pos] ^= 32;
+        dfsPermutation(arr, pos + 1, res);
+        arr[pos] ^= 32;
+        dfsPermutation(arr, pos + 1, res);
     }
     //endregion
 
