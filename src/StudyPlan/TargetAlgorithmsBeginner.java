@@ -412,6 +412,25 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230330    191. 位1的个数
+
+    /**
+     * https://leetcode.cn/problems/number-of-1-bits/description/
+     *
+     * @param n 输入是一个无符号整数（以二进制串的形式）
+     * @return 返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）
+     */
+    public int hammingWeight(int n) {
+        int ret = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & (1 << i)) != 0) {
+                ret++;
+            }
+        }
+        return ret;
+    }
+    //endregion
+
     //region    20230330    198. 打家劫舍
 
     /**
@@ -477,6 +496,18 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region    20230331    231. 2 的幂
+
+    /**
+     * https://leetcode.cn/problems/power-of-two/
+     * @param n 一个整数 n
+     * @return  判断该整数是否是 2 的幂次方
+     */
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
     }
     //endregion
 

@@ -1065,6 +1065,84 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230331    剑指 Offer 37. 序列化二叉树
+
+    /**
+     * https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/
+     */
+    public class Codec {
+        public String serialize(TreeNode root) {
+            return rserialize(root, "");
+        }
+
+        public TreeNode deserialize(String data) {
+            String[] dataArray = data.split(",");
+            List<String> dataList = new LinkedList<String>(Arrays.asList(dataArray));
+            return rdeserialize(dataList);
+        }
+
+        public String rserialize(TreeNode root, String str) {
+            if (root == null) {
+                str += "None,";
+            } else {
+                str += str.valueOf(root.val) + ",";
+                str = rserialize(root.left, str);
+                str = rserialize(root.right, str);
+            }
+            return str;
+        }
+
+        public TreeNode rdeserialize(List<String> dataList) {
+            if (dataList.get(0).equals("None")) {
+                dataList.remove(0);
+                return null;
+            }
+
+            TreeNode root = new TreeNode(Integer.valueOf(dataList.get(0)));
+            dataList.remove(0);
+            root.left = rdeserialize(dataList);
+            root.right = rdeserialize(dataList);
+
+            return root;
+        }
+    }
+    //endregion
+
+    //region    20230331    剑指 Offer 38. 字符串的排列
+
+    /**
+     * https://leetcode.cn/problems/zi-fu-chuan-de-pai-lie-lcof
+     * @param s 一个字符串 s
+     * @return 打印出该字符串中字符的所有排列
+     */
+    public String[] permutation(String s) {
+        result = new ArrayList<>();
+        visited = new boolean[s.length()];
+        char[] payloads = s.toCharArray();
+        Arrays.sort(payloads);
+        permuate(payloads, "");
+
+        return result.stream().toArray(String[]::new);
+    }
+
+    private void permuate(char[] s, String p) {
+        if (p.length() == s.length) {
+            result.add(p);
+            return;
+        }
+        for (int i = 0; i < s.length; i++) {
+            if (visited[i] || (i > 0 && s[i] == s[i - 1] && !visited[i - 1])) {
+                continue;
+            }
+            visited[i] = true;
+            permuate(s, p + s[i]);
+            visited[i] = false;
+        }
+    }
+    private List<String> result;
+    private boolean[] visited;
+    //endregion
+
     //region    20230326    剑指 Offer 39. 数组中出现次数超过一半的数字
 
     /**

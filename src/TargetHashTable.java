@@ -211,11 +211,35 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230331    2367. 算术三元组的数目
+
+    /**
+     * https://leetcode.cn/problems/number-of-arithmetic-triplets/
+     * @param nums  严格递增 的整数数组 num
+     * @param diff  一个正整数 diff
+     * @return  不同 算术三元组 的数目
+     */
+    public int arithmeticTriplets(int[] nums, int diff) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            hashSet.add(nums[i]);
+        }
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (hashSet.contains(nums[i] + diff) && hashSet.contains(nums[i] + diff * 2)) {
+                res++;
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230326    2395. 和相等的子数组
 
     /**
      * https://leetcode.cn/problems/find-subarrays-with-equal-sum/
-     * @param nums  下标从 0 开始的整数数组 nums
+     *
+     * @param nums 下标从 0 开始的整数数组 nums
      * @return 判断是否存在 两个 长度为 2 的子数组且它们的 和 相等。注意，这两个子数组起始位置的下标必须 不相同
      */
     public boolean findSubarrays(int[] nums) {
