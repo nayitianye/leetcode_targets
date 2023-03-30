@@ -459,31 +459,61 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof
+     *
      * @param s 字符串 s
-     * @return  判断字符串是否表示数值
+     * @return 判断字符串是否表示数值
      */
     public boolean isNumber(String s) {
         Map[] states = {
-                new HashMap<Character,Integer>() {{ put(' ', 0); put('s', 1); put('d', 2); put('.', 4); }}, // 0.
-                new HashMap<Character,Integer>() {{ put('d', 2); put('.', 4); }},                           // 1.
-                new HashMap<Character,Integer>() {{ put('d', 2); put('.', 3); put('e', 5); put(' ', 8); }}, // 2.
-                new HashMap<Character,Integer>() {{ put('d', 3); put('e', 5); put(' ', 8); }},              // 3.
-                new HashMap<Character,Integer>() {{ put('d', 3); }},                                        // 4.
-                new HashMap<Character,Integer>() {{ put('s', 6); put('d', 7); }},                           // 5.
-                new HashMap<Character,Integer>() {{ put('d', 7); }},                                        // 6.
-                new HashMap<Character,Integer>() {{ put('d', 7); put(' ', 8); }},                           // 7.
-                new HashMap<Character,Integer>() {{ put(' ', 8); }}                                         // 8.
+                new HashMap<Character, Integer>() {{
+                    put(' ', 0);
+                    put('s', 1);
+                    put('d', 2);
+                    put('.', 4);
+                }}, // 0.
+                new HashMap<Character, Integer>() {{
+                    put('d', 2);
+                    put('.', 4);
+                }},                           // 1.
+                new HashMap<Character, Integer>() {{
+                    put('d', 2);
+                    put('.', 3);
+                    put('e', 5);
+                    put(' ', 8);
+                }}, // 2.
+                new HashMap<Character, Integer>() {{
+                    put('d', 3);
+                    put('e', 5);
+                    put(' ', 8);
+                }},              // 3.
+                new HashMap<Character, Integer>() {{
+                    put('d', 3);
+                }},                                        // 4.
+                new HashMap<Character, Integer>() {{
+                    put('s', 6);
+                    put('d', 7);
+                }},                           // 5.
+                new HashMap<Character, Integer>() {{
+                    put('d', 7);
+                }},                                        // 6.
+                new HashMap<Character, Integer>() {{
+                    put('d', 7);
+                    put(' ', 8);
+                }},                           // 7.
+                new HashMap<Character, Integer>() {{
+                    put(' ', 8);
+                }}                                         // 8.
         };
         int p = 0;
         char t;
-        for(char c : s.toCharArray()) {
-            if(c >= '0' && c <= '9') t = 'd';
-            else if(c == '+' || c == '-') t = 's';
-            else if(c == 'e' || c == 'E') t = 'e';
-            else if(c == '.' || c == ' ') t = c;
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') t = 'd';
+            else if (c == '+' || c == '-') t = 's';
+            else if (c == 'e' || c == 'E') t = 'e';
+            else if (c == '.' || c == ' ') t = c;
             else t = '?';
-            if(!states[p].containsKey(t)) return false;
-            p = (int)states[p].get(t);
+            if (!states[p].containsKey(t)) return false;
+            p = (int) states[p].get(t);
         }
         return p == 2 || p == 3 || p == 7 || p == 8;
     }
@@ -772,6 +802,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+     *
      * @param pushed 入栈序列
      * @param popped 出栈序列
      * @return 判断第二个序列是否为该栈的弹出顺序
@@ -1549,6 +1580,73 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230330    剑指 Offer 59 - I. 滑动窗口的最大值
+
+    /**
+     * https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof
+     * @param nums  一个数组 nums
+     * @param k 滑动窗口的大小 k
+     * @return
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] != o2[0] ? o2[0] - o1[0] : o2[1] - o1[1];
+            }
+        });
+        for (int i = 0; i < k; i++) {
+            pq.offer(new int[]{nums[i], i});
+        }
+        int[] res = new int[n - k + 1];
+        res[0] = pq.peek()[0];
+        for (int i = k; i < n; i++) {
+            pq.offer(new int[]{nums[i], i});
+            while (pq.peek()[1] <= i - k) {
+                pq.poll();
+            }
+            res[i - k + 1] = pq.peek()[0];
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230330    面试题59 - II. 队列的最大值
+
+    /**
+     * https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof
+     */
+    class MaxQueue {
+
+        int[] q = new int[20000];
+        int begin = 0, end = 0;
+
+        public MaxQueue() {
+
+        }
+
+        public int max_value() {
+            int ans = -1;
+            for (int i = begin; i != end; ++i) {
+                ans = Math.max(ans, q[i]);
+            }
+            return ans;
+        }
+
+        public void push_back(int value) {
+            q[end++] = value;
+        }
+
+        public int pop_front() {
+            if (begin == end) {
+                return -1;
+            }
+            return q[begin++];
+        }
+    }
+    //endregion
+
     //region    20230327    剑指 Offer 62. 圆圈中最后剩下的数字
 
     /**
@@ -1689,31 +1787,32 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof
-     * @param str  字符串
-     * @return  一个函数 StrToInt，实现把字符串转换成整数这个功能
+     *
+     * @param str 字符串
+     * @return 一个函数 StrToInt，实现把字符串转换成整数这个功能
      */
     public int strToInt(String str) {
         int res = 0, bndry = Integer.MAX_VALUE / 10;
         int i = 0, sign = 1, length = str.length();
-        if(length == 0){
+        if (length == 0) {
             return 0;
         }
-        while(str.charAt(i) == ' '){
-            if(++i == length) {
+        while (str.charAt(i) == ' ') {
+            if (++i == length) {
                 return 0;
             }
         }
-        if(str.charAt(i) == '-') {
+        if (str.charAt(i) == '-') {
             sign = -1;
         }
-        if(str.charAt(i) == '-' || str.charAt(i) == '+') {
+        if (str.charAt(i) == '-' || str.charAt(i) == '+') {
             i++;
         }
-        for(int j = i; j < length; j++) {
-            if(str.charAt(j) < '0' || str.charAt(j) > '9') {
+        for (int j = i; j < length; j++) {
+            if (str.charAt(j) < '0' || str.charAt(j) > '9') {
                 break;
             }
-            if(res > bndry || res == bndry && str.charAt(j) > '7'){
+            if (res > bndry || res == bndry && str.charAt(j) > '7') {
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             }
             res = res * 10 + (str.charAt(j) - '0');

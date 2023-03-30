@@ -850,6 +850,23 @@ public class TargetArray {
     }
     //endregion
 
+    //region    20230330    1637. 两点之间不包含任何点的最宽垂直区域
+
+    /**
+     * https://leetcode.cn/problems/widest-vertical-area-between-two-points-containing-no-points/
+     * @param points     n 个二维平面上的点 points ，其中 points[i] = [xi, yi]
+     * @return  请你返回两点之间内部不包含任何点的 最宽垂直区域 的宽度
+     */
+    public int maxWidthOfVerticalArea(int[][] points) {
+        Arrays.sort(points,(a,b)->a[0]-b[0]);
+        int max=0;
+        for (int i = 1; i < points.length; i++) {
+            max=Math.max(points[i][0]-points[i-1][0],max);
+        }
+        return max;
+    }
+    //endregion
+
     public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience) {
         int sum = 0;
         for (int e : energy) {

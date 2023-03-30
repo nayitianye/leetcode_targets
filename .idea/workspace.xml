@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点" />
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,7 +233,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6b8e48b8-2780-4f72-b9c5-706981ab9c15" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -354,14 +355,8 @@
       <workItem from="1679844961274" duration="5710000" />
       <workItem from="1679929216832" duration="7176000" />
       <workItem from="1680016971264" duration="2656000" />
-      <workItem from="1680100587104" duration="4887000" />
-    </task>
-    <task id="LOCAL-00018" summary="993. 二叉树的堂兄弟节点">
-      <created>1621264019392</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1621264019392</updated>
+      <workItem from="1680100587104" duration="5496000" />
+      <workItem from="1680178123398" duration="4886000" />
     </task>
     <task id="LOCAL-00019" summary="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯">
       <created>1676477735667</created>
@@ -699,7 +694,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680105338072</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍">
+      <created>1680108273480</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1680108273480</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -786,7 +788,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历" />
     <MESSAGE value="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III" />
     <MESSAGE value="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列" />
     <MESSAGE value="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩" />
@@ -811,7 +812,8 @@
     <MESSAGE value="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表" />
     <MESSAGE value="学习计划_算法入门：&#10;116. 填充每个节点的下一个右侧节点指针&#10;542. 01 矩阵&#10;994. 腐烂的橘子" />
     <MESSAGE value="学习计划_算法入门：&#10;46. 全排列&#10;77. 组合&#10;784. 字母大小写全排列&#10;学习计划_剑指offer:&#10;面试题67. 把字符串转换成整数&#10;剑指 Offer 20. 表示数值的字符串&#10;每日一题：&#10;1641. 统计字典序元音字符串的数目" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;46. 全排列&#10;77. 组合&#10;784. 字母大小写全排列&#10;学习计划_剑指offer:&#10;面试题67. 把字符串转换成整数&#10;剑指 Offer 20. 表示数值的字符串&#10;每日一题：&#10;1641. 统计字典序元音字符串的数目" />
+    <MESSAGE value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

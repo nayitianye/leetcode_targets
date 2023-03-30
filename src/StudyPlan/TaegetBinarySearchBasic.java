@@ -11,6 +11,25 @@ import java.util.List;
  */
 public class TaegetBinarySearchBasic {
 
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     //region    20230320    209. 长度最小的子数组
 
     /**
@@ -40,6 +59,50 @@ public class TaegetBinarySearchBasic {
             }
         }
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+    //endregion
+
+    //region    20230330    222. 完全二叉树的节点个数
+
+    /**
+     * https://leetcode.cn/problems/count-complete-tree-nodes
+     * @param root  完全二叉树 的根节点 root
+     * @return  求出该树的节点个数
+     */
+    public int countNodes(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int level = 0;
+        TreeNode node = root;
+        while (node.left != null) {
+            level++;
+            node = node.left;
+        }
+        int low = 1 << level, high = (1 << (level + 1)) - 1;
+        while (low < high) {
+            int mid = (high - low + 1) / 2 + low;
+            if (exists(root, level, mid)) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+    public boolean exists(TreeNode root, int level, int k) {
+        int bits = 1 << (level - 1);
+        TreeNode node = root;
+        while (node != null && bits > 0) {
+            if ((bits & k) == 0) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+            bits >>= 1;
+        }
+        return node != null;
     }
     //endregion
 
@@ -421,6 +484,66 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230330    1712. 将数组分成三个子数组的方案数
+
+    /**
+     * https://leetcode.cn/problems/ways-to-split-array-into-three-subarrays
+     *
+     * @param nums 非负 整数数组 nums
+     * @return 返回好的分割 nums 方案数目。由于答案可能会很大，请你将结果对 109 + 7 取余后返回
+     */
+    public int waysToSplit(int[] nums) {
+        int n = nums.length;
+        // 计算前缀和
+        int[] sums = new int[n];
+        sums[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            sums[i] = sums[i - 1] + nums[i];
+        }
+
+        final int MOD = 1000000000 + 7;
+        long ans = 0;
+        // 第一刀的最大值：sum(nums) / 3
+        int t = sums[n - 1] / 3;
+        for (int i = 0; i < n && sums[i] <= t; i++) {
+            // 二分查找第二刀的最小值：sum(mid) == sum(left)
+            // 在 [i+1, n] 中二分查找 sums[i] * 2，sums[i] 为到 i 为止元素和，因为是前缀数组，因而应该查找 sum(left) + sum(mid)
+            int left = lowerBound(i + 1, n - 1, sums, sums[i] * 2);
+            // 二分查找第二刀的最大值：sum(mid) == sum(mid + right) / 2
+            // 在 [i+1, n] 中二分查找 sums[i] + (sums[n - 1] - sums[i]) / 2)，因为是前缀数组，因而应该查找 sum(left) + sum(mid + right) / 2
+            int right = upperBound(i + 1, n - 1, sums, sums[i] + (sums[n - 1] - sums[i]) / 2);
+            if (right >= left) {
+                ans += right - left + 1;
+            }
+        }
+        return (int) (ans % MOD);
+    }
+
+    public int lowerBound(int left, int right, int[] nums, int target) {
+        while (left < right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+
+    public int upperBound(int left, int right, int[] nums, int target) {
+        while (left < right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left - 1;
+    }
+    //endregion
+
     //region    20230322    1760. 袋子里最少数目的球
 
     /**
@@ -501,9 +624,10 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/frequency-of-the-most-frequent-element/
-     * @param nums  整数数组 nums
-     * @param k 一个整数 k
-     * @return  返回数组中最高频元素的 最大可能频数
+     *
+     * @param nums 整数数组 nums
+     * @param k    一个整数 k
+     * @return 返回数组中最高频元素的 最大可能频数
      */
     public int maxFrequency(int[] nums, int k) {
         /*
