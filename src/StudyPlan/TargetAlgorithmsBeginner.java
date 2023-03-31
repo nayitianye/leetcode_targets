@@ -358,6 +358,22 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230401    136. 只出现一次的数字
+
+    /**
+     * https://leetcode.cn/problems/single-number/
+     * @param nums   非空 整数数组 nums
+     * @return  找出那个只出现了一次的元素
+     */
+    public int singleNumber(int[] nums) {
+        int res=0;
+        for (int num:nums) {
+            res^=num;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230321    167. 两数之和 II - 输入有序数组
 
     /**
@@ -409,6 +425,23 @@ public class TargetAlgorithmsBeginner {
             start++;
             end--;
         }
+    }
+    //endregion
+
+    //region    20230401    190. 颠倒二进制位
+
+    /**
+     * https://leetcode.cn/problems/reverse-bits/
+     * @param n  给定的 32 位无符号整数 n
+     * @return  颠倒给定的 32 位无符号整数的二进制位
+     */
+    public int reverseBits(int n) {
+        int rev = 0;
+        for (int i = 0; i < 32 && n != 0; ++i) {
+            rev |= (n & 1) << (31 - i);
+            n >>>= 1;
+        }
+        return rev;
     }
     //endregion
 
