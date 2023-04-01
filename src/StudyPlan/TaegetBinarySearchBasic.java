@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class TaegetBinarySearchBasic {
 
+    //region    自定义数据结构
     public class TreeNode {
         int val;
         TreeNode left;
@@ -29,6 +30,123 @@ public class TaegetBinarySearchBasic {
             this.right = right;
         }
     }
+    //endregion
+
+    //region    20230401    81. 搜索旋转排序数组 II
+
+    /**
+     * https://leetcode.cn/problems/search-in-rotated-sorted-array-ii/
+     *
+     * @param nums   按非降序排列的整数数组 nums ，数组中的值不必互不相同
+     * @param target 一个整数 target
+     * @return 如果 nums 中存在这个目标值 target ，则返回 true ，否则返回 false
+     */
+    public boolean search1(int[] nums, int target) {
+        int n = nums.length;
+        if (n == 0) {
+            return false;
+        }
+        if (n == 1) {
+            return nums[0] == target;
+        }
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return true;
+            }
+            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
+                left++;
+                right--;
+            } else if (nums[left] <= nums[mid]) {
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (nums[mid] < target && target <= nums[n - 1]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return false;
+    }
+    //endregion
+
+    //region    20230401    154. 寻找旋转排序数组中的最小值 II
+
+    /**
+     * https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/
+     * @param nums  可能存在 重复 元素值的数组 nums
+     * @return  请你找出并返回数组中的 最小元素
+     */
+    public int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            } else if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right -= 1;
+            }
+        }
+        return nums[left];
+    }
+    //endregion
+
+    //region    20230401    162. 寻找峰值
+
+    /**
+     * https://leetcode.cn/problems/find-peak-element/
+     *
+     * @param nums 数组 nums
+     * @return 返回 任何一个峰值 所在位置即可
+     */
+    public int findPeakElement(int[] nums) {
+        int n = nums.length;
+        int left = 0, right = n - 1, ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (compare(nums, mid - 1, mid) < 0 && compare(nums, mid, mid + 1) > 0) {
+                ans = mid;
+                break;
+            }
+            if (compare(nums, mid, mid + 1) < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    // 辅助函数，输入下标 i，返回一个二元组 (0/1, nums[i])
+    // 方便处理 nums[-1] 以及 nums[n] 的边界情况
+    public int[] get(int[] nums, int index) {
+        if (index == -1 || index == nums.length) {
+            return new int[]{0, 0};
+        }
+        return new int[]{1, nums[index]};
+    }
+
+    public int compare(int[] nums, int index1, int index2) {
+        int[] num1 = get(nums, index1);
+        int[] num2 = get(nums, index2);
+        if (num1[0] != num2[0]) {
+            return num1[0] > num2[0] ? 1 : -1;
+        }
+        if (num1[1] == num2[1]) {
+            return 0;
+        }
+        return num1[1] > num2[1] ? 1 : -1;
+    }
+    //endregion
 
     //region    20230320    209. 长度最小的子数组
 
@@ -66,8 +184,9 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/count-complete-tree-nodes
-     * @param root  完全二叉树 的根节点 root
-     * @return  求出该树的节点个数
+     *
+     * @param root 完全二叉树 的根节点 root
+     * @return 求出该树的节点个数
      */
     public int countNodes(TreeNode root) {
         if (root == null) {
@@ -249,6 +368,44 @@ public class TaegetBinarySearchBasic {
             }
         }
         return nums[left];
+    }
+    //endregion
+
+    //region    20230401    528. 按权重随机选择
+
+    /**
+     * https://leetcode.cn/problems/random-pick-with-weight/
+     */
+    class Solution {
+        int[] pre;
+        int total;
+
+        public Solution(int[] w) {
+            pre = new int[w.length];
+            pre[0] = w[0];
+            for (int i = 1; i < w.length; ++i) {
+                pre[i] = pre[i - 1] + w[i];
+            }
+            total = Arrays.stream(w).sum();
+        }
+
+        public int pickIndex() {
+            int x = (int) (Math.random() * total) + 1;
+            return binarySearch(x);
+        }
+
+        private int binarySearch(int x) {
+            int low = 0, high = pre.length - 1;
+            while (low < high) {
+                int mid = (high - low) / 2 + low;
+                if (pre[mid] < x) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return low;
+        }
     }
     //endregion
 

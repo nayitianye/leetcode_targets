@@ -170,7 +170,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetBookSortAlgorithms">
+  <component name="RunManager" selected="应用程序.TargetString">
     <configuration name="TaegetBinarySearchBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TaegetBinarySearchBasic" />
       <module name="leetcode_targets" />
@@ -197,9 +197,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
+    <configuration name="TargetLeetCode75Mid" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetLeetCode75Mid" />
       <module name="leetcode_targets" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StudyPlan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -220,10 +226,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetString" />
+        <item itemvalue="应用程序.TargetLeetCode75Mid" />
         <item itemvalue="应用程序.TargetBookSortAlgorithms" />
         <item itemvalue="应用程序.TaegetBinarySearchBasic" />
         <item itemvalue="应用程序.TargetTwoPointers" />
-        <item itemvalue="应用程序.TargetHashTable" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +240,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="33bb39bf-091e-4a9b-9220-1e3bf4201f51" name="变更" comment="" />
+      <changelist id="e91ee050-1614-4875-be84-082ba43b177b" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -358,14 +365,8 @@
       <workItem from="1680016971264" duration="2656000" />
       <workItem from="1680100587104" duration="5496000" />
       <workItem from="1680178123398" duration="7799000" />
-      <workItem from="1680273907010" duration="4799000" />
-    </task>
-    <task id="LOCAL-00021" summary="509. 斐波拉契数列&#10;70. 爬楼梯&#10;1137. 第N个泰波那契数&#10;746. 使用最小花费爬楼梯">
-      <created>1676478100356</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1676478100356</updated>
+      <workItem from="1680273907010" duration="5207000" />
+      <workItem from="1680322572287" duration="17723000" />
     </task>
     <task id="LOCAL-00022" summary="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数">
       <created>1676562995238</created>
@@ -703,7 +704,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680195161185</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测">
+      <created>1680280470169</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1680280470169</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -790,7 +798,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩" />
     <MESSAGE value="学习计划_数据结构初级&#10;学习计划_编程能力入门&#10;每日一题：" />
     <MESSAGE value="学习计划_LeetCode 75&#10;424. 替换后的最长重复字符&#10;438. 找到字符串中所有字母异位词&#10;学习计划_剑指 Offer&#10;剑指 Offer 48. 最长不含重复字符的子字符串" />
     <MESSAGE value="学习计划_编程能力入门&#10;283. 移动零&#10;496. 下一个更大元素 I&#10;1281. 整数的各位积和之差&#10;1588. 所有奇数长度子数组的和&#10;每日一题&#10;2389. 和有限的最长子序列" />
@@ -815,7 +822,8 @@
     <MESSAGE value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
     <MESSAGE value="学习计划_二分查找基础：&#10;222. 完全二叉树的节点个数&#10;1712. 将数组分成三个子数组的方案数&#10;学习计划_剑指offer:&#10;剑指 Offer 59 - I. 滑动窗口的最大值&#10;面试题59 - II. 队列的最大值&#10;每日一题：&#10;1637. 两点之间不包含任何点的最宽垂直区域" />
     <MESSAGE value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
+    <MESSAGE value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -898,13 +906,13 @@
           <line>273</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetString.java</url>
+          <line>714</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="treeNode.right" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://D:/Java/jdk1.8.0_191/src.zip!/java/util/PriorityQueue.java">

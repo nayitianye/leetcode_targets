@@ -455,6 +455,48 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230401    剑指 Offer 19. 正则表达式匹配
+
+    /**
+     * https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/
+     * @param s 字符串 s
+     * @param p 字符串 p
+     * @return 现一个函数用来匹配包含'. '和'*'的正则表达式
+     */
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (p.charAt(j - 1) == '*') {
+                    dp[i][j] = dp[i][j - 2];
+                    if (matches(s, p, i, j - 1)) {
+                        dp[i][j] = dp[i][j] || dp[i - 1][j];
+                    }
+                } else {
+                    if (matches(s, p, i, j)) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    }
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
+    public boolean matches(String s, String p, int i, int j) {
+        if (i == 0) {
+            return false;
+        }
+        if (p.charAt(j - 1) == ',') {
+            return true;
+        }
+        return s.charAt(i - 1) == p.charAt(j - 1);
+    }
+    //endregion
+
     //region    20230329    剑指 Offer 20. 表示数值的字符串
 
     /**
@@ -1112,6 +1154,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zi-fu-chuan-de-pai-lie-lcof
+     *
      * @param s 一个字符串 s
      * @return 打印出该字符串中字符的所有排列
      */
@@ -1139,6 +1182,7 @@ public class TargetLcof {
             visited[i] = false;
         }
     }
+
     private List<String> result;
     private boolean[] visited;
     //endregion
@@ -1333,6 +1377,35 @@ public class TargetLcof {
             maxLength = Math.max(maxLength, rk - i + 1);
         }
         return maxLength;
+    }
+    //endregion
+
+    //region    20230401    剑指 Offer 49. 丑数
+
+    /**
+     * https://leetcode.cn/problems/chou-shu-lcof
+     *
+     * @param n 第 n 个丑数
+     * @return 从小到大的顺序的第 n 个丑数
+     */
+    public int nthUglyNumber(int n) {
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        int p2 = 1, p3 = 1, p5 = 1;
+        for (int i = 2; i <= n; i++) {
+            int num2 = dp[p2] * 2, num3 = dp[p3] * 3, num5 = dp[p5] * 5;
+            dp[i] = Math.min(Math.min(num2, num3), num5);
+            if (dp[i] == num2) {
+                p2++;
+            }
+            if (dp[i] == num3) {
+                p3++;
+            }
+            if (dp[i] == num5) {
+                p5++;
+            }
+        }
+        return dp[n];
     }
     //endregion
 
@@ -1662,8 +1735,9 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof
-     * @param nums  一个数组 nums
-     * @param k 滑动窗口的大小 k
+     *
+     * @param nums 一个数组 nums
+     * @param k    滑动窗口的大小 k
      * @return
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
@@ -1722,6 +1796,30 @@ public class TargetLcof {
             }
             return q[begin++];
         }
+    }
+    //endregion
+
+    //region    20230401    剑指 Offer 60. n个骰子的点数
+
+    /**
+     * https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/
+     *
+     * @param n 输入n
+     * @return 打印出s的所有可能的值出现的概率
+     */
+    public double[] dicesProbability(int n) {
+        double[] dp = new double[6];
+        Arrays.fill(dp, 1.0 / 6.0);
+        for (int i = 2; i <= n; i++) {
+            double[] temp = new double[5 * i + 1];
+            for (int j = 0; j < dp.length; j++) {
+                for (int k = 0; k < 6; k++) {
+                    temp[j + k] += dp[j] / 6.0;
+                }
+            }
+            dp = temp;
+        }
+        return dp;
     }
     //endregion
 

@@ -677,6 +677,48 @@ public class TargetString {
     }
     //endregion
 
+    //region    20230401    831. 隐藏个人信息
+
+    /**
+     * https://leetcode.cn/problems/masking-personal-information/
+     * @param s 个人信息字符串 s
+     * @return  返回按如下规则 隐藏 个人信息后的结果
+     */
+    public String maskPII(String s) {
+        StringBuilder res = new StringBuilder();
+        if (s.contains("@")) {
+            String[] tempString = s.toLowerCase().split("@");
+            res.append(tempString[0].charAt(0));
+            res.append("*****");
+            res.append(tempString[0].charAt(tempString[0].length() - 1));
+            res.append("@");
+            res.append(tempString[1]);
+        } else {
+            int number = 0;
+            StringBuilder numbers=new StringBuilder();
+            for (int i = 0; i < s.length(); i++) {
+                if (Character.isDigit(s.charAt(i))) {
+                    numbers.append(s.charAt(i));
+                    number++;
+                }
+            }
+            if (number == 10) {
+                res.append("***-***-");
+
+            }else if(number==11){
+                res.append("+*-***-***-");
+            }else if(number==12){
+                res.append("+**-***-***-");
+            }else{
+                res.append("+**-***-***-");
+            }
+            String numStr=numbers.toString();
+            res.append(numStr.substring(numStr.length() - 4));
+        }
+        return res.toString();
+    }
+    //endregion
+
     //region 890. 查找和替换模式  2019/10/6  双映射处理
 
     /**
@@ -1040,11 +1082,13 @@ public class TargetString {
     //endregion
 
     //region    20230309    2379. 得到 K 个黑块的最少涂色次数
+
     /**
      * https://leetcode.cn/problems/minimum-recolors-to-get-k-consecutive-black-blocks/
-     * @param blocks  给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。
-     * @param k 给你一个整数 k ，表示想要 连续 黑色块的数目。
-     * @return  请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
+     *
+     * @param blocks 给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。
+     * @param k      给你一个整数 k ，表示想要 连续 黑色块的数目。
+     * @return 请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
      */
     public int minimumRecolors(String blocks, int k) {
         if (blocks.length() < k) {
@@ -1066,15 +1110,11 @@ public class TargetString {
                 }
             }
         }
-        return Math.min(count,min);
+        return Math.min(count, min);
     }
     //endregion
 
     public static void main(String[] args) {
-        //int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("ccaabbb");
-
-        //int res=(new TargetString().repeatedStringMatch("abccb","cbabccb"));
-        //int res = (new TargetString().dayOfYear("1900-3-26"));
-        new TargetString().minimumRecolors("BBBBBWWBBWBWBWWWBWBWBBBBWBBBBWBWBWBWBWWBWWBWBWWWWBBWWWWBWWWWBWBBWBBWBBWWW", 29);
+        new TargetString().maskPII("1(234)567-890");
     }
 }
