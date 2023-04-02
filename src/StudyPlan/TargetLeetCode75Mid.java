@@ -11,6 +11,78 @@ import java.util.List;
  */
 public class TargetLeetCode75Mid {
 
+    //region    自定义数据结构
+    public class Node {
+        public int val;
+
+        public Node left;
+        public Node right;
+        public Node next;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
+    }
+
+    /**
+     * 单链表
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    /**
+     * TreeNode 二叉树
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    //endregion
+
     //region    20230401    14. 最长公共前缀
 
     /**
@@ -31,6 +103,32 @@ public class TargetLeetCode75Mid {
             res = res.substring(0, j);
         }
         return res;
+    }
+    //endregion
+
+    //region    20230402    19. 删除链表的倒数第 N 个结点
+
+    /**
+     * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
+     *
+     * @param head 头结点 head
+     * @param n    删除倒数第 n 个结点
+     * @return 返回删除倒数第 n 个结点的头结点
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummy;
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        ListNode ans = dummy.next;
+        return ans;
     }
     //endregion
 
@@ -152,6 +250,32 @@ public class TargetLeetCode75Mid {
             n = n / 10;
         }
         return res;
+    }
+    //endregion
+
+    //region    20230402    234. 回文链表
+
+    /**
+     * https://leetcode.cn/problems/palindrome-linked-list/
+     *
+     * @param head 单链表的头节点 head
+     * @return 判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false
+     */
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> res = new ArrayList<>();
+        while (head != null) {
+            res.add(head.val);
+            head = head.next;
+        }
+        int front = 0, back = res.size() - 1;
+        while (front < back) {
+            if (res.get(front) != res.get(back)) {
+                return false;
+            }
+            front++;
+            back--;
+        }
+        return true;
     }
     //endregion
 

@@ -2191,6 +2191,29 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230403    1039. 多边形三角剖分的最低得分
+
+    /**
+     * https://leetcode.cn/problems/minimum-score-triangulation-of-polygon/
+     *
+     * @param values 给定一个整数数组 values ，其中 values[i] 是第 i 个顶点的值（即 顺时针顺序 ）
+     * @return 多边形进行三角剖分后可以得到的最低分
+     */
+    public int minScoreTriangulation(int[] values) {
+        int n = values.length;
+        int[][] dp = new int[values.length][values.length];
+        for (int i = n - 3; i >= 0; --i)//倒着枚举起点
+            for (int j = i + 2; j < n; ++j)//枚举终点
+            {
+                int res = Integer.MAX_VALUE;
+                for (int k = i + 1; k < j; ++k)//枚举分点
+                    res = Math.min(res, dp[i][k] + dp[k][j] + values[i] * values[k] * values[j]);
+                dp[i][j] = res;
+            }
+        return dp[0][n - 1];
+    }
+    //endregion
+
     //region    20230215    1137. 第 N 个泰波那契数
 
     /**
@@ -2633,8 +2656,9 @@ public class TargetDynamicProgramming {
 
     /**
      * https://leetcode.cn/problems/count-sorted-vowel-strings/
-     * @param n  一个整数 n
-     * @return  返回长度为 n 、仅由元音 (a, e, i, o, u) 组成且按 字典序排列 的字符串数量
+     *
+     * @param n 一个整数 n
+     * @return 返回长度为 n 、仅由元音 (a, e, i, o, u) 组成且按 字典序排列 的字符串数量
      */
     public int countVowelStrings(int n) {
         int[] dp = new int[5];

@@ -319,8 +319,7 @@ public class TargetLcof {
             return true;
         }
         board[i][j] = '\0';
-        boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) ||
-                dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
+        boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) || dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
         board[i][j] = words[k];
         return res;
     }
@@ -433,6 +432,24 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230402    剑指 Offer 17. 打印从1到最大的n位数
+
+    /**
+     * https://leetcode.cn/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
+     *
+     * @param n 数字 n
+     * @return 顺序打印出从 1 到最大的 n 位十进制数
+     */
+    public int[] printNumbers(int n) {
+        int end = (int) Math.pow(10, n) - 1;
+        int[] res = new int[end];
+        for (int i = 0; i < end; i++) {
+            res[i] = i + 1;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230315    剑指 Offer 18. 删除链表的节点
 
     /**
@@ -459,6 +476,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/
+     *
      * @param s 字符串 s
      * @param p 字符串 p
      * @return 现一个函数用来匹配包含'. '和'*'的正则表达式
@@ -467,30 +485,30 @@ public class TargetLcof {
         int m = s.length();
         int n = p.length();
 
-        boolean[][] dp = new boolean[m + 1][n + 1];
-        dp[0][0] = true;
-        for (int i = 0; i < m; i++) {
-            for (int j = 1; j <= n; j++) {
+        boolean[][] f = new boolean[m + 1][n + 1];
+        f[0][0] = true;
+        for (int i = 0; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
                 if (p.charAt(j - 1) == '*') {
-                    dp[i][j] = dp[i][j - 2];
+                    f[i][j] = f[i][j - 2];
                     if (matches(s, p, i, j - 1)) {
-                        dp[i][j] = dp[i][j] || dp[i - 1][j];
+                        f[i][j] = f[i][j] || f[i - 1][j];
                     }
                 } else {
                     if (matches(s, p, i, j)) {
-                        dp[i][j] = dp[i - 1][j - 1];
+                        f[i][j] = f[i - 1][j - 1];
                     }
                 }
             }
         }
-        return dp[m][n];
+        return f[m][n];
     }
 
     public boolean matches(String s, String p, int i, int j) {
         if (i == 0) {
             return false;
         }
-        if (p.charAt(j - 1) == ',') {
+        if (p.charAt(j - 1) == '.') {
             return true;
         }
         return s.charAt(i - 1) == p.charAt(j - 1);
@@ -506,13 +524,12 @@ public class TargetLcof {
      * @return 判断字符串是否表示数值
      */
     public boolean isNumber(String s) {
-        Map[] states = {
-                new HashMap<Character, Integer>() {{
-                    put(' ', 0);
-                    put('s', 1);
-                    put('d', 2);
-                    put('.', 4);
-                }}, // 0.
+        Map[] states = {new HashMap<Character, Integer>() {{
+            put(' ', 0);
+            put('s', 1);
+            put('d', 2);
+            put('.', 4);
+        }}, // 0.
                 new HashMap<Character, Integer>() {{
                     put('d', 2);
                     put('.', 4);
@@ -1429,6 +1446,77 @@ public class TargetLcof {
             }
         }
         return ' ';
+    }
+    //endregion
+
+    //region    20230402    剑指 Offer 51. 数组中的逆序对
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
+     *
+     * @param nums 数组 nums
+     * @return 求出这个数组中的逆序对的总数
+     */
+    public int reversePairs(int[] nums) {
+        int len = nums.length;
+
+        if (len < 2) {
+            return 0;
+        }
+
+        int[] copy = new int[len];
+        for (int i = 0; i < len; i++) {
+            copy[i] = nums[i];
+        }
+
+        int[] temp = new int[len];
+        return reversePairs(copy, 0, len - 1, temp);
+    }
+
+    private int reversePairs(int[] nums, int left, int right, int[] temp) {
+        if (left == right) {
+            return 0;
+        }
+
+        int mid = left + (right - left) / 2;
+        int leftPairs = reversePairs(nums, left, mid, temp);
+        int rightPairs = reversePairs(nums, mid + 1, right, temp);
+
+        if (nums[mid] <= nums[mid + 1]) {
+            return leftPairs + rightPairs;
+        }
+
+        int crossPairs = mergeAndCount(nums, left, mid, right, temp);
+        return leftPairs + rightPairs + crossPairs;
+    }
+
+    private int mergeAndCount(int[] nums, int left, int mid, int right, int[] temp) {
+        for (int i = left; i <= right; i++) {
+            temp[i] = nums[i];
+        }
+
+        int i = left;
+        int j = mid + 1;
+
+        int count = 0;
+        for (int k = left; k <= right; k++) {
+
+            if (i == mid + 1) {
+                nums[k] = temp[j];
+                j++;
+            } else if (j == right + 1) {
+                nums[k] = temp[i];
+                i++;
+            } else if (temp[i] <= temp[j]) {
+                nums[k] = temp[i];
+                i++;
+            } else {
+                nums[k] = temp[j];
+                j++;
+                count += (mid - i + 1);
+            }
+        }
+        return count;
     }
     //endregion
 

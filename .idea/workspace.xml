@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +64,14 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="132eb99a-08cc-47f0-a9db-968d390c2df6" />
+        <option name="url" value="https://github.com/nayitianye/leetcode_targets.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBeginner.java" root0="SKIP_INSPECTION" />
@@ -160,6 +172,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/github/leetcode_targets&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -170,7 +187,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetString">
+  <component name="RunManager" selected="Application.TaegetBinarySearchBasic">
     <configuration name="TaegetBinarySearchBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TaegetBinarySearchBasic" />
       <module name="leetcode_targets" />
@@ -224,15 +241,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="应用程序.TargetString" />
-        <item itemvalue="应用程序.TargetLeetCode75Mid" />
-        <item itemvalue="应用程序.TargetBookSortAlgorithms" />
-        <item itemvalue="应用程序.TaegetBinarySearchBasic" />
-        <item itemvalue="应用程序.TargetTwoPointers" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -240,7 +248,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e91ee050-1614-4875-be84-082ba43b177b" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -367,6 +374,8 @@
       <workItem from="1680178123398" duration="7799000" />
       <workItem from="1680273907010" duration="5207000" />
       <workItem from="1680322572287" duration="17723000" />
+      <workItem from="1680427264852" duration="706000" />
+      <workItem from="1680439697010" duration="6087000" />
     </task>
     <task id="LOCAL-00022" summary="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数">
       <created>1676562995238</created>

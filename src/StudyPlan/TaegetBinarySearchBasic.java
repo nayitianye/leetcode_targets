@@ -80,8 +80,9 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/
-     * @param nums  可能存在 重复 元素值的数组 nums
-     * @return  请你找出并返回数组中的 最小元素
+     *
+     * @param nums 可能存在 重复 元素值的数组 nums
+     * @return 请你找出并返回数组中的 最小元素
      */
     public int findMin(int[] nums) {
         int left = 0;
@@ -349,6 +350,42 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230402    436. 寻找右区间
+
+    /**
+     * https://leetcode.cn/problems/find-right-interval/
+     * @param intervals 区间数组 intervals ，其中 intervals[i] = [starti, endi] ，且每个 starti 都 不同
+     * @return  返回一个由每个区间 i 的 右侧区间 在 intervals 中对应下标组成的数组
+     */
+    public int[] findRightInterval(int[][] intervals) {
+        int n = intervals.length;
+        int[][] startIntervals = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            startIntervals[i][0] = intervals[i][0];
+            startIntervals[i][1] = i;
+        }
+        Arrays.sort(startIntervals, (o1, o2) -> o1[0] - o2[0]);
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int left = 0;
+            int right = n - 1;
+            int target = -1;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                if (startIntervals[mid][0] >= intervals[i][1]) {
+                    target = startIntervals[mid][1];
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            ans[i] = target;
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230328    540. 有序数组中的单一元素
 
     /**
@@ -485,6 +522,32 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230402    826. 安排工作以达到最大收益
+
+    /**
+     * https://leetcode.cn/problems/most-profit-assigning-work/
+     * @param difficulty   数组：difficulty difficulty[i] 表示第 i 个工作的难度，profit[i] 表示第 i 个工作的收益
+     * @param profit 数组：profit
+     * @param worker 数组：worker  worker[i] 是第 i 个工人的能力，即该工人只能完成难度小于等于 worker[i] 的工作
+     * @return
+     */
+    public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+        int n = difficulty.length;
+        Integer[] aux = new Integer[n];
+        for (int i = 0; i < n; i++) aux[i] = i;
+        Arrays.sort(aux, (a, b) -> difficulty[a] - difficulty[b]);
+        Arrays.sort(worker);
+        int idx = 0, best = 0, ans = 0;
+        for (int x : worker) {
+            while (idx < n && x >= difficulty[aux[idx]]) {
+                best = Math.max(best, profit[aux[idx++]]);
+            }
+            ans += best;
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230324    875. 爱吃香蕉的珂珂
 
     /**
@@ -605,6 +668,76 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230402    1508. 子数组和排序后的区间和
+
+    /**
+     * https://leetcode.cn/problems/range-sum-of-sorted-subarray-sums/
+     *
+     * @param nums  数组 nums
+     * @param n     包含 n 个正整数
+     * @param left  下标为 left
+     * @param right 下标为 right
+     * @return 下标为 left 到 right （下标从 1 开始）的所有数字和（包括左右端点
+     */
+    public int rangeSum(int[] nums, int n, int left, int right) {
+        int[] prefixSums = new int[n + 1];
+        prefixSums[0] = 0;
+        for (int i = 0; i < n; i++) {
+            prefixSums[i + 1] = prefixSums[i] + nums[i];
+        }
+        int[] prefixPrefixSums = new int[n + 1];
+        prefixPrefixSums[0] = 0;
+        for (int i = 0; i < n; i++) {
+            prefixPrefixSums[i + 1] = prefixPrefixSums[i] + prefixSums[i + 1];
+        }
+        return (getSum(prefixSums, prefixPrefixSums, n, right) - getSum(prefixSums, prefixPrefixSums, n, left - 1)) % MODULO;
+    }
+
+    public int getSum(int[] prefixSums, int[] prefixPrefixSums, int n, int k) {
+        int num = getKth(prefixSums, n, k);
+        int sum = 0;
+        int count = 0;
+        for (int i = 0, j = 1; i < n; i++) {
+            while (j <= n && prefixSums[j] - prefixSums[i] < num) {
+                j++;
+            }
+            j--;
+            sum = (sum + prefixPrefixSums[j] - prefixPrefixSums[i] - prefixSums[i] * (j - i)) % MODULO;
+            count += j - i;
+        }
+        sum = (sum + num * (k - count)) % MODULO;
+        return sum;
+    }
+
+    public int getKth(int[] prefixSums, int n, int k) {
+        int low = 0, high = prefixSums[n];
+        while (low < high) {
+            int mid = (high - low) / 2 + low;
+            int count = getCount(prefixSums, n, mid);
+            if (count < k) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    public int getCount(int[] prefixSums, int n, int x) {
+        int count = 0;
+        for (int i = 0, j = 1; i < n; i++) {
+            while (j <= n && prefixSums[j] - prefixSums[i] <= x) {
+                j++;
+            }
+            j--;
+            count += j - i;
+        }
+        return count;
+    }
+
+    static final int MODULO = 1000000007;
+    //endregion
+
     //region    20230324    1552. 两球之间的磁力
 
     /**
@@ -638,6 +771,48 @@ public class TaegetBinarySearchBasic {
             }
         }
         return cnt >= m;
+    }
+    //endregion
+
+    //region    20230401    1574. 删除最短的子数组使剩余数组有序
+
+    /**
+     * https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/
+     *
+     * @param arr 整数数组 arr
+     * @return 返回满足题目要求的最短子数组的长度
+     */
+    public int findLengthOfShortestSubarray(int[] arr) {
+        int n = arr.length;
+        int i = 0, j = n - 1;
+        while (i + 1 < n && arr[i] <= arr[i + 1]) {
+            ++i;
+        }
+        while (j - 1 >= 0 && arr[j - 1] <= arr[j]) {
+            --j;
+        }
+        if (i >= j) {
+            return 0;
+        }
+        int ans = Math.min(n - i - 1, j);
+        for (int l = 0; l <= i; ++l) {
+            int r = search(arr, arr[l], j);
+            ans = Math.min(ans, r - l - 1);
+        }
+        return ans;
+    }
+
+    private int search(int[] arr, int x, int left) {
+        int right = arr.length;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (arr[mid] >= x) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
     }
     //endregion
 
