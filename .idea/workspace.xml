@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="993. 二叉树的堂兄弟节点">
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetDynamicProgramming.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,14 +375,7 @@
       <workItem from="1680273907010" duration="5207000" />
       <workItem from="1680322572287" duration="17723000" />
       <workItem from="1680427264852" duration="706000" />
-      <workItem from="1680439697010" duration="6087000" />
-    </task>
-    <task id="LOCAL-00022" summary="198. 打家劫舍&#10;213. 打家劫舍 II&#10;740. 删除并获得点数">
-      <created>1676562995238</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1676562995238</updated>
+      <workItem from="1680439697010" duration="13312000" />
     </task>
     <task id="LOCAL-00023" summary="55. 跳跃游戏&#10;45. 跳跃游戏 II&#10;53. 最大子数组和&#10;918. 环形子数组的最大和">
       <created>1676648673178</created>
@@ -720,7 +713,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680280470169</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分">
+      <created>1680447709863</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1680447709864</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -807,7 +807,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_数据结构初级&#10;学习计划_编程能力入门&#10;每日一题：" />
     <MESSAGE value="学习计划_LeetCode 75&#10;424. 替换后的最长重复字符&#10;438. 找到字符串中所有字母异位词&#10;学习计划_剑指 Offer&#10;剑指 Offer 48. 最长不含重复字符的子字符串" />
     <MESSAGE value="学习计划_编程能力入门&#10;283. 移动零&#10;496. 下一个更大元素 I&#10;1281. 整数的各位积和之差&#10;1588. 所有奇数长度子数组的和&#10;每日一题&#10;2389. 和有限的最长子序列" />
     <MESSAGE value="学习计划_剑指 Offer&#10;剑指 Offer 54. 二叉搜索树的第k大节点&#10;学习计划_LeetCode 75&#10;394. 字符串解码&#10;844. 比较含退格的字符串&#10;学习计划_编程能力入门&#10;1572. 矩阵对角线元素的和" />
@@ -832,7 +831,8 @@
     <MESSAGE value="学习计划_二分查找基础：&#10;222. 完全二叉树的节点个数&#10;1712. 将数组分成三个子数组的方案数&#10;学习计划_剑指offer:&#10;剑指 Offer 59 - I. 滑动窗口的最大值&#10;面试题59 - II. 队列的最大值&#10;每日一题：&#10;1637. 两点之间不包含任何点的最宽垂直区域" />
     <MESSAGE value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
     <MESSAGE value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
+    <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -857,12 +857,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>546</line>
+          <line>553</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>548</line>
+          <line>555</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

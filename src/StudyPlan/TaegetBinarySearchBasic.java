@@ -1,5 +1,7 @@
 package StudyPlan;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -354,8 +356,9 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/find-right-interval/
+     *
      * @param intervals 区间数组 intervals ，其中 intervals[i] = [starti, endi] ，且每个 starti 都 不同
-     * @return  返回一个由每个区间 i 的 右侧区间 在 intervals 中对应下标组成的数组
+     * @return 返回一个由每个区间 i 的 右侧区间 在 intervals 中对应下标组成的数组
      */
     public int[] findRightInterval(int[][] intervals) {
         int n = intervals.length;
@@ -526,9 +529,10 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/most-profit-assigning-work/
-     * @param difficulty   数组：difficulty difficulty[i] 表示第 i 个工作的难度，profit[i] 表示第 i 个工作的收益
-     * @param profit 数组：profit
-     * @param worker 数组：worker  worker[i] 是第 i 个工人的能力，即该工人只能完成难度小于等于 worker[i] 的工作
+     *
+     * @param difficulty 数组：difficulty difficulty[i] 表示第 i 个工作的难度，profit[i] 表示第 i 个工作的收益
+     * @param profit     数组：profit
+     * @param worker     数组：worker  worker[i] 是第 i 个工人的能力，即该工人只能完成难度小于等于 worker[i] 的工作
      * @return
      */
     public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
@@ -618,6 +622,47 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230403    1292. 元素和小于等于阈值的正方形的最大边长
+
+    /**
+     * https://leetcode.cn/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold
+     *
+     * @param mat       大小为 m x n 的矩阵 mat
+     * @param threshold 整数阈值 threshold
+     * @return 返回元素总和小于或等于阈值的正方形区域的最大边长；如果没有这样的正方形区域，则返回 0
+     */
+    public int maxSideLength(int[][] mat, int threshold) {
+        //二分查找
+        int row = mat.length, col = mat[0].length;
+        int[][] prefix = new int[row + 1][col + 1];
+        for (int i = 1; i <= row; ++i) {
+            for (int j = 1; j <= col; ++j) {
+                prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + mat[i - 1][j - 1];
+            }
+        }
+
+        int left = 0, right = Math.min(row, col), mid = 0, res = 0;
+        while (left < right) {
+            mid = left + right + 1 >> 1;
+            boolean flag = false;
+            for (int i = 1; i + mid <= row + 1; ++i) {
+                for (int j = 1; j + mid <= col + 1; ++j) {
+                    int temp = prefix[i + mid - 1][j + mid - 1] - prefix[i + mid - 1][j - 1] - prefix[i - 1][j + mid - 1] + prefix[i - 1][j - 1];
+                    if (temp <= threshold) {
+                        flag = true;
+                    }
+                }
+            }
+            if (flag) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+    //endregion
+
     //region    20230327    1482. 制作 m 束花所需的最少天数
 
     /**
@@ -666,6 +711,55 @@ public class TaegetBinarySearchBasic {
         }
         return bouquets >= m;
     }
+    //endregion
+
+    //region    20230403    1498. 满足条件的子序列数目
+
+    /**
+     * https://leetcode.cn/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/
+     *
+     * @param nums   整数数组 nums
+     * @param target 一个整数 target
+     * @return 统计并返回 nums 中能满足其最小元素与最大元素的 和 小于或等于 target 的 非空 子序列的数目
+     */
+    public int numSubseq(int[] nums, int target) {
+        Arrays.sort(nums);
+        long res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] * 2 > target) {
+                break;
+            }
+            int left = i, right = nums.length - 1;
+            while (left < right) {
+                int mid = left + right + 1 >> 1;
+                if (nums[mid] + nums[i] > target) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            if (nums[i] + nums[left] > target) {
+                break;
+            }
+            res += fastPow(2, (left - i));
+            res %= MOD;
+        }
+        return (int) res;
+    }
+
+    public long fastPow(int x, int n) {
+        long res = 1, y = x;
+        while (n > 0) {
+            if ((n & 1) == 1) {
+                res = (res * y) % MOD;
+            }
+            y = (y * y) % MOD;
+            n >>= 1;
+        }
+        return res % MOD;
+    }
+
+    final static int MOD = (int) 1e9 + 7;
     //endregion
 
     //region    20230402    1508. 子数组和排序后的区间和

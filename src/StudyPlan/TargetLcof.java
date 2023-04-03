@@ -391,6 +391,36 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230403    剑指 Offer 14- II. 剪绳子 II
+
+    /**
+     * https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/
+     *
+     * @param n 长度为 n 的绳子
+     * @return 请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m - 1] 。请问 k[0]*k[1]*...*k[m - 1] 可能的最大乘积是多少
+     */
+    public int cuttingRope1(int n) {
+        if (n <= 3) {
+            return n - 1;
+        }
+        int b = n % 3, p = 1000000007;
+        long rem = 1, x = 3;
+        for (int i = n / 3 - 1; i > 0; i /= 2) {
+            if (i % 2 == 1) {
+                rem = (rem * x) % p;
+            }
+            x = (x * x) % p;
+        }
+        if (b == 0) {
+            return (int) (rem * 3 % p);
+        }
+        if (b == 1) {
+            return (int) (rem * 4 % p);
+        }
+        return (int) (rem * 6 % p);
+    }
+    //endregion
+
     //region    20230324    剑指 Offer 15. 二进制中1的个数
 
     /**
@@ -1291,6 +1321,51 @@ public class TargetLcof {
             res = Math.max(res, dp[i]);
         }
         return res;
+    }
+    //endregion
+
+    //region    20230403    剑指 Offer 43. 1～n 整数中 1 出现的次数
+
+    /**
+     * https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof
+     * @param n 一个整数 n
+     * @return  求1～n这n个整数的十进制表示中1出现的次数
+     */
+    public int countDigitOne(int n) {
+        // mulk 表示 10^k
+        // 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用10^k）
+        // 但为了让代码看起来更加直观，这里保留了k
+        long mulk = 1;
+        int ans = 0;
+        for (int i = 0; n >= mulk; i++) {
+            ans += (n / (mulk * 10)) * mulk + Math.min(Math.max(n % (mulk * 10) - mulk + 1, 0), mulk);
+            mulk *= 10;
+        }
+        return ans;
+    }
+    //endregion
+
+    //region    20230403    剑指 Offer 44. 数字序列中某一位的数字
+
+    /**
+     * https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
+     *
+     * @param n 第n位
+     * @return 求任意第n位对应的数字
+     */
+    public int findNthDigit(int n) {
+        int d = 1, count = 9;
+        while (n > (long) d * count) {
+            n -= d * count;
+            d++;
+            count *= 10;
+        }
+        int index = n - 1;
+        int start = (int) Math.pow(10, d - 1);
+        int num = start + index / d;
+        int digitIndex = index % d;
+        int digit = (num / (int) Math.pow(10, d - digitIndex - 1)) % 10;
+        return digit;
     }
     //endregion
 
