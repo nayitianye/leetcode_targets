@@ -2,9 +2,7 @@ package StudyPlan;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yyb
@@ -591,6 +589,84 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230404    981. 基于时间的键值存储
+
+    /**
+     * https://leetcode.cn/problems/time-based-key-value-store/description/
+     */
+    class TimeMap {
+        class Pair implements Comparable<Pair> {
+            int timestamp;
+            String value;
+
+            public Pair(int timestamp, String value) {
+                this.timestamp = timestamp;
+                this.value = value;
+            }
+
+            public int hashCode() {
+                return timestamp + value.hashCode();
+            }
+
+            public boolean equals(Object obj) {
+                if (obj instanceof Pair) {
+                    Pair pair2 = (Pair) obj;
+                    return this.timestamp == pair2.timestamp && this.value.equals(pair2.value);
+                }
+                return false;
+            }
+
+            public int compareTo(Pair pair2) {
+                if (this.timestamp != pair2.timestamp) {
+                    return this.timestamp - pair2.timestamp;
+                } else {
+                    return this.value.compareTo(pair2.value);
+                }
+            }
+        }
+
+        Map<String, List<Pair>> map;
+
+        public TimeMap() {
+            map = new HashMap<String, List<Pair>>();
+        }
+
+        public void set(String key, String value, int timestamp) {
+            List<Pair> pairs = map.getOrDefault(key, new ArrayList<Pair>());
+            pairs.add(new Pair(timestamp, value));
+            map.put(key, pairs);
+        }
+
+        public String get(String key, int timestamp) {
+            List<Pair> pairs = map.getOrDefault(key, new ArrayList<Pair>());
+            // 使用一个大于所有 value 的字符串，以确保在 pairs 中含有 timestamp 的情况下也返回大于 timestamp 的位置
+            Pair pair = new Pair(timestamp, String.valueOf((char) 127));
+            int i = binarySearch(pairs, pair);
+            if (i > 0) {
+                return pairs.get(i - 1).value;
+            }
+            return "";
+        }
+
+        private int binarySearch(List<Pair> pairs, Pair target) {
+            int low = 0, high = pairs.size() - 1;
+            if (high < 0 || pairs.get(high).compareTo(target) <= 0) {
+                return high + 1;
+            }
+            while (low < high) {
+                int mid = (high - low) / 2 + low;
+                Pair pair = pairs.get(mid);
+                if (pair.compareTo(target) <= 0) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return low;
+        }
+    }
+    //endregion
+
     //region    20230324    1283. 使结果不超过阈值的最小除数
 
     /**
@@ -660,6 +736,51 @@ public class TaegetBinarySearchBasic {
             }
         }
         return left;
+    }
+    //endregion
+
+    //region    20230404    1300. 转变数组后最接近目标值的数组和
+
+    /**
+     * https://leetcode.cn/problems/sum-of-mutated-array-closest-to-target/description/
+     *
+     * @param arr    整数数组 arr
+     * @param target 目标值 target
+     * @return 返回一个整数 value ，使得将数组中所有大于 value 的值变成 value 后，数组的和最接近  target （最接近表示两者之差的绝对值最小）
+     */
+    public int findBestValue(int[] arr, int target) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        int[] prefix = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            prefix[i] = prefix[i - 1] + arr[i - 1];
+        }
+        int left = 0, right = arr[n - 1], ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int index = Arrays.binarySearch(arr, mid);
+            if (index < 0) {
+                index = -index - 1;
+            }
+            int cur = prefix[index] + (n - index) * mid;
+            if (cur <= target) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        int chooseSmall = check(arr, ans);
+        int chooseBig = check(arr, ans + 1);
+        return Math.abs(chooseSmall - target) <= Math.abs(chooseBig - target) ? ans : ans + 1;
+    }
+
+    public int check(int[] arr, int x) {
+        int ret = 0;
+        for (int num : arr) {
+            ret += Math.min(num, x);
+        }
+        return ret;
     }
     //endregion
 

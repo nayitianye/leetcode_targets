@@ -1,8 +1,6 @@
 package StudyPlan;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yyb
@@ -361,6 +359,37 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230404    621. 任务调度器
+
+    /**
+     * https://leetcode.cn/problems/task-scheduler/
+     *
+     * @param tasks 字符数组 tasks 表示的 CPU 需要执行的任务列表
+     * @param n     相同种类 的任务之间必须有长度为整数 n 的冷却时间
+     * @return 计算完成所有任务所需要的 最短时间
+     */
+    public int leastInterval(char[] tasks, int n) {
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        //最多的执行次数
+        int maxExec = 0;
+        for (char ch : tasks) {
+            int exec = hashMap.getOrDefault(ch, 0) + 1;
+            hashMap.put(ch, exec);
+            maxExec = Math.max(maxExec, exec);
+        }
+        //具有最多执行次数的任务数量
+        int maxCount = 0;
+        Set<Map.Entry<Character, Integer>> entrySet = hashMap.entrySet();
+        for (Map.Entry<Character, Integer> entry : entrySet) {
+            int value = entry.getValue();
+            if (value == maxExec) {
+                ++maxCount;
+            }
+        }
+        return Math.max((maxExec - 1) * (n + 1) + maxCount, tasks.length);
+    }
+    //endregion
+
     //region    20230401    1706. 球会落何处
     public int[] findBall(int[][] grid) {
         int n = grid[0].length;
@@ -393,6 +422,42 @@ public class TargetLeetCode75Mid {
             }
         }
         return res;
+    }
+    //endregion
+
+    //region    20230404    2131. 连接两字母单词得到的最长回文串
+
+    /**
+     * https://leetcode.cn/problems/longest-palindrome-by-concatenating-two-letter-words/
+     *
+     * @param words 字符串数组 words
+     * @return 返回你能得到的最长回文串的长度
+     */
+    public int longestPalindrome(String[] words) {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < words.length; i++) {
+            hashMap.put(words[i], hashMap.getOrDefault(words[i], 0) + 1);
+        }
+        int add = 0;
+        int ans = 0;
+        for (String s : hashMap.keySet()) {
+            if (s.charAt(0) == s.charAt(1)) {
+                ans += ((hashMap.get(s) >> 1) << 2);
+                if (((hashMap.get(s) & 1) == 1)) {
+                    add = 2;
+                }
+            } else {
+                String t = pal(s);
+                if (hashMap.containsKey(t)) {
+                    ans += Math.min(hashMap.get(s), hashMap.get(t)) * 2;
+                }
+            }
+        }
+        return ans + add;
+    }
+
+    public String pal(String s) {
+        return new StringBuilder(s).reverse().toString();
     }
     //endregion
 
