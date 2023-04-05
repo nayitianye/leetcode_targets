@@ -220,6 +220,29 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230405    110. 平衡二叉树
+
+    /**
+     * https://leetcode.cn/problems/balanced-binary-tree/
+     *
+     * @param root 一个二叉树根节点 root
+     * @return 判断是否是平衡二叉树
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return Math.abs(treeDepth(root.right) - treeDepth(root.left)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public int treeDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(treeDepth(root.left), treeDepth(root.right));
+    }
+    //endregion
+
     //region    20230403    148. 排序链表
 
     /**
@@ -305,6 +328,24 @@ public class TargetLeetCode75Mid {
             n = n / 10;
         }
         return res;
+    }
+    //endregion
+
+    //region    20230405    226. 翻转二叉树
+
+    /**
+     * https://leetcode.cn/problems/invert-binary-tree/
+     * @param root  二叉树的根节点 root
+     * @return  翻转这棵二叉树，并返回其根节点
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        TreeNode left = root.left, right = root.right;
+        root.left = invertTree(right);
+        root.right = invertTree(left);
+        return root;
     }
     //endregion
 

@@ -1326,6 +1326,18 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230405    1901. 寻找峰值 II
+
+    /**
+     * https://leetcode.cn/problems/find-a-peak-element-ii/
+     * @param mat  从 0 开始编号 的 m x n 矩阵 mat
+     * @return  找出 任意一个 峰值 mat[i][j] 并 返回其位置 [i,j]
+     */
+    public int[] findPeakGrid(int[][] mat) {
+        return new int[]{1};
+    }
+    //endregion
+
     public static void main(String[] args) {
         new TaegetBinarySearchBasic().chalkReplacer(new int[]{3, 4, 1, 2}, 25);
     }
