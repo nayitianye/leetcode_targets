@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;621. 任务调度器&#10;2131. 连接两字母单词得到的最长回文串&#10;学习计划_二分查找基础：&#10;981. 基于时间的键值存储&#10;1300. 转变数组后最接近目标值的数组和">
-      <change afterPath="$PROJECT_DIR$/src/StudyPlan/TargetAlgorithmsBasic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBasic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" afterDir="false" />
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TaegetBinarySearchBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBeginner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBeginner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Mid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetMath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,14 +374,7 @@
       <workItem from="1680427264852" duration="706000" />
       <workItem from="1680439697010" duration="13312000" />
       <workItem from="1680614059989" duration="5251000" />
-      <workItem from="1680700387864" duration="8822000" />
-    </task>
-    <task id="LOCAL-00024" summary="704. 二分查找&#10;374. 猜数字大小&#10;35. 搜索插入位置&#10;852. 山脉数组的峰顶索引&#10;367. 有效的完全平方数">
-      <created>1676777514187</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1676777514187</updated>
+      <workItem from="1680700387864" duration="9356000" />
     </task>
     <task id="LOCAL-00025" summary="121. 买卖股票的最佳时机&#10;1385. 两个数组间的距离值&#10;69. x 的平方根&#10;744. 寻找比目标字母大的最小字母&#10;278. 第一个错误的版本 &#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;441. 排列硬币">
       <created>1676817855206</created>
@@ -725,7 +712,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680619728378</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
+      <created>1680710557252</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1680710557252</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -812,7 +806,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_编程能力入门&#10;283. 移动零&#10;496. 下一个更大元素 I&#10;1281. 整数的各位积和之差&#10;1588. 所有奇数长度子数组的和&#10;每日一题&#10;2389. 和有限的最长子序列" />
     <MESSAGE value="学习计划_剑指 Offer&#10;剑指 Offer 54. 二叉搜索树的第k大节点&#10;学习计划_LeetCode 75&#10;394. 字符串解码&#10;844. 比较含退格的字符串&#10;学习计划_编程能力入门&#10;1572. 矩阵对角线元素的和" />
     <MESSAGE value="学习计划_剑指 Offer&#10;面试题45. 把数组排成最小的数&#10;面试题61. 扑克牌中的顺子&#10;剑指 Offer 46. 把数字翻译成字符串&#10;学习计划_LeetCode 75&#10;692. 前K个高频单词&#10;1046. 最后一块石头的重量&#10;学习计划_编程能力入门&#10;389. 找不同&#10;1678. 设计 Goal 解析器&#10;1768. 交替合并字符串" />
     <MESSAGE value="文件重命名" />
@@ -837,7 +830,8 @@
     <MESSAGE value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
     <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分" />
     <MESSAGE value="学习计划_LeetCode75_Level2:&#10;621. 任务调度器&#10;2131. 连接两字母单词得到的最长回文串&#10;学习计划_二分查找基础：&#10;981. 基于时间的键值存储&#10;1300. 转变数组后最接近目标值的数组和" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode75_Level2:&#10;621. 任务调度器&#10;2131. 连接两字母单词得到的最长回文串&#10;学习计划_二分查找基础：&#10;981. 基于时间的键值存储&#10;1300. 转变数组后最接近目标值的数组和" />
+    <MESSAGE value="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
