@@ -589,6 +589,37 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230408    911. 在线选举
+
+    /**
+     * https://leetcode.cn/problems/online-election/
+     */
+    class TopVotedCandidate {
+
+        List<int[]> list = new ArrayList<>();
+        public TopVotedCandidate(int[] persons, int[] times) {
+            int val = 0;
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < times.length; i++) {
+                map.put(persons[i], map.getOrDefault(persons[i], 0) + 1);
+                if (map.get(persons[i]) >= val) {
+                    val = map.get(persons[i]);
+                    list.add(new int[]{times[i], persons[i]});
+                }
+            }
+        }
+        public int q(int t) {
+            int l = 0, r = list.size() - 1;
+            while (l < r) {
+                int mid = l + r + 1 >> 1;
+                if (list.get(mid)[0] <= t) l = mid;
+                else r = mid - 1;
+            }
+            return list.get(r)[0] <= t ? list.get(r)[1] : 0;
+        }
+    }
+    //endregion
+
     //region    20230404    981. 基于时间的键值存储
 
     /**
@@ -664,6 +695,81 @@ public class TaegetBinarySearchBasic {
             }
             return low;
         }
+    }
+    //endregion
+
+    //region    20230408    1146. 快照数组
+
+    /**
+     * https://leetcode.cn/problems/snapshot-array
+     */
+    class SnapshotArray {
+
+        private Map<Integer, TreeMap<Integer, Integer>> map;
+        private int snap_id;
+
+        public SnapshotArray(int length) {
+            map = new HashMap<>();
+            snap_id = 0;
+            for (int i = 0; i < length; i++) {
+                TreeMap<Integer, Integer> tree = new TreeMap<>();
+                tree.put(0, 0);
+                map.put(i, tree);
+            }
+        }
+
+        public void set(int index, int val) {
+            TreeMap<Integer, Integer> tree = map.get(index);
+            tree.put(snap_id, val);
+        }
+
+        public int snap() {
+            return snap_id++;
+        }
+
+        public int get(int index, int snap_id) {
+            TreeMap<Integer, Integer> tree = map.get(index);
+            return tree.floorEntry(snap_id).getValue();
+        }
+    }
+    //endregion
+
+    //region    20230408    1201. 丑数 III
+
+    /**
+     * https://leetcode.cn/problems/ugly-number-iii/
+     *
+     * @param n 整数：n
+     * @param a 整数：a
+     * @param b 整数：b
+     * @param c 整数：c
+     * @return 找出第 n 个丑数,丑数是可以被 a 或 b 或 c 整除的 正整数 。
+     */
+    public int nthUglyNumber(int n, int a, int b, int c) {
+        long lcmAB = (long) a * b / gcd(a, b);
+        long lcmBC = (long) b * c / gcd(b, c);
+        long lcmAC = (long) a * c / gcd(a, c);
+        long lcmABC = lcmAB * c / gcd(lcmAB, c);
+        long low = 1, high = 2000000000;
+        while (low < high) {
+            long mid = low + (high - low) / 2;
+            long count = mid / a + mid / b + mid / c - mid / lcmAB - mid / lcmAC - mid / lcmBC + mid / lcmABC;
+            if (count >= n) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return (int) low;
+    }
+
+    public long gcd(long num1, long num2) {
+        while (num2 != 0) {
+            long temp = num1;
+            num1 = num2;
+            num2 = temp % num2;
+        }
+        return num1;
     }
     //endregion
 
@@ -834,6 +940,69 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230408    1488. 避免洪水泛滥
+
+    /**
+     * https://leetcode.cn/problems/avoid-flood-in-the-city/
+     *
+     * @param rains 整数数组 rains
+     * @return 有多种可行解，请返回它们中的 任意一个 。如果没办法阻止洪水，请返回一个 空的数组
+     */
+    public int[] avoidFlood(int[] rains) {
+        int n = rains.length;
+        SortedSet<Integer> sun = new TreeSet<>();
+        HashMap<Integer, Integer> rain = new HashMap<>();
+        int[] res = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (rains[i] == 0) {
+                sun.add(i);
+                res[i] = 1;
+                continue;
+            }
+            res[i] = -1;
+            if (!rain.containsKey(rains[i])) {
+                rain.put(rains[i], i);
+            } else {
+                int left = rain.get(rains[i]);
+                int right = i;
+                if (left >= right || sun.isEmpty() || left > sun.last()) {
+                    return new int[0];
+                }
+                int min = rainMin(left, sun);
+                while (left < right) {
+                    int mid = (left + right) >> 1;
+                    if (mid >= min) {
+                        right = mid;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
+                if (sun.contains(left)) {
+                    sun.remove(left);
+                    res[left] = rains[i];
+                    rain.put(rains[i], i);
+                } else {
+                    return new int[0];
+                }
+            }
+        }
+        return res;
+    }
+
+    public int rainMin(int left, SortedSet<Integer> sun) {
+        Iterator<Integer> it = sun.iterator();
+        while (it.hasNext()) {
+            int k = it.next();
+            if (k < left) {
+                continue;
+            } else {
+                return k;
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+    //endregion
+
     //region    20230403    1498. 满足条件的子序列数目
 
     /**
@@ -989,6 +1158,43 @@ public class TaegetBinarySearchBasic {
     }
     //endregion
 
+    //region    20230408    1562. 查找大小为 M 的最新分组
+
+    /**
+     * https://leetcode.cn/problems/find-latest-group-of-size-m/
+     *
+     * @param arr 数组 arr
+     * @param m   长度 恰好 为 m
+     * @return 存在长度 恰好 为 m 的 一组 1  的最后步骤
+     */
+    public int findLatestStep(int[] arr, int m) {
+        return find(arr, m, arr.length - 1, 0, arr.length - 1);
+    }
+
+    public int find(int[] arr, int m, int index, int left, int right) {
+        // 长度满足，直接返回
+        if (m == right - left + 1) {
+            return index + 1;
+        }
+        if (index < 0 || left < 0 || right > arr.length - 1 || right - left + 1 < m) {
+            return -1;
+        }
+        if (arr[index] - 1 >= left && arr[index] - 1 <= right) {
+            // 在区间内，才划分
+            int mid = arr[index] - 1;
+            index--;
+            // 二分查找
+            int resLeft = find(arr, m, index, left, mid - 1);
+            int resRight = find(arr, m, index, mid + 1, right);
+            return Math.max(resLeft, resRight);
+        } else {
+            // 不在区间，保持原样继续找
+            index--;
+            return find(arr, m, index, left, right);
+        }
+    }
+    //endregion
+
     //region    20230401    1574. 删除最短的子数组使剩余数组有序
 
     /**
@@ -1028,6 +1234,54 @@ public class TaegetBinarySearchBasic {
             }
         }
         return left;
+    }
+    //endregion
+
+    //region    20230408    1648. 销售价值减少的颜色球
+
+    /**
+     * https://leetcode.cn/problems/sell-diminishing-valued-colored-balls/
+     *
+     * @param inventory 球的库存 inventory
+     * @param orders    任意颜色 总数为 orders 的球
+     * @return 返回卖了 orders 个球以后 最大 总价值之和
+     */
+    public int maxProfit(int[] inventory, int orders) {
+        final int MOD = (int) 1e9 + 7;
+        int max = 0;
+        for (int x : inventory) {
+            max = Math.max(x, max);
+        }
+        int left = -1, right = max + 1;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (check(inventory, orders, mid)) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        long ans = 0;
+        for (int x : inventory) {
+            if (x > right) {
+                ans += (x + right + 1) * 1L * (x - right) / 2;
+                ans %= MOD;
+                orders -= x - right;
+            }
+        }
+        ans += right * 1L * orders;
+        return (int) (ans % MOD);
+    }
+
+    private boolean check(int[] nums, int orders, int mid) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += Math.max(nums[i] - mid, 0);
+            if (sum > orders) {
+                return true;
+            }
+        }
+        return false;
     }
     //endregion
 
@@ -1117,6 +1371,34 @@ public class TaegetBinarySearchBasic {
             }
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230408    1802. 有界数组中指定下标处的最大值
+
+    /**
+     * https://leetcode.cn/problems/maximum-value-at-a-given-index-in-a-bounded-array/
+     *
+     * @param n      正整数 n
+     * @param index  正整数 index
+     * @param maxSum 正整数 maxSum
+     * @return nums[index] 的值被 最大化
+     */
+    public int maxValue(int n, int index, int maxSum) {
+        int left = 1, right = maxSum;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (sum(mid - 1, index) + sum(mid, n - index) <= maxSum) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
+    private long sum(long x, int cnt) {
+        return x >= cnt ? (x + x - cnt + 1) * cnt / 2 : (x + 1) * x / 2 + cnt - x;
     }
     //endregion
 
@@ -1330,11 +1612,63 @@ public class TaegetBinarySearchBasic {
 
     /**
      * https://leetcode.cn/problems/find-a-peak-element-ii/
-     * @param mat  从 0 开始编号 的 m x n 矩阵 mat
-     * @return  找出 任意一个 峰值 mat[i][j] 并 返回其位置 [i,j]
+     *
+     * @param mat 从 0 开始编号 的 m x n 矩阵 mat
+     * @return 找出 任意一个 峰值 mat[i][j] 并 返回其位置 [i,j]
      */
     public int[] findPeakGrid(int[][] mat) {
-        return new int[]{1};
+        // 什么样的元素可以成为顶峰元素呢
+        // 如果一个元素是此行的最大元素，且大于等于上下两行的最大元素，就是一个顶峰元素
+        // 所以就是相当于对于每行的最大值构成的数组，找一个弱化的顶峰元素
+        // 一维数组找弱化顶峰元素怎么找呢
+        // 一个数组里的元素总是上升，下降交替进行的
+        // 对于一个元素，如果它不小于左右两边，则就是它
+        // 否则，如果同时小于左右两边，则左右各有一个顶峰
+        // 若小于左边，大于等于右边，则说明现在是下降阶段，左边有一个顶峰
+        // 若大于等于左边，小于右边，则说明现在是上升阶段，右边有一个顶峰
+        int top = 0;
+        int down = mat.length - 1;
+        int mid;
+        //m1:mid前一行最大值列号;m2:mid最大值列号;m3:mid+1行最大值列号
+        int m1, m2, m3;
+        //中间三行对应的最大值
+        int v1, v2, v3;
+        while (top <= down) {
+            mid = top + (down - top) / 2;
+            m2 = maxOfRow(mat, mid);
+            if (top == down) {
+                return new int[]{mid, m2};
+            }
+            m1 = maxOfRow(mat, mid - 1);
+            m3 = maxOfRow(mat, mid + 1);
+            v1 = mid - 1 >= 0 ? mat[mid - 1][m1] : -1;
+            v2 = mat[mid][m2];
+            v3 = mid + 1 < mat.length ? mat[mid + 1][m3] : -1;
+            //中间行最大，直接顶峰
+            if (v2 > v3 && v2 > v1) {
+                return new int[]{mid, m2};
+            }
+            //mid-1行最大
+            if (v1 > v3 && v1 >= v2) {
+                down = mid - 1;
+            } else {
+                top = mid + 1;
+            }
+        }
+        return null;
+    }
+
+    public int maxOfRow(int[][] mat, int row) {
+        if (row < 0 || row >= mat.length) {
+            return -1;
+        }
+        int col = 0;
+        for (int i = 1; i < mat[row].length; i++) {
+            if (mat[row][i] > mat[row][col]) {
+                col = i;
+            }
+        }
+        return col;
     }
     //endregion
 

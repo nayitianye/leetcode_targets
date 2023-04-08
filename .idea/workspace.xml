@@ -184,7 +184,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Application.TaegetBinarySearchBasic">
+  <component name="RunManager" selected="应用程序.TaegetBinarySearchBasic">
     <configuration name="TaegetBinarySearchBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TaegetBinarySearchBasic" />
       <module name="leetcode_targets" />
