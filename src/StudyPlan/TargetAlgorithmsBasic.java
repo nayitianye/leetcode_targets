@@ -1,11 +1,64 @@
 package StudyPlan;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author yyb
  * leetcode_studyplan_algorithms_Basic
  * leetcode 学习计划 算法基础
  */
 public class TargetAlgorithmsBasic {
+
+    //region    20230408    15. 三数之和
+
+    /**
+     * https://leetcode.cn/problems/3sum/
+     *
+     * @param nums 整数数组 nums
+     * @return 返回所有和为 0 且不重复的三元组
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length < 3) {
+            return res;
+        }
+        Arrays.sort(nums);
+        if (nums[nums.length - 1] < 0) {
+            return res;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return res;
+    }
+    //endregion
 
     //region    20230405    33. 搜索旋转排序数组
 
@@ -120,6 +173,33 @@ public class TargetAlgorithmsBasic {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region    20230408    153. 寻找旋转排序数组中的最小值
+
+    /**
+     * https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array
+     * @param nums  元素值 互不相同 的数组 nums
+     * @return  找出并返回数组中的 最小元素
+     */
+    public int findMin(int[] nums) {
+        if(nums==null||nums.length<1){
+            return 0;
+        }
+        if(nums.length==1){
+            return nums[0];
+        }
+        int left=0,right=nums.length-1;
+        while(left<right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]<nums[right]){
+                right=mid;
+            }else{
+                left=mid+1;
+            }
+        }
+        return nums[left];
     }
     //endregion
 }
