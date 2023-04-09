@@ -215,9 +215,10 @@ public class TargetHashTable {
 
     /**
      * https://leetcode.cn/problems/number-of-arithmetic-triplets/
-     * @param nums  严格递增 的整数数组 num
-     * @param diff  一个正整数 diff
-     * @return  不同 算术三元组 的数目
+     *
+     * @param nums 严格递增 的整数数组 num
+     * @param diff 一个正整数 diff
+     * @return 不同 算术三元组 的数目
      */
     public int arithmeticTriplets(int[] nums, int diff) {
         HashSet<Integer> hashSet = new HashSet<>();
@@ -252,6 +253,28 @@ public class TargetHashTable {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region    20230409    2399. 检查相同字母间的距离
+
+    /**
+     * https://leetcode.cn/problems/check-distances-between-same-letters/
+     *
+     * @param s  下标从 0 开始的字符串 s
+     * @param distance  下标从 0 开始、长度为 26 的的整数数组 distance
+     * @return   s 是一个 匀整 字符串，返回 true ；否则，返回 false
+     */
+    public boolean checkDistances(String s, int[] distance) {
+        int[] last = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            int c = s.charAt(i) - 'a';
+            if (last[c] != 0 && i - last[c] != distance[c]) {
+                return false;
+            }
+            last[c] = i + 1;
+        }
+        return true;
     }
     //endregion
 

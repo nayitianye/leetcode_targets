@@ -72,8 +72,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBeginner.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetDynamicProgrammingBasic.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLcof.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetLeetCode75Basic.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBeginner.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
   </component>
@@ -184,20 +186,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TaegetBinarySearchBasic">
-    <configuration name="TaegetBinarySearchBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StudyPlan.TaegetBinarySearchBasic" />
-      <module name="leetcode_targets" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StudyPlan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="应用程序.TargetProgrammingSkillsBasic">
     <configuration name="TargetBookSortAlgorithms" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LeetBook.TargetBookSortAlgorithms" />
       <module name="leetcode_targets" />
@@ -224,6 +213,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TargetProgrammingSkillsBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetProgrammingSkillsBasic" />
+      <module name="leetcode_targets" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StudyPlan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TargetString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetString" />
       <module name="leetcode_targets" />
@@ -238,6 +240,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.TargetProgrammingSkillsBasic" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -245,6 +252,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="e755efa2-b4fe-4b35-9eb2-163762daceff" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -375,13 +383,7 @@
       <workItem from="1680439697010" duration="13312000" />
       <workItem from="1680614059989" duration="5251000" />
       <workItem from="1680700387864" duration="9356000" />
-    </task>
-    <task id="LOCAL-00026" summary="122. 买卖股票的最佳时机 II&#10;309. 最佳买卖股票时机含冷冻期&#10;714. 买卖股票的最佳时机含手续费">
-      <created>1676908727547</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1676908727547</updated>
+      <workItem from="1681047914659" duration="7795000" />
     </task>
     <task id="LOCAL-00027" summary="1539. 第 k 个缺失的正整数&#10;167. 两数之和 II - 输入有序数组&#10;1608. 特殊数组的特征值">
       <created>1676993555398</created>
@@ -719,7 +721,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680967546243</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="学习计划_数据结构基础：&#10;75. 颜色分类&#10;119. 杨辉三角 II&#10;学习计划_算法基础：&#10;15. 三数之和&#10;153. 寻找旋转排序数组中的最小值">
+      <created>1680969591501</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1680969591501</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -806,7 +815,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_剑指 Offer&#10;面试题45. 把数组排成最小的数&#10;面试题61. 扑克牌中的顺子&#10;剑指 Offer 46. 把数字翻译成字符串&#10;学习计划_LeetCode 75&#10;692. 前K个高频单词&#10;1046. 最后一块石头的重量&#10;学习计划_编程能力入门&#10;389. 找不同&#10;1678. 设计 Goal 解析器&#10;1768. 交替合并字符串" />
     <MESSAGE value="文件重命名" />
     <MESSAGE value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
     <MESSAGE value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
@@ -831,7 +839,8 @@
     <MESSAGE value="学习计划_LeetCode75_Level2:&#10;621. 任务调度器&#10;2131. 连接两字母单词得到的最长回文串&#10;学习计划_二分查找基础：&#10;981. 基于时间的键值存储&#10;1300. 转变数组后最接近目标值的数组和" />
     <MESSAGE value="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
     <MESSAGE value="学习计划_二分查找基础：&#10;911. 在线选举&#10;1146. 快照数组&#10;1201. 丑数 III&#10;1488. 避免洪水泛滥&#10;1562. 查找大小为 M 的最新分组&#10;1648. 销售价值减少的颜色球&#10;1802. 有界数组中指定下标处的最大值&#10;1901. 寻找峰值 II" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_二分查找基础：&#10;911. 在线选举&#10;1146. 快照数组&#10;1201. 丑数 III&#10;1488. 避免洪水泛滥&#10;1562. 查找大小为 M 的最新分组&#10;1648. 销售价值减少的颜色球&#10;1802. 有界数组中指定下标处的最大值&#10;1901. 寻找峰值 II" />
+    <MESSAGE value="学习计划_数据结构基础：&#10;75. 颜色分类&#10;119. 杨辉三角 II&#10;学习计划_算法基础：&#10;15. 三数之和&#10;153. 寻找旋转排序数组中的最小值" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构基础：&#10;75. 颜色分类&#10;119. 杨辉三角 II&#10;学习计划_算法基础：&#10;15. 三数之和&#10;153. 寻找旋转排序数组中的最小值" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -896,7 +905,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
-          <line>258</line>
+          <line>281</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -918,6 +927,16 @@
           <url>file://$PROJECT_DIR$/src/TargetString.java</url>
           <line>714</line>
           <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
+          <line>293</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
