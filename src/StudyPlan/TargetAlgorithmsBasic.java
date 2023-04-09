@@ -202,4 +202,72 @@ public class TargetAlgorithmsBasic {
         return nums[left];
     }
     //endregion
+
+    //region    20230410    200. 岛屿数量
+
+    /**
+     * https://leetcode.cn/problems/number-of-islands/
+     * @param grid 一个由 '1'（陆地）和 '0'（水）组成的的二维网格 grid
+     * @return  计算网格中岛屿的数量
+     */
+    public int numIslands(char[][] grid) {
+        int res = 0;
+        for (int i = 0; i < grid.length; i ++) {
+            for (int j = 0; j < grid[0].length; j ++) {
+                if (grid[i][j] == '1') {
+                    dfsGrid(grid, i, j);
+                    res ++;
+                }
+            }
+        }
+        return res;
+    }
+
+    private void dfsGrid(char[][] grid, int row, int col) {
+        if (row >= grid.length || col >= grid[0].length || row < 0 || col < 0) {
+            return;
+        }
+
+        if (grid[row][col] != '1') {
+            return;
+        }
+
+        grid[row][col] = '2';
+        dfsGrid(grid, row - 1, col);
+        dfsGrid(grid, row + 1, col);
+        dfsGrid(grid, row, col - 1);
+        dfsGrid(grid, row, col + 1);
+    }
+    //endregion
+
+    //region    20230410    209. 长度最小的子数组
+
+    /**
+     * https://leetcode.cn/problems/minimum-size-subarray-sum
+     * @param target 一个正整数 target
+     * @param nums  含有 n 个正整数的数组 nums
+     * @return  找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0
+     */
+    public int minSubArrayLen(int target, int[] nums) {
+        int[] presum = new int[nums.length + 1];
+        for (int i = 1; i <= nums.length; i++) {
+            presum[i] = presum[i - 1] + nums[i - 1];
+        }
+        if (presum[nums.length] < target) {
+            return 0;
+        }
+        int minLength = Integer.MAX_VALUE;
+        for (int i = 1; i < presum.length; i++) {
+            int temptarget = target + presum[i-1];
+            int bound = Arrays.binarySearch(presum, temptarget);
+            if (bound < 0) {
+                bound = -bound - 1;
+            }
+            if (bound < presum.length) {
+                minLength = Math.min(minLength, bound - (i - 1));
+            }
+        }
+        return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+    //endregion
 }

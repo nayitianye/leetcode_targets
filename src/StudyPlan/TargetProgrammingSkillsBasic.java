@@ -66,6 +66,77 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230410    43. 字符串相乘
+
+    /**
+     * https://leetcode.cn/problems/multiply-strings/
+     * @param num1  非负整数 num1
+     * @param num2  非负整数 num2
+     * @return  返回 num1 和 num2 的乘积
+     */
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        if (num1.equals("1")) {
+            return num2;
+        }
+        if (num2.equals("1")) {
+            return num1;
+        }
+        String ans = "0";
+        int m = num1.length(), n = num2.length();
+        for (int i = n - 1; i >= 0; i--) {
+            StringBuffer curr = new StringBuffer();
+            int add = 0;
+            for (int j = n - 1; j > i; j--) {
+                curr.append(0);
+            }
+            int y = num2.charAt(i) - '0';
+            for (int j = m - 1; j >= 0; j--) {
+                int x = num1.charAt(j) - '0';
+                int product = x * y + add;
+                curr.append(product % 10);
+                add = product / 10;
+            }
+            if (add != 0) {
+                curr.append(add % 10);
+            }
+            ans = addStrings(ans, curr.reverse().toString());
+        }
+        return ans;
+    }
+
+    public String addStrings(String num1, String num2) {
+        int i = num1.length() - 1, j = num2.length() - 1, add = 0;
+        StringBuffer ans = new StringBuffer();
+        while (i >= 0 || j >= 0 || add != 0) {
+            int x = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int y = j >= 0 ? num2.charAt(j) - '0' : 0;
+            int result = x + y + add;
+            ans.append(result % 10);
+            add = result / 10;
+            i--;
+            j--;
+        }
+        ans.reverse();
+        return ans.toString();
+    }
+    //endregion
+
+    //region    20230410    58. 最后一个单词的长度
+
+    /**
+     * https://leetcode.cn/problems/length-of-last-word
+     * @param s  字符串 s
+     * @return  返回字符串中最后一个单词的长度
+     */
+    public int lengthOfLastWord(String s) {
+        String[] strings = s.trim().split(" ");
+        return strings[strings.length - 1].length();
+    }
+    //endregion
+
     //region    20230409    66. 加一
 
     /**
@@ -237,6 +308,29 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230410    739. 每日温度
+
+    /**
+     * https://leetcode.cn/problems/daily-temperatures/
+     *
+     * @param temperatures 整数数组 temperatures
+     * @return 一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后
+     */
+    public int[] dailyTemperatures(int[] temperatures) {
+        Stack<Integer> stack = new Stack<>();
+        int[] res = new int[temperatures.length];
+        for (int i = 0; i < temperatures.length; i++) {
+            int temperature = temperatures[i];
+            while (!stack.isEmpty() && temperature > temperatures[stack.peek()]) {
+                int prevIndex = stack.pop();
+                res[prevIndex] = i - prevIndex;
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230405    896. 单调数列
 
     /**
@@ -272,25 +366,28 @@ public class TargetProgrammingSkillsBasic {
      * @return 返回 整数 num + k 的 数组形式
      */
     public List<Integer> addToArrayForm(int[] num, int k) {
-        int num1 = 0;
-        for (int i = 0; i < num.length; i++) {
-            num1 = num1 * 10 + num[i];
+        int n = num.length;
+        List<Integer> res = new ArrayList<>();  // 可以用 LinkeList，或者 ArrayList 往后加，最后反转
+        int i = n - 1, sum = 0, carry = 0;
+        while (i >= 0 || k != 0) {  // 循环条件：两个数有一个没完
+            int x = i >= 0 ? num[i] : 0;
+            int y = k != 0 ? k % 10 : 0;
+
+            sum = x + y + carry;
+            carry = sum / 10;
+            k = k / 10;
+
+            i--;
+            res.add(0, sum % 10);
         }
-        int sum = num1 + k;
-        Stack<Integer> stack = new Stack<>();
-        while (sum > 0) {
-            stack.push(sum % 10);
-            sum = sum / 10;
-        }
-        List<Integer> res = new ArrayList<>();
-        while (!stack.isEmpty()) {
-            res.add(stack.pop());
+        if (carry != 0) {
+            res.add(0, carry);
         }
         return res;
     }
     //endregion
 
     public static void main(String[] args) {
-        new TargetProgrammingSkillsBasic().addBinary("11", "1");
+        new TargetProgrammingSkillsBasic().addToArrayForm(new int[]{9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, 1);
     }
 }

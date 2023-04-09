@@ -186,13 +186,13 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetProgrammingSkillsBasic">
-    <configuration name="TargetBookSortAlgorithms" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="LeetBook.TargetBookSortAlgorithms" />
+  <component name="RunManager" selected="应用程序.TargetDataStructuresBasic">
+    <configuration name="TargetDataStructuresBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructuresBasic" />
       <module name="leetcode_targets" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="LeetBook.*" />
+          <option name="PATTERN" value="StudyPlan.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -242,6 +242,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetDataStructuresBasic" />
         <item itemvalue="应用程序.TargetProgrammingSkillsBasic" />
       </list>
     </recent_temporary>
@@ -383,21 +384,7 @@
       <workItem from="1680439697010" duration="13312000" />
       <workItem from="1680614059989" duration="5251000" />
       <workItem from="1680700387864" duration="9356000" />
-      <workItem from="1681047914659" duration="7795000" />
-    </task>
-    <task id="LOCAL-00027" summary="1539. 第 k 个缺失的正整数&#10;167. 两数之和 II - 输入有序数组&#10;1608. 特殊数组的特征值">
-      <created>1676993555398</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1676993555398</updated>
-    </task>
-    <task id="LOCAL-00028" summary="1351. 统计有序矩阵中的负数&#10;1346. 检查整数及其两倍数是否存在&#10;633. 平方数之和&#10;74. 搜索二维矩阵&#10;33. 搜索旋转排序数组">
-      <created>1677085523738</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1677085523738</updated>
+      <workItem from="1681047914659" duration="12709000" />
     </task>
     <task id="LOCAL-00029" summary="1855. 下标对中的最大距离&#10;1337. 矩阵中战斗力最弱的 K 行&#10;74. 搜索二维矩阵&#10;350. 两个数组的交集 II">
       <created>1677164444738</created>
@@ -728,7 +715,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680969591501</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="学习计划_编程能力基础：&#10;66. 加一&#10;67. 二进制求和&#10;150. 逆波兰表达式求值&#10;989. 数组形式的整数加法&#10;学习计划_动态规划基础：&#10;70. 爬楼梯&#10;509. 斐波那契数&#10;746. 使用最小花费爬楼梯&#10;每日一题：&#10;2399. 检查相同字母间的距离">
+      <created>1681055944727</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1681055944727</updated>
+    </task>
+    <task id="LOCAL-00077" summary="学习计划_编程能力基础：&#10;66. 加一&#10;67. 二进制求和&#10;150. 逆波兰表达式求值&#10;989. 数组形式的整数加法&#10;学习计划_动态规划基础：&#10;70. 爬楼梯&#10;509. 斐波那契数&#10;746. 使用最小花费爬楼梯&#10;每日一题：&#10;2399. 检查相同字母间的距离">
+      <created>1681055955707</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1681055955707</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -815,7 +816,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="文件重命名" />
     <MESSAGE value="学习计划_算法入门：&#10;35. 搜索插入位置&#10;278. 第一个错误的版本&#10;704. 二分查找" />
     <MESSAGE value="学习计划_算法入门：&#10;189. 轮转数组&#10;977. 有序数组的平方&#10;学习计划_程能力入门:&#10;709. 转换成小写字母&#10;953. 验证外星语词典&#10;1309. 解码字母到整数映射" />
     <MESSAGE value="学习计划_剑指Offer&#10;剑指 Offer 40. 最小的k个数&#10;剑指 Offer 41. 数据流中的中位数&#10;学习计划_二分查找基础&#10;209. 长度最小的子数组&#10;每日一题：&#10;1012. 至少有 1 位重复的数字" />
@@ -840,7 +840,8 @@
     <MESSAGE value="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
     <MESSAGE value="学习计划_二分查找基础：&#10;911. 在线选举&#10;1146. 快照数组&#10;1201. 丑数 III&#10;1488. 避免洪水泛滥&#10;1562. 查找大小为 M 的最新分组&#10;1648. 销售价值减少的颜色球&#10;1802. 有界数组中指定下标处的最大值&#10;1901. 寻找峰值 II" />
     <MESSAGE value="学习计划_数据结构基础：&#10;75. 颜色分类&#10;119. 杨辉三角 II&#10;学习计划_算法基础：&#10;15. 三数之和&#10;153. 寻找旋转排序数组中的最小值" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构基础：&#10;75. 颜色分类&#10;119. 杨辉三角 II&#10;学习计划_算法基础：&#10;15. 三数之和&#10;153. 寻找旋转排序数组中的最小值" />
+    <MESSAGE value="学习计划_编程能力基础：&#10;66. 加一&#10;67. 二进制求和&#10;150. 逆波兰表达式求值&#10;989. 数组形式的整数加法&#10;学习计划_动态规划基础：&#10;70. 爬楼梯&#10;509. 斐波那契数&#10;746. 使用最小花费爬楼梯&#10;每日一题：&#10;2399. 检查相同字母间的距离" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_编程能力基础：&#10;66. 加一&#10;67. 二进制求和&#10;150. 逆波兰表达式求值&#10;989. 数组形式的整数加法&#10;学习计划_动态规划基础：&#10;70. 爬楼梯&#10;509. 斐波那契数&#10;746. 使用最小花费爬楼梯&#10;每日一题：&#10;2399. 检查相同字母间的距离" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -930,13 +931,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>293</line>
+          <line>390</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>105</line>
+          <line>176</line>
           <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetDataStructuresBasic.java</url>
+          <line>264</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
