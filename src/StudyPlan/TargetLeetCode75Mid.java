@@ -220,6 +220,30 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230410    108. 将有序数组转换为二叉搜索树
+
+    /**
+     * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
+     *
+     * @param nums 整数数组 nums
+     * @return 将其转换为一棵 高度平衡 二叉搜索树
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode helper(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+        int mid = left + (right - left) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper(nums, left, mid - 1);
+        root.right = helper(nums, mid + 1, right);
+        return root;
+    }
+    //endregion
+
     //region    20230405    110. 平衡二叉树
 
     /**
@@ -335,8 +359,9 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/invert-binary-tree/
-     * @param root  二叉树的根节点 root
-     * @return  翻转这棵二叉树，并返回其根节点
+     *
+     * @param root 二叉树的根节点 root
+     * @return 翻转这棵二叉树，并返回其根节点
      */
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
@@ -397,6 +422,55 @@ public class TargetLeetCode75Mid {
         }
         odd.next = evenHead;
         return head;
+    }
+    //endregion
+
+    //region    20230410    438. 找到字符串中所有字母异位词
+
+    /**
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string
+     * @param s  字符串 s
+     * @param p  字符串 p
+     * @return  找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        int slen = s.length(), plen = p.length();
+        if (slen < plen) {
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        int[] count = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[p.charAt(i) - 'a']--;
+        }
+        int differ = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                ++differ;
+            }
+        }
+        if (differ == 0) {
+            res.add(0);
+        }
+        for (int i = 0; i < slen - plen; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
+                --differ;
+            } else if (count[s.charAt(i) - 'a'] == 0) {
+                ++differ;
+            }
+            --count[s.charAt(i) - 'a'];
+            if (count[s.charAt(i + plen) - 'a'] == -1) {
+                --differ;
+            } else if (count[s.charAt(i + plen) - 'a'] == 0) {
+                ++differ;
+            }
+            ++count[s.charAt(i + plen )- 'a'];
+            if (differ == 0) {
+                res.add(i + 1);
+            }
+        }
+        return res;
     }
     //endregion
 
