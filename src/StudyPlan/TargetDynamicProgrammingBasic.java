@@ -9,6 +9,36 @@ import java.util.HashMap;
  */
 public class TargetDynamicProgrammingBasic {
 
+    //region    20230411    53. 最大子数组和
+
+    /**
+     * https://leetcode.cn/problems/maximum-subarray/
+     * @param nums  整数数组 nums
+     * @return  找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和
+     */
+    public int maxSubArray(int[] nums) {
+        if (nums == null) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        //dp 数组表示以nums[i]结尾的最大数组
+        int[] dp=new int[nums.length];
+        dp[0]=nums[0];
+        int res=nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if(dp[i-1]>0){
+                dp[i]=dp[i-1]+nums[i];
+            }else{
+                dp[i]=nums[i];
+            }
+            res=Math.max(res,dp[i]);
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230409    70. 爬楼梯
 
     /**
@@ -31,6 +61,62 @@ public class TargetDynamicProgrammingBasic {
         }
     }
     HashMap<Integer, Integer> hashMapClimbStairs = new HashMap<>();
+    //endregion
+
+    //region    20230411    198. 打家劫舍
+
+    /**
+     * https://leetcode.cn/problems/house-robber/
+     * @param nums  一个代表每个房屋存放金额的非负整数数组 nums
+     * @return  计算你不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
+     */
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    //endregion
+
+    //region    20230411    213. 打家劫舍 II
+
+    /**
+     * https://leetcode.cn/problems/house-robber-ii/
+     * @param nums  给定一个代表每个房屋存放金额的非负整数数组 nums
+     * @return  计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额
+     */
+    public int rob1(int[] nums) {
+        if(nums==null ||nums.length==0){
+            return 0;
+        }
+        if(nums.length==1){
+            return nums[0];
+        }
+        if(nums.length==2){
+            return Math.max(nums[0],nums[1]);
+        }
+        return Math.max(maxRob(0,nums.length-1,nums),maxRob(1,nums.length,nums));
+    }
+
+    public int maxRob(int start, int end, int[] nums) {
+        int first = nums[start], second = Math.max(nums[start], nums[start + 1]);
+        for (int i = start + 2; i < end; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
     //endregion
 
     //region    20230409    509. 斐波那契数

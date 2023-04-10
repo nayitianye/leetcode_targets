@@ -194,6 +194,30 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230411    290. 单词规律
+
+    /**
+     * https://leetcode.cn/problems/word-pattern/
+     *
+     * @param pattern 一种规律 pattern
+     * @param s       一个字符串 s
+     * @return 判断 s 是否遵循相同的规律
+     */
+    public boolean wordPattern(String pattern, String s) {
+        String[] strs = s.trim().split(" ");
+        if (pattern.length() != strs.length) {
+            return false;
+        }
+        Map<Object, Integer> map = new HashMap<>();
+        for (Integer i = 0; i < strs.length; i++) {
+            if (map.put(pattern.charAt(i), i) != map.put(strs[i], i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    //endregion
+
     //region    20230410    334. 递增的三元子序列
 
     /**

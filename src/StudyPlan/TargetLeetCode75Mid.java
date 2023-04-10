@@ -324,6 +324,31 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230411    198. 打家劫舍
+
+    /**
+     * https://leetcode.cn/problems/house-robber/
+     * @param nums  一个代表每个房屋存放金额的非负整数数组 nums
+     * @return  计算你不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
+     */
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    //endregion
+
     //region    20230401    202. 快乐数
 
     /**
