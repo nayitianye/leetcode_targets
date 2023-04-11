@@ -1,8 +1,6 @@
 package StudyPlan;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yyb
@@ -27,6 +25,23 @@ public class TargetAlgorithmsBasic {
             this.val = val;
             this.next = next;
         }
+    }
+    //endregion
+
+    //region    20230412    11. 盛最多水的容器
+
+    /**
+     * https://leetcode.cn/problems/container-with-most-water/
+     *
+     * @param height 给定一个长度为 n 的整数数组 height
+     * @return 出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。返回容器可以储存的最大水量
+     */
+    public int maxArea(int[] height) {
+        int i = 0, j = height.length - 1, res = 0;
+        while (i < j) {
+            res = height[i] < height[j] ? Math.max(res, (j - i) * height[i++]) : Math.max(res, (j - i) * height[j--]);
+        }
+        return res;
     }
     //endregion
 
@@ -202,8 +217,9 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii
-     * @param head  已排序的链表的头 head
-     * @return  删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表
+     *
+     * @param head 已排序的链表的头 head
+     * @return 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表
      */
     public ListNode deleteDuplicates(ListNode head) {
         //没有节点或者只有一个节点，必然没有重复元素
@@ -369,6 +385,129 @@ public class TargetAlgorithmsBasic {
             }
         }
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+    //endregion
+
+    //region    20230412    713. 乘积小于 K 的子数组
+
+    /**
+     * https://leetcode.cn/problems/subarray-product-less-than-k/
+     *
+     * @param nums 整数数组 nums
+     * @param k    一个整数 k
+     * @return 返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目
+     */
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        //同样排除k为1的情况比如  [1,1,1] k=1
+        if (k <= 1) {
+            return 0;
+        }
+        int left = 0;
+        int right = 0;
+        //创建一个变量记录路上的乘积
+        int mul = 1;
+        //记录连续数组的组合个数
+        int ans = 0;
+
+        //用右指针遍历整个数组，每次循环右指针右移一次
+        while (right < nums.length) {
+            //记录乘积
+            mul *= nums[right];
+            //当大于等于k，左指针右移并把之前左指针的数除掉
+            while (mul >= k) {
+                mul /= nums[left];
+                left++;
+            }
+
+            //每次右指针位移到一个新位置，应该加上 x 种数组组合：
+            //  nums[right]
+            //  nums[right-1], nums[right]
+            //  nums[right-2], nums[right-1], nums[right]
+            //  nums[left], ......, nums[right-2], nums[right-1], nums[right]
+            //共有 right - left + 1 种
+            ans += right - left + 1;
+
+            //右指针右移
+            right++;
+        }
+        return ans;
+    }
+    //endregion
+
+    //region    20230412    844. 比较含退格的字符串
+
+    /**
+     * https://leetcode.cn/problems/backspace-string-compare
+     *
+     * @param s 字符串 s
+     * @param t 字符串 t
+     * @return 它们分别被输入到空白的文本编辑器后，如果两者相等，返回 true
+     */
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> stackT = getStack(t);
+        Stack<Character> stackS = getStack(s);
+        while (!stackS.isEmpty() || !stackT.isEmpty()) {
+            if (!stackS.isEmpty() && stackT.isEmpty()) {
+                return false;
+            }
+            if (stackS.isEmpty() && !stackT.isEmpty()) {
+                return false;
+            }
+            if (stackS.peek() != stackT.peek()) {
+                return false;
+            }
+            stackS.pop();
+            stackT.pop();
+        }
+        return true;
+    }
+
+    private Stack<Character> getStack(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '#') {
+                stack.push(s.charAt(i));
+            }
+            if (!stack.isEmpty() && s.charAt(i) == '#') {
+                stack.pop();
+            }
+        }
+        return stack;
+    }
+    //endregion
+
+    //region    20230412    986. 区间列表的交集
+
+    /**
+     * https://leetcode.cn/problems/interval-list-intersections/
+     *
+     * @param firstList  由一些 闭区间 组成的列表，firstList
+     * @param secondList 由一些 闭区间 组成的列表，secondList
+     * @return 两个区间列表的交
+     */
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        if (firstList == null || firstList.length == 0) {
+            return firstList;
+        }
+        if (secondList == null || secondList.length == 0) {
+            return secondList;
+        }
+        List<int[]> res = new ArrayList<>();
+        int firstIndex = 0;
+        int secondIndex = 0;
+        while (firstIndex < firstList.length && secondIndex < secondList.length) {
+            int lo = Math.max(firstList[firstIndex][0], secondList[secondIndex][0]);
+            int hi = Math.min(firstList[firstIndex][1], secondList[secondIndex][1]);
+            if (lo <= hi) {
+                res.add(new int[]{lo, hi});
+            }
+            if (firstList[firstIndex][1] < secondList[secondIndex][1]) {
+                firstIndex++;
+            } else {
+                secondIndex++;
+            }
+        }
+        return res.toArray(new int[res.size()][]);
     }
     //endregion
 }

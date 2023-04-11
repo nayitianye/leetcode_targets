@@ -58,6 +58,96 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230412    43. 字符串相乘
+
+    /**
+     * https://leetcode.cn/problems/multiply-strings/
+     * @param num1  非负整数 num1
+     * @param num2  非负整数 num2
+     * @return  返回 num1 和 num2 的乘积
+     */
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        if (num1.equals("1")) {
+            return num2;
+        }
+        if (num2.equals("1")) {
+            return num1;
+        }
+        String ans = "0";
+        int m = num1.length(), n = num2.length();
+        for (int i = n - 1; i >= 0; i--) {
+            StringBuffer curr = new StringBuffer();
+            int add = 0;
+            for (int j = n - 1; j > i; j--) {
+                curr.append(0);
+            }
+            int y = num2.charAt(i) - '0';
+            for (int j = m - 1; j >= 0; j--) {
+                int x = num1.charAt(j) - '0';
+                int product = x * y + add;
+                curr.append(product % 10);
+                add = product / 10;
+            }
+            if (add != 0) {
+                curr.append(add % 10);
+            }
+            ans = addStrings1(ans, curr.reverse().toString());
+        }
+        return ans;
+    }
+
+    public String addStrings1(String num1, String num2) {
+        int i = num1.length() - 1, j = num2.length() - 1, add = 0;
+        StringBuffer ans = new StringBuffer();
+        while (i >= 0 || j >= 0 || add != 0) {
+            int x = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int y = j >= 0 ? num2.charAt(j) - '0' : 0;
+            int result = x + y + add;
+            ans.append(result % 10);
+            add = result / 10;
+            i--;
+            j--;
+        }
+        ans.reverse();
+        return ans.toString();
+    }
+    //endregion
+
+    //region    20230412    49. 字母异位词分组
+
+    /**
+     * https://leetcode.cn/problems/group-anagrams/description/
+     * @param strs  字符串数组 strs
+     * @return  将字母异位词组合在一起 , 可以按任意顺序返回结果列表
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            int[] counts = new int[26];
+            int length = str.length();
+            for (int i = 0; i < length; i++) {
+                counts[str.charAt(i) - 'a']++;
+            }
+            //将每个出现次数大于0 的字母和出现次数按顺序拼接成字符串，作为哈希表的键
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0; i < 26; i++) {
+                if (counts[i] != 0) {
+                    stringBuffer.append((char) ('a' + i));
+                    stringBuffer.append(counts[i]);
+                }
+            }
+            String key = stringBuffer.toString();
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(str);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+    //endregion
+
     //region    20230408    75. 颜色分类
 
     /**
