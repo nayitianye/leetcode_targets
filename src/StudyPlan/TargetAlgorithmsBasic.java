@@ -11,6 +11,25 @@ import java.util.List;
  */
 public class TargetAlgorithmsBasic {
 
+    //region    自定义数据结构
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    //endregion
+
     //region    20230408    15. 三数之和
 
     /**
@@ -64,9 +83,10 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/search-in-rotated-sorted-array/
-     * @param nums  整数数组 nums
-     * @param target  整数 target
-     * @return  nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1
+     *
+     * @param nums   整数数组 nums
+     * @param target 整数 target
+     * @return nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1
      */
     public int search(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
@@ -101,9 +121,10 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array
-     * @param nums  非递减顺序排列的整数数组 nums
-     * @param target  目标值 target
-     * @return  目标值在数组中的开始位置和结束位置
+     *
+     * @param nums   非递减顺序排列的整数数组 nums
+     * @param target 目标值 target
+     * @return 目标值在数组中的开始位置和结束位置
      */
     public int[] searchRange(int[] nums, int target) {
         int[] res = new int[]{-1, -1};
@@ -141,9 +162,10 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/search-a-2d-matrix/
-     * @param matrix  m x n 的 matrix 矩阵
+     *
+     * @param matrix m x n 的 matrix 矩阵
      * @param target 目标值 target
-     * @return  判断目标值是否在数组中
+     * @return 判断目标值是否在数组中
      */
     public boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
@@ -151,7 +173,7 @@ public class TargetAlgorithmsBasic {
         }
         int bottom = -1, top = matrix.length - 1, mid = 0;
         while (bottom < top) {
-            mid = bottom + (top - bottom+1) / 2;
+            mid = bottom + (top - bottom + 1) / 2;
             if (matrix[mid][0] <= target) {
                 bottom = mid;
             } else {
@@ -176,30 +198,107 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230411    82. 删除排序链表中的重复元素 II
+
+    /**
+     * https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii
+     * @param head  已排序的链表的头 head
+     * @return  删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        //没有节点或者只有一个节点，必然没有重复元素
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //当前节点和下一个节点，值不同，则head的值是需要保留的，对head.next继续递归
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates(head.next);
+            return head;
+        } else {
+            // 当前节点与下一个节点的值重复了，重复的值都不能要
+            // 一直往下找，找到不重复的节点。返回堆不重复节点的递归结果
+            ListNode notDup = head.next.next;
+            while (notDup != null && notDup.val == head.val) {
+                notDup = notDup.next;
+            }
+            return deleteDuplicates(notDup);
+        }
+    }
+    //endregion
+
     //region    20230408    153. 寻找旋转排序数组中的最小值
 
     /**
      * https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array
-     * @param nums  元素值 互不相同 的数组 nums
-     * @return  找出并返回数组中的 最小元素
+     *
+     * @param nums 元素值 互不相同 的数组 nums
+     * @return 找出并返回数组中的 最小元素
      */
     public int findMin(int[] nums) {
-        if(nums==null||nums.length<1){
+        if (nums == null || nums.length < 1) {
             return 0;
         }
-        if(nums.length==1){
+        if (nums.length == 1) {
             return nums[0];
         }
-        int left=0,right=nums.length-1;
-        while(left<right){
-            int mid=left+(right-left)/2;
-            if(nums[mid]<nums[right]){
-                right=mid;
-            }else{
-                left=mid+1;
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            } else {
+                left = mid + 1;
             }
         }
         return nums[left];
+    }
+    //endregion
+
+    //region    20230411    162. 寻找峰值
+
+    /**
+     * https://leetcode.cn/problems/find-peak-element/
+     *
+     * @param nums 整数数组 nums
+     * @return 找到峰值元素并返回其索引
+     */
+    public int findPeakElement(int[] nums) {
+        int n = nums.length;
+        int left = 0, right = n - 1, ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (compare(nums, mid - 1, mid) < 0 && compare(nums, mid, mid + 1) > 0) {
+                ans = mid;
+                break;
+            }
+            if (compare(nums, mid, mid + 1) < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    // 辅助函数，输入下标 i，返回一个二元组 (0/1, nums[i])
+    // 方便处理 nums[-1] 以及 nums[n] 的边界情况
+    public int[] get(int[] nums, int index) {
+        if (index == -1 || index == nums.length) {
+            return new int[]{0, 0};
+        }
+        return new int[]{1, nums[index]};
+    }
+
+    public int compare(int[] nums, int index1, int index2) {
+        int[] num1 = get(nums, index1);
+        int[] num2 = get(nums, index2);
+        if (num1[0] != num2[0]) {
+            return num1[0] > num2[0] ? 1 : -1;
+        }
+        if (num1[1] == num2[1]) {
+            return 0;
+        }
+        return num1[1] > num2[1] ? 1 : -1;
     }
     //endregion
 
@@ -207,16 +306,17 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/number-of-islands/
+     *
      * @param grid 一个由 '1'（陆地）和 '0'（水）组成的的二维网格 grid
-     * @return  计算网格中岛屿的数量
+     * @return 计算网格中岛屿的数量
      */
     public int numIslands(char[][] grid) {
         int res = 0;
-        for (int i = 0; i < grid.length; i ++) {
-            for (int j = 0; j < grid[0].length; j ++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == '1') {
                     dfsGrid(grid, i, j);
-                    res ++;
+                    res++;
                 }
             }
         }
@@ -244,9 +344,10 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/minimum-size-subarray-sum
+     *
      * @param target 一个正整数 target
-     * @param nums  含有 n 个正整数的数组 nums
-     * @return  找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0
+     * @param nums   含有 n 个正整数的数组 nums
+     * @return 找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0
      */
     public int minSubArrayLen(int target, int[] nums) {
         int[] presum = new int[nums.length + 1];
@@ -258,7 +359,7 @@ public class TargetAlgorithmsBasic {
         }
         int minLength = Integer.MAX_VALUE;
         for (int i = 1; i < presum.length; i++) {
-            int temptarget = target + presum[i-1];
+            int temptarget = target + presum[i - 1];
             int bound = Arrays.binarySearch(presum, temptarget);
             if (bound < 0) {
                 bound = -bound - 1;

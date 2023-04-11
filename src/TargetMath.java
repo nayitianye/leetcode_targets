@@ -41,7 +41,7 @@ public class TargetMath {
      * https://leetcode.cn/problems/unique-binary-search-trees/
      *
      * @param n 整数 n
-     * @return  返回满足题意的二叉搜索树的种数
+     * @return 返回满足题意的二叉搜索树的种数
      */
     public int numTrees(int n) {
         //卡塔兰数  C0=1 Cn+1=2*(2*n+1)/(n+2)*Cn
@@ -59,8 +59,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/excel-sheet-column-number/
      *
-     * @param columnTitle  一个字符串 columnTitle ，表示 Excel 表格中的列名称
-     * @return  返回该列名称对应的列序号
+     * @param columnTitle 一个字符串 columnTitle ，表示 Excel 表格中的列名称
+     * @return 返回该列名称对应的列序号
      */
     private int titleToNumber(String columnTitle) {
         int res = 0;
@@ -77,16 +77,14 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/add-digits/
      *
-     * @param num   一个非负整数 num
-     * @return  反复将各个位上的数字相加，直到结果为一位数。返回这个结果
+     * @param num 一个非负整数 num
+     * @return 反复将各个位上的数字相加，直到结果为一位数。返回这个结果
      */
     private int addDigits(int num) {
         //若括号内为9，原本应该返回9，但经过模运算变为0，故要考虑此情况
         if (num != 0 && num % 9 == 0) {
             return 9;
-        }
-        else
-        {
+        } else {
             return num % 9;
         }
     }
@@ -132,8 +130,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/ugly-number/
      *
-     * @param n  一个整数 n
-     * @return  判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false
+     * @param n 一个整数 n
+     * @return 判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false
      */
     public boolean isUgly(int n) {
         if (n < 1) {
@@ -159,8 +157,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/minimum-moves-to-equal-array-elements/
      *
-     * @param nums  长度为 n 的整数数组 nums
-     * @return  返回让数组所有元素相等的最小操作次数
+     * @param nums 长度为 n 的整数数组 nums
+     * @return 返回让数组所有元素相等的最小操作次数
      */
     public int minMoves(int[] nums) {
         int minNum = Arrays.stream(nums).min().getAsInt();
@@ -178,8 +176,8 @@ public class TargetMath {
      * https://leetcode.cn/problems/self-dividing-numbers/
      *
      * @param left  整数 left
-     * @param right  整数 right
-     * @return  返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数
+     * @param right 整数 right
+     * @return 返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数
      */
     private List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> list = new ArrayList<>();
@@ -213,7 +211,7 @@ public class TargetMath {
      * https://leetcode.cn/problems/stone-game/
      *
      * @param piles 一共有偶数堆石子，排成一行；每堆都有 正 整数颗石子，数目为 piles[i]
-     * @return  当 Alice 赢得比赛时返回 true ，当 Bob 赢得比赛时返回 false
+     * @return 当 Alice 赢得比赛时返回 true ，当 Bob 赢得比赛时返回 false
      */
     public boolean stoneGame(int[] piles) {
         int N = piles.length;
@@ -239,8 +237,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/projection-area-of-3d-shapes/
      *
-     * @param grid  网格 grid
-     * @return  返回所有三个投影的总面积
+     * @param grid 网格 grid
+     * @return 返回所有三个投影的总面积
      */
     private int projectionArea(int[][] grid) {
         int N = grid.length;
@@ -264,9 +262,9 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/smallest-range-i/
      *
-     * @param nums  整数数组 nums
-     * @param K  整数 k
-     * @return  返回 nums 的最低 分数
+     * @param nums 整数数组 nums
+     * @param K    整数 k
+     * @return 返回 nums 的最低 分数
      */
     private int smallestRangeI(int[] nums, int K) {
         int min = Integer.MAX_VALUE;
@@ -289,8 +287,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/di-string-match/
      *
-     * @param S  范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s
-     * @return  给定一个字符串 s ，重构排列 perm 并返回它
+     * @param S 范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s
+     * @return 给定一个字符串 s ，重构排列 perm 并返回它
      */
     private int[] diStringMatch(String S) {
         int left = S.length();
@@ -315,8 +313,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/divisor-game/
      *
-     * @param N  一个数字 n
-     * @return  在爱丽丝在游戏中取得胜利时才返回 true
+     * @param N 一个数字 n
+     * @return 在爱丽丝在游戏中取得胜利时才返回 true
      */
     private boolean divisorGame(int N) {
         return N % 2 == 0;
@@ -326,7 +324,7 @@ public class TargetMath {
      * 动态规划求解
      *
      * @param N 一个数字 n
-     * @return  在爱丽丝在游戏中取得胜利时才返回 true
+     * @return 在爱丽丝在游戏中取得胜利时才返回 true
      */
     private boolean divisorGame2(int N) {
         boolean dp[] = new boolean[N + 1];
@@ -345,13 +343,38 @@ public class TargetMath {
     }
     //endregion
 
+    //region    20230411    1041. 困于环中的机器人
+
+    /**
+     * https://leetcode.cn/problems/robot-bounded-in-circle/
+     *
+     * @param instructions 执行指令 instructions
+     * @return 只有在平面中存在环使得机器人永远无法离开时，返回 true。否则，返回 fals
+     */
+    public boolean isRobotBounded(String instructions) {
+        int k = 0;
+        int[] dist = new int[4];
+        for (int i = 0; i < instructions.length(); i++) {
+            char c = instructions.charAt(i);
+            if (c == 'L') {
+                k = (k + 1) % 4;
+            } else if (c == 'R') {
+                k = (k + 3) % 4;
+            } else {
+                ++dist[k];
+            }
+        }
+        return (dist[0] == dist[2] && dist[1] == dist[3]) || (k != 0);
+    }
+    //endregion
+
     //region    20190922    1134. 阿姆斯特朗数
 
     /**
      * https://leetcode.cn/problems/armstrong-number/
      *
-     * @param N  一个整数 n
-     * @return  判定他是否是 阿姆斯特朗数
+     * @param N 一个整数 n
+     * @return 判定他是否是 阿姆斯特朗数
      */
     private boolean isArmstrong(int N) {
         int len = (N + "").length();
@@ -380,8 +403,8 @@ public class TargetMath {
     /**
      * https://leetcode.cn/problems/count-substrings-with-only-one-distinct-letter/
      *
-     * @param S  一个字符串 s
-     * @return  返回只含单一字母的子串个数
+     * @param S 一个字符串 s
+     * @return 返回只含单一字母的子串个数
      */
     private static int countLetters(String S) {
         int sum = 0;
