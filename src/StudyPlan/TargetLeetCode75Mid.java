@@ -324,12 +324,48 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230412    173. 二叉搜索树迭代器
+
+    /**
+     * https://leetcode.cn/problems/binary-search-tree-iterator
+     */
+    class BSTIterator {
+
+        Deque<TreeNode> stack = new LinkedList<>();
+
+        public BSTIterator(TreeNode root) {
+            TreeNode node = root;
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        public int next() {
+            TreeNode node = stack.pop();
+            if (node.right != null) {
+                TreeNode p = node.right;
+                while (p != null) {
+                    stack.push(p);
+                    p = p.left;
+                }
+            }
+            return node.val;
+        }
+
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+    }
+    //endregion
+
     //region    20230411    198. 打家劫舍
 
     /**
      * https://leetcode.cn/problems/house-robber/
-     * @param nums  一个代表每个房屋存放金额的非负整数数组 nums
-     * @return  计算你不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
+     *
+     * @param nums 一个代表每个房屋存放金额的非负整数数组 nums
+     * @return 计算你不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
      */
     public int rob(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -399,6 +435,38 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230412    230. 二叉搜索树中第K小的元素
+
+    /**
+     * https://leetcode.cn/problems/kth-smallest-element-in-a-bst/
+     *
+     * @param root 二叉搜索树的根节点 root
+     * @param k    个整数 k
+     * @return 设计一个算法查找其中第 k 个最小元素
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> b - a);
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addLast(root);
+        while (!deque.isEmpty()) {
+            TreeNode node = deque.pollFirst();
+            if (priorityQueue.size() < k) {
+                priorityQueue.add(node.val);
+            } else if (priorityQueue.peek() > node.val) {
+                priorityQueue.poll();
+                priorityQueue.add(node.val);
+            }
+            if (node.left != null) {
+                deque.addLast(node.left);
+            }
+            if (node.right != null) {
+                deque.addLast(node.right);
+            }
+        }
+        return priorityQueue.peek();
+    }
+    //endregion
+
     //region    20230402    234. 回文链表
 
     /**
@@ -454,9 +522,10 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/find-all-anagrams-in-a-string
-     * @param s  字符串 s
-     * @param p  字符串 p
-     * @return  找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
+     *
+     * @param s 字符串 s
+     * @param p 字符串 p
+     * @return 找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
      */
     public List<Integer> findAnagrams(String s, String p) {
         int slen = s.length(), plen = p.length();
@@ -490,7 +559,7 @@ public class TargetLeetCode75Mid {
             } else if (count[s.charAt(i + plen) - 'a'] == 0) {
                 ++differ;
             }
-            ++count[s.charAt(i + plen )- 'a'];
+            ++count[s.charAt(i + plen) - 'a'];
             if (differ == 0) {
                 res.add(i + 1);
             }
