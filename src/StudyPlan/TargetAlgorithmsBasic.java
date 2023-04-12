@@ -26,6 +26,26 @@ public class TargetAlgorithmsBasic {
             this.next = next;
         }
     }
+
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
     //endregion
 
     //region    20230412    11. 盛最多水的容器
@@ -385,6 +405,37 @@ public class TargetAlgorithmsBasic {
             }
         }
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+    //endregion
+
+    //region    20230413    572. 另一棵树的子树
+
+    /**
+     * https://leetcode.cn/problems/subtree-of-another-tree/
+     *
+     * @param root    二叉树 root
+     * @param subRoot 二叉树 subRoot
+     * @return 检验 root 中是否包含和 subRoot 具有相同结构和节点值的子树
+     */
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+        return dfs(root, subRoot);
+    }
+
+    public boolean dfs(TreeNode root, TreeNode subRoot) {
+        if (root == null) {
+            return false;
+        }
+        return check(root, subRoot) || dfs(root.right, subRoot) || dfs(root.left, subRoot);
+    }
+
+    public boolean check(TreeNode root, TreeNode subRoot) {
+        if (root == null && subRoot == null) {
+            return true;
+        }
+        if (root == null || subRoot == null || root.val != subRoot.val) {
+            return false;
+        }
+        return check(root.left, subRoot.left) && check(root.right, subRoot.right);
     }
     //endregion
 

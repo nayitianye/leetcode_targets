@@ -9,6 +9,57 @@ import java.util.*;
  */
 public class TargetDataStructuresBasic {
 
+    //region    20230413    5. 最长回文子串
+
+    /**
+     * https://leetcode.cn/problems/longest-palindromic-substring/
+     * @param s  一个字符串 s
+     * @return  找到 s 中最长的回文子串
+     */
+    public String longestPalindrome1(String s) {
+        int length = s.length();
+        if (length < 2) {
+            return s;
+        }
+        int maxLength = 1;
+        int begin = 0;
+        //d[i][j]表示s[i..j]是否是回文串
+        boolean[][] dp = new boolean[length][length];
+        //初始化：所有长度为1的字串都是回文串
+        for (int i = 0; i < length; i++) {
+            dp[i][i] = true;
+        }
+        char[] charArray = s.toCharArray();
+        //先枚举字串的长度
+        for (int L = 2; L <= length; L++) {
+            //枚举左边界，左边界的上限设置可以宽松一些
+            for (int i = 0; i < length; i++) {
+                //由i和j可以确定右边界，即j-i+1=L得
+                int j = L + i - 1;
+                //如果右边界越界，就可以退出当前循环
+                if (j >= length) {
+                    break;
+                }
+                if (charArray[i] != charArray[j]) {
+                    dp[i][j] = false;
+                } else {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                //只要dp[i][L]==true成立，就表示字串s[i..L]是回文，此时记录回文长度和起始位置
+                if (dp[i][j] && j - i + 1 > maxLength) {
+                    maxLength = j - i + 1;
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, begin + maxLength);
+    }
+    //endregion
+
     //region    20230405    15. 三数之和
 
     /**

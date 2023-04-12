@@ -81,6 +81,35 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230413    3. 无重复字符的最长子串
+
+    /**
+     * https://leetcode.cn/problems/longest-substring-without-repeating-characters
+     * @param s  字符串 s
+     * @return  找出其中不含有重复字符的最长子串的长度
+     */
+    public int lengthOfLongestSubstring(String s) {
+        // 哈希集合，记录每个字符是否出现过
+        HashSet<Character> hashSet = new HashSet<>();
+        int n = s.length();
+        // 右指针，初始值为-1，相当于我们在字符串的左边界的左侧，还没有开始移动
+        int rk = -1, ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (i != 0) {
+                //左指针向右移动一格，移除一个字符
+                hashSet.remove(s.charAt(i - 1));
+            }
+            while (rk + 1 < n && !hashSet.contains(s.charAt(rk + 1))) {
+                hashSet.add(s.charAt(rk + 1));
+                ++rk;
+            }
+            //第 i 到 rk 个字符是一个极长的无重复字符字串
+            ans = Math.max(ans, rk - i + 1);
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230401    14. 最长公共前缀
 
     /**
@@ -101,6 +130,35 @@ public class TargetLeetCode75Mid {
             res = res.substring(0, j);
         }
         return res;
+    }
+    //endregion
+
+    //region    20230413    16. 最接近的三数之和
+
+    /**
+     * https://leetcode.cn/problems/3sum-closest/
+     * @param nums  一个长度为 n 的整数数组 nums
+     * @param target  一个目标值 target
+     * @return  从 nums 中选出三个整数，使它们的和与 target 最接近
+     */
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int ans = nums[0] + nums[1] + nums[2];
+        for(int i=0;i<nums.length;i++) {
+            int start = i+1, end = nums.length - 1;
+            while(start < end) {
+                int sum = nums[start] + nums[end] + nums[i];
+                if(Math.abs(target - sum) < Math.abs(target - ans))
+                    ans = sum;
+                if(sum > target)
+                    end--;
+                else if(sum < target)
+                    start++;
+                else
+                    return ans;
+            }
+        }
+        return ans;
     }
     //endregion
 
@@ -324,6 +382,31 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230413    152. 乘积最大子数组
+
+    /**
+     * https://leetcode.cn/problems/maximum-product-subarray
+     * @param nums  一个整数数组 nums
+     * @return  找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积
+     */
+    public int maxProduct(int[] nums) {
+        int length=nums.length;
+        int[] maxdp=new int[length];
+        int[] mindp=new int[length];
+        System.arraycopy(nums,0,maxdp,0,length);
+        System.arraycopy(nums,0,mindp,0,length);
+        for(int i=1;i<length;i++){
+            maxdp[i]=Math.max(maxdp[i-1]*nums[i],Math.max(nums[i],mindp[i-1]*nums[i]));
+            mindp[i]=Math.min(mindp[i-1]*nums[i],Math.min(nums[i],maxdp[i-1]*nums[i]));
+        }
+        int ans=maxdp[0];
+        for(int i=1;i<length;i++){
+            ans=Math.max(ans,maxdp[i]);
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230412    173. 二叉搜索树迭代器
 
     /**
@@ -518,6 +601,87 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230413    322. 零钱兑换
+
+    /**
+     * https://leetcode.cn/problems/coin-change/
+     * @param coins  一个整数数组 coins ，表示不同面额的硬币
+     * @param amount  一个整数 amount ，表示总金额
+     * @return  计算并返回可以凑成总金额所需的 最少的硬币个数
+     */
+    public int coinChange(int[] coins, int amount) {
+        int max=amount+1;
+        int[] dp=new int[amount+1];
+        Arrays.fill(dp,max);
+        dp[0]=0;
+        for(int i=1;i<max;i++){
+            for(int j=0;j<coins.length;j++){
+                if(coins[j]<=i){
+                    dp[i]=Math.min(dp[i],dp[i-coins[j]]+1);
+                }
+            }
+        }
+        return dp[amount]>amount?-1:dp[amount];
+    }
+    //endregion
+
+    //region    20230413    437. 路径总和 III
+
+    /**
+     * https://leetcode.cn/problems/path-sum-iii
+     * @param root  二叉树的根节点 root
+     * @param sum  一个整数 targetSum
+     * @return  求该二叉树里节点值之和等于 targetSum 的 路径 的数目
+     */
+    public int pathSum(TreeNode root, int sum) {
+        // key是前缀和, value是大小为key的前缀和出现的次数
+        Map<Long, Integer> prefixSumCount = new HashMap<>();
+        // 前缀和为0的一条路径
+        prefixSumCount.put(0L, 1);
+        // 前缀和的递归回溯思路
+        return recursionPathSum(root, prefixSumCount, sum, 0L);
+    }
+
+    /**
+     * 前缀和的递归回溯思路
+     * 从当前节点反推到根节点(反推比较好理解，正向其实也只有一条)，有且仅有一条路径，因为这是一棵树
+     * 如果此前有和为currSum-target,而当前的和又为currSum,两者的差就肯定为target了
+     * 所以前缀和对于当前路径来说是唯一的，当前记录的前缀和，在回溯结束，回到本层时去除，保证其不影响其他分支的结果
+     * @param node 树节点
+     * @param prefixSumCount 前缀和Map
+     * @param target 目标值
+     * @param currSum 当前路径和
+     * @return 满足题意的解
+     */
+    private int recursionPathSum(TreeNode node, Map<Long, Integer> prefixSumCount, int target, long currSum) {
+        // 1.递归终止条件
+        if (node == null) {
+            return 0;
+        }
+        // 2.本层要做的事情
+        int res = 0;
+        // 当前路径上的和
+        currSum += node.val;
+
+        //---核心代码
+        // 看看root到当前节点这条路上是否存在节点前缀和加target为currSum的路径
+        // 当前节点->root节点反推，有且仅有一条路径，如果此前有和为currSum-target,而当前的和又为currSum,两者的差就肯定为target了
+        // currSum-target相当于找路径的起点，起点的sum+target=currSum，当前点到起点的距离就是target
+        res += prefixSumCount.getOrDefault(currSum - target, 0);
+        // 更新路径上当前节点前缀和的个数
+        prefixSumCount.put(currSum, prefixSumCount.getOrDefault(currSum, 0) + 1);
+        //---核心代码
+
+        // 3.进入下一层
+        res += recursionPathSum(node.left, prefixSumCount, target, currSum);
+        res += recursionPathSum(node.right, prefixSumCount, target, currSum);
+
+        // 4.回到本层，恢复状态，去除当前节点的前缀和数量
+        prefixSumCount.put(currSum, prefixSumCount.get(currSum) - 1);
+        return res;
+    }
+    //endregion
+
     //region    20230410    438. 找到字符串中所有字母异位词
 
     /**
@@ -568,6 +732,32 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230413    543. 二叉树的直径
+
+    /**
+     * https://leetcode.cn/problems/diameter-of-binary-tree/
+     * @param root  根节点 root
+     * @return  计算它的直径长度
+     */
+    public int diameterOfBinaryTree(TreeNode root) {
+        ans = 1;
+        depth(root);
+        return ans - 1;
+    }
+
+    public int depth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int L = depth(node.left);
+        int R = depth(node.right);
+        ans = Math.max(ans, L + R + 1);
+        return Math.max(L, R) + 1;
+    }
+
+    int ans;
+    //endregion
+
     //region    20230404    621. 任务调度器
 
     /**
@@ -596,6 +786,55 @@ public class TargetLeetCode75Mid {
             }
         }
         return Math.max((maxExec - 1) * (n + 1) + maxCount, tasks.length);
+    }
+    //endregion
+
+    //region    20230413    994. 腐烂的橘子
+
+    /**
+     * https://leetcode.cn/problems/rotting-oranges
+     * @param grid  给定的 m x n 网格 grid 中
+     * @return 返回直到单元格中没有新鲜橘子为止所必须经过的最小分钟数
+     */
+    public int orangesRotting(int[][] grid) {
+        int[] dr = new int[]{-1, 0, 1, 0};
+        int[] dc = new int[]{0, -1, 0, 1};
+        int row = grid.length, col = grid[0].length;
+        Queue<Integer> queue = new ArrayDeque<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 2) {
+                    int code = i * col + j;
+                    queue.add(code);
+                    map.put(code, 0);
+                }
+            }
+        }
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int code = queue.remove();
+            int r = code / col, c = code % col;
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                if (0 <= nr && nr < row && 0 <= nc && nc < col && grid[nr][nc] == 1) {
+                    grid[nr][nc] = 2;
+                    int ncode = nr * col + nc;
+                    queue.add(ncode);
+                    map.put(ncode, map.get(code) + 1);
+                    ans = map.get(ncode);
+                }
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    return -1;
+                }
+            }
+        }
+        return ans;
     }
     //endregion
 
