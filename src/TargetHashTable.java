@@ -261,9 +261,9 @@ public class TargetHashTable {
     /**
      * https://leetcode.cn/problems/check-distances-between-same-letters/
      *
-     * @param s  下标从 0 开始的字符串 s
-     * @param distance  下标从 0 开始、长度为 26 的的整数数组 distance
-     * @return   s 是一个 匀整 字符串，返回 true ；否则，返回 false
+     * @param s        下标从 0 开始的字符串 s
+     * @param distance 下标从 0 开始、长度为 26 的的整数数组 distance
+     * @return s 是一个 匀整 字符串，返回 true ；否则，返回 false
      */
     public boolean checkDistances(String s, int[] distance) {
         int[] last = new int[26];
@@ -275,6 +275,30 @@ public class TargetHashTable {
             last[c] = i + 1;
         }
         return true;
+    }
+    //endregion
+
+    //region    20230414    2404. 出现最频繁的偶数元素
+
+    /**
+     * https://leetcode.cn/problems/most-frequent-even-element
+     *
+     * @param nums 一个整数数组 nums
+     * @return 返回出现最频繁的偶数元素
+     */
+    public int mostFrequentEven(int[] nums) {
+        int res = -1;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] % 2 > 0) {
+                continue;
+            }
+            hashMap.put(nums[i], hashMap.getOrDefault(nums[i], 0) + 1);
+            if (res < 0 || hashMap.get(nums[i]) > hashMap.get(res) || hashMap.get(nums[i]) == hashMap.get(res) && nums[i] < res) {
+                res = nums[i];
+            }
+        }
+        return res;
     }
     //endregion
 

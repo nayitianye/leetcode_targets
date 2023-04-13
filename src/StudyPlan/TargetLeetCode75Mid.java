@@ -85,8 +85,9 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/longest-substring-without-repeating-characters
-     * @param s  字符串 s
-     * @return  找出其中不含有重复字符的最长子串的长度
+     *
+     * @param s 字符串 s
+     * @return 找出其中不含有重复字符的最长子串的长度
      */
     public int lengthOfLongestSubstring(String s) {
         // 哈希集合，记录每个字符是否出现过
@@ -137,22 +138,23 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/3sum-closest/
-     * @param nums  一个长度为 n 的整数数组 nums
-     * @param target  一个目标值 target
-     * @return  从 nums 中选出三个整数，使它们的和与 target 最接近
+     *
+     * @param nums   一个长度为 n 的整数数组 nums
+     * @param target 一个目标值 target
+     * @return 从 nums 中选出三个整数，使它们的和与 target 最接近
      */
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int ans = nums[0] + nums[1] + nums[2];
-        for(int i=0;i<nums.length;i++) {
-            int start = i+1, end = nums.length - 1;
-            while(start < end) {
+        for (int i = 0; i < nums.length; i++) {
+            int start = i + 1, end = nums.length - 1;
+            while (start < end) {
                 int sum = nums[start] + nums[end] + nums[i];
-                if(Math.abs(target - sum) < Math.abs(target - ans))
+                if (Math.abs(target - sum) < Math.abs(target - ans))
                     ans = sum;
-                if(sum > target)
+                if (sum > target)
                     end--;
-                else if(sum < target)
+                else if (sum < target)
                     start++;
                 else
                     return ans;
@@ -278,6 +280,67 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230414    100. 相同的树
+
+    /**
+     * https://leetcode.cn/problems/same-tree/
+     *
+     * @param p 二叉树的根节点 p
+     * @param q 二叉树的根节点 q
+     * @return 编写一个函数来检验这两棵树是否相同
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null) {
+            return false;
+        }
+        if (q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+    //endregion
+
+    //region    20230414    101. 对称二叉树
+
+    /**
+     * https://leetcode.cn/problems/symmetric-tree
+     *
+     * @param root 二叉树的根节点 root
+     * @return 检查它是否轴对称
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        //调用递归函数，比较左节点，右节点
+        return dfs(root.left, root.right);
+    }
+
+    boolean dfs(TreeNode left, TreeNode right) {
+        //递归的终止条件是两个节点都为空
+        //或者两个节点中有一个为空
+        //或者两个节点的值不相等
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        //再递归的比较 左节点的左孩子 和 右节点的右孩子
+        //以及比较  左节点的右孩子 和 右节点的左孩子
+        return dfs(left.left, right.right) && dfs(left.right, right.left);
+    }
+    //endregion
+
     //region    20230410    108. 将有序数组转换为二叉搜索树
 
     /**
@@ -386,22 +449,23 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/maximum-product-subarray
-     * @param nums  一个整数数组 nums
-     * @return  找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积
+     *
+     * @param nums 一个整数数组 nums
+     * @return 找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积
      */
     public int maxProduct(int[] nums) {
-        int length=nums.length;
-        int[] maxdp=new int[length];
-        int[] mindp=new int[length];
-        System.arraycopy(nums,0,maxdp,0,length);
-        System.arraycopy(nums,0,mindp,0,length);
-        for(int i=1;i<length;i++){
-            maxdp[i]=Math.max(maxdp[i-1]*nums[i],Math.max(nums[i],mindp[i-1]*nums[i]));
-            mindp[i]=Math.min(mindp[i-1]*nums[i],Math.min(nums[i],maxdp[i-1]*nums[i]));
+        int length = nums.length;
+        int[] maxdp = new int[length];
+        int[] mindp = new int[length];
+        System.arraycopy(nums, 0, maxdp, 0, length);
+        System.arraycopy(nums, 0, mindp, 0, length);
+        for (int i = 1; i < length; i++) {
+            maxdp[i] = Math.max(maxdp[i - 1] * nums[i], Math.max(nums[i], mindp[i - 1] * nums[i]));
+            mindp[i] = Math.min(mindp[i - 1] * nums[i], Math.min(nums[i], maxdp[i - 1] * nums[i]));
         }
-        int ans=maxdp[0];
-        for(int i=1;i<length;i++){
-            ans=Math.max(ans,maxdp[i]);
+        int ans = maxdp[0];
+        for (int i = 1; i < length; i++) {
+            ans = Math.max(ans, maxdp[i]);
         }
         return ans;
     }
@@ -465,6 +529,40 @@ public class TargetLeetCode75Mid {
             first = temp;
         }
         return second;
+    }
+    //endregion
+
+    //region    20230414    199. 二叉树的右视图
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-right-side-view
+     *
+     * @param root 二叉树的 根节点 root
+     * @return 返回从右侧所能看到的节点值
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+                if (i == size - 1) {
+                    res.add(node.val);
+                }
+            }
+        }
+        return res;
     }
     //endregion
 
@@ -605,23 +703,24 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/coin-change/
+     *
      * @param coins  一个整数数组 coins ，表示不同面额的硬币
-     * @param amount  一个整数 amount ，表示总金额
-     * @return  计算并返回可以凑成总金额所需的 最少的硬币个数
+     * @param amount 一个整数 amount ，表示总金额
+     * @return 计算并返回可以凑成总金额所需的 最少的硬币个数
      */
     public int coinChange(int[] coins, int amount) {
-        int max=amount+1;
-        int[] dp=new int[amount+1];
-        Arrays.fill(dp,max);
-        dp[0]=0;
-        for(int i=1;i<max;i++){
-            for(int j=0;j<coins.length;j++){
-                if(coins[j]<=i){
-                    dp[i]=Math.min(dp[i],dp[i-coins[j]]+1);
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i < max; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
                 }
             }
         }
-        return dp[amount]>amount?-1:dp[amount];
+        return dp[amount] > amount ? -1 : dp[amount];
     }
     //endregion
 
@@ -629,9 +728,10 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/path-sum-iii
-     * @param root  二叉树的根节点 root
+     *
+     * @param root 二叉树的根节点 root
      * @param sum  一个整数 targetSum
-     * @return  求该二叉树里节点值之和等于 targetSum 的 路径 的数目
+     * @return 求该二叉树里节点值之和等于 targetSum 的 路径 的数目
      */
     public int pathSum(TreeNode root, int sum) {
         // key是前缀和, value是大小为key的前缀和出现的次数
@@ -647,10 +747,11 @@ public class TargetLeetCode75Mid {
      * 从当前节点反推到根节点(反推比较好理解，正向其实也只有一条)，有且仅有一条路径，因为这是一棵树
      * 如果此前有和为currSum-target,而当前的和又为currSum,两者的差就肯定为target了
      * 所以前缀和对于当前路径来说是唯一的，当前记录的前缀和，在回溯结束，回到本层时去除，保证其不影响其他分支的结果
-     * @param node 树节点
+     *
+     * @param node           树节点
      * @param prefixSumCount 前缀和Map
-     * @param target 目标值
-     * @param currSum 当前路径和
+     * @param target         目标值
+     * @param currSum        当前路径和
      * @return 满足题意的解
      */
     private int recursionPathSum(TreeNode node, Map<Long, Integer> prefixSumCount, int target, long currSum) {
@@ -736,8 +837,9 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/diameter-of-binary-tree/
-     * @param root  根节点 root
-     * @return  计算它的直径长度
+     *
+     * @param root 根节点 root
+     * @return 计算它的直径长度
      */
     public int diameterOfBinaryTree(TreeNode root) {
         ans = 1;
@@ -793,7 +895,8 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/rotting-oranges
-     * @param grid  给定的 m x n 网格 grid 中
+     *
+     * @param grid 给定的 m x n 网格 grid 中
      * @return 返回直到单元格中没有新鲜橘子为止所必须经过的最小分钟数
      */
     public int orangesRotting(int[][] grid) {

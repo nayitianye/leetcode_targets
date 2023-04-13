@@ -681,8 +681,9 @@ public class TargetString {
 
     /**
      * https://leetcode.cn/problems/masking-personal-information/
+     *
      * @param s 个人信息字符串 s
-     * @return  返回按如下规则 隐藏 个人信息后的结果
+     * @return 返回按如下规则 隐藏 个人信息后的结果
      */
     public String maskPII(String s) {
         StringBuilder res = new StringBuilder();
@@ -695,7 +696,7 @@ public class TargetString {
             res.append(tempString[1]);
         } else {
             int number = 0;
-            StringBuilder numbers=new StringBuilder();
+            StringBuilder numbers = new StringBuilder();
             for (int i = 0; i < s.length(); i++) {
                 if (Character.isDigit(s.charAt(i))) {
                     numbers.append(s.charAt(i));
@@ -705,14 +706,14 @@ public class TargetString {
             if (number == 10) {
                 res.append("***-***-");
 
-            }else if(number==11){
+            } else if (number == 11) {
                 res.append("+*-***-***-");
-            }else if(number==12){
+            } else if (number == 12) {
                 res.append("+**-***-***-");
-            }else{
+            } else {
                 res.append("+**-***-***-");
             }
-            String numStr=numbers.toString();
+            String numStr = numbers.toString();
             res.append(numStr.substring(numStr.length() - 4));
         }
         return res.toString();
@@ -1078,6 +1079,42 @@ public class TargetString {
             start = end;
         }
         return sum;
+    }
+    //endregion
+
+    //region    20230414    1023. 驼峰式匹配
+
+    /**
+     * https://leetcode.cn/problems/camelcase-matching/
+     *
+     * @param queries 待查询列表 queries
+     * @param pattern 模式串 pattern
+     * @return 返回由布尔值组成的答案列表 answer
+     */
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> res = new ArrayList<>(queries.length);
+        for (String query : queries) {
+            res.add(isMatch1(query, pattern));
+        }
+        return res;
+    }
+
+    public Boolean isMatch1(String query, String pattern) {
+        int index = 0;
+        for (char c : query.toCharArray()) {
+            if (index == pattern.length()) {
+                if (c < 'a' || c > 'z') {
+                    return false;
+                }
+            } else {
+                if (c == pattern.charAt(index)) {
+                    index++;
+                } else if (c < 'a' || c > 'z') {
+                    return false;
+                }
+            }
+        }
+        return index == pattern.length();
     }
     //endregion
 
