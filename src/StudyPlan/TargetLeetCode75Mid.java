@@ -1,5 +1,7 @@
 package StudyPlan;
 
+import javax.print.DocFlavor;
+import javax.swing.plaf.nimbus.State;
 import java.util.*;
 
 /**
@@ -280,6 +282,131 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230416    56. 合并区间
+
+    /**
+     * https://leetcode.cn/problems/merge-intervals/
+     *
+     * @param intervals 数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi]
+     * @return 合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间
+     */
+    public int[][] merge(int[][] intervals) {
+        //1、先根据区间开始位置的大小，将 intervals 排序
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] nums1, int[] nums2) {
+                return nums1[0] - nums2[0];
+            }
+        });
+
+        //这一段使用 lambda 表达式会更加高效
+        //Arrays.sort(intervals , (nums1 , nums2)->nums1[0]-nums2[0]);
+
+        //2、创建一个新的二维数组，用于保存合并后的区间
+        int[][] res = new int[intervals.length][2];
+        int index = 0;
+
+        //3、开始合并区间
+        for (int i = 0; i < intervals.length; i++) {
+            //若是第一个区间，或者当前区间的起始位置 > 结果数组res中最后区间的终止位置（注意，结果数组res中最后区间的下标是 index-1）
+            //则不需要将当前区间合并到上一个区间，那么当前区间可以赋值给ret，作为一个新的“合并基底”，将后面满足条件的区间向这个基底合并
+            if (i == 0 || intervals[i][0] > res[index - 1][1])
+                res[index++] = intervals[i];//同时将index+1
+            else
+                //否则，需要将当前区间合并到结果数组res的最后区间（即res中下标为index-1的区间），此时index不需要变化
+                //此时需要改变 ret[index][1]，即ret[index] 数组的右边界可能扩展
+                res[index - 1][1] = Math.max(res[index - 1][1], intervals[i][1]);
+        }
+        //res数组中实际上只有 index 个数组有效，其他都是 (0 , 0)，我们原先设置res长度为 intervals.length，需要将有效部分复制返回！
+        return Arrays.copyOf(res, index);
+    }
+    //endregion
+
+    //region    20230416    57. 插入区间
+
+    /**
+     * https://leetcode.cn/problems/insert-interval/
+     *
+     * @param intervals   一个无重叠的 ，按照区间起始端点排序的区间列表  intervals
+     * @param newInterval 插入一个新的区间 newInterval
+     * @return 确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）
+     */
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> res = new ArrayList<>();
+        int i = 0;
+        int len = intervals.length;
+        while (i < len && intervals[i][1] < newInterval[0]) {
+            res.add(intervals[i]);
+            i++;
+        }
+        while (i < len && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        res.add(newInterval);
+        while (i < len) {
+            res.add(intervals[i]);
+            i++;
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+    //endregion
+
+    //region    20230416    76. 最小覆盖子串
+
+    /**
+     * https://leetcode.cn/problems/minimum-window-substring/
+     * @param s  一个字符串 s
+     * @param t  一个字符串 t
+     * @return  返回 s 中涵盖 t 所有字符的最小子串
+     */
+    public String minWindow(String s, String t) {
+        int tLen = t.length();
+        for (int i = 0; i < tLen; i++) {
+            char c = t.charAt(i);
+            ori.put(c, ori.getOrDefault(c, 0) + 1);
+        }
+        int l = 0, r = -1;
+        int len = Integer.MAX_VALUE, ansL = -1, ansR = -1;
+        int sLen = s.length();
+        while (r < sLen) {
+            ++r;
+            if (r < sLen && ori.containsKey(s.charAt(r))) {
+                cnt.put(s.charAt(r), cnt.getOrDefault(s.charAt(r), 0) + 1);
+            }
+            while (check() && l <= r) {
+                if (r - l + 1 < len) {
+                    len = r - l + 1;
+                    ansL = l;
+                    ansR = l + len;
+                }
+                if (ori.containsKey(s.charAt(l))) {
+                    cnt.put(s.charAt(l), cnt.getOrDefault(s.charAt(l), 0) - 1);
+                }
+                ++l;
+            }
+        }
+        return ansL == -1 ? "" : s.substring(ansL, ansR);
+    }
+
+    public boolean check() {
+        Iterator iter = ori.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            Character key = (Character) entry.getKey();
+            Integer val = (Integer) entry.getValue();
+            if (cnt.getOrDefault(key, 0) < val) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    Map<Character, Integer> ori = new HashMap<Character, Integer>();
+    Map<Character, Integer> cnt = new HashMap<Character, Integer>();
+    //endregion
+
     //region    20230414    100. 相同的树
 
     /**
@@ -471,6 +598,53 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230416    155. 最小栈
+
+    /**
+     * https://leetcode.cn/problems/min-stack
+     */
+    class MinStack {
+
+        private Stack<Integer> stack;
+
+        private Stack<Integer> minStack;
+
+        public MinStack() {
+            stack = new Stack<>();
+            minStack = new Stack<>();
+        }
+
+        public void push(int val) {
+            stack.push(val);
+            if (!minStack.isEmpty()) {
+                int top = minStack.peek();
+                //小于的时候才入栈
+                if (val <= top) {
+                    minStack.push(val);
+                }
+            } else {
+                minStack.push(val);
+            }
+        }
+
+        public void pop() {
+            int pop = stack.pop();
+            int top = minStack.peek();
+            if (pop == top) {
+                minStack.pop();
+            }
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+    //endregion
+
     //region    20230412    173. 二叉搜索树迭代器
 
     /**
@@ -597,6 +771,157 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230416    208. 实现 Trie (前缀树)
+
+    /**
+     * https://leetcode.cn/problems/implement-trie-prefix-tree
+     */
+    class Trie {
+
+        private class Node {
+            public boolean isWord;
+            public TreeMap<Character, Node> next;
+
+            public Node(boolean isWord) {
+                this.isWord = isWord;
+                next = new TreeMap<>();
+            }
+
+            public Node() {
+                this(false);
+            }
+        }
+
+        /**
+         * Initialize your data structure here.
+         */
+        private Node root;
+        private int size;
+
+        public Trie() {
+            root = new Node();
+            size = 0;
+        }
+
+        /**
+         * Inserts a word into the trie.
+         */
+        public void insert(String word) {
+            Node cur = root;
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                if (cur.next.get(c) == null) {
+                    cur.next.put(c, new Node());
+                }
+                cur = cur.next.get(c);
+            }
+            if (!cur.isWord) {
+                cur.isWord = true;
+                size++;
+            }
+        }
+
+        /**
+         * Returns if the word is in the trie.
+         */
+        public boolean search(String word) {
+            Node cur = root;
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                if (cur.next.get(c) == null) {
+                    return false;
+                }
+                cur = cur.next.get(c);
+            }
+            return cur.isWord;
+        }
+
+        /**
+         * Returns if there is any word in the trie that starts with the given prefix.
+         */
+        public boolean startsWith(String prefix) {
+            Node cur = root;
+            for (int i = 0; i < prefix.length(); i++) {
+                char ch = prefix.charAt(i);
+                if (cur.next.get(ch) == null) {
+                    return false;
+                }
+                cur = cur.next.get(ch);
+            }
+            return true;
+        }
+    }
+    //endregion
+
+    //region    20230416    210. 课程表 II
+
+    /**
+     * https://leetcode.cn/problems/course-schedule-ii/
+     *
+     * @param numCourses    总共有 numCourses 门课需要选，记为 0 到 numCourses - 1
+     * @param prerequisites 一个数组 prerequisites ，其中 prerequisites[i] = [ai, bi] ，表示在选修课程 ai 前必须先选修 bi
+     * @return
+     */
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        edges = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            edges.add(new ArrayList<>());
+        }
+        visited = new int[numCourses];
+        result = new int[numCourses];
+        index = numCourses - 1;
+        for (int[] info : prerequisites) {
+            edges.get(info[1]).add(info[0]);
+        }
+        //每次挑选一个【未搜索】 的节点，开始进行深度优先搜索
+        for (int i = 0; i < numCourses && valid; i++) {
+            if (visited[i] == 0) {
+                dfsfindOrder(i);
+            }
+        }
+        if (!valid) {
+            return new int[0];
+        }
+        //如果没有环，那么就有拓扑排序
+        return result;
+    }
+
+    public void dfsfindOrder(int u) {
+        //将节点标记为 搜索中
+        visited[u] = 1;
+        //搜索其相邻节点
+        //只要发现有环，立即停止搜索
+        for (int v : edges.get(u)) {
+            //如果 未搜索 那么搜索相邻节点
+            if (visited[v] == 0) {
+                dfsfindOrder(v);
+                if (!valid) {
+                    return;
+                }
+            }
+            //如果 搜索中 说明找到了环
+            else if (visited[v] == 1) {
+                valid = false;
+                return;
+            }
+        }
+        // 将节点标记为 已完成
+        visited[u] = 2;
+        //将节点入栈
+        result[index--] = u;
+    }
+
+    List<List<Integer>> edges;
+    //标记每个节点的状态：0-未搜索，1=搜索中，2=已完成
+    int[] visited;
+    //用数组来模拟栈，下标n-1为栈底,0-为栈顶
+    int[] result;
+    //判断有向图中是否有环
+    boolean valid = true;
+    //栈下标
+    int index;
+    //endregion
+
     //region    20230405    226. 翻转二叉树
 
     /**
@@ -645,6 +970,49 @@ public class TargetLeetCode75Mid {
             }
         }
         return priorityQueue.peek();
+    }
+    //endregion
+
+    //region    20230416    232. 用栈实现队列
+
+    /**
+     * https://leetcode.cn/problems/implement-queue-using-stacks/
+     */
+    class MyQueue {
+
+        Stack<Integer> inStack;
+        Stack<Integer> outStack;
+
+        public MyQueue() {
+            inStack = new Stack<>();
+            outStack = new Stack<>();
+        }
+
+        public void push(int x) {
+            inStack.push(x);
+        }
+
+        public int pop() {
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.pop();
+        }
+
+        public int peek() {
+            if (outStack.isEmpty()) {
+                while (!inStack.isEmpty()) {
+                    outStack.push(inStack.pop());
+                }
+            }
+            return outStack.peek();
+        }
+
+        public boolean empty() {
+            return inStack.isEmpty() && outStack.isEmpty();
+        }
     }
     //endregion
 
@@ -722,6 +1090,100 @@ public class TargetLeetCode75Mid {
         }
         return dp[amount] > amount ? -1 : dp[amount];
     }
+    //endregion
+
+    //region    20230416    416. 分割等和子集
+
+    /**
+     * https://leetcode.cn/problems/partition-equal-subset-sum/
+     * @param nums  一个 只包含正整数 的 非空 数组 nums
+     * @return  判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
+     */
+    public boolean canPartition(int[] nums) {
+        int len = nums.length;
+        // 题目已经说非空数组，可以不做非空判断
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        // 特判：如果是奇数，就不符合要求
+        if ((sum & 1) == 1) {
+            return false;
+        }
+
+        int target = sum / 2;
+        // 创建二维状态数组，行：物品索引，列：容量（包括 0）
+        boolean[][] dp = new boolean[len][target + 1];
+
+        // 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
+        if (nums[0] <= target) {
+            dp[0][nums[0]] = true;
+        }
+        // 再填表格后面几行
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j <= target; j++) {
+                // 直接从上一行先把结果抄下来，然后再修正
+                dp[i][j] = dp[i - 1][j];
+
+                if (nums[i] == j) {
+                    dp[i][j] = true;
+                    continue;
+                }
+                if (nums[i] < j) {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
+                }
+            }
+        }
+        return dp[len - 1][target];
+    }
+    //endregion
+
+    //region    20230416    417. 太平洋大西洋水流问题
+
+    /**
+     * https://leetcode.cn/problems/pacific-atlantic-water-flow
+     * @param heights  给定一个 m x n 的整数矩阵 heights ， heights[r][c] 表示坐标 (r, c) 上单元格 高于海平面的高度
+     * @return  返回网格坐标 result 的 2D 列表 ，其中 result[i] = [ri, ci] 表示雨水从单元格 (ri, ci) 流动 既可流向太平洋也可流向大西洋
+     */
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        g = heights;
+        m = g.length; n = g[0].length;
+        boolean[][] res1 = new boolean[m][n], res2 = new boolean[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    if (!res1[i][j]) dfs(i, j, res1);
+                }
+                if (i == m - 1 || j == n - 1) {
+                    if (!res2[i][j]) dfs(i, j, res2);
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (res1[i][j] && res2[i][j]) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(i); list.add(j);
+                    ans.add(list);
+                }
+            }
+        }
+        return ans;
+    }
+    int[][] dirs = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
+    void dfs(int x, int y, boolean[][] res) {
+        res[x][y] = true;
+        for (int[] di : dirs) {
+            int nx = x + di[0], ny = y + di[1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+            if (res[nx][ny] || g[nx][ny] < g[x][y]) continue;
+            dfs(nx, ny, res);
+        }
+    }
+
+    int n, m;
+    int[][] g;
     //endregion
 
     //region    20230413    437. 路径总和 III
@@ -888,6 +1350,61 @@ public class TargetLeetCode75Mid {
             }
         }
         return Math.max((maxExec - 1) * (n + 1) + maxCount, tasks.length);
+    }
+    //endregion
+
+    //region    20230416    815. 公交路线
+
+    /**
+     * https://leetcode.cn/problems/bus-routes/
+     * @param routes  一个数组 routes ，表示一系列公交线路，其中每个 routes[i] 表示一条公交线路，第 i 辆公交车将会在上面循环行驶
+     * @param source   source 车站出发
+     * @param target   前往 target 车站
+     * @return  最少乘坐的公交车数量
+     */
+    public int numBusesToDestination(int[][] routes, int source, int target) {
+        if (source == target) {
+            return 0;
+        }
+
+        int n = routes.length;
+        boolean[][] edge = new boolean[n][n];
+        Map<Integer, List<Integer>> rec = new HashMap<Integer, List<Integer>>();
+        for (int i = 0; i < n; i++) {
+            for (int site : routes[i]) {
+                List<Integer> list = rec.getOrDefault(site, new ArrayList<Integer>());
+                for (int j : list) {
+                    edge[i][j] = edge[j][i] = true;
+                }
+                list.add(i);
+                rec.put(site, list);
+            }
+        }
+
+        int[] dis = new int[n];
+        Arrays.fill(dis, -1);
+        Queue<Integer> que = new LinkedList<Integer>();
+        for (int bus : rec.getOrDefault(source, new ArrayList<Integer>())) {
+            dis[bus] = 1;
+            que.offer(bus);
+        }
+        while (!que.isEmpty()) {
+            int x = que.poll();
+            for (int y = 0; y < n; y++) {
+                if (edge[x][y] && dis[y] == -1) {
+                    dis[y] = dis[x] + 1;
+                    que.offer(y);
+                }
+            }
+        }
+
+        int ret = Integer.MAX_VALUE;
+        for (int bus : rec.getOrDefault(target, new ArrayList<Integer>())) {
+            if (dis[bus] != -1) {
+                ret = Math.min(ret, dis[bus]);
+            }
+        }
+        return ret == Integer.MAX_VALUE ? -1 : ret;
     }
     //endregion
 
