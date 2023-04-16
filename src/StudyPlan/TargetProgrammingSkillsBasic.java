@@ -2,10 +2,7 @@ package StudyPlan;
 
 import com.sun.xml.internal.ws.commons.xmlutil.Converter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author yyb
@@ -37,6 +34,22 @@ public class TargetProgrammingSkillsBasic {
             this.right = right;
         }
     }
+
+    class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {}
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    };
     //endregion
 
     //region    20230405    28. 找出字符串中第一个匹配项的下标
@@ -121,6 +134,101 @@ public class TargetProgrammingSkillsBasic {
         }
         ans.reverse();
         return ans.toString();
+    }
+    //endregion
+
+    //region    20230417    48. 旋转图像
+
+    /**
+     * https://leetcode.cn/problems/rotate-image
+     * @param matrix  一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
+     */
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                int tmp = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = tmp;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[i][n - j - 1];
+                matrix[i][n - j - 1] = tmp;
+            }
+        }
+    }
+    //endregion
+
+    //region    20230417    49. 字母异位词分组
+
+    /**
+     * https://leetcode.cn/problems/group-anagrams
+     * @param strs  一个字符串数组 strs
+     * @return  字母异位词 组合在一起
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            int[] counts = new int[26];
+            int length = str.length();
+            for (int i = 0; i < length; i++) {
+                counts[str.charAt(i) - 'a']++;
+            }
+            //将每个出现次数大于0 的字母和出现次数按顺序拼接成字符串，作为哈希表的键
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0; i < 26; i++) {
+                if (counts[i] != 0) {
+                    stringBuffer.append((char) ('a' + i));
+                    stringBuffer.append(counts[i]);
+                }
+            }
+            String key = stringBuffer.toString();
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(str);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+    //endregion
+
+    //region    20230417    54. 螺旋矩阵
+
+    /**
+     * https://leetcode.cn/problems/spiral-matrix/
+     * @param matrix  一个 m 行 n 列的矩阵 matrix
+     * @return  按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return res;
+        }
+        int rows = matrix.length, colums = matrix[0].length;
+        int left = 0, right = colums - 1, top = 0, bottom = rows - 1;
+        while (left <= right && top <= bottom) {
+            for (int column = left; column <= right; column++) {
+                res.add(matrix[top][column]);
+            }
+            for (int row = top + 1; row <= bottom; row++) {
+                res.add(matrix[row][right]);
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    res.add(matrix[bottom][column]);
+                }
+                for (int row = bottom; row > top; row--) {
+                    res.add(matrix[row][left]);
+                }
+            }
+            left++;
+            right--;
+            top ++;
+            bottom--;
+        }
+        return res;
     }
     //endregion
 
@@ -294,6 +402,114 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230417    304. 二维区域和检索 - 矩阵不可变
+
+    /**
+     * https://leetcode.cn/problems/range-sum-query-2d-immutable/
+     */
+    class NumMatrix {
+
+        int[][] sums;
+        public NumMatrix(int[][] matrix) {
+            int m=matrix.length;
+            if(m>0){
+                int n=matrix[0].length;
+                sums=new int[m][n+1];
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        sums[i][j+1]=sums[i][j]+matrix[i][j];
+                    }
+                }
+            }
+        }
+
+        public int sumRegion(int row1, int col1, int row2, int col2) {
+            int sum=0;
+            for (int i = row1; i <= row2; i++) {
+                sum+=sums[i][col2+1]-sums[i][col1];
+            }
+            return sum;
+        }
+    }
+    //endregion
+
+    //region    20230417    429. N 叉树的层序遍历
+
+    /**
+     * https://leetcode.cn/problems/n-ary-tree-level-order-traversal/
+     * @param root  一个 N 叉树根节点 root
+     * @return  返回其前序遍历
+     */
+    public List<List<Integer>> levelOrder(Node root) {
+        helpLevelOrder(root,0);
+        return res;
+    }
+    public void helpLevelOrder(Node root,int level){
+        if(root==null){
+            return;
+        }
+        if(res.size()<level+1){
+            List<Integer> levelList=new ArrayList<>();
+            res.add(levelList);
+        }
+        res.get(level).add(root.val);
+        for(Node node:root.children){
+            helpLevelOrder(node,level+1);
+        }
+    }
+
+    private List<List<Integer>> res=new ArrayList<>();
+    //endregion
+
+    //region    20230417    438. 找到字符串中所有字母异位词
+
+    /**
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string/
+     * @param s  字符串 s
+     * @param p  字符串 p
+     * @return  找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        int slen = s.length(), plen = p.length();
+        if (slen < plen) {
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        int[] count = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[p.charAt(i) - 'a']--;
+        }
+        int differ = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                ++differ;
+            }
+        }
+        if (differ == 0) {
+            res.add(0);
+        }
+        for (int i = 0; i < slen - plen; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
+                --differ;
+            } else if (count[s.charAt(i) - 'a'] == 0) {
+                ++differ;
+            }
+            --count[s.charAt(i) - 'a'];
+            if (count[s.charAt(i + plen) - 'a'] == -1) {
+                --differ;
+            } else if (count[s.charAt(i + plen) - 'a'] == 0) {
+                ++differ;
+            }
+            ++count[s.charAt(i + plen) - 'a'];
+            if (differ == 0) {
+                res.add(i + 1);
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230406    459. 重复的子字符串
 
     /**
@@ -305,6 +521,51 @@ public class TargetProgrammingSkillsBasic {
     public boolean repeatedSubstringPattern(String s) {
         String str = s + s;
         return str.substring(1, str.length() - 1).contains(s);
+    }
+    //endregion
+
+    //region    20230417    713. 乘积小于 K 的子数组
+
+    /**
+     * https://leetcode.cn/problems/subarray-product-less-than-k
+     * @param nums  一个整数数组 nums
+     * @param k  一个整数 k
+     * @return  返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目
+     */
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        //同样排除k为1的情况比如  [1,1,1] k=1
+        if (k <= 1) {
+            return 0;
+        }
+        int left = 0;
+        int right = 0;
+        //创建一个变量记录路上的乘积
+        int mul = 1;
+        //记录连续数组的组合个数
+        int ans = 0;
+
+        //用右指针遍历整个数组，每次循环右指针右移一次
+        while(right<nums.length) {
+            //记录乘积
+            mul *= nums[right];
+            //当大于等于k，左指针右移并把之前左指针的数除掉
+            while (mul >= k) {
+                mul /= nums[left];
+                left++;
+            }
+
+            //每次右指针位移到一个新位置，应该加上 x 种数组组合：
+            //  nums[right]
+            //  nums[right-1], nums[right]
+            //  nums[right-2], nums[right-1], nums[right]
+            //  nums[left], ......, nums[right-2], nums[right-1], nums[right]
+            //共有 right - left + 1 种
+            ans += right - left + 1;
+
+            //右指针右移
+            right++;
+        }
+        return ans;
     }
     //endregion
 
@@ -386,6 +647,58 @@ public class TargetProgrammingSkillsBasic {
         return res;
     }
     //endregion
+
+    //region    20230417    1630. 等差子数组
+
+    /**
+     * https://leetcode.cn/problems/arithmetic-subarrays
+     * @param nums  由 n 个整数组成的数组 nums
+     * @param l 由 m 个整数组成的数组 l
+     * @param r 由 m 个整数组成的数组 r
+     * @return  返回 boolean 元素构成的答案列表 answer
+     */
+    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
+        int n = l.length;
+        List<Boolean> ans = new ArrayList<Boolean>();
+        for (int i = 0; i < n; ++i) {
+            int left = l[i], right = r[i];
+            int minv = nums[left], maxv = nums[left];
+            for (int j = left + 1; j <= right; ++j) {
+                minv = Math.min(minv, nums[j]);
+                maxv = Math.max(maxv, nums[j]);
+            }
+
+            if (minv == maxv) {
+                ans.add(true);
+                continue;
+            }
+            if ((maxv - minv) % (right - left) != 0) {
+                ans.add(false);
+                continue;
+            }
+
+            int d = (maxv - minv) / (right - left);
+            boolean flag = true;
+            boolean[] seen = new boolean[right - left + 1];
+            for (int j = left; j <= right; ++j) {
+                if ((nums[j] - minv) % d != 0) {
+                    flag = false;
+                    break;
+                }
+                int t = (nums[j] - minv) / d;
+                if (seen[t]) {
+                    flag = false;
+                    break;
+                }
+                seen[t] = true;
+            }
+            ans.add(flag);
+        }
+        return ans;
+    }
+    //endregion
+
+
 
     public static void main(String[] args) {
         new TargetProgrammingSkillsBasic().addToArrayForm(new int[]{9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, 1);

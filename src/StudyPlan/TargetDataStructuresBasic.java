@@ -9,12 +9,66 @@ import java.util.*;
  */
 public class TargetDataStructuresBasic {
 
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    //region    20230417    2. 两数相加
+
+    /**
+     * https://leetcode.cn/problems/add-two-numbers/
+     * @param l1  链表 l1
+     * @param l2  链表 l2
+     * @return  两个数相加，并以相同形式返回一个表示和的链表
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null, tail = null;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int n1 = l1 != null ? l1.val : 0;
+            int n2 = l2 != null ? l2.val : 0;
+            int sum = n1 + n2 + carry;
+            if (head == null) {
+                head = tail = new ListNode(sum % 10);
+            } else {
+                tail.next = new ListNode(sum % 10);
+                tail = tail.next;
+            }
+            carry = sum / 10;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry > 0) {
+            tail.next = new ListNode(carry);
+        }
+        return head;
+    }
+    //endregion
+
     //region    20230413    5. 最长回文子串
 
     /**
      * https://leetcode.cn/problems/longest-palindromic-substring/
-     * @param s  一个字符串 s
-     * @return  找到 s 中最长的回文子串
+     *
+     * @param s 一个字符串 s
+     * @return 找到 s 中最长的回文子串
      */
     public String longestPalindrome1(String s) {
         int length = s.length();
@@ -109,13 +163,32 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230417    24. 两两交换链表中的节点
+
+    /**
+     * https://leetcode.cn/problems/swap-nodes-in-pairs
+     * @param head  你一个链表头节点 head
+     * @return  两两交换其中相邻的节点，并返回交换后链表的头节点
+     */
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
+    }
+    //endregion
+
     //region    20230412    43. 字符串相乘
 
     /**
      * https://leetcode.cn/problems/multiply-strings/
-     * @param num1  非负整数 num1
-     * @param num2  非负整数 num2
-     * @return  返回 num1 和 num2 的乘积
+     *
+     * @param num1 非负整数 num1
+     * @param num2 非负整数 num2
+     * @return 返回 num1 和 num2 的乘积
      */
     public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
@@ -167,12 +240,38 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230417    48. 旋转图像
+
+    /**
+     * https://leetcode.cn/problems/rotate-image
+     * @param matrix  一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
+     */
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                int tmp = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = tmp;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[i][n - j - 1];
+                matrix[i][n - j - 1] = tmp;
+            }
+        }
+    }
+    //endregion
+
     //region    20230412    49. 字母异位词分组
 
     /**
      * https://leetcode.cn/problems/group-anagrams/description/
-     * @param strs  字符串数组 strs
-     * @return  将字母异位词组合在一起 , 可以按任意顺序返回结果列表
+     *
+     * @param strs 字符串数组 strs
+     * @return 将字母异位词组合在一起 , 可以按任意顺序返回结果列表
      */
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
@@ -246,6 +345,34 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230417    82. 删除排序链表中的重复元素 II
+
+    /**
+     * https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii
+     * @param head  一个已排序的链表的头 head
+     * @return  删除原始链表中所有重复数字的节点，只留下不同的数字
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        //没有节点或者只有一个节点，必然没有重复元素
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //当前节点和下一个节点，值不同，则head的值是需要保留的，对head.next继续递归
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates(head.next);
+            return head;
+        } else {
+            // 当前节点与下一个节点的值重复了，重复的值都不能要
+            // 一直往下找，找到不重复的节点。返回堆不重复节点的递归结果
+            ListNode notDup = head.next.next;
+            while (notDup != null && notDup.val == head.val) {
+                notDup = notDup.next;
+            }
+            return deleteDuplicates(notDup);
+        }
+    }
+    //endregion
+
     //region    20230408    119. 杨辉三角 II
 
     /**
@@ -281,6 +408,48 @@ public class TargetDataStructuresBasic {
             res ^= num;
         }
         return res;
+    }
+    //endregion
+
+    //region    20230417    142. 环形链表 II
+
+    /**
+     * https://leetcode.cn/problems/linked-list-cycle-ii
+     * @param head  链表的头节点  head
+     * @return  返回链表开始入环的第一个节点。 如果链表无环，则返回 null
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (true) {
+            if (fast == null || fast.next == null) return null;
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) break;
+        }
+        fast = head;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+    //endregion
+
+    //region    20230417    160. 相交链表
+
+    /**
+     * https://leetcode.cn/problems/intersection-of-two-linked-lists
+     * @param headA  单链表的头节点 headA
+     * @param headB  单链表的头节点 headB
+     * @return  返回两个单链表相交的起始节点
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A = headA, B = headB;
+        while (A != B) {
+            A = A != null ? A.next : headB;
+            B = B != null ? B.next : headA;
+        }
+        return A;
     }
     //endregion
 
@@ -479,6 +648,135 @@ public class TargetDataStructuresBasic {
             hashMap.put(pre, hashMap.getOrDefault(pre, 0) + 1);
         }
         return count;
+    }
+    //endregion
+
+    //region    20230417    707. 设计链表
+
+    /**
+     * https://leetcode.cn/problems/design-linked-list/
+     */
+    class MyLinkedList {
+
+        private  class Node{
+            int val;
+            Node next;
+            Node(int val){
+                this.val = val;
+                this.next = null;
+            }
+        }
+        private Node head,tail;
+        private int size;
+
+        /**
+         * 链表构造函数
+         */
+        public MyLinkedList() {
+            Node p= new Node(0);
+            this.head = p;
+            this.tail = p;
+            this.size = 0;
+        }
+
+        /**
+         *获取链表中第 index 个节点的值。
+         * @param index 索引
+         * @return 索引为index 对应的值 无效返回-1
+         */
+        public int get(int index) {
+            //如果超出范围直接返回-1
+            if(index<0||index>=this.size) return -1;
+            else{
+                Node cur = this.head;
+                for(int i =0 ;i<index;i++){
+                    cur= cur.next;
+                }
+                return cur.val;
+            }
+        }
+
+        /**
+         * 在链表的第一个元素之前添加一个值为 val 的节点。
+         * @param val
+         */
+        public void addAtHead(int val) {
+            if(this.size==0){
+                this.head.val = val;
+            }else{
+                Node tmp = new Node(val);
+                tmp.next = this.head;
+                this.head = tmp;//加了之后要更新head 的值
+            }
+            this.size ++;
+        }
+
+        /**
+         * 将值为 val 的节点追加到链表的最后一个元素。
+         * @param val
+         */
+        public void addAtTail(int val) {
+            if(this.size==0){
+                this.tail.val = val;
+            }else {
+                Node tmp = new Node(val);
+                this.tail.next = tmp;
+                this.tail = tmp;//加了之后要更新tail的值
+            }
+            this.size++;
+        }
+
+        /**
+         * 在链表中的第 index 个节点之前添加值为 val  的节点。
+         * 如果 index 等于链表的长度，则该节点将附加到链表的末尾。
+         * 如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。
+         * @param index
+         * @param val
+         */
+        public void addAtIndex(int index, int val) {
+            if(index>this.size){//超出范围结束
+                return;
+            }else if(index<=0){//比零小，加在head
+                addAtHead(val);
+            }else if(index==this.size){//index为size说明实在tail之后加
+                addAtTail(val);
+            }else {
+                Node tmp = new Node(val);
+                Node cur = this.head;
+                for(int i=0;i<index-1;i++){
+                    cur = cur.next;
+                }//加的位置是cur的下一个
+                tmp.next = cur.next;
+                cur.next = tmp;
+                this.size ++;//别忘记加size
+            }
+        }
+
+        /**
+         * deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。
+         * @param index
+         */
+        public void deleteAtIndex(int index) {
+            if(index>=0&&index<this.size)//索引有效才能删
+            {
+                if(index==0)//删head
+                {
+                    this.head = this.head.next;
+                }else
+                {
+                    Node cur = this.head;
+                    for(int i=0;i<index-1;i++)
+                    {
+                        cur = cur.next;
+                    }
+                    cur.next = cur.next.next;
+                    if(index==this.size-1){
+                        tail=cur;
+                    }//删tail 要更新tail
+                }
+                this.size--;//别忘记了减size
+            }
+        }
     }
     //endregion
 
