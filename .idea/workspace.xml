@@ -250,7 +250,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0493efa4-523a-4154-9ce8-260266c937f4" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -389,6 +388,7 @@
       <workItem from="1681530656347" duration="1284000" />
       <workItem from="1681568308061" duration="620000" />
       <workItem from="1681654527103" duration="7968000" />
+      <workItem from="1681747491209" duration="3801000" />
     </task>
     <task id="LOCAL-00033" summary="300. 最长递增子序列&#10;376. 摆动序列">
       <created>1677684343635</created>
@@ -935,13 +935,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>703</line>
+          <line>763</line>
           <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>284</line>
-          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -435,6 +435,84 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230418    143. 重排链表
+
+    /**
+     * https://leetcode.cn/problems/reorder-list/
+     *
+     * @param head 单链表 L 的头节点 head
+     */
+    public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        List<ListNode> list = new ArrayList<ListNode>();
+        ListNode node = head;
+        while (node != null) {
+            list.add(node);
+            node = node.next;
+        }
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+        list.get(i).next = null;
+    }
+    //endregion
+
+    //region    20230418    155. 最小栈
+
+    /**
+     * https://leetcode.cn/problems/min-stack
+     */
+    class MinStack {
+
+        private Stack<Integer> stack;
+
+        private Stack<Integer> minStack;
+
+        public MinStack() {
+            stack = new Stack<>();
+            minStack = new Stack<>();
+        }
+
+        public void push(int val) {
+            stack.push(val);
+            if (!minStack.isEmpty()) {
+                int top = minStack.peek();
+                //小于的时候才入栈
+                if (val <= top) {
+                    minStack.push(val);
+                }
+            } else {
+                minStack.push(val);
+            }
+        }
+
+        public void pop() {
+            int pop = stack.pop();
+            int top = minStack.peek();
+            if (pop == top) {
+                minStack.pop();
+            }
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+    //endregion
+
     //region    20230417    160. 相交链表
 
     /**
@@ -777,6 +855,57 @@ public class TargetDataStructuresBasic {
                 this.size--;//别忘记了减size
             }
         }
+    }
+    //endregion
+
+    //region    20230418    1249. 移除无效的括号
+
+    /**
+     * https://leetcode.cn/problems/minimum-remove-to-make-valid-parentheses
+     *
+     * @param s 一个由 '('、')' 和小写字母组成的字符串 s
+     * @return 从字符串中删除最少数目的 '(' 或者 ')' （可以删除任意位置的括号)，使得剩下的「括号字符串」有效
+     */
+    public String minRemoveToMakeValid(String s) {
+        Set<Integer> indexesToRemove = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } if (s.charAt(i) == ')') {
+                if (stack.isEmpty()) {
+                    indexesToRemove.add(i);
+                } else {
+                    stack.pop();
+                }
+            }
+        }
+        // Put any indexes remaining on stack into the set.
+        while (!stack.isEmpty()) indexesToRemove.add(stack.pop());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (!indexesToRemove.contains(i)) {
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
+    //endregion
+
+    //region    20230418    1823. 找出游戏的获胜者
+
+    /**
+     * https://leetcode.cn/problems/find-the-winner-of-the-circular-game
+     * @param n  参与游戏的小伙伴总数 n
+     * @param k  一个整数 k
+     * @return  返回游戏的获胜者
+     */
+    public int findTheWinner(int n, int k) {
+        int pos = 0;
+        for (int i = 2; i < n + 1; ++i) {
+            pos = (pos + k) % i;
+        }
+        return pos + 1;
     }
     //endregion
 

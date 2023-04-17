@@ -357,9 +357,10 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/minimum-window-substring/
-     * @param s  一个字符串 s
-     * @param t  一个字符串 t
-     * @return  返回 s 中涵盖 t 所有字符的最小子串
+     *
+     * @param s 一个字符串 s
+     * @param t 一个字符串 t
+     * @return 返回 s 中涵盖 t 所有字符的最小子串
      */
     public String minWindow(String s, String t) {
         int tLen = t.length();
@@ -941,6 +942,101 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230418    227. 基本计算器 II
+
+    /**
+     * https://leetcode.cn/problems/basic-calculator-ii
+     *
+     * @param s 字符串表达式 s
+     * @return 实现一个基本计算器来计算并返回它的值
+     */
+    public int calculate(String s) {
+        // 将所有的空格去掉
+        s = s.replaceAll(" ", "");
+        char[] cs = s.toCharArray();
+        int n = s.length();
+        // 存放所有的数字
+        Deque<Integer> nums = new ArrayDeque<>();
+        // 为了防止第一个数为负数，先往 nums 加个 0
+        nums.addLast(0);
+        // 存放所有「非数字以外」的操作
+        Deque<Character> ops = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            char c = cs[i];
+            if (c == '(') {
+                ops.addLast(c);
+            } else if (c == ')') {
+                // 计算到最近一个左括号为止
+                while (!ops.isEmpty()) {
+                    if (ops.peekLast() != '(') {
+                        calc(nums, ops);
+                    } else {
+                        ops.pollLast();
+                        break;
+                    }
+                }
+            } else {
+                if (isNumber(c)) {
+                    int u = 0;
+                    int j = i;
+                    // 将从 i 位置开始后面的连续数字整体取出，加入 nums
+                    while (j < n && isNumber(cs[j])) u = u * 10 + (cs[j++] - '0');
+                    nums.addLast(u);
+                    i = j - 1;
+                } else {
+                    if (i > 0 && (cs[i - 1] == '(' || cs[i - 1] == '+' || cs[i - 1] == '-')) {
+                        nums.addLast(0);
+                    }
+                    // 有一个新操作要入栈时，先把栈内可以算的都算了
+                    // 只有满足「栈内运算符」比「当前运算符」优先级高/同等，才进行运算
+                    while (!ops.isEmpty() && ops.peekLast() != '(') {
+                        char prev = ops.peekLast();
+                        if (map.get(prev) >= map.get(c)) {
+                            calc(nums, ops);
+                        } else {
+                            break;
+                        }
+                    }
+                    ops.addLast(c);
+                }
+            }
+        }
+        // 将剩余的计算完
+        while (!ops.isEmpty()) calc(nums, ops);
+        return nums.peekLast();
+    }
+
+    void calc(Deque<Integer> nums, Deque<Character> ops) {
+        if (nums.isEmpty() || nums.size() < 2) return;
+        if (ops.isEmpty()) return;
+        int b = nums.pollLast(), a = nums.pollLast();
+        char op = ops.pollLast();
+        int ans = 0;
+        if (op == '+') ans = a + b;
+        else if (op == '-') ans = a - b;
+        else if (op == '*') ans = a * b;
+        else if (op == '/') ans = a / b;
+        else if (op == '^') ans = (int) Math.pow(a, b);
+        else if (op == '%') ans = a % b;
+        nums.addLast(ans);
+    }
+
+    boolean isNumber(char c) {
+        return Character.isDigit(c);
+    }
+
+    // 使用 map 维护一个运算符优先级
+    // 这里的优先级划分按照「数学」进行划分即可
+    Map<Character, Integer> map = new HashMap<Character, Integer>() {{
+        put('-', 1);
+        put('+', 1);
+        put('*', 2);
+        put('/', 2);
+        put('%', 2);
+        put('^', 3);
+    }};
+    //endregion
+
     //region    20230412    230. 二叉搜索树中第K小的元素
 
     /**
@@ -1096,8 +1192,9 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/partition-equal-subset-sum/
-     * @param nums  一个 只包含正整数 的 非空 数组 nums
-     * @return  判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
+     *
+     * @param nums 一个 只包含正整数 的 非空 数组 nums
+     * @return 判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
      */
     public boolean canPartition(int[] nums) {
         int len = nums.length;
@@ -1142,12 +1239,14 @@ public class TargetLeetCode75Mid {
 
     /**
      * https://leetcode.cn/problems/pacific-atlantic-water-flow
-     * @param heights  给定一个 m x n 的整数矩阵 heights ， heights[r][c] 表示坐标 (r, c) 上单元格 高于海平面的高度
-     * @return  返回网格坐标 result 的 2D 列表 ，其中 result[i] = [ri, ci] 表示雨水从单元格 (ri, ci) 流动 既可流向太平洋也可流向大西洋
+     *
+     * @param heights 给定一个 m x n 的整数矩阵 heights ， heights[r][c] 表示坐标 (r, c) 上单元格 高于海平面的高度
+     * @return 返回网格坐标 result 的 2D 列表 ，其中 result[i] = [ri, ci] 表示雨水从单元格 (ri, ci) 流动 既可流向太平洋也可流向大西洋
      */
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         g = heights;
-        m = g.length; n = g[0].length;
+        m = g.length;
+        n = g[0].length;
         boolean[][] res1 = new boolean[m][n], res2 = new boolean[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -1164,14 +1263,17 @@ public class TargetLeetCode75Mid {
             for (int j = 0; j < n; j++) {
                 if (res1[i][j] && res2[i][j]) {
                     List<Integer> list = new ArrayList<>();
-                    list.add(i); list.add(j);
+                    list.add(i);
+                    list.add(j);
                     ans.add(list);
                 }
             }
         }
         return ans;
     }
-    int[][] dirs = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
+
+    int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
     void dfs(int x, int y, boolean[][] res) {
         res[x][y] = true;
         for (int[] di : dirs) {
@@ -1322,6 +1424,36 @@ public class TargetLeetCode75Mid {
     int ans;
     //endregion
 
+    //region    20230418    547. 省份数量
+
+    /**
+     * https://leetcode.cn/problems/number-of-provinces/
+     * @param isConnected  给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 表示二者不直接相连。
+     * @return  返回矩阵中省份的数量。
+     */
+    public int findCircleNum(int[][] isConnected) {
+        int cicties = isConnected.length;
+        boolean[] visited = new boolean[cicties];
+        int provinces = 0;
+        for (int i = 0; i < cicties; i++) {
+            if (!visited[i]) {
+                dfs(isConnected, visited, cicties, i);
+                provinces++;
+            }
+        }
+        return provinces;
+    }
+
+    public void dfs(int[][] isConnected, boolean[] visited, int cities, int i) {
+        for (int j = 0; j < cities; j++) {
+            if (isConnected[i][j] == 1 && !visited[j]) {
+                visited[j] = true;
+                dfs(isConnected, visited, cities, j);
+            }
+        }
+    }
+    //endregion
+
     //region    20230404    621. 任务调度器
 
     /**
@@ -1353,14 +1485,50 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230418    735. 行星碰撞
+
+    /**
+     * https://leetcode.cn/problems/asteroid-collision/
+     *
+     * @param asteroids 一个整数数组 asteroids，表示在同一行的行星
+     * @return 找出碰撞后剩下的所有行星
+     */
+    public int[] asteroidCollision(int[] asteroids) {
+        Deque<Integer> deque = new ArrayDeque<>();
+        for (int asteroid : asteroids) {
+            boolean ok = true;
+            while (ok && !deque.isEmpty() && deque.peekLast() > 0 && asteroid < 0) {
+                int a = deque.peekLast();
+                int b = -asteroid;
+                if (a <= b) {
+                    deque.pollLast();
+                }
+                if (a >= b) {
+                    ok = false;
+                }
+            }
+            if (ok) {
+                deque.addLast(asteroid);
+            }
+        }
+        int length = deque.size();
+        int[] res = new int[length];
+        while (!deque.isEmpty()) {
+            res[--length] = deque.pollLast();
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230416    815. 公交路线
 
     /**
      * https://leetcode.cn/problems/bus-routes/
-     * @param routes  一个数组 routes ，表示一系列公交线路，其中每个 routes[i] 表示一条公交线路，第 i 辆公交车将会在上面循环行驶
-     * @param source   source 车站出发
-     * @param target   前往 target 车站
-     * @return  最少乘坐的公交车数量
+     *
+     * @param routes 一个数组 routes ，表示一系列公交线路，其中每个 routes[i] 表示一条公交线路，第 i 辆公交车将会在上面循环行驶
+     * @param source source 车站出发
+     * @param target 前往 target 车站
+     * @return 最少乘坐的公交车数量
      */
     public int numBusesToDestination(int[][] routes, int source, int target) {
         if (source == target) {
@@ -1405,6 +1573,45 @@ public class TargetLeetCode75Mid {
             }
         }
         return ret == Integer.MAX_VALUE ? -1 : ret;
+    }
+    //endregion
+
+    //region    20230418    947. 移除最多的同行或同列石头
+
+    /**
+     * https://leetcode.cn/problems/most-stones-removed-with-same-row-or-column
+     * @param stones  一个长度为 n 的数组 stones ，其中 stones[i] = [xi, yi] 表示第 i 块石头的位置
+     * @return  可以移除的石子 的最大数量
+     */
+    public int removeStones(int[][] stones) {
+        int n = stones.length;
+        List<List<Integer>> edge = new ArrayList<List<Integer>>();
+        for (int i = 0; i < n; i++) {
+            edge.add(new ArrayList<Integer>());
+            for (int j = 0; j < n; j++) {
+                if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
+                    edge.get(i).add(j);
+                }
+            }
+        }
+        boolean[] vis = new boolean[n];
+        int num = 0;
+        for (int i = 0; i < n; i++) {
+            if (!vis[i]) {
+                num++;
+                dfs(i, edge, vis);
+            }
+        }
+        return n - num;
+    }
+
+    public void dfs(int x, List<List<Integer>> edge, boolean[] vis) {
+        vis[x] = true;
+        for (int y : edge.get(x)) {
+            if (!vis[y]) {
+                dfs(y, edge, vis);
+            }
+        }
     }
     //endregion
 

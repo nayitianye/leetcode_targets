@@ -39,7 +39,8 @@ public class TargetProgrammingSkillsBasic {
         public int val;
         public List<Node> children;
 
-        public Node() {}
+        public Node() {
+        }
 
         public Node(int _val) {
             val = _val;
@@ -49,7 +50,24 @@ public class TargetProgrammingSkillsBasic {
             val = _val;
             children = _children;
         }
-    };
+    }
+
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
     //endregion
 
     //region    20230405    28. 找出字符串中第一个匹配项的下标
@@ -83,9 +101,10 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/multiply-strings/
-     * @param num1  非负整数 num1
-     * @param num2  非负整数 num2
-     * @return  返回 num1 和 num2 的乘积
+     *
+     * @param num1 非负整数 num1
+     * @param num2 非负整数 num2
+     * @return 返回 num1 和 num2 的乘积
      */
     public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
@@ -141,12 +160,13 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/rotate-image
-     * @param matrix  一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
+     *
+     * @param matrix 一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
      */
     public void rotate(int[][] matrix) {
         int n = matrix.length;
-        for(int i=0;i<n;i++){
-            for(int j=i;j<n;j++){
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
                 int tmp = matrix[j][i];
                 matrix[j][i] = matrix[i][j];
                 matrix[i][j] = tmp;
@@ -166,8 +186,9 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/group-anagrams
-     * @param strs  一个字符串数组 strs
-     * @return  字母异位词 组合在一起
+     *
+     * @param strs 一个字符串数组 strs
+     * @return 字母异位词 组合在一起
      */
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
@@ -198,8 +219,9 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/spiral-matrix/
-     * @param matrix  一个 m 行 n 列的矩阵 matrix
-     * @return  按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
+     *
+     * @param matrix 一个 m 行 n 列的矩阵 matrix
+     * @return 按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
      */
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
@@ -225,7 +247,7 @@ public class TargetProgrammingSkillsBasic {
             }
             left++;
             right--;
-            top ++;
+            top++;
             bottom--;
         }
         return res;
@@ -236,8 +258,9 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/length-of-last-word
-     * @param s  字符串 s
-     * @return  返回字符串中最后一个单词的长度
+     *
+     * @param s 字符串 s
+     * @return 返回字符串中最后一个单词的长度
      */
     public int lengthOfLastWord(String s) {
         String[] strings = s.trim().split(" ");
@@ -365,6 +388,37 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230418    143. 重排链表
+
+    /**
+     * https://leetcode.cn/problems/reorder-list/
+     *
+     * @param head 单链表 L 的头节点 head
+     */
+    public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        List<ListNode> list = new ArrayList<ListNode>();
+        ListNode node = head;
+        while (node != null) {
+            list.add(node);
+            node = node.next;
+        }
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+        list.get(i).next = null;
+    }
+    //endregion
+
     //region    20230409    150. 逆波兰表达式求值
 
     /**
@@ -410,23 +464,24 @@ public class TargetProgrammingSkillsBasic {
     class NumMatrix {
 
         int[][] sums;
+
         public NumMatrix(int[][] matrix) {
-            int m=matrix.length;
-            if(m>0){
-                int n=matrix[0].length;
-                sums=new int[m][n+1];
+            int m = matrix.length;
+            if (m > 0) {
+                int n = matrix[0].length;
+                sums = new int[m][n + 1];
                 for (int i = 0; i < m; i++) {
                     for (int j = 0; j < n; j++) {
-                        sums[i][j+1]=sums[i][j]+matrix[i][j];
+                        sums[i][j + 1] = sums[i][j] + matrix[i][j];
                     }
                 }
             }
         }
 
         public int sumRegion(int row1, int col1, int row2, int col2) {
-            int sum=0;
+            int sum = 0;
             for (int i = row1; i <= row2; i++) {
-                sum+=sums[i][col2+1]-sums[i][col1];
+                sum += sums[i][col2 + 1] - sums[i][col1];
             }
             return sum;
         }
@@ -437,37 +492,40 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/n-ary-tree-level-order-traversal/
-     * @param root  一个 N 叉树根节点 root
-     * @return  返回其前序遍历
+     *
+     * @param root 一个 N 叉树根节点 root
+     * @return 返回其前序遍历
      */
     public List<List<Integer>> levelOrder(Node root) {
-        helpLevelOrder(root,0);
+        helpLevelOrder(root, 0);
         return res;
     }
-    public void helpLevelOrder(Node root,int level){
-        if(root==null){
+
+    public void helpLevelOrder(Node root, int level) {
+        if (root == null) {
             return;
         }
-        if(res.size()<level+1){
-            List<Integer> levelList=new ArrayList<>();
+        if (res.size() < level + 1) {
+            List<Integer> levelList = new ArrayList<>();
             res.add(levelList);
         }
         res.get(level).add(root.val);
-        for(Node node:root.children){
-            helpLevelOrder(node,level+1);
+        for (Node node : root.children) {
+            helpLevelOrder(node, level + 1);
         }
     }
 
-    private List<List<Integer>> res=new ArrayList<>();
+    private List<List<Integer>> res = new ArrayList<>();
     //endregion
 
     //region    20230417    438. 找到字符串中所有字母异位词
 
     /**
      * https://leetcode.cn/problems/find-all-anagrams-in-a-string/
-     * @param s  字符串 s
-     * @param p  字符串 p
-     * @return  找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
+     *
+     * @param s 字符串 s
+     * @param p 字符串 p
+     * @return 找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引
      */
     public List<Integer> findAnagrams(String s, String p) {
         int slen = s.length(), plen = p.length();
@@ -528,9 +586,10 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/subarray-product-less-than-k
-     * @param nums  一个整数数组 nums
-     * @param k  一个整数 k
-     * @return  返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目
+     *
+     * @param nums 一个整数数组 nums
+     * @param k    一个整数 k
+     * @return 返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目
      */
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         //同样排除k为1的情况比如  [1,1,1] k=1
@@ -545,7 +604,7 @@ public class TargetProgrammingSkillsBasic {
         int ans = 0;
 
         //用右指针遍历整个数组，每次循环右指针右移一次
-        while(right<nums.length) {
+        while (right < nums.length) {
             //记录乘积
             mul *= nums[right];
             //当大于等于k，左指针右移并把之前左指针的数除掉
@@ -652,10 +711,11 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/arithmetic-subarrays
-     * @param nums  由 n 个整数组成的数组 nums
-     * @param l 由 m 个整数组成的数组 l
-     * @param r 由 m 个整数组成的数组 r
-     * @return  返回 boolean 元素构成的答案列表 answer
+     *
+     * @param nums 由 n 个整数组成的数组 nums
+     * @param l    由 m 个整数组成的数组 l
+     * @param r    由 m 个整数组成的数组 r
+     * @return 返回 boolean 元素构成的答案列表 answer
      */
     public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
         int n = l.length;
