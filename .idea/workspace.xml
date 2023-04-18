@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -388,14 +390,8 @@
       <workItem from="1681530656347" duration="1284000" />
       <workItem from="1681568308061" duration="620000" />
       <workItem from="1681654527103" duration="7968000" />
-      <workItem from="1681747491209" duration="3801000" />
-    </task>
-    <task id="LOCAL-00033" summary="300. 最长递增子序列&#10;376. 摆动序列">
-      <created>1677684343635</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1677684343635</updated>
+      <workItem from="1681747491209" duration="3848000" />
+      <workItem from="1681827748673" duration="3680000" />
     </task>
     <task id="LOCAL-00034" summary="1. 两数之和&#10;53. 最大子数组和&#10;88. 合并两个有序数组&#10;217. 存在重复元素&#10;724. 寻找数组的中心下标&#10;1480. 一维数组的动态和&#10;剑指 Offer 06. 从尾到头打印链表&#10;剑指 Offer 09. 用两个栈实现队列&#10;剑指 Offer 24. 反转链表\&#10;剑指 Offer 30. 包含min函数的栈&#10;剑指 Offer 35. 复杂链表的复制">
       <created>1678027914457</created>
@@ -733,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681660166635</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="学习计划_LeetCode75_Level2：&#10;227. 基本计算器 II&#10;547. 省份数量&#10;735. 行星碰撞&#10;947. 移除最多的同行或同列石头&#10;学习计划_数据结构基础：&#10;143. 重排链表&#10;155. 最小栈&#10;1249. 移除无效的括号&#10;1823. 找出游戏的获胜者&#10;学习计划_编程能力基础：&#10;143. 重排链表">
+      <created>1681752336291</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1681752336291</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -820,7 +823,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_二分查找基础:&#10;611. 有效三角形的个数&#10;658. 找到 K 个最接近的元素&#10;1894. 找到需要补充粉笔的学生编号" />
     <MESSAGE value="学习计划_二分查找基础:&#10;300. 最长递增子序列&#10;1760. 袋子里最少数目的球" />
     <MESSAGE value="学习计划_二分查找基础:&#10;287. 寻找重复数&#10;1552. 两球之间的磁力&#10;学习计划_算法入门：&#10;3. 无重复字符的最长子串&#10;学习计划_剑指offer&#10;剑指 Offer 33. 二叉搜索树的后序遍历序列" />
     <MESSAGE value="LeetBook：排序算法图算法_冒泡算法" />
@@ -845,7 +847,8 @@
     <MESSAGE value="学习计划_算法基础：&#10;82. 删除排序链表中的重复元素 II&#10;162. 寻找峰值&#10;每日一题：&#10;1041. 困于环中的机器人" />
     <MESSAGE value="学习计划_LeetCode75_Level2：&#10;173. 二叉搜索树迭代器&#10;230. 二叉搜索树中第K小的元素&#10;每日一题：&#10;1147. 段式回文" />
     <MESSAGE value="学习计划_LeetCode75_Level2：&#10;56. 合并区间&#10;57. 插入区间&#10;76. 最小覆盖子串&#10;155. 最小栈&#10;208. 实现 Trie (前缀树)&#10;210. 课程表 II&#10;232. 用栈实现队列&#10;416. 分割等和子集&#10;417. 太平洋大西洋水流问题&#10;815. 公交路线" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode75_Level2：&#10;56. 合并区间&#10;57. 插入区间&#10;76. 最小覆盖子串&#10;155. 最小栈&#10;208. 实现 Trie (前缀树)&#10;210. 课程表 II&#10;232. 用栈实现队列&#10;416. 分割等和子集&#10;417. 太平洋大西洋水流问题&#10;815. 公交路线" />
+    <MESSAGE value="学习计划_LeetCode75_Level2：&#10;227. 基本计算器 II&#10;547. 省份数量&#10;735. 行星碰撞&#10;947. 移除最多的同行或同列石头&#10;学习计划_数据结构基础：&#10;143. 重排链表&#10;155. 最小栈&#10;1249. 移除无效的括号&#10;1823. 找出游戏的获胜者&#10;学习计划_编程能力基础：&#10;143. 重排链表" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode75_Level2：&#10;227. 基本计算器 II&#10;547. 省份数量&#10;735. 行星碰撞&#10;947. 移除最多的同行或同列石头&#10;学习计划_数据结构基础：&#10;143. 重排链表&#10;155. 最小栈&#10;1249. 移除无效的括号&#10;1823. 找出游戏的获胜者&#10;学习计划_编程能力基础：&#10;143. 重排链表" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -935,7 +938,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>763</line>
+          <line>1049</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
       </breakpoints>
