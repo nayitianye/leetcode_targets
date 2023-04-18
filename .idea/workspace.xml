@@ -391,14 +391,7 @@
       <workItem from="1681568308061" duration="620000" />
       <workItem from="1681654527103" duration="7968000" />
       <workItem from="1681747491209" duration="3848000" />
-      <workItem from="1681827748673" duration="3680000" />
-    </task>
-    <task id="LOCAL-00034" summary="1. 两数之和&#10;53. 最大子数组和&#10;88. 合并两个有序数组&#10;217. 存在重复元素&#10;724. 寻找数组的中心下标&#10;1480. 一维数组的动态和&#10;剑指 Offer 06. 从尾到头打印链表&#10;剑指 Offer 09. 用两个栈实现队列&#10;剑指 Offer 24. 反转链表\&#10;剑指 Offer 30. 包含min函数的栈&#10;剑指 Offer 35. 复杂链表的复制">
-      <created>1678027914457</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1678027914457</updated>
+      <workItem from="1681827748673" duration="5792000" />
     </task>
     <task id="LOCAL-00035" summary="代码同步">
       <created>1678028056403</created>
@@ -736,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681752336291</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="学习计划_算法基础：&#10;5. 最长回文子串&#10;45. 跳跃游戏 II&#10;47. 全排列 II&#10;55. 跳跃游戏&#10;62. 不同路径&#10;78. 子集&#10;90. 子集 II&#10;213. 打家劫舍 II&#10;413. 等差数列划分">
+      <created>1681833730089</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1681833730089</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -823,7 +823,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_二分查找基础:&#10;300. 最长递增子序列&#10;1760. 袋子里最少数目的球" />
     <MESSAGE value="学习计划_二分查找基础:&#10;287. 寻找重复数&#10;1552. 两球之间的磁力&#10;学习计划_算法入门：&#10;3. 无重复字符的最长子串&#10;学习计划_剑指offer&#10;剑指 Offer 33. 二叉搜索树的后序遍历序列" />
     <MESSAGE value="LeetBook：排序算法图算法_冒泡算法" />
     <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 56 - I. 数组中数字出现的次数&#10;剑指 Offer 56 - II. 数组中数字出现的次数 II&#10;学习计划_算法入门：&#10;695. 岛屿的最大面积&#10;733. 图像渲染&#10;学习计划_二分查找基础&#10;1870. 准时到达的列车最小时速&#10;1898. 可移除字符的最大数目&#10;每日一题：&#10;1574. 删除最短的子数组使剩余数组有序" />
@@ -848,7 +847,8 @@
     <MESSAGE value="学习计划_LeetCode75_Level2：&#10;173. 二叉搜索树迭代器&#10;230. 二叉搜索树中第K小的元素&#10;每日一题：&#10;1147. 段式回文" />
     <MESSAGE value="学习计划_LeetCode75_Level2：&#10;56. 合并区间&#10;57. 插入区间&#10;76. 最小覆盖子串&#10;155. 最小栈&#10;208. 实现 Trie (前缀树)&#10;210. 课程表 II&#10;232. 用栈实现队列&#10;416. 分割等和子集&#10;417. 太平洋大西洋水流问题&#10;815. 公交路线" />
     <MESSAGE value="学习计划_LeetCode75_Level2：&#10;227. 基本计算器 II&#10;547. 省份数量&#10;735. 行星碰撞&#10;947. 移除最多的同行或同列石头&#10;学习计划_数据结构基础：&#10;143. 重排链表&#10;155. 最小栈&#10;1249. 移除无效的括号&#10;1823. 找出游戏的获胜者&#10;学习计划_编程能力基础：&#10;143. 重排链表" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_LeetCode75_Level2：&#10;227. 基本计算器 II&#10;547. 省份数量&#10;735. 行星碰撞&#10;947. 移除最多的同行或同列石头&#10;学习计划_数据结构基础：&#10;143. 重排链表&#10;155. 最小栈&#10;1249. 移除无效的括号&#10;1823. 找出游戏的获胜者&#10;学习计划_编程能力基础：&#10;143. 重排链表" />
+    <MESSAGE value="学习计划_算法基础：&#10;5. 最长回文子串&#10;45. 跳跃游戏 II&#10;47. 全排列 II&#10;55. 跳跃游戏&#10;62. 不同路径&#10;78. 子集&#10;90. 子集 II&#10;213. 打家劫舍 II&#10;413. 等差数列划分" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法基础：&#10;5. 最长回文子串&#10;45. 跳跃游戏 II&#10;47. 全排列 II&#10;55. 跳跃游戏&#10;62. 不同路径&#10;78. 子集&#10;90. 子集 II&#10;213. 打家劫舍 II&#10;413. 等差数列划分" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -938,7 +938,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>1049</line>
+          <line>921</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
       </breakpoints>

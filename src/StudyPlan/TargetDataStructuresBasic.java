@@ -26,13 +26,33 @@ public class TargetDataStructuresBasic {
         }
     }
 
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     //region    20230417    2. 两数相加
 
     /**
      * https://leetcode.cn/problems/add-two-numbers/
-     * @param l1  链表 l1
-     * @param l2  链表 l2
-     * @return  两个数相加，并以相同形式返回一个表示和的链表
+     *
+     * @param l1 链表 l1
+     * @param l2 链表 l2
+     * @return 两个数相加，并以相同形式返回一个表示和的链表
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = null, tail = null;
@@ -167,8 +187,9 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/swap-nodes-in-pairs
-     * @param head  你一个链表头节点 head
-     * @return  两两交换其中相邻的节点，并返回交换后链表的头节点
+     *
+     * @param head 你一个链表头节点 head
+     * @return 两两交换其中相邻的节点，并返回交换后链表的头节点
      */
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) {
@@ -244,12 +265,13 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/rotate-image
-     * @param matrix  一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
+     *
+     * @param matrix 一个 n × n 的二维矩阵 matrix 表示一个图像,将图像顺时针旋转 90 度
      */
     public void rotate(int[][] matrix) {
         int n = matrix.length;
-        for(int i=0;i<n;i++){
-            for(int j=i;j<n;j++){
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
                 int tmp = matrix[j][i];
                 matrix[j][i] = matrix[i][j];
                 matrix[i][j] = tmp;
@@ -349,8 +371,9 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii
-     * @param head  一个已排序的链表的头 head
-     * @return  删除原始链表中所有重复数字的节点，只留下不同的数字
+     *
+     * @param head 一个已排序的链表的头 head
+     * @return 删除原始链表中所有重复数字的节点，只留下不同的数字
      */
     public ListNode deleteDuplicates(ListNode head) {
         //没有节点或者只有一个节点，必然没有重复元素
@@ -370,6 +393,106 @@ public class TargetDataStructuresBasic {
             }
             return deleteDuplicates(notDup);
         }
+    }
+    //endregion
+
+    //region    20230419    103. 二叉树的锯齿形层序遍历
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
+     * @param root  二叉树的根节点 root
+     * @return  返回其节点值的 锯齿形层序遍历
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<List<Integer>>();
+        if (root == null) {
+            return ans;
+        }
+
+        Queue<TreeNode> nodeQueue = new ArrayDeque<TreeNode>();
+        nodeQueue.offer(root);
+        boolean isOrderLeft = true;
+
+        while (!nodeQueue.isEmpty()) {
+            Deque<Integer> levelList = new LinkedList<Integer>();
+            int size = nodeQueue.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode curNode = nodeQueue.poll();
+                if (isOrderLeft) {
+                    levelList.offerLast(curNode.val);
+                } else {
+                    levelList.offerFirst(curNode.val);
+                }
+                if (curNode.left != null) {
+                    nodeQueue.offer(curNode.left);
+                }
+                if (curNode.right != null) {
+                    nodeQueue.offer(curNode.right);
+                }
+            }
+            ans.add(new LinkedList<Integer>(levelList));
+            isOrderLeft = !isOrderLeft;
+        }
+
+        return ans;
+    }
+    //endregion
+
+    //region    20230419    105. 从前序与中序遍历序列构造二叉树
+
+    /**
+     * https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+     * @param preorder  整数数组 preorder
+     * @param inorder  整数数组 inorder
+     * @return  构造二叉树并返回其根节点
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[0]);
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        stack.push(root);
+        int inorderIndex = 0;
+        for (int i = 1; i < preorder.length; i++) {
+            int preorderVal = preorder[i];
+            TreeNode node = stack.peek();
+            if (node.val != inorder[inorderIndex]) {
+                node.left = new TreeNode(preorderVal);
+                stack.push(node.left);
+            } else {
+                while (!stack.isEmpty() && stack.peek().val == inorder[inorderIndex]) {
+                    node = stack.pop();
+                    inorderIndex++;
+                }
+                node.right = new TreeNode(preorderVal);
+                stack.push(node.right);
+            }
+        }
+        return root;
+    }
+    //endregion
+
+    //region    20230419    108. 将有序数组转换为二叉搜索树
+
+    /**
+     * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
+     * @param nums  一个整数数组 nums
+     * @return  将其转换为一棵 高度平衡 二叉搜索树
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode helper(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+        int mid = left + (right - left) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper(nums, left, mid - 1);
+        root.right = helper(nums, mid + 1, right);
+        return root;
     }
     //endregion
 
@@ -415,8 +538,9 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/linked-list-cycle-ii
-     * @param head  链表的头节点  head
-     * @return  返回链表开始入环的第一个节点。 如果链表无环，则返回 null
+     *
+     * @param head 链表的头节点  head
+     * @return 返回链表开始入环的第一个节点。 如果链表无环，则返回 null
      */
     public ListNode detectCycle(ListNode head) {
         ListNode fast = head, slow = head;
@@ -517,9 +641,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/intersection-of-two-linked-lists
-     * @param headA  单链表的头节点 headA
-     * @param headB  单链表的头节点 headB
-     * @return  返回两个单链表相交的起始节点
+     *
+     * @param headA 单链表的头节点 headA
+     * @param headB 单链表的头节点 headB
+     * @return 返回两个单链表相交的起始节点
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode A = headA, B = headB;
@@ -579,6 +704,41 @@ public class TargetDataStructuresBasic {
             res[i] = Mul / nums[i];
         }
         return res;
+    }
+    //endregion
+
+    //region    20230419    240. 搜索二维矩阵 II
+
+    /**
+     * https://leetcode.cn/problems/search-a-2d-matrix-ii/
+     * @param matrix   m x n 矩阵 matrix
+     * @param target  一个目标值 target
+     * @return  判断是否找到你对应的值
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int[] row : matrix) {
+            int index=search(row,target);
+            if(index>=0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int search(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int num = nums[mid];
+            if (num == target) {
+                return mid;
+            } else if (num < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
     }
     //endregion
 
@@ -736,39 +896,42 @@ public class TargetDataStructuresBasic {
      */
     class MyLinkedList {
 
-        private  class Node{
+        private class Node {
             int val;
             Node next;
-            Node(int val){
+
+            Node(int val) {
                 this.val = val;
                 this.next = null;
             }
         }
-        private Node head,tail;
+
+        private Node head, tail;
         private int size;
 
         /**
          * 链表构造函数
          */
         public MyLinkedList() {
-            Node p= new Node(0);
+            Node p = new Node(0);
             this.head = p;
             this.tail = p;
             this.size = 0;
         }
 
         /**
-         *获取链表中第 index 个节点的值。
+         * 获取链表中第 index 个节点的值。
+         *
          * @param index 索引
          * @return 索引为index 对应的值 无效返回-1
          */
         public int get(int index) {
             //如果超出范围直接返回-1
-            if(index<0||index>=this.size) return -1;
-            else{
+            if (index < 0 || index >= this.size) return -1;
+            else {
                 Node cur = this.head;
-                for(int i =0 ;i<index;i++){
-                    cur= cur.next;
+                for (int i = 0; i < index; i++) {
+                    cur = cur.next;
                 }
                 return cur.val;
             }
@@ -776,27 +939,29 @@ public class TargetDataStructuresBasic {
 
         /**
          * 在链表的第一个元素之前添加一个值为 val 的节点。
+         *
          * @param val
          */
         public void addAtHead(int val) {
-            if(this.size==0){
+            if (this.size == 0) {
                 this.head.val = val;
-            }else{
+            } else {
                 Node tmp = new Node(val);
                 tmp.next = this.head;
                 this.head = tmp;//加了之后要更新head 的值
             }
-            this.size ++;
+            this.size++;
         }
 
         /**
          * 将值为 val 的节点追加到链表的最后一个元素。
+         *
          * @param val
          */
         public void addAtTail(int val) {
-            if(this.size==0){
+            if (this.size == 0) {
                 this.tail.val = val;
-            }else {
+            } else {
                 Node tmp = new Node(val);
                 this.tail.next = tmp;
                 this.tail = tmp;//加了之后要更新tail的值
@@ -808,48 +973,48 @@ public class TargetDataStructuresBasic {
          * 在链表中的第 index 个节点之前添加值为 val  的节点。
          * 如果 index 等于链表的长度，则该节点将附加到链表的末尾。
          * 如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。
+         *
          * @param index
          * @param val
          */
         public void addAtIndex(int index, int val) {
-            if(index>this.size){//超出范围结束
+            if (index > this.size) {//超出范围结束
                 return;
-            }else if(index<=0){//比零小，加在head
+            } else if (index <= 0) {//比零小，加在head
                 addAtHead(val);
-            }else if(index==this.size){//index为size说明实在tail之后加
+            } else if (index == this.size) {//index为size说明实在tail之后加
                 addAtTail(val);
-            }else {
+            } else {
                 Node tmp = new Node(val);
                 Node cur = this.head;
-                for(int i=0;i<index-1;i++){
+                for (int i = 0; i < index - 1; i++) {
                     cur = cur.next;
                 }//加的位置是cur的下一个
                 tmp.next = cur.next;
                 cur.next = tmp;
-                this.size ++;//别忘记加size
+                this.size++;//别忘记加size
             }
         }
 
         /**
          * deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。
+         *
          * @param index
          */
         public void deleteAtIndex(int index) {
-            if(index>=0&&index<this.size)//索引有效才能删
+            if (index >= 0 && index < this.size)//索引有效才能删
             {
-                if(index==0)//删head
+                if (index == 0)//删head
                 {
                     this.head = this.head.next;
-                }else
-                {
+                } else {
                     Node cur = this.head;
-                    for(int i=0;i<index-1;i++)
-                    {
+                    for (int i = 0; i < index - 1; i++) {
                         cur = cur.next;
                     }
                     cur.next = cur.next.next;
-                    if(index==this.size-1){
-                        tail=cur;
+                    if (index == this.size - 1) {
+                        tail = cur;
                     }//删tail 要更新tail
                 }
                 this.size--;//别忘记了减size
@@ -872,7 +1037,8 @@ public class TargetDataStructuresBasic {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
                 stack.push(i);
-            } if (s.charAt(i) == ')') {
+            }
+            if (s.charAt(i) == ')') {
                 if (stack.isEmpty()) {
                     indexesToRemove.add(i);
                 } else {
@@ -896,9 +1062,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/find-the-winner-of-the-circular-game
-     * @param n  参与游戏的小伙伴总数 n
-     * @param k  一个整数 k
-     * @return  返回游戏的获胜者
+     *
+     * @param n 参与游戏的小伙伴总数 n
+     * @param k 一个整数 k
+     * @return 返回游戏的获胜者
      */
     public int findTheWinner(int n, int k) {
         int pos = 0;

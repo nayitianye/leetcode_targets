@@ -68,57 +68,130 @@ public class TargetProgrammingSkillsBasic {
             this.next = next;
         }
     }
+
     //endregion
 
-    //region    20230418    5. 最长回文子串
+    //region    20230419    2. 两数相加
 
     /**
-     * https://leetcode.cn/problems/longest-palindromic-substring
+     * https://leetcode.cn/problems/add-two-numbers/
      *
-     * @param s 一个字符串 s
-     * @return 找到 s 中最长的回文子串
+     * @param l1 链表 l1
+     * @param l2 链表 l2
+     * @return 两个数相加，并以相同形式返回一个表示和的链表
      */
-    public String longestPalindrome(String s) {
-        int length = s.length();
-        if (length < 2) {
-            return s;
-        }
-        int maxLength = 1;
-        int begin = 0;
-        //d[i][j]表示s[i..j]是否是回文串
-        boolean[][] dp = new boolean[length][length];
-        //初始化：所有长度为1的字串都是回文串
-        for (int i = 0; i < length; i++) {
-            dp[i][i] = true;
-        }
-        char[] charArray = s.toCharArray();
-        //先枚举字串的长度
-        for (int L = 2; L <= length; L++) {
-            //枚举左边界，左边界的上限设置可以宽松一些
-            for (int i = 0; i < length; i++) {
-                //由i和j可以确定右边界，即j-i+1=L得
-                int j = L + i - 1;
-                //如果右边界越界，就可以退出当前循环
-                if (j >= length) {
-                    break;
-                }
-                if (charArray[i] != charArray[j]) {
-                    dp[i][j] = false;
-                } else {
-                    if (j - i < 3) {
-                        dp[i][j] = true;
-                    } else {
-                        dp[i][j] = dp[i + 1][j - 1];
-                    }
-                }
-                //只要dp[i][L]==true成立，就表示字串s[i..L]是回文，此时记录回文长度和起始位置
-                if (dp[i][j] && j - i + 1 > maxLength) {
-                    maxLength = j - i + 1;
-                    begin = i;
-                }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null, tail = null;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int n1 = l1 != null ? l1.val : 0;
+            int n2 = l2 != null ? l2.val : 0;
+            int sum = n1 + n2 + carry;
+            if (head == null) {
+                head = tail = new ListNode(sum % 10);
+            } else {
+                tail.next = new ListNode(sum % 10);
+                tail = tail.next;
+            }
+            carry = sum / 10;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
             }
         }
-        return s.substring(begin, begin + maxLength);
+        if (carry > 0) {
+            tail.next = new ListNode(carry);
+        }
+        return head;
+    }
+    //endregion
+
+    //region    20230419    17. 电话号码的字母组合
+
+    /**
+     * https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
+     * @param digits  一个仅包含数字 2-9 的字符串 digits
+     * @return  返回所有它能表示的字母组合
+     */
+    public List<String> letterCombinations(String digits) {
+        List<String> combinations = new ArrayList<String>();
+        if (digits.length() == 0) {
+            return combinations;
+        }
+        Map<Character, String> phoneMap = new HashMap<Character, String>() {{
+            put('2', "abc");
+            put('3', "def");
+            put('4', "ghi");
+            put('5', "jkl");
+            put('6', "mno");
+            put('7', "pqrs");
+            put('8', "tuv");
+            put('9', "wxyz");
+        }};
+        backtrack(combinations, phoneMap, digits, 0, new StringBuffer());
+        return combinations;
+    }
+
+    public void backtrack(List<String> combinations, Map<Character, String> phoneMap, String digits, int index, StringBuffer combination) {
+        if (index == digits.length()) {
+            combinations.add(combination.toString());
+        } else {
+            char digit = digits.charAt(index);
+            String letters = phoneMap.get(digit);
+            int lettersCount = letters.length();
+            for (int i = 0; i < lettersCount; i++) {
+                combination.append(letters.charAt(i));
+                backtrack(combinations, phoneMap, digits, index + 1, combination);
+                combination.deleteCharAt(index);
+            }
+        }
+    }
+    //endregion
+
+    //region    20230419    22. 括号生成
+
+    /**
+     * https://leetcode.cn/problems/generate-parentheses/
+     * @param n  数字 n 代表生成括号的对数
+     * @return  设计一个函数，用于能够生成所有可能的并且 有效的 括号组合
+     */
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        // 特判
+        if (n == 0) {
+            return res;
+        }
+
+        dfs("", 0, 0, n, res);
+        return res;
+    }
+
+    /**
+     * @param curStr 当前递归得到的结果
+     * @param left   左括号已经用了几个
+     * @param right  右括号已经用了几个
+     * @param n      左括号、右括号一共得用几个
+     * @param res    结果集
+     */
+    private void dfs(String curStr, int left, int right, int n, List<String> res) {
+        if (left == n && right == n) {
+            res.add(curStr);
+            return;
+        }
+
+        // 剪枝
+        if (left < right) {
+            return;
+        }
+
+        if (left < n) {
+            dfs(curStr + "(", left + 1, right, n, res);
+        }
+        if (right < n) {
+            dfs(curStr + ")", left, right + 1, n, res);
+        }
     }
     //endregion
 
@@ -206,69 +279,6 @@ public class TargetProgrammingSkillsBasic {
         ans.reverse();
         return ans.toString();
     }
-    //endregion
-
-    //region    20230418    45. 跳跃游戏 II
-
-    /**
-     * https://leetcode.cn/problems/jump-game-ii/
-     *
-     * @param nums 长度为 n 的 0 索引整数数组 nums
-     * @return 返回到达 nums[n - 1] 的最小跳跃次数
-     */
-    public int jump(int[] nums) {
-        //下一次跳的位置
-        int end = 0;
-        //最大的跳跃距离
-        int maxPosition = 0;
-        //跳跃次数
-        int steps = 0;
-        for (int i = 0; i < nums.length - 1; i++) {
-            maxPosition = Math.max(maxPosition, i + nums[i]);
-            if (i == end) {
-                end = maxPosition;
-                steps++;
-            }
-        }
-        return steps;
-    }
-    //endregion
-
-    //region    20230418    47. 全排列 II
-
-    /**
-     * https://leetcode.cn/problems/permutations-ii/
-     * @param nums  可包含重复数字的序列 nums
-     * @return  按任意顺序 返回所有不重复的全排列
-     */
-    public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> perm = new ArrayList<>();
-        visPermuteUnique = new boolean[nums.length];
-        Arrays.sort(nums);
-        backtrack(nums, res, 0, perm);
-        return res;
-    }
-
-    public void backtrack(int[] nums, List<List<Integer>> res, int index, List<Integer> perm) {
-        if (index == nums.length) {
-            res.add(new ArrayList<>(perm));
-            return;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            if (visPermuteUnique[i] || (i > 0 && nums[i] == nums[i - 1] && !visPermuteUnique[i-1])) {
-                continue;
-            }
-            perm.add(nums[i]);
-            visPermuteUnique[i] = true;
-            backtrack(nums, res, index + 1, perm);
-            visPermuteUnique[i] = false;
-            perm.remove(index);
-        }
-    }
-
-
-    public boolean[] visPermuteUnique;
     //endregion
 
     //region    20230417    48. 旋转图像
@@ -369,35 +379,6 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
-    //region    20230418    55. 跳跃游戏
-
-    /**
-     * https://leetcode.cn/problems/jump-game/
-     *
-     * @param nums 非负整数数组 nums
-     * @return 判断你是否能够到达最后一个下标
-     */
-    public boolean canJump(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        //前n-1个元素能够跳到的最远的距离
-        int mostLength = 0;
-        for (int i = 0; i <= mostLength; i++) {
-            //第i个元素能够跳到的最远距离
-            int temp = i + nums[i];
-            //更新最远距离
-            mostLength = Math.max(mostLength, temp);
-            //如果最远距离已经大于或等于最后一个元素的下标，则说明能跳过去，退出，减少循环
-            if (mostLength >= nums.length - 1) {
-                return true;
-            }
-        }
-        //最远距离k不再改变，且没有到末尾元素
-        return false;
-    }
-    //endregion
-
     //region    20230410    58. 最后一个单词的长度
 
     /**
@@ -409,31 +390,6 @@ public class TargetProgrammingSkillsBasic {
     public int lengthOfLastWord(String s) {
         String[] strings = s.trim().split(" ");
         return strings[strings.length - 1].length();
-    }
-    //endregion
-
-    //region    20230418    62. 不同路径
-
-    /**
-     * https://leetcode.cn/problems/unique-paths
-     *
-     * @param m m 行
-     * @param n n 列
-     * @return 从左上到右下的步骤数
-     */
-    public int uniquePaths(int m, int n) {
-        int dp[][] = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 || j == 0) {
-                    dp[i][j] = 1;
-                    continue;
-                } else {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-                }
-            }
-        }
-        return dp[m - 1][n - 1];
     }
     //endregion
 
@@ -534,66 +490,6 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
-    //region    20230418    78. 子集
-
-    /**
-     * https://leetcode.cn/problems/subsets/
-     *
-     * @param nums 一个整数数组 nums ，数组中的元素互不相同
-     * @return 返回该数组所有可能的子集（幂集）
-     */
-    public List<List<Integer>> subsets(int[] nums) {
-        dfsSubSets(0, nums);
-        return resSubSets;
-    }
-
-    public void dfsSubSets(int cur, int[] nums) {
-        if (cur == nums.length) {
-            resSubSets.add(new ArrayList<>(tempList));
-            return;
-        }
-        tempList.add(nums[cur]);
-        dfsSubSets(cur + 1, nums);
-        tempList.remove(tempList.size() - 1);
-        dfsSubSets(cur + 1, nums);
-    }
-
-    List<List<Integer>> resSubSets = new ArrayList<>();
-    List<Integer> tempList = new ArrayList<>();
-    //endregion
-
-    //region    20230418    90. 子集 II
-
-    /**
-     * https://leetcode.cn/problems/subsets-ii
-     *
-     * @param nums 一个整数数组 nums ，其中可能包含重复元素
-     * @return 返回该数组所有可能的子集（幂集）
-     */
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
-        Arrays.sort(nums);
-        dfsSubsetsWithDup(false, 0, nums);
-        return resSubsetWidthDup;
-    }
-
-    public void dfsSubsetsWithDup(boolean choosePre, int cur, int[] nums) {
-        if (cur == nums.length) {
-            resSubsetWidthDup.add(new ArrayList<>(tempSubsetsWithDup));
-            return;
-        }
-        dfsSubsetsWithDup(false, cur + 1, nums);
-        if (!choosePre && cur > 0 && nums[cur - 1] == nums[cur]) {
-            return;
-        }
-        tempSubsetsWithDup.add(nums[cur]);
-        dfsSubsetsWithDup(true, cur + 1, nums);
-        tempSubsetsWithDup.remove(tempSubsetsWithDup.size() - 1);
-    }
-
-    List<Integer> tempSubsetsWithDup = new ArrayList<>();
-    List<List<Integer>> resSubsetWidthDup = new ArrayList<>();
-    //endregion
-
     //region    20230406    110. 平衡二叉树
 
     /**
@@ -685,38 +581,6 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
-    //region    20230418    213. 打家劫舍 II
-
-    /**
-     * https://leetcode.cn/problems/house-robber-ii/
-     *
-     * @param nums 给定一个代表每个房屋存放金额的非负整数数组 nums
-     * @return 计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额
-     */
-    public int rob1(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        if (nums.length == 1) {
-            return nums[0];
-        }
-        if (nums.length == 2) {
-            return Math.max(nums[0], nums[1]);
-        }
-        return Math.max(maxRob(0, nums.length - 1, nums), maxRob(1, nums.length, nums));
-    }
-
-    public int maxRob(int start, int end, int[] nums) {
-        int first = nums[start], second = Math.max(nums[start], nums[start + 1]);
-        for (int i = start + 2; i < end; i++) {
-            int temp = second;
-            second = Math.max(first + nums[i], second);
-            first = temp;
-        }
-        return second;
-    }
-    //endregion
-
     //region    20230417    304. 二维区域和检索 - 矩阵不可变
 
     /**
@@ -746,33 +610,6 @@ public class TargetProgrammingSkillsBasic {
             }
             return sum;
         }
-    }
-    //endregion
-
-    //region    20230418    413. 等差数列划分
-
-    /**
-     * https://leetcode.cn/problems/arithmetic-slices/
-     *
-     * @param nums 一个整数数组 nums
-     * @return 返回数组 nums 中所有为等差数组的 子数组 个数
-     */
-    public int numberOfArithmeticSlices(int[] nums) {
-        if (nums == null || nums.length <= 2) {
-            return 0;
-        }
-        int res = 0;
-        //存储增量
-        // 1, 2, 3, 6, 8, 10 原数组
-        // 0  0  1  0  0  1 增量
-        int[] dp = new int[nums.length];
-        for (int i = 2; i < nums.length; i++) {
-            if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) {
-                dp[i] = dp[i - 1] + 1;//确定增量
-                res += dp[i];//添加增量
-            }
-        }
-        return res;
     }
     //endregion
 
@@ -853,6 +690,41 @@ public class TargetProgrammingSkillsBasic {
             }
         }
         return res;
+    }
+    //endregion
+
+    //region    20230419    445. 两数相加 II
+
+    /**
+     * https://leetcode.cn/problems/add-two-numbers-ii
+     * @param l1 链表 l1
+     * @param l2 链表 l2
+     * @return 两个数相加，并以相同形式返回一个表示和的链表
+     */
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        Deque<Integer> stack1 = new ArrayDeque<Integer>();
+        Deque<Integer> stack2 = new ArrayDeque<Integer>();
+        while (l1 != null) {
+            stack1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            stack2.push(l2.val);
+            l2 = l2.next;
+        }
+        int carry = 0;
+        ListNode ans = null;
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry != 0) {
+            int a = stack1.isEmpty() ? 0 : stack1.pop();
+            int b = stack2.isEmpty() ? 0 : stack2.pop();
+            int cur = a + b + carry;
+            carry = cur / 10;
+            cur %= 10;
+            ListNode curnode = new ListNode(cur);
+            curnode.next = ans;
+            ans = curnode;
+        }
+        return ans;
     }
     //endregion
 

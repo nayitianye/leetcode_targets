@@ -192,6 +192,35 @@ public class TargetLeetCode75Mid {
     }
     //endregion
 
+    //region    20230419    39. 组合总和
+
+    /**
+     * https://leetcode.cn/problems/combination-sum/
+     * @param candidates  一个 无重复元素 的整数数组 candidates
+     * @param target  一个目标整数 target
+     * @return  找出 candidates 中可以使数字和为目标数 target 的 所有 不同组合 ，并以列表形式返回
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+        int len=candidates.length;
+        Arrays.sort(candidates);
+        findCombinationSum(target,0,new Stack<>(),len,candidates,res);
+        return res;
+    }
+
+    private void findCombinationSum(int residue,int start,Stack<Integer>pre,int len,int[] candidates,List<List<Integer>> res)
+    {
+        if(residue==0){
+            res.add(new ArrayList<>(pre));
+        }
+        for(int i=start;i<len&&residue-candidates[i]>=0;i++){
+            pre.add(candidates[i]);
+            findCombinationSum(residue-candidates[i],i,pre,len,candidates,res);
+            pre.pop();
+        }
+    }
+    //endregion
+
     //region    20230401    43. 字符串相乘
     public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
@@ -240,6 +269,41 @@ public class TargetLeetCode75Mid {
         }
         ans.reverse();
         return ans.toString();
+    }
+    //endregion
+
+    //region    20230419    46. 全排列
+
+    /**
+     * https://leetcode.cn/problems/permutations/
+     *
+     * @param nums 不含重复数字的数组 num
+     * @return 返回其 所有可能的全排列
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int num : nums) {
+            output.add(num);
+        }
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
+    }
+
+    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
+        //所有数都填完了
+        if (first == n) {
+            res.add(new ArrayList<>(output));
+        }
+        for (int i = first; i < n; i++) {
+            //动态维护数组
+            Collections.swap(output, first, i);
+            //继续递归填下一个数
+            backtrack(n, output, res, first + 1);
+            //撤销操作
+            Collections.swap(output, first, i);
+        }
     }
     //endregion
 
