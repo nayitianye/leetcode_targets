@@ -249,27 +249,29 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/combination-sum-ii
-     * @param candidates  一个候选人编号的集合 candidates
-     * @param target  一个目标数 target
-     * @return  找出 candidates 中所有可以使数字和为 target 的组合
+     *
+     * @param candidates 一个候选人编号的集合 candidates
+     * @param target     一个目标数 target
+     * @return 找出 candidates 中所有可以使数字和为 target 的组合
      */
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        int len=candidates.length;
-        List<List<Integer>> res=new ArrayList<>();
+        int len = candidates.length;
+        List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(candidates);
-        findConbinationSum2(target,0,new Stack<>(),candidates,res);
+        findConbinationSum2(target, 0, new Stack<>(), candidates, res);
         return res;
     }
-    private void findConbinationSum2(int target,int index,Stack<Integer> stack,int[] candidates,List<List<Integer>>res){
-        if(target==0){
+
+    private void findConbinationSum2(int target, int index, Stack<Integer> stack, int[] candidates, List<List<Integer>> res) {
+        if (target == 0) {
             res.add(new ArrayList<>(stack));
         }
-        for(int i=index;i<candidates.length&&target-candidates[i]>=0;i++){
-            if(i>index&&candidates[i]==candidates[i-1]){
+        for (int i = index; i < candidates.length && target - candidates[i] >= 0; i++) {
+            if (i > index && candidates[i] == candidates[i - 1]) {
                 continue;
             }
             stack.push(candidates[i]);
-            findConbinationSum2(target-candidates[i],i+1,stack,candidates,res);
+            findConbinationSum2(target - candidates[i], i + 1, stack, candidates, res);
             stack.pop();
         }
     }
@@ -305,8 +307,9 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/permutations-ii/
-     * @param nums  可包含重复数字的序列 nums
-     * @return  按任意顺序 返回所有不重复的全排列
+     *
+     * @param nums 可包含重复数字的序列 nums
+     * @return 按任意顺序 返回所有不重复的全排列
      */
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -323,7 +326,7 @@ public class TargetAlgorithmsBasic {
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (visPermuteUnique[i] || (i > 0 && nums[i] == nums[i - 1] && !visPermuteUnique[i-1])) {
+            if (visPermuteUnique[i] || (i > 0 && nums[i] == nums[i - 1] && !visPermuteUnique[i - 1])) {
                 continue;
             }
             perm.add(nums[i]);
@@ -460,6 +463,55 @@ public class TargetAlgorithmsBasic {
     List<Integer> tempList = new ArrayList<>();
     //endregion
 
+    //region    20230419    79. 单词搜索
+
+    /**
+     * https://leetcode.cn/problems/word-search/
+     *
+     * @param board 给定一个 m x n 二维字符网格 board
+     * @param word  一个字符串单词 word
+     * @return 如果 word 存在于网格中，返回 true ；否则，返回 false
+     */
+    public boolean exist(char[][] board, String word) {
+        int h = board.length, w = board[0].length;
+        boolean[][] visited = new boolean[h][w];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                boolean flag = check(board, visited, i, j, word, 0);
+                if (flag) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean check(char[][] board, boolean[][] visited, int i, int j, String s, int k) {
+        if (board[i][j] != s.charAt(k)) {
+            return false;
+        } else if (k == s.length() - 1) {
+            return true;
+        }
+        visited[i][j] = true;
+        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        boolean result = false;
+        for (int[] dir : directions) {
+            int newi = i + dir[0], newj = j + dir[1];
+            if (newi >= 0 && newi < board.length && newj >= 0 && newj < board[0].length) {
+                if (!visited[newi][newj]) {
+                    boolean flag = check(board, visited, newi, newj, s, k + 1);
+                    if (flag) {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        visited[i][j] = false;
+        return result;
+    }
+    //endregion
+
     //region    20230411    82. 删除排序链表中的重复元素 II
 
     /**
@@ -525,8 +577,9 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/decode-ways/
-     * @param s  一个只含数字的 非空 字符串 s
-     * @return  计算并返回 解码 方法的 总数
+     *
+     * @param s 一个只含数字的 非空 字符串 s
+     * @return 计算并返回 解码 方法的 总数
      */
     public int numDecodings(String s) {
         int n = s.length();
@@ -544,13 +597,58 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230419    130. 被围绕的区域
+
+    /**
+     * https://leetcode.cn/problems/surrounded-regions/
+     *
+     * @param board 一个 m x n 的矩阵 board
+     */
+    public void solve(char[][] board) {
+        int n = board.length;
+        if (n == 0) {
+            return;
+        }
+        int m = board[0].length;
+        for (int i = 0; i < n; i++) {
+            dfs(board, i, 0, n, m);
+            dfs(board, i, m - 1, n, m);
+        }
+        for (int i = 1; i < m - 1; i++) {
+            dfs(board, 0, i, n, m);
+            dfs(board, n - 1, i, n, m);
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] == 'A') {
+                    board[i][j] = 'O';
+                } else if (board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    public void dfs(char[][] board, int x, int y, int n, int m) {
+        if (x < 0 || x >= n || y < 0 || y >= m || board[x][y] != 'O') {
+            return;
+        }
+        board[x][y] = 'A';
+        dfs(board, x + 1, y, n, m);
+        dfs(board, x - 1, y, n, m);
+        dfs(board, x, y + 1, n, m);
+        dfs(board, x, y - 1, n, m);
+    }
+    //endregion
+
     //region    20230419    139. 单词拆分
 
     /**
      * https://leetcode.cn/problems/word-break
-     * @param s  一个字符串 s
-     * @param wordDict  一个字符串列表 wordDict 作为字典
-     * @return  判断是否可以利用字典中出现的单词拼接出 s
+     *
+     * @param s        一个字符串 s
+     * @param wordDict 一个字符串列表 wordDict 作为字典
+     * @return 判断是否可以利用字典中出现的单词拼接出 s
      */
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordDictSet = new HashSet<>(wordDict);
@@ -850,6 +948,35 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230419    797. 所有可能的路径
+
+    /**
+     * https://leetcode.cn/problems/all-paths-from-source-to-target
+     * @param graph  有 n 个节点的 有向无环图 graph
+     * @return  找出所有从节点 0 到节点 n-1 的路径并输出
+     */
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        stack.offerLast(0);
+        dfs(graph, 0, graph.length - 1);
+        return ans;
+    }
+
+    public void dfs(int[][] graph, int x, int n) {
+        if (x == n) {
+            ans.add(new ArrayList<Integer>(stack));
+            return;
+        }
+        for (int y : graph[x]) {
+            stack.offerLast(y);
+            dfs(graph, y, n);
+            stack.pollLast();
+        }
+    }
+
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    Deque<Integer> stack = new ArrayDeque<Integer>();
+    //endregion
+
     //region    20230412    844. 比较含退格的字符串
 
     /**
@@ -924,6 +1051,43 @@ public class TargetAlgorithmsBasic {
             }
         }
         return res.toArray(new int[res.size()][]);
+    }
+    //endregion
+
+    //region    20230419    1091. 二进制矩阵中的最短路径
+
+    /**
+     * https://leetcode.cn/problems/shortest-path-in-binary-matrix/
+     *
+     * @param grid 一个 n x n 的二进制矩阵 grid
+     * @return 矩阵中最短 畅通路径 的长度
+     */
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int[][] directions = {{0, 1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {-1, 0}, {-1, -1}, {-1, 1}};
+        int row = grid.length, col = grid[0].length;
+        if (grid[0][0] == 1 || grid[row - 1][col - 1] == 1) {
+            return -1;
+        }
+        Queue<int[]> pos = new LinkedList<>();
+        grid[0][0] = 1;
+        pos.add(new int[]{0, 0});
+        while (!pos.isEmpty() && grid[row - 1][col - 1] == 0) {
+            int[] xy = pos.remove();
+            int preLength = grid[xy[0]][xy[1]];
+            for (int i = 0; i < 8; i++) {
+                int newx = xy[0] + directions[i][0];
+                int newy = xy[1] + directions[i][1];
+                if (inGrid(newx, newy, row, col) && grid[newx][newy] == 0) {
+                    pos.add(new int[]{newx, newy});
+                    grid[newx][newy] = preLength + 1;
+                }
+            }
+        }
+        return grid[row - 1][col - 1] == 0 ? -1 : grid[row - 1][col - 1];
+    }
+
+    private boolean inGrid(int x, int y, int row, int col) {
+        return x >= 0 && x < row && y >= 0 && y < col;
     }
     //endregion
 }
