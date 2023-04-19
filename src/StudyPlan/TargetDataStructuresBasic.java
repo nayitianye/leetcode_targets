@@ -496,6 +496,37 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    113. 路径总和 II
+
+    /**
+     * https://leetcode.cn/problems/path-sum-ii
+     * @param root  二叉树的根节点 root
+     * @param targetSum  一个整数目标和 targetSum
+     * @return  找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        dfs(root, targetSum);
+        return ret;
+    }
+
+    public void dfs(TreeNode root, int targetSum) {
+        if (root == null) {
+            return;
+        }
+        path.offerLast(root.val);
+        targetSum -= root.val;
+        if (root.left == null && root.right == null && targetSum == 0) {
+            ret.add(new LinkedList<Integer>(path));
+        }
+        dfs(root.left, targetSum);
+        dfs(root.right, targetSum);
+        path.pollLast();
+    }
+
+    List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    Deque<Integer> path = new LinkedList<Integer>();
+    //endregion
+
     //region    20230408    119. 杨辉三角 II
 
     /**
@@ -667,6 +698,39 @@ public class TargetDataStructuresBasic {
     public int majorityElement(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length / 2];
+    }
+    //endregion
+
+    //region    20230420    199. 二叉树的右视图
+
+    /**
+     * https://leetcode.cn/problems/binary-tree-right-side-view
+     * @param root  二叉树的 根节点 root
+     * @return  按照从顶部到底部的顺序，返回从右侧所能看到的节点值
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+                if (i == size - 1) {
+                    res.add(node.val);
+                }
+            }
+        }
+        return res;
     }
     //endregion
 
@@ -865,6 +929,49 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    450. 删除二叉搜索树中的节点
+
+    /**
+     * https://leetcode.cn/problems/delete-node-in-a-bst/
+     * @param root  二叉搜索树的根节点 root
+     * @param key  值 key
+     * @return 删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变,删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变
+     */
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val > key) {
+            root.left = deleteNode(root.left, key);
+            return root;
+        }
+        if (root.val < key) {
+            root.right = deleteNode(root.right, key);
+            return root;
+        }
+        if (root.val == key) {
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+            if (root.left == null) {
+                return root.right;
+            }
+            TreeNode successor = root.right;
+            while (successor.left != null) {
+                successor = successor.left;
+            }
+            root.right = deleteNode(root.right, successor.val);
+            successor.right = root.right;
+            successor.left = root.left;
+            return successor;
+        }
+        return root;
+    }
+    //endregion
+
     //region    20230410    560. 和为 K 的子数组
 
     /**
@@ -886,6 +993,87 @@ public class TargetDataStructuresBasic {
             hashMap.put(pre, hashMap.getOrDefault(pre, 0) + 1);
         }
         return count;
+    }
+    //endregion
+
+    //region    20230420    706. 设计哈希映射
+
+    /**
+     * https://leetcode.cn/problems/design-hashmap/
+     */
+    class MyHashMap {
+        private class Pair {
+            private int key;
+            private int value;
+
+            public Pair(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+
+            public int getKey() {
+                return key;
+            }
+
+            public int getValue() {
+                return value;
+            }
+
+            public void setValue(int value) {
+                this.value = value;
+            }
+        }
+
+        private static final int BASE = 769;
+        private LinkedList[] data;
+
+        public MyHashMap() {
+            data = new LinkedList[BASE];
+            for (int i = 0; i < BASE; ++i) {
+                data[i] = new LinkedList<Pair>();
+            }
+        }
+
+        public void put(int key, int value) {
+            int h = hash(key);
+            Iterator<Pair> iterator = data[h].iterator();
+            while (iterator.hasNext()) {
+                Pair pair = iterator.next();
+                if (pair.getKey() == key) {
+                    pair.setValue(value);
+                    return;
+                }
+            }
+            data[h].offerLast(new Pair(key, value));
+        }
+
+        public int get(int key) {
+            int h = hash(key);
+            Iterator<Pair> iterator = data[h].iterator();
+            while (iterator.hasNext()) {
+                Pair pair = iterator.next();
+                if (pair.getKey() == key) {
+                    return pair.value;
+                }
+            }
+            return -1;
+        }
+
+        public void remove(int key) {
+            int h = hash(key);
+            Iterator<Pair> iterator = data[h].iterator();
+            while (iterator.hasNext()) {
+                Pair pair = iterator.next();
+                if (pair.key == key) {
+                    data[h].remove(pair);
+                    return;
+                }
+            }
+        }
+
+        private  int hash(int key) {
+            return key % BASE;
+        }
     }
     //endregion
 

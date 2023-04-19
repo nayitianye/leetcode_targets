@@ -46,6 +46,29 @@ public class TargetAlgorithmsBasic {
             this.right = right;
         }
     }
+
+    class Node {
+        public int val;
+        public Node left;
+        public Node right;
+        public Node next;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
+    }
+
+    ;
     //endregion
 
     //region    20230418    5. 最长回文子串
@@ -597,6 +620,39 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230420    117. 填充每个节点的下一个右侧节点指针 II
+
+    /**
+     * https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii
+     *
+     * @param root 二叉树的根节点 root
+     * @return 填充它的每个 next 指针，让这个指针指向其下一个右侧节点
+     */
+    public Node connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            Node next = null;
+            for (int i = 0; i < len; i++) {
+                Node cur = queue.poll();
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                cur.next = next;
+                next = cur;
+            }
+        }
+        return root;
+    }
+    //endregion
+
     //region    20230419    130. 被围绕的区域
 
     /**
@@ -844,6 +900,34 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230420    300. 最长递增子序列
+
+    /**
+     * https://leetcode.cn/problems/longest-increasing-subsequence/
+     *
+     * @param nums 一个整数数组 nums
+     * @return 找到其中最长严格递增子序列的长度
+     */
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[nums.length];
+        dp[0] = 1;
+        int maxans = -1;
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            maxans = Math.max(maxans, dp[i]);
+        }
+        return maxans;
+    }
+    //endregion
+
     //region    20230418    413. 等差数列划分
 
     /**
@@ -902,6 +986,42 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230420    673. 最长递增子序列的个数
+
+    /**
+     * https://leetcode.cn/problems/number-of-longest-increasing-subsequence
+     *
+     * @param nums 一个未排序的整数数组 nums
+     * @return 返回最长递增子序列的个数
+     */
+    public int findNumberOfLIS(int[] nums) {
+        int n = nums.length, maxLen = 0, res = 0;
+        int[] dp = new int[n];
+        int[] cnt = new int[n];
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+            cnt[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    if (dp[j] + 1 > dp[i]) {
+                        dp[i] = dp[j] + 1;
+                        cnt[i] = cnt[j];
+                    } else if (dp[j] + 1 == dp[i]) {
+                        cnt[i] += cnt[j];
+                    }
+                }
+            }
+            if (dp[i] > maxLen) {
+                maxLen = dp[i];
+                res = cnt[i];
+            } else if (dp[i] == maxLen) {
+                res += cnt[i];
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230412    713. 乘积小于 K 的子数组
 
     /**
@@ -952,8 +1072,9 @@ public class TargetAlgorithmsBasic {
 
     /**
      * https://leetcode.cn/problems/all-paths-from-source-to-target
-     * @param graph  有 n 个节点的 有向无环图 graph
-     * @return  找出所有从节点 0 到节点 n-1 的路径并输出
+     *
+     * @param graph 有 n 个节点的 有向无环图 graph
+     * @return 找出所有从节点 0 到节点 n-1 的路径并输出
      */
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         stack.offerLast(0);

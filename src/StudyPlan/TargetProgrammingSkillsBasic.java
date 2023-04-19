@@ -37,6 +37,9 @@ public class TargetProgrammingSkillsBasic {
 
     class Node {
         public int val;
+
+        Node next;
+        Node random;
         public List<Node> children;
 
         public Node() {
@@ -44,6 +47,8 @@ public class TargetProgrammingSkillsBasic {
 
         public Node(int _val) {
             val = _val;
+            this.next = null;
+            this.random = null;
         }
 
         public Node(int _val, List<Node> _children) {
@@ -68,7 +73,6 @@ public class TargetProgrammingSkillsBasic {
             this.next = next;
         }
     }
-
     //endregion
 
     //region    20230419    2. 两数相加
@@ -112,8 +116,9 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
-     * @param digits  一个仅包含数字 2-9 的字符串 digits
-     * @return  返回所有它能表示的字母组合
+     *
+     * @param digits 一个仅包含数字 2-9 的字符串 digits
+     * @return 返回所有它能表示的字母组合
      */
     public List<String> letterCombinations(String digits) {
         List<String> combinations = new ArrayList<String>();
@@ -154,8 +159,9 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/generate-parentheses/
-     * @param n  数字 n 代表生成括号的对数
-     * @return  设计一个函数，用于能够生成所有可能的并且 有效的 括号组合
+     *
+     * @param n 数字 n 代表生成括号的对数
+     * @return 设计一个函数，用于能够生成所有可能的并且 有效的 括号组合
      */
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
@@ -393,6 +399,39 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230420    61. 旋转链表
+
+    /**
+     * https://leetcode.cn/problems/rotate-list/
+     *
+     * @param head 链表的头节点 head
+     * @param k    旋转链表，将链表每个节点向右移动 k 个位置
+     * @return
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+        if (k == 0 || head == null || head.next == null) {
+            return head;
+        }
+        int n = 1;
+        ListNode iter = head;
+        while (iter.next != null) {
+            iter = iter.next;
+            n++;
+        }
+        int add = n - k % n;
+        if (add == n) {
+            return head;
+        }
+        iter.next = head;
+        while (add-- > 0) {
+            iter = iter.next;
+        }
+        ListNode ret = iter.next;
+        iter.next = null;
+        return ret;
+    }
+    //endregion
+
     //region    20230409    66. 加一
 
     /**
@@ -513,6 +552,49 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230420    138. 复制带随机指针的链表
+
+    /**
+     * https://leetcode.cn/problems/copy-list-with-random-pointer/
+     *
+     * @param head 链表头节点 head
+     * @return 复制链表中的指针都不应指向原链表中的节点
+     */
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node p = head;
+        //第一步，在每个原节点后面创建一个新节点
+        //1->1'->2->2'->3->3'
+        while (p != null) {
+            Node newNode = new Node(p.val);
+            newNode.next = p.next;
+            p.next = newNode;
+            p = newNode.next;
+        }
+        p = head;
+        //第二步，设置新节点的随机节点
+        while (p != null) {
+            if (p.random != null) {
+                p.next.random = p.random.next;
+            }
+            p = p.next.next;
+        }
+        Node dummy = new Node(-1);
+        p = head;
+        Node cur = dummy;
+        //第三步，将两个链表分离
+        while (p != null) {
+            cur.next = p.next;
+            cur = cur.next;
+            p.next = cur.next;
+            p = p.next;
+        }
+        return dummy.next;
+    }
+    //endregion
+
     //region    20230418    143. 重排链表
 
     /**
@@ -578,6 +660,41 @@ public class TargetProgrammingSkillsBasic {
 
     public boolean isCalculateString(String s) {
         return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/");
+    }
+    //endregion
+
+    //region    20230420    173. 二叉搜索树迭代器
+
+    /**
+     * https://leetcode.cn/problems/binary-search-tree-iterator/
+     */
+    class BSTIterator {
+
+        Deque<TreeNode> stack = new LinkedList<>();
+
+        public BSTIterator(TreeNode root) {
+            TreeNode node = root;
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        public int next() {
+            TreeNode node = stack.pop();
+            if (node.right != null) {
+                TreeNode p = node.right;
+                while (p != null) {
+                    stack.push(p);
+                    p = p.left;
+                }
+            }
+            return node.val;
+        }
+
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
     }
     //endregion
 
@@ -697,6 +814,7 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/add-two-numbers-ii
+     *
      * @param l1 链表 l1
      * @param l2 链表 l2
      * @return 两个数相加，并以相同形式返回一个表示和的链表
@@ -836,6 +954,62 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230420    910. 最小差值 II
+
+    /**
+     * https://leetcode.cn/problems/smallest-range-ii/
+     * @param nums  一个整数数组 nums
+     * @param k  一个整数 k
+     * @return  在更改每个下标对应的值之后，返回 nums 的最小 分数
+     */
+    public int smallestRangeII(int[] nums, int k) {
+        int length = nums.length;
+        Arrays.sort(nums);
+        int res = nums[length - 1] - nums[0];
+        for (int i = 0; i < nums.length - 1; i++) {
+            int a = nums[i], b = nums[i + 1];
+            int high = Math.max(nums[length - 1 - k], a + k);
+            int low = Math.min(nums[0] + k, b - k);
+            res = Math.min(res, high - low);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230420    973. 最接近原点的 K 个点
+
+    /**
+     * https://leetcode.cn/problems/k-closest-points-to-origin/
+     *
+     * @param points 一个数组 points
+     * @param k      一个整数 k
+     * @return 返回离原点 (0,0) 最近的 k 个点
+     */
+    public int[][] kClosest(int[][] points, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            public int compare(int[] array1, int[] array2) {
+                return array2[0] - array1[0];
+            }
+        });
+        for (int i = 0; i < k; ++i) {
+            pq.offer(new int[]{points[i][0] * points[i][0] + points[i][1] * points[i][1], i});
+        }
+        int n = points.length;
+        for (int i = k; i < n; ++i) {
+            int dist = points[i][0] * points[i][0] + points[i][1] * points[i][1];
+            if (dist < pq.peek()[0]) {
+                pq.poll();
+                pq.offer(new int[]{dist, i});
+            }
+        }
+        int[][] ans = new int[k][2];
+        for (int i = 0; i < k; ++i) {
+            ans[i] = points[pq.poll()[1]];
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230409    989. 数组形式的整数加法
 
     /**
@@ -864,6 +1038,44 @@ public class TargetProgrammingSkillsBasic {
             res.add(0, carry);
         }
         return res;
+    }
+    //endregion
+
+    //region    20230420    1367. 二叉树中的链表
+
+    /**
+     * https://leetcode.cn/problems/linked-list-in-binary-tree/
+     *
+     * @param head 以 root 为根的二叉树
+     * @param root 一个 head 为第一个节点的链表
+     * @return 如果在二叉树中，存在一条一直向下的路径，且每个点的数值恰好一一对应以 head 为首的链表中每个节点的值，那么请你返回 True ，否则返回 False
+     */
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if (head == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        //先判断当前的节点，如果不对，再看左子树和右子树呗
+        return isSub(head, root) || isSubPath(head, root.left) || isSubPath(head, root.right);
+    }
+
+    private boolean isSub(ListNode head, TreeNode node) {
+        //特判：链表走完了，返回true
+        if (head == null) {
+            return true;
+        }
+        //特判：链表没走完，树走完了，这肯定不行，返回false
+        if (node == null) {
+            return false;
+        }
+        //如果值不同，必定不是啊
+        if (head.val != node.val) {
+            return false;
+        }
+        //如果值相同，继续看，左边和右边有一个满足即可
+        return isSub(head.next, node.left) || isSub(head.next, node.right);
     }
     //endregion
 
@@ -915,6 +1127,46 @@ public class TargetProgrammingSkillsBasic {
             ans.add(flag);
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230420    1886. 判断矩阵经轮转后是否一致
+
+    /**
+     * https://leetcode.cn/problems/determine-whether-matrix-can-be-obtained-by-rotation/
+     *
+     * @param mat    大小为 n x n 的二进制矩阵 mat
+     * @param target 大小为 n x n 的二进制矩阵 target
+     * @return 现 以 90 度顺时针轮转 矩阵 mat 中的元素 若干次 ，如果能够使 mat 与 target 一致，返回 true ；否则，返回 false
+     */
+    public boolean findRotation(int[][] mat, int[][] target) {
+        int n = mat.length;
+        for (int count = 0; count < 4; ++count) {
+            for (int i = 0; i < n / 2; ++i) {
+                for (int j = 0; j < (n + 1) / 2; ++j) {
+                    int temp = mat[i][j];
+                    mat[i][j] = mat[n - 1 - j][i];
+                    mat[n - 1 - j][i] = mat[n - 1 - i][n - 1 - j];
+                    mat[n - 1 - i][n - 1 - j] = mat[j][n - 1 - i];
+                    mat[j][n - 1 - i] = temp;
+                }
+            }
+            if (isequals(mat, target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isequals(int[][] mat, int[][] target) {
+        for (int i = 0; i < mat.length; ++i) {
+            for (int j = 0; j < mat[0].length; ++j) {
+                if (mat[i][j] != target[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     //endregion
 
