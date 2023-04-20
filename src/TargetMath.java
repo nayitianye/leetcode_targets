@@ -424,6 +424,22 @@ public class TargetMath {
     }
     //endregion
 
+    //region    20230421    2413. 最小偶倍数
+
+    /**
+     * https://leetcode.cn/problems/smallest-even-multiple
+     * @param n  一个正整数 n
+     * @return  返回 2 和 n 的最小公倍数（正整数）
+     */
+    public int smallestEvenMultiple(int n) {
+        if (n % 2 == 0) {
+            return n;
+        } else {
+            return 2 * n;
+        }
+    }
+    //endregion
+
     //region    20230405    2427. 公因子的数目
 
     /**
@@ -456,6 +472,7 @@ public class TargetMath {
         return new double[]{celsius + 273.15, celsius * 1.8 + 32.00};
     }
     //endregion
+
 
     public static void main(String[] args) {
         System.out.println(countLetters("jjjjxttttn"));

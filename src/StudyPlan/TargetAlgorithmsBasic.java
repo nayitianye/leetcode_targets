@@ -986,6 +986,33 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230421    583. 两个字符串的删除操作
+
+    /**
+     * https://leetcode.cn/problems/delete-operation-for-two-strings/
+     * @param word1  单词 word1
+     * @param word2  单词 word2
+     * @return  返回使得 word1 和  word2 相同所需的最小步数
+     */
+    public int minDistance(String word1, String word2) {
+        int m = word1.length(), n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            char c1 = word1.charAt(i-1);
+            for (int j = 1; j <= n; j++) {
+                char c2 = word2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        int lcs = dp[m][n];
+        return m - lcs + n - lcs;
+    }
+    //endregion
+
     //region    20230420    673. 最长递增子序列的个数
 
     /**
@@ -1209,6 +1236,33 @@ public class TargetAlgorithmsBasic {
 
     private boolean inGrid(int x, int y, int row, int col) {
         return x >= 0 && x < row && y >= 0 && y < col;
+    }
+    //endregion
+
+    //region    20230421    1143. 最长公共子序列
+
+    /**
+     * https://leetcode.cn/problems/longest-common-subsequence/
+     *
+     * @param text1 字符串 text1
+     * @param text2 字符串 text2
+     * @return 返回这两个字符串的最长 公共子序列 的长度
+     */
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length(), n = text2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            char c1 = text1.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
+                char c2 = text2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[m][n];
     }
     //endregion
 }

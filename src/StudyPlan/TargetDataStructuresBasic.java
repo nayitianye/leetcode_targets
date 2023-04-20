@@ -782,6 +782,41 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230421    173. 二叉搜索树迭代器
+
+    /**
+     * https://leetcode.cn/problems/binary-search-tree-iterator/
+     */
+    class BSTIterator {
+
+        Deque<TreeNode> stack = new LinkedList<>();
+
+        public BSTIterator(TreeNode root) {
+            TreeNode node = root;
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        public int next() {
+            TreeNode node = stack.pop();
+            if (node.right != null) {
+                TreeNode p = node.right;
+                while (p != null) {
+                    stack.push(p);
+                    p = p.left;
+                }
+            }
+            return node.val;
+        }
+
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+    }
+    //endregion
+
     //region    20230420    187. 重复的DNA序列
 
     /**
@@ -837,6 +872,37 @@ public class TargetDataStructuresBasic {
             }
         }
         return res;
+    }
+    //endregion
+
+    //region    20230421    230. 二叉搜索树中第K小的元素
+
+    /**
+     * https://leetcode.cn/problems/kth-smallest-element-in-a-bst/
+     * @param root  一个二叉搜索树的根节点 root
+     * @param k  一个整数 k
+     * @return  设计一个算法查找其中第 k 个最小元素（从 1 开始计数）
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> b - a);
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addLast(root);
+        while (!deque.isEmpty()) {
+            TreeNode node = deque.pollFirst();
+            if (priorityQueue.size() < k) {
+                priorityQueue.add(node.val);
+            } else if (priorityQueue.peek() > node.val) {
+                priorityQueue.poll();
+                priorityQueue.add(node.val);
+            }
+            if (node.left != null) {
+                deque.addLast(node.left);
+            }
+            if (node.right != null) {
+                deque.addLast(node.right);
+            }
+        }
+        return priorityQueue.peek();
     }
     //endregion
 

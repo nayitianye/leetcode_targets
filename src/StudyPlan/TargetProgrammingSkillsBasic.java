@@ -981,6 +981,40 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230421    860. 柠檬水找零
+
+    /**
+     * https://leetcode.cn/problems/lemonade-change
+     *
+     * @param bills 一个整数数组 bills
+     * @return 能给每位顾客正确找零，返回 true ，否则返回 false
+     */
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0, ten = 0;
+        for (int i = 0; i < bills.length; i++) {
+            if (bills[i] == 5) {
+                five++;
+            } else if (bills[i] == 10) {
+                if (five == 0) {
+                    return false;
+                }
+                five--;
+                ten++;
+            } else {
+                if (five > 0 && ten > 0) {
+                    five--;
+                    ten--;
+                } else if (five >= 3) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    //endregion
+
     //region    20230405    896. 单调数列
 
     /**
@@ -1208,6 +1242,28 @@ public class TargetProgrammingSkillsBasic {
             ans.add(flag);
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230421    1845. 座位预约管理系统
+
+    /**
+     * https://leetcode.cn/problems/seat-reservation-manager/
+     */
+    class SeatManager {
+
+        PriorityQueue<Integer> queue;
+        int i=1;
+        public SeatManager(int n) {
+            queue=new PriorityQueue<>();
+        }
+        public int reserve() {
+            if(!queue.isEmpty()) return queue.poll();
+            else return i++;
+        }
+        public void unreserve(int seatNumber) {
+            queue.add(seatNumber);
+        }
     }
     //endregion
 
