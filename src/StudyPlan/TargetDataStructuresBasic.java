@@ -202,6 +202,49 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    25. K 个一组翻转链表
+
+    /**
+     * https://leetcode.cn/problems/reverse-nodes-in-k-group
+     * @param head  链表的头节点 head
+     * @param k  每 k 个节点一组进行翻转
+     * @return  返回修改后的链表
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode pre = dummy;
+        ListNode end = dummy;
+
+        while (end.next != null) {
+            for (int i = 0; i < k && end != null; i++) end = end.next;
+            if (end == null) break;
+            ListNode start = pre.next;
+            ListNode next = end.next;
+            end.next = null;
+            pre.next = reverse(start);
+            start.next = next;
+            pre = start;
+
+            end = pre;
+        }
+        return dummy.next;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+    }
+    //endregion
+
     //region    20230412    43. 字符串相乘
 
     /**
@@ -320,6 +363,40 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    59. 螺旋矩阵 II
+
+    /**
+     * https://leetcode.cn/problems/spiral-matrix-ii
+     *
+     * @param n 一个正整数 n
+     * @return 生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix
+     */
+    public int[][] generateMatrix(int n) {
+        int l = 0, r = n - 1, t = 0, b = n - 1;
+        int[][] mat = new int[n][n];
+        int num = 1, tar = n * n;
+        while (num <= tar) {
+            for (int i = l; i <= r; i++) {
+                mat[t][i] = num++;
+            }
+            t++;
+            for (int i = t; i <= b; i++) {
+                mat[i][r] = num++;
+            }
+            r--;
+            for (int i = r; i >= l; i--) {
+                mat[b][i] = num++;
+            }
+            b--;
+            for (int i = b; i >= t; i--) {
+                mat[i][l] = num++;
+            }
+            l++;
+        }
+        return mat;
+    }
+    //endregion
+
     //region    20230408    75. 颜色分类
 
     /**
@@ -400,8 +477,9 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
-     * @param root  二叉树的根节点 root
-     * @return  返回其节点值的 锯齿形层序遍历
+     *
+     * @param root 二叉树的根节点 root
+     * @return 返回其节点值的 锯齿形层序遍历
      */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new LinkedList<List<Integer>>();
@@ -442,9 +520,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-     * @param preorder  整数数组 preorder
+     *
+     * @param preorder 整数数组 preorder
      * @param inorder  整数数组 inorder
-     * @return  构造二叉树并返回其根节点
+     * @return 构造二叉树并返回其根节点
      */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder == null || preorder.length == 0) {
@@ -477,8 +556,9 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
-     * @param nums  一个整数数组 nums
-     * @return  将其转换为一棵 高度平衡 二叉搜索树
+     *
+     * @param nums 一个整数数组 nums
+     * @return 将其转换为一棵 高度平衡 二叉搜索树
      */
     public TreeNode sortedArrayToBST(int[] nums) {
         return helper(nums, 0, nums.length - 1);
@@ -500,9 +580,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/path-sum-ii
-     * @param root  二叉树的根节点 root
-     * @param targetSum  一个整数目标和 targetSum
-     * @return  找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径
+     *
+     * @param root      二叉树的根节点 root
+     * @param targetSum 一个整数目标和 targetSum
+     * @return 找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径
      */
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         dfs(root, targetSum);
@@ -701,12 +782,37 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    187. 重复的DNA序列
+
+    /**
+     * https://leetcode.cn/problems/repeated-dna-sequences
+     *
+     * @param s 给定一个表示 DNA序列 的字符串 s
+     * @return 返回所有在 DNA 分子中出现不止一次的 长度为 10 的序列(子字符串)
+     */
+    public List<String> findRepeatedDnaSequences(String s) {
+        List<String> ans = new ArrayList<>();
+        int n = s.length();
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i + 10 <= n; i++) {
+            String cur = s.substring(i, i + 10);
+            int cnt = map.getOrDefault(cur, 0);
+            if(cnt==1){
+                ans.add(cur);
+            }
+            map.put(cur, cnt + 1);
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20230420    199. 二叉树的右视图
 
     /**
      * https://leetcode.cn/problems/binary-tree-right-side-view
-     * @param root  二叉树的 根节点 root
-     * @return  按照从顶部到底部的顺序，返回从右侧所能看到的节点值
+     *
+     * @param root 二叉树的 根节点 root
+     * @return 按照从顶部到底部的顺序，返回从右侧所能看到的节点值
      */
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -775,14 +881,15 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/search-a-2d-matrix-ii/
-     * @param matrix   m x n 矩阵 matrix
-     * @param target  一个目标值 target
-     * @return  判断是否找到你对应的值
+     *
+     * @param matrix m x n 矩阵 matrix
+     * @param target 一个目标值 target
+     * @return 判断是否找到你对应的值
      */
     public boolean searchMatrix(int[][] matrix, int target) {
         for (int[] row : matrix) {
-            int index=search(row,target);
-            if(index>=0){
+            int index = search(row, target);
+            if (index >= 0) {
                 return true;
             }
         }
@@ -929,11 +1036,43 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230420    435. 无重叠区间
+
+    /**
+     * https://leetcode.cn/problems/non-overlapping-intervals/
+     *
+     * @param intervals 一个区间的集合 intervals
+     * @return 返回 需要移除区间的最小数量，使剩余区间互不重叠
+     */
+    public int eraseOverlapIntervals(int[][] intervals) {
+        if (intervals.length == 0) {
+            return 0;
+        }
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[1] - o2[1];
+            }
+        });
+        int n = intervals.length;
+        int right = intervals[0][1];
+        int ans = 1;
+        for (int i = 1; i < n; i++) {
+            if (intervals[i][0] >= right) {
+                ans++;
+                right = intervals[i][1];
+            }
+        }
+        return n - ans;
+    }
+    //endregion
+
     //region    20230420    450. 删除二叉搜索树中的节点
 
     /**
      * https://leetcode.cn/problems/delete-node-in-a-bst/
-     * @param root  二叉搜索树的根节点 root
+     *
+     * @param root 二叉搜索树的根节点 root
      * @param key  值 key
      * @return 删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变,删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变
      */
@@ -1071,7 +1210,7 @@ public class TargetDataStructuresBasic {
             }
         }
 
-        private  int hash(int key) {
+        private int hash(int key) {
             return key % BASE;
         }
     }
@@ -1208,6 +1347,33 @@ public class TargetDataStructuresBasic {
                 this.size--;//别忘记了减size
             }
         }
+    }
+    //endregion
+
+    //region    20230420    763. 划分字母区间
+
+    /**
+     * https://leetcode.cn/problems/partition-labels/
+     *
+     * @param s 一个字符串 s
+     * @return 返回一个表示每个字符串片段的长度的列表
+     */
+    public List<Integer> partitionLabels(String s) {
+        int[] last = new int[26];
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            last[s.charAt(i) - 'a'] = i;
+        }
+        List<Integer> partition = new ArrayList<>();
+        int start = 0, end = 0;
+        for (int i = 0; i < length; i++) {
+            end = Math.max(end, last[s.charAt(i) - 'a']);
+            if (i == end) {
+                partition.add(end - start + 1);
+                start = end + 1;
+            }
+        }
+        return partition;
     }
     //endregion
 

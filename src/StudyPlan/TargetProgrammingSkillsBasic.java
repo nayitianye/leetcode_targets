@@ -860,6 +860,58 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230420    503. 下一个更大元素 II
+
+    /**
+     * https://leetcode.cn/problems/next-greater-element-ii/
+     *
+     * @param nums 一个循环数组 nums
+     * @return 返回 nums 中每个元素的 下一个更大元素
+     */
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res, -1);
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < 2 * n; i++) {
+            while (!stack.isEmpty() && nums[i % n] > nums[stack.peek()]) {
+                res[stack.pop()] = nums[i % n];
+            }
+            stack.push(i % n);
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230420    556. 下一个更大元素 III
+
+    /**
+     * https://leetcode.cn/problems/next-greater-element-iii/
+     *
+     * @param n 一个正整数 n
+     * @return 找出符合条件的最小整数，其由重新排列 n 中存在的每位数字组成，并且其值大于 n
+     */
+    public int nextGreaterElement(int n) {
+        char[] s = String.valueOf(n).toCharArray();
+        for (int i = s.length - 1; i > 0; i--) {
+            Arrays.sort(s, i, s.length);
+            for (int j = i; j < s.length; j++) {
+                if (s[j] > s[i - 1]) {
+                    char t = s[i - 1];
+                    s[i - 1] = s[j];
+                    s[j] = t;
+                    long ans = Long.parseLong(String.valueOf(s));
+                    if (ans > Integer.MAX_VALUE) {
+                        return -1;
+                    }
+                    return (int) ans;
+                }
+            }
+        }
+        return -1;
+    }
+    //endregion
+
     //region    20230417    713. 乘积小于 K 的子数组
 
     /**
@@ -958,9 +1010,10 @@ public class TargetProgrammingSkillsBasic {
 
     /**
      * https://leetcode.cn/problems/smallest-range-ii/
-     * @param nums  一个整数数组 nums
-     * @param k  一个整数 k
-     * @return  在更改每个下标对应的值之后，返回 nums 的最小 分数
+     *
+     * @param nums 一个整数数组 nums
+     * @param k    一个整数 k
+     * @return 在更改每个下标对应的值之后，返回 nums 的最小 分数
      */
     public int smallestRangeII(int[] nums, int k) {
         int length = nums.length;
@@ -968,7 +1021,7 @@ public class TargetProgrammingSkillsBasic {
         int res = nums[length - 1] - nums[0];
         for (int i = 0; i < nums.length - 1; i++) {
             int a = nums[i], b = nums[i + 1];
-            int high = Math.max(nums[length - 1 - k], a + k);
+            int high = Math.max(nums[length - 1] - k, a + k);
             int low = Math.min(nums[0] + k, b - k);
             res = Math.min(res, high - low);
         }
@@ -1076,6 +1129,34 @@ public class TargetProgrammingSkillsBasic {
         }
         //如果值相同，继续看，左边和右边有一个满足即可
         return isSub(head.next, node.left) || isSub(head.next, node.right);
+    }
+    //endregion
+
+    //region    20230420    1376. 通知所有员工所需的时间
+
+    /**
+     * https://leetcode.cn/problems/time-needed-to-inform-all-employees/
+     *
+     * @param n          有 n 名员工
+     * @param headID     总负责人通过 headID 进行标识
+     * @param manager    manager 数组
+     * @param informTime 第 i 名员工需要 informTime[i]
+     * @return 通知所有员工这一紧急消息所需要的 分钟数
+     */
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        int res = 0;
+        for (int i = 0; i < manager.length; i++) {
+            if (informTime[i] == 0) {
+                int temp = 0;
+                int index = i;
+                while (index != -1) {
+                    temp += informTime[index];
+                    index = manager[index];
+                }
+                res = Math.max(res, temp);
+            }
+        }
+        return res;
     }
     //endregion
 
