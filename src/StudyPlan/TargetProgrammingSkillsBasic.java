@@ -73,6 +73,19 @@ public class TargetProgrammingSkillsBasic {
             this.next = next;
         }
     }
+
+    public interface NestedInteger {
+        // @return true if this NestedInteger holds a single integer, rather than a nested list.
+        public boolean isInteger();
+
+        // @return the single integer that this NestedInteger holds, if it holds a single integer
+        // Return null if this NestedInteger holds a nested list
+        public Integer getInteger();
+
+        // @return the nested list that this NestedInteger holds, if it holds a nested list
+        // Return empty list if this NestedInteger holds a single integer
+        public List<NestedInteger> getList();
+    }
     //endregion
 
     //region    20230419    2. 两数相加
@@ -663,6 +676,53 @@ public class TargetProgrammingSkillsBasic {
     }
     //endregion
 
+    //region    20230422    155. 最小栈
+
+    /**
+     * https://leetcode.cn/problems/min-stack/
+     */
+    class MinStack {
+
+        private Stack<Integer> stack;
+
+        private Stack<Integer> minStack;
+
+        public MinStack() {
+            stack = new Stack<>();
+            minStack = new Stack<>();
+        }
+
+        public void push(int val) {
+            stack.push(val);
+            if (!minStack.isEmpty()) {
+                int top = minStack.peek();
+                //小于的时候才入栈
+                if (val <= top) {
+                    minStack.push(val);
+                }
+            } else {
+                minStack.push(val);
+            }
+        }
+
+        public void pop() {
+            int pop = stack.pop();
+            int top = minStack.peek();
+            if (pop == top) {
+                minStack.pop();
+            }
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            return minStack.peek();
+        }
+    }
+    //endregion
+
     //region    20230420    173. 二叉搜索树迭代器
 
     /**
@@ -726,6 +786,41 @@ public class TargetProgrammingSkillsBasic {
                 sum += sums[i][col2 + 1] - sums[i][col1];
             }
             return sum;
+        }
+    }
+    //endregion
+
+    //region    20230422    341. 扁平化嵌套列表迭代器
+
+    /**
+     * https://leetcode.cn/problems/flatten-nested-list-iterator
+     */
+    public class NestedIterator implements Iterator<Integer> {
+
+        Deque<Integer> queue = new ArrayDeque<>();
+
+        public NestedIterator(List<NestedInteger> nestedList) {
+            dfs(nestedList);
+        }
+
+        @Override
+        public Integer next() {
+            return hasNext() ? queue.pollFirst() : -1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+
+        void dfs(List<NestedInteger> list) {
+            for (NestedInteger item : list) {
+                if (item.isInteger()) {
+                    queue.addLast(item.getInteger());
+                } else {
+                    dfs(item.getList());
+                }
+            }
         }
     }
     //endregion
@@ -1253,14 +1348,17 @@ public class TargetProgrammingSkillsBasic {
     class SeatManager {
 
         PriorityQueue<Integer> queue;
-        int i=1;
+        int i = 1;
+
         public SeatManager(int n) {
-            queue=new PriorityQueue<>();
+            queue = new PriorityQueue<>();
         }
+
         public int reserve() {
-            if(!queue.isEmpty()) return queue.poll();
+            if (!queue.isEmpty()) return queue.poll();
             else return i++;
         }
+
         public void unreserve(int seatNumber) {
             queue.add(seatNumber);
         }

@@ -418,6 +418,46 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230422    72. 编辑距离
+
+    /**
+     * https://leetcode.cn/problems/edit-distance/description/
+     * @param word1  单词 word1
+     * @param word2  单词 word2
+     * @return  返回将 word1 转换成 word2 所使用的最少操作数
+     */
+    public int minDistance1(String word1, String word2) {
+        int n = word1.length();
+        int m = word2.length();
+        //有一个字符串为空串
+        if (n * m == 0) {
+            return m + n;
+        }
+        //DP数组
+        int[][] dp = new int[n + 1][m + 1];
+        //边界状态初始化
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= m; j++) {
+            dp[0][j] = j;
+        }
+        //计算所有dp的值
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                int left = dp[i - 1][j] + 1;
+                int down = dp[i][j - 1] + 1;
+                int left_down = dp[i - 1][j - 1];
+                if (word1.charAt(i - 1) != word2.charAt(j - 1)) {
+                    left_down += 1;
+                }
+                dp[i][j] = Math.min(left_down, Math.min(left, down));
+            }
+        }
+        return dp[n][m];
+    }
+    //endregion
+
     //region    20230405    74. 搜索二维矩阵
 
     /**
@@ -925,6 +965,50 @@ public class TargetAlgorithmsBasic {
             maxans = Math.max(maxans, dp[i]);
         }
         return maxans;
+    }
+    //endregion
+
+    //region    20230422    322. 零钱兑换
+
+    /**
+     * https://leetcode.cn/problems/coin-change/
+     * @param coins  整数数组 coins
+     * @param amount  一个整数 amount
+     * @return  计算并返回可以凑成总金额所需的 最少的硬币个数
+     */
+    public int coinChange(int[] coins, int amount) {
+        int max=amount+1;
+        int[] dp=new int[amount+1];
+        Arrays.fill(dp,max);
+        dp[0]=0;
+        for(int i=1;i<max;i++){
+            for(int j=0;j<coins.length;j++){
+                if(coins[j]<=i){
+                    dp[i]=Math.min(dp[i],dp[i-coins[j]]+1);
+                }
+            }
+        }
+        return dp[amount]>amount?-1:dp[amount];
+    }
+    //endregion
+
+    //region    20230422    343. 整数拆分
+
+    /**
+     * https://leetcode.cn/problems/integer-break
+     * @param n  一个正整数 n
+     * @return  将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化
+     */
+    public int integerBreak(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            int curMax = 0;
+            for (int j = 1; j < i; j++) {
+                curMax = Math.max(curMax, Math.max(j * (i - j), j * dp[i - j]));
+            }
+            dp[i] = curMax;
+        }
+        return dp[n];
     }
     //endregion
 

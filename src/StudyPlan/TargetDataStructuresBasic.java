@@ -906,6 +906,31 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230422    236. 二叉树的最近公共祖先
+
+    /**
+     * https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
+     * @param root  二叉树根节点 root
+     * @param p 对于有根树 T 的节点 p
+     * @param q 对于有根树 T 的节点 q
+     * @return  满足 x 是 p、q 的祖先且 x 的深度尽可能大
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q){
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(left == null) {
+            return right;
+        }
+        if(right == null){
+            return left;
+        }
+        return root;
+    }
+    //endregion
+
     //region    20230410    238. 除自身以外数组的乘积
 
     /**
@@ -1000,6 +1025,64 @@ public class TargetDataStructuresBasic {
             }
         }
         return true;
+    }
+    //endregion
+
+    //region    20230422    297. 二叉树的序列化与反序列化
+
+    /**
+     * https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/
+     */
+    public class Codec {
+
+        public String serialize(TreeNode root) {
+            if(root == null){
+                return "";
+            }
+            StringBuilder res = new StringBuilder();
+            res.append("[");
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                TreeNode node = queue.poll();
+                if(node != null){
+                    res.append("" + node.val);
+                    queue.offer(node.left);
+                    queue.offer(node.right);
+                }else{
+                    res.append("null");
+                }
+                res.append(",");
+            }
+            res.append("]");
+            return res.toString();
+        }
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            if(data == ""){
+                return null;
+            }
+            String[] dataList = data.substring(1, data.length() - 1).split(",");
+            TreeNode root = new TreeNode(Integer.parseInt(dataList[0]));
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            int i = 1;
+            while(!queue.isEmpty()){
+                TreeNode node = queue.poll();
+                if(!"null".equals(dataList[i])){
+                    node.left = new TreeNode(Integer.parseInt(dataList[i]));
+                    queue.offer(node.left);
+                }
+                i++;
+                if(!"null".equals(dataList[i])){
+                    node.right = new TreeNode(Integer.parseInt(dataList[i]));
+                    queue.offer(node.right);
+                }
+                i++;
+            }
+            return root;
+        }
     }
     //endregion
 

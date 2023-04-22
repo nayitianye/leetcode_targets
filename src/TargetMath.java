@@ -472,8 +472,7 @@ public class TargetMath {
         return new double[]{celsius + 273.15, celsius * 1.8 + 32.00};
     }
     //endregion
-
-
+    
     public static void main(String[] args) {
         System.out.println(countLetters("jjjjxttttn"));
     }

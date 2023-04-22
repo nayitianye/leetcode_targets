@@ -2191,6 +2191,29 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230422    1027. 最长等差数列
+
+    /**
+     * https://leetcode.cn/problems/longest-arithmetic-subsequence
+     *
+     * @param nums 一个整数数组 nums
+     * @return 返回 nums 中最长等差子序列的长度
+     */
+    public int longestArithSeqLength(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][1001];
+        int maxLength = 0;
+        for (int k = 1; k < n; k++) {
+            for (int j = 0; j < k; j++) {
+                int d = nums[k] - nums[j] + 500;
+                dp[k][d] = dp[j][d] + 1;
+                maxLength = Math.max(maxLength, dp[k][d]);
+            }
+        }
+        return maxLength + 1;
+    }
+    //endregion
+
     //region    20230403    1039. 多边形三角剖分的最低得分
 
     /**
