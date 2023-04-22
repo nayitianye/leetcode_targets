@@ -398,14 +398,7 @@
       <workItem from="1681917113337" duration="6423000" />
       <workItem from="1682001760162" duration="5489000" />
       <workItem from="1682076859152" duration="6208000" />
-      <workItem from="1682147079068" duration="15164000" />
-    </task>
-    <task id="LOCAL-00040" summary="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字">
-      <created>1678550208019</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1678550208019</updated>
+      <workItem from="1682147079068" duration="17759000" />
     </task>
     <task id="LOCAL-00041" summary="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字">
       <created>1678550314995</created>
@@ -743,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682150538638</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II">
+      <created>1682178243907</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1682178243907</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -830,7 +830,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_二分查找：&#10;1482. 制作 m 束花所需的最少天数&#10;1818. 绝对差值和&#10;每日一题：&#10;1638. 统计只差一个字符的子串数目" />
     <MESSAGE value="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表" />
     <MESSAGE value="学习计划_算法入门：&#10;116. 填充每个节点的下一个右侧节点指针&#10;542. 01 矩阵&#10;994. 腐烂的橘子" />
     <MESSAGE value="学习计划_算法入门：&#10;46. 全排列&#10;77. 组合&#10;784. 字母大小写全排列&#10;学习计划_剑指offer:&#10;面试题67. 把字符串转换成整数&#10;剑指 Offer 20. 表示数值的字符串&#10;每日一题：&#10;1641. 统计字典序元音字符串的数目" />
@@ -855,7 +854,8 @@
     <MESSAGE value="学习计划_数据结构基础：&#10;25. K 个一组翻转链表&#10;59. 螺旋矩阵 II&#10;187. 重复的DNA序列&#10;435. 无重叠区间&#10;763. 划分字母区间&#10;学习计划_编程能力基础：&#10;503. 下一个更大元素 II&#10;556. 下一个更大元素 III&#10;1376. 通知所有员工所需的时间" />
     <MESSAGE value="学习计划_数据结构基础：&#10;173. 二叉搜索树迭代器&#10;230. 二叉搜索树中第K小的元素&#10;学习计划_编程能力基础：&#10;860. 柠檬水找零&#10;1845. 座位预约管理系统&#10;学习计划_算法基础：&#10;583. 两个字符串的删除操作&#10;1143. 最长公共子序列&#10;每日一题：&#10;2413. 最小偶倍数" />
     <MESSAGE value="学习计划_数据结构基础：&#10;236. 二叉树的最近公共祖先&#10;297. 二叉树的序列化与反序列化&#10;学习计划_编程能力基础：&#10;155. 最小栈&#10;341. 扁平化嵌套列表迭代器&#10;学习计划_算法基础：&#10;72. 编辑距离&#10;322. 零钱兑换&#10;343. 整数拆分&#10;每日一题：&#10;1027. 最长等差数列" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构基础：&#10;236. 二叉树的最近公共祖先&#10;297. 二叉树的序列化与反序列化&#10;学习计划_编程能力基础：&#10;155. 最小栈&#10;341. 扁平化嵌套列表迭代器&#10;学习计划_算法基础：&#10;72. 编辑距离&#10;322. 零钱兑换&#10;343. 整数拆分&#10;每日一题：&#10;1027. 最长等差数列" />
+    <MESSAGE value="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II" />
+    <option name="LAST_COMMIT_MESSAGE" value="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -945,7 +945,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>1408</line>
+          <line>1573</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

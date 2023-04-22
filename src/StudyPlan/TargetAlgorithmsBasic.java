@@ -876,6 +876,22 @@ public class TargetAlgorithmsBasic {
     }
     //endregion
 
+    //region    20230423    201. 数字范围按位与
+
+    /**
+     * ttps://leetcode.cn/problems/bitwise-and-of-numbers-range
+     * @param left  整数 left
+     * @param right  整数 right
+     * @return  返回此区间内所有数字 按位与 的结果（包含 left 、right 端点）
+     */
+    public int rangeBitwiseAnd(int left, int right) {
+        while (left<right){
+            right=right&(right-1);
+        }
+        return right;
+    }
+    //endregion
+
     //region    20230410    209. 长度最小的子数组
 
     /**
@@ -1349,4 +1365,5 @@ public class TargetAlgorithmsBasic {
         return dp[m][n];
     }
     //endregion
+
 }

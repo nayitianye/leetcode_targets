@@ -206,9 +206,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/reverse-nodes-in-k-group
-     * @param head  链表的头节点 head
-     * @param k  每 k 个节点一组进行翻转
-     * @return  返回修改后的链表
+     *
+     * @param head 链表的头节点 head
+     * @param k    每 k 个节点一组进行翻转
+     * @return 返回修改后的链表
      */
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode dummy = new ListNode(0);
@@ -832,7 +833,7 @@ public class TargetDataStructuresBasic {
         for (int i = 0; i + 10 <= n; i++) {
             String cur = s.substring(i, i + 10);
             int cnt = map.getOrDefault(cur, 0);
-            if(cnt==1){
+            if (cnt == 1) {
                 ans.add(cur);
             }
             map.put(cur, cnt + 1);
@@ -879,9 +880,10 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/kth-smallest-element-in-a-bst/
-     * @param root  一个二叉搜索树的根节点 root
-     * @param k  一个整数 k
-     * @return  设计一个算法查找其中第 k 个最小元素（从 1 开始计数）
+     *
+     * @param root 一个二叉搜索树的根节点 root
+     * @param k    一个整数 k
+     * @return 设计一个算法查找其中第 k 个最小元素（从 1 开始计数）
      */
     public int kthSmallest(TreeNode root, int k) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> b - a);
@@ -910,21 +912,22 @@ public class TargetDataStructuresBasic {
 
     /**
      * https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
-     * @param root  二叉树根节点 root
-     * @param p 对于有根树 T 的节点 p
-     * @param q 对于有根树 T 的节点 q
-     * @return  满足 x 是 p、q 的祖先且 x 的深度尽可能大
+     *
+     * @param root 二叉树根节点 root
+     * @param p    对于有根树 T 的节点 p
+     * @param q    对于有根树 T 的节点 q
+     * @return 满足 x 是 p、q 的祖先且 x 的深度尽可能大
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null || root == p || root == q){
+        if (root == null || root == p || root == q) {
             return root;
         }
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if(left == null) {
+        if (left == null) {
             return right;
         }
-        if(right == null){
+        if (right == null) {
             return left;
         }
         return root;
@@ -1036,20 +1039,20 @@ public class TargetDataStructuresBasic {
     public class Codec {
 
         public String serialize(TreeNode root) {
-            if(root == null){
+            if (root == null) {
                 return "";
             }
             StringBuilder res = new StringBuilder();
             res.append("[");
             Queue<TreeNode> queue = new LinkedList<>();
             queue.offer(root);
-            while(!queue.isEmpty()){
+            while (!queue.isEmpty()) {
                 TreeNode node = queue.poll();
-                if(node != null){
+                if (node != null) {
                     res.append("" + node.val);
                     queue.offer(node.left);
                     queue.offer(node.right);
-                }else{
+                } else {
                     res.append("null");
                 }
                 res.append(",");
@@ -1060,7 +1063,7 @@ public class TargetDataStructuresBasic {
 
         // Decodes your encoded data to tree.
         public TreeNode deserialize(String data) {
-            if(data == ""){
+            if (data == "") {
                 return null;
             }
             String[] dataList = data.substring(1, data.length() - 1).split(",");
@@ -1068,14 +1071,14 @@ public class TargetDataStructuresBasic {
             Queue<TreeNode> queue = new LinkedList<>();
             queue.offer(root);
             int i = 1;
-            while(!queue.isEmpty()){
+            while (!queue.isEmpty()) {
                 TreeNode node = queue.poll();
-                if(!"null".equals(dataList[i])){
+                if (!"null".equals(dataList[i])) {
                     node.left = new TreeNode(Integer.parseInt(dataList[i]));
                     queue.offer(node.left);
                 }
                 i++;
-                if(!"null".equals(dataList[i])){
+                if (!"null".equals(dataList[i])) {
                     node.right = new TreeNode(Integer.parseInt(dataList[i]));
                     queue.offer(node.right);
                 }
@@ -1526,6 +1529,67 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230423    841. 钥匙和房间
+
+    /**
+     * https://leetcode.cn/problems/keys-and-rooms
+     * @param rooms  一个数组 rooms 其中 rooms[i] 是你进入 i 号房间可以获得的钥匙集合
+     * @return  如果能进入 所有 房间返回 true，否则返回 false
+     */
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        List<Boolean> visited = new ArrayList<Boolean>(){{
+            for(int i = 0 ; i < rooms.size(); i++){
+                add(false);
+            }
+        }};
+        dfs(0, rooms, visited);
+        //检查是否都访问到了
+        for (boolean flag : visited) {
+            if (!flag) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void dfs(int key, List<List<Integer>>  rooms, List<Boolean> visited) {
+        if (visited.get(key)) {
+            return;
+        }
+        visited.set(key, true);
+        for (int k : rooms.get(key)) {
+            // 深度优先搜索遍历
+            dfs(k, rooms, visited);
+        }
+    }
+    //endregion
+
+    //region    20230423    997. 找到小镇的法官
+
+    /**
+     * https://leetcode.cn/problems/find-the-town-judge
+     *
+     * @param n     有 n 个人
+     * @param trust 一个数组 trust ，其中 trust[i] = [ai, bi] 表示编号为 ai 的人信任编号为 bi 的
+     * @return 小镇法官存在并且可以确定他的身份，请返回该法官的编号
+     */
+    public int findJudge(int n, int[][] trust) {
+        int[] inDegress = new int[n + 1];
+        int[] outDrgress = new int[n + 1];
+        for (int[] edge : trust) {
+            int x = edge[0], y = edge[1];
+            ++inDegress[y];
+            ++outDrgress[x];
+        }
+        for (int i = 1; i <= n; i++) {
+            if (inDegress[i] == n - 1 && outDrgress[i] == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    //endregion
+
     //region    20230418    1249. 移除无效的括号
 
     /**
@@ -1558,6 +1622,30 @@ public class TargetDataStructuresBasic {
             }
         }
         return sb.toString();
+    }
+    //endregion
+
+    //region    20230423    1557. 可以到达所有点的最少点数目
+
+    /**
+     * https://leetcode.cn/problems/minimum-number-of-vertices-to-reach-all-nodes
+     *
+     * @param n     n 个节点编号为 0 到 n-1
+     * @param edges 一个边数组 edges ，其中 edges[i] = [fromi, toi] 表示一条从点  fromi 到点 toi 的有向边
+     * @return 找到最小的点集使得从这些点出发能到达图中所有点
+     */
+    public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
+        List<Integer> ans = new ArrayList<>();
+        Set<Integer> endSet = new HashSet<>();
+        for (List<Integer> edge : edges) {
+            endSet.add(edge.get(1));
+        }
+        for (int i = 0; i < n; i++) {
+            if (!endSet.contains(i)) {
+                ans.add(i);
+            }
+        }
+        return ans;
     }
     //endregion
 
