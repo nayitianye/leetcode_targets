@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TargetMath.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +253,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="adad2235-7124-4324-b351-6e813da42098" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -398,14 +396,8 @@
       <workItem from="1681917113337" duration="6423000" />
       <workItem from="1682001760162" duration="5489000" />
       <workItem from="1682076859152" duration="6208000" />
-      <workItem from="1682147079068" duration="17759000" />
-    </task>
-    <task id="LOCAL-00041" summary="每日一题:&#10;1590. 使数组和能被 P 整除&#10;面试题 17.05. 字母与数字">
-      <created>1678550314995</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1678550314995</updated>
+      <workItem from="1682147079068" duration="18236000" />
+      <workItem from="1682266377280" duration="1294000" />
     </task>
     <task id="LOCAL-00042" summary="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历">
       <created>1678623898379</created>
@@ -743,7 +735,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682178243907</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="学习计划_算法基础：&#10;201. 数字范围按位与&#10;学习计划_数据结构基础：&#10;841. 钥匙和房间&#10;997. 找到小镇的法官&#10;1557. 可以到达所有点的最少点数目&#10;学习计划_编程能力基础：&#10;707. 设计链表&#10;1797. 设计一个验证系统">
+      <created>1682181262812</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1682181262812</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -830,7 +829,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_二分查找基础：&#10;540. 有序数组中的单一元素&#10;1838. 最高频元素的频数&#10;学习计划_剑指offer:&#10;剑指 Offer 29. 顺时针打印矩阵&#10;剑指 Offer 31. 栈的压入、弹出序列&#10;学习计划_算法入门：&#10;21. 合并两个有序链表&#10;206. 反转链表" />
     <MESSAGE value="学习计划_算法入门：&#10;116. 填充每个节点的下一个右侧节点指针&#10;542. 01 矩阵&#10;994. 腐烂的橘子" />
     <MESSAGE value="学习计划_算法入门：&#10;46. 全排列&#10;77. 组合&#10;784. 字母大小写全排列&#10;学习计划_剑指offer:&#10;面试题67. 把字符串转换成整数&#10;剑指 Offer 20. 表示数值的字符串&#10;每日一题：&#10;1641. 统计字典序元音字符串的数目" />
     <MESSAGE value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
@@ -855,7 +853,8 @@
     <MESSAGE value="学习计划_数据结构基础：&#10;173. 二叉搜索树迭代器&#10;230. 二叉搜索树中第K小的元素&#10;学习计划_编程能力基础：&#10;860. 柠檬水找零&#10;1845. 座位预约管理系统&#10;学习计划_算法基础：&#10;583. 两个字符串的删除操作&#10;1143. 最长公共子序列&#10;每日一题：&#10;2413. 最小偶倍数" />
     <MESSAGE value="学习计划_数据结构基础：&#10;236. 二叉树的最近公共祖先&#10;297. 二叉树的序列化与反序列化&#10;学习计划_编程能力基础：&#10;155. 最小栈&#10;341. 扁平化嵌套列表迭代器&#10;学习计划_算法基础：&#10;72. 编辑距离&#10;322. 零钱兑换&#10;343. 整数拆分&#10;每日一题：&#10;1027. 最长等差数列" />
     <MESSAGE value="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II" />
-    <option name="LAST_COMMIT_MESSAGE" value="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II" />
+    <MESSAGE value="学习计划_算法基础：&#10;201. 数字范围按位与&#10;学习计划_数据结构基础：&#10;841. 钥匙和房间&#10;997. 找到小镇的法官&#10;1557. 可以到达所有点的最少点数目&#10;学习计划_编程能力基础：&#10;707. 设计链表&#10;1797. 设计一个验证系统" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习计划_算法基础：&#10;201. 数字范围按位与&#10;学习计划_数据结构基础：&#10;841. 钥匙和房间&#10;997. 找到小镇的法官&#10;1557. 可以到达所有点的最少点数目&#10;学习计划_编程能力基础：&#10;707. 设计链表&#10;1797. 设计一个验证系统" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -945,7 +944,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java</url>
-          <line>1573</line>
+          <line>1702</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

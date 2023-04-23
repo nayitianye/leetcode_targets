@@ -876,6 +876,64 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230424    215. 数组中的第K个最大元素
+
+    /**
+     * https://leetcode.cn/problems/kth-largest-element-in-an-array/
+     * @param nums  整数数组 nums
+     * @param k  整数 k
+     * @return  返回数组中第 k 个最大的元素
+     */
+    public int findKthLargest(int[] nums, int k) {
+        buildMaxHeap(nums);
+        // 调整 k-1 次
+        for (int i = nums.length - 1; i > nums.length - k; i--) {
+            swap(nums, 0, i);
+            maxHeapify(nums, 0, i);
+        }
+        // 此时，堆顶的元素就是第 k 大的数
+        return nums[0];
+    }
+
+    // 构建初始大顶堆
+    public static void buildMaxHeap(int[] arr) {
+        // 从最后一个非叶子结点开始调整大顶堆，最后一个非叶子结点的下标就是 arr.length / 2-1
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            maxHeapify(arr, i, arr.length);
+        }
+    }
+
+    // 调整大顶堆，第三个参数表示剩余未排序的数字的数量，也就是剩余堆的大小
+    private static void maxHeapify(int[] arr, int i, int heapSize) {
+        // 左子结点下标
+        int l = 2 * i + 1;
+        // 右子结点下标
+        int r = l + 1;
+        // 记录根结点、左子树结点、右子树结点三者中的最大值下标
+        int largest = i;
+        // 与左子树结点比较
+        if (l < heapSize && arr[l] > arr[largest]) {
+            largest = l;
+        }
+        // 与右子树结点比较
+        if (r < heapSize && arr[r] > arr[largest]) {
+            largest = r;
+        }
+        if (largest != i) {
+            // 将最大值交换为根结点
+            swap1(arr, i, largest);
+            // 再次调整交换数字后的大顶堆
+            maxHeapify(arr, largest, heapSize);
+        }
+    }
+
+    private static void swap1(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    //endregion
+
     //region    20230421    230. 二叉搜索树中第K小的元素
 
     /**
@@ -1114,6 +1172,45 @@ public class TargetDataStructuresBasic {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region    20230424    347. 前 K 个高频元素
+
+    /**
+     * https://leetcode.cn/problems/top-k-frequent-elements/
+     * @param nums  整数数组 nums
+     * @param k  整数 k
+     * @return  返回其中出现频率前 k 高的元素
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> occurrences = new HashMap<Integer, Integer>();
+        for (int num : nums) {
+            occurrences.put(num, occurrences.getOrDefault(num, 0) + 1);
+        }
+
+        // int[] 的第一个元素代表数组的值，第二个元素代表了该值出现的次数
+        PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            public int compare(int[] m, int[] n) {
+                return m[1] - n[1];
+            }
+        });
+        for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+            int num = entry.getKey(), count = entry.getValue();
+            if (queue.size() == k) {
+                if (queue.peek()[1] < count) {
+                    queue.poll();
+                    queue.offer(new int[]{num, count});
+                }
+            } else {
+                queue.offer(new int[]{num, count});
+            }
+        }
+        int[] ret = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ret[i] = queue.poll()[0];
+        }
+        return ret;
     }
     //endregion
 
