@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -398,6 +396,7 @@
       <workItem from="1682076859152" duration="6208000" />
       <workItem from="1682147079068" duration="18236000" />
       <workItem from="1682266377280" duration="1294000" />
+      <workItem from="1682352334637" duration="299000" />
     </task>
     <task id="LOCAL-00042" summary="学习计划_LeetCode 75&#10;98. 验证二叉搜索树&#10;102. 二叉树的层序遍历&#10;235. 二叉搜索树的最近公共祖先&#10;589. N 叉树的前序遍历">
       <created>1678623898379</created>

@@ -1360,6 +1360,36 @@ public class TargetDataStructuresBasic {
     }
     //endregion
 
+    //region    20230425    451. 根据字符出现频率排序
+
+    /**
+     * https://leetcode.cn/problems/sort-characters-by-frequency/
+     * @param s  一个字符串 s
+     * @return
+     */
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            int frequency = map.getOrDefault(c, 0) + 1;
+            map.put(c, frequency);
+        }
+        List<Character> list = new ArrayList<Character>(map.keySet());
+        Collections.sort(list, (a, b) -> map.get(b) - map.get(a));
+        StringBuffer sb = new StringBuffer();
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            char c = list.get(i);
+            int frequency = map.get(c);
+            for (int j = 0; j < frequency; j++) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    //endregion
+
     //region    20230410    560. 和为 K 的子数组
 
     /**
@@ -1658,6 +1688,39 @@ public class TargetDataStructuresBasic {
             // 深度优先搜索遍历
             dfs(k, rooms, visited);
         }
+    }
+    //endregion
+
+    //region    20230425    973. 最接近原点的 K 个点
+
+    /**
+     * https://leetcode.cn/problems/k-closest-points-to-origin/
+     * @param points  一个数组 points
+     * @param k  一个整数 k
+     * @return  回离原点 (0,0) 最近的 k 个点
+     */
+    public int[][] kClosest(int[][] points, int k) {
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            public int compare(int[] array1, int[] array2) {
+                return array2[0] - array1[0];
+            }
+        });
+        for (int i = 0; i < k; ++i) {
+            pq.offer(new int[]{points[i][0] * points[i][0] + points[i][1] * points[i][1], i});
+        }
+        int n = points.length;
+        for (int i = k; i < n; ++i) {
+            int dist = points[i][0] * points[i][0] + points[i][1] * points[i][1];
+            if (dist < pq.peek()[0]) {
+                pq.poll();
+                pq.offer(new int[]{dist, i});
+            }
+        }
+        int[][] ans = new int[k][2];
+        for (int i = 0; i < k; ++i) {
+            ans[i] = points[pq.poll()[1]];
+        }
+        return ans;
     }
     //endregion
 
