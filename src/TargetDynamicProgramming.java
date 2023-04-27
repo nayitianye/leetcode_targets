@@ -2237,6 +2237,31 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230427    1048. 最长字符串链
+
+    /**
+     * https://leetcode.cn/problems/longest-string-chain/
+     * @param words  一个单词数组 words
+     * @return  从给定单词列表 words 中选择单词组成词链，返回 词链的 最长可能长度
+     */
+    public int longestStrChain(String[] words) {
+        Map<String,Integer> hashmap=new HashMap<>();
+        Arrays.sort(words,(a,b)->a.length()-b.length());
+        int res=0;
+        for (String word:words) {
+            hashmap.put(word,1);
+            for (int i = 0; i < word.length(); i++) {
+                String prev=word.substring(0,i)+word.substring(i+1);
+                if(hashmap.containsKey(prev)){
+                    hashmap.put(word,Math.max(hashmap.get(word),hashmap.get(prev)+1));
+                }
+            }
+            res=Math.max(res,hashmap.get(word));
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230215    1137. 第 N 个泰波那契数
 
     /**
