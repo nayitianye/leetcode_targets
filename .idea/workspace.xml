@@ -75,6 +75,7 @@
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBasic.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/StudyPlan/TargetProgrammingSkillsBeginner.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/TargetDynamicProgramming.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/TargetStack.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -183,7 +184,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetSeries.TargetString">
+  <component name="RunManager" selected="应用程序.TargetStack">
     <configuration name="TargetDataStructuresBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructuresBasic" />
       <module name="leetcode_targets" />
@@ -223,8 +224,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetString" />
+    <configuration name="TargetStack" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetStack" />
       <module name="leetcode_targets" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -239,6 +240,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetStack" />
         <item itemvalue="应用程序.TargetSeries.TargetString" />
         <item itemvalue="应用程序.TargetDataStructuresBasic" />
         <item itemvalue="应用程序.TargetProgrammingSkillsBasic" />
@@ -251,7 +253,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b41b7f59-404a-4814-ba87-e49008829cd6" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -400,6 +401,7 @@
       <workItem from="1682352334637" duration="924000" />
       <workItem from="1682518770093" duration="5644000" />
       <workItem from="1682609642306" duration="2076000" />
+      <workItem from="1683040606998" duration="2655000" />
     </task>
     <task id="LOCAL-00043" summary="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III">
       <created>1678637253492</created>
@@ -956,13 +958,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetSeries/TargetString.java</url>
-          <line>101</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetSeries/TargetString.java</url>
           <line>79</line>
           <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetStack.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="139" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
