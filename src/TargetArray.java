@@ -922,6 +922,33 @@ public class TargetArray {
     }
     //endregion
 
+    //region    20230505    2432. 处理用时最长的那个任务的员工
+
+    /**
+     * https://leetcode.cn/problems/the-employee-that-worked-on-the-longest-task/
+     * @param n  有 n 位员工，每位员工都有一个从 0 到 n - 1 的唯一 id
+     * @param logs  二维整数数组 logs ，其中 logs[i] = [idi, leaveTimei]
+     * @return  返回处理用时最长的那个任务的员工的 id 。如果存在两个或多个员工同时满足，则返回几人中 最小 的 id
+     */
+    public int hardestWorker(int n, int[][] logs) {
+        int maxTime=Integer.MIN_VALUE;
+        int preStart=0;
+        int res=n;
+        for (int i = 0; i < logs.length; i++) {
+            int interTime=logs[i][1]-preStart;
+            if(interTime==maxTime){
+                res=Math.min(res,logs[i][0]);
+            }
+            if(interTime>maxTime){
+                maxTime=interTime;
+                res=logs[i][0];
+            }
+            preStart=logs[i][1];
+        }
+        return res;
+    }
+    //endregion
+
     public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience) {
         int sum = 0;
         for (int e : energy) {
@@ -940,7 +967,6 @@ public class TargetArray {
     }
 
     public static void main(String[] args) {
-        int[][] A = {{1, 1, 0}, {1, 0, 1}, {0, 0, 0}};
-        System.out.println(flipAndInvertImage(A));
+        new TargetArray().hardestWorker(10,new int[][]{{1,1},{3,7},{2,12},{7,17}});
     }
 }

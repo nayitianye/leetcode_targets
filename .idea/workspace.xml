@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目" />
+    <list default="true" id="ee52b51f-0e04-4743-8a5d-14ca32692362" name="Default Changelist" comment="学习计划_LeetCode75_Level2:&#10;110. 平衡二叉树&#10;226. 翻转二叉树&#10;学习计划_编程能力基础：&#10;28. 找出字符串中第一个匹配项的下标&#10;896. 单调数列&#10;学习计划_数据结构基础：&#10;15. 三数之和&#10;136. 只出现一次的数字&#10;169. 多数元素&#10;学习计划_算法基础：&#10;33. 搜索旋转排序数组&#10;34. 在排序数组中查找元素的第一个和最后一个位置&#10;74. 搜索二维矩阵&#10;每日一题：&#10;2427. 公因子的数目">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +186,14 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetStack">
+  <component name="RunManager" selected="应用程序.TargetArray">
+    <configuration name="TargetArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetArray" />
+      <module name="leetcode_targets" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TargetDataStructuresBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetDataStructuresBasic" />
       <module name="leetcode_targets" />
@@ -231,15 +240,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetTwoPointers" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TargetTwoPointers" />
-      <module name="leetcode_targets" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetArray" />
         <item itemvalue="应用程序.TargetStack" />
         <item itemvalue="应用程序.TargetSeries.TargetString" />
         <item itemvalue="应用程序.TargetDataStructuresBasic" />
@@ -401,14 +404,8 @@
       <workItem from="1682352334637" duration="924000" />
       <workItem from="1682518770093" duration="5644000" />
       <workItem from="1682609642306" duration="2076000" />
-      <workItem from="1683040606998" duration="2655000" />
-    </task>
-    <task id="LOCAL-00043" summary="学习计划_编程能力入门&#10;1491. 去掉最低工资和最高工资后的工资平均值&#10;1523. 在区间范围内统计奇数数目&#10;每日一题：&#10;217. 存在重复元素&#10;219. 存在重复元素 II&#10;220. 存在重复元素 III">
-      <created>1678637253492</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1678637253492</updated>
+      <workItem from="1683040606998" duration="4474000" />
+      <workItem from="1683296551767" duration="1354000" />
     </task>
     <task id="LOCAL-00044" summary="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列">
       <created>1678809806233</created>
@@ -746,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682354073788</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="每日一题：&#10;1003. 检查替换后的词是否有效">
+      <created>1683129313876</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1683129313876</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -833,7 +837,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_算法入门：&#10;46. 全排列&#10;77. 组合&#10;784. 字母大小写全排列&#10;学习计划_剑指offer:&#10;面试题67. 把字符串转换成整数&#10;剑指 Offer 20. 表示数值的字符串&#10;每日一题：&#10;1641. 统计字典序元音字符串的数目" />
     <MESSAGE value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
     <MESSAGE value="学习计划_二分查找基础：&#10;222. 完全二叉树的节点个数&#10;1712. 将数组分成三个子数组的方案数&#10;学习计划_剑指offer:&#10;剑指 Offer 59 - I. 滑动窗口的最大值&#10;面试题59 - II. 队列的最大值&#10;每日一题：&#10;1637. 两点之间不包含任何点的最宽垂直区域" />
     <MESSAGE value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
@@ -858,7 +861,8 @@
     <MESSAGE value="同系列或类似题型：&#10;243. 最短单词距离&#10;244. 最短单词距离 II&#10;245. 最短单词距离 III&#10;246. 中心对称数&#10;247. 中心对称数 II&#10;248. 中心对称数 III&#10;1056. 易混淆数&#10;1088. 易混淆数 II" />
     <MESSAGE value="学习计划_算法基础：&#10;201. 数字范围按位与&#10;学习计划_数据结构基础：&#10;841. 钥匙和房间&#10;997. 找到小镇的法官&#10;1557. 可以到达所有点的最少点数目&#10;学习计划_编程能力基础：&#10;707. 设计链表&#10;1797. 设计一个验证系统" />
     <MESSAGE value="学习计划_数据结构基础：&#10;451. 根据字符出现频率排序&#10;973. 最接近原点的 K 个点" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习计划_数据结构基础：&#10;451. 根据字符出现频率排序&#10;973. 最接近原点的 K 个点" />
+    <MESSAGE value="每日一题：&#10;1003. 检查替换后的词是否有效" />
+    <option name="LAST_COMMIT_MESSAGE" value="每日一题：&#10;1003. 检查替换后的词是否有效" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -880,16 +884,6 @@
           <url>file://$PROJECT_DIR$/src/Main.java</url>
           <line>8</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>553</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
-          <line>555</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetQueue.java</url>
@@ -965,6 +959,16 @@
           <url>file://$PROJECT_DIR$/src/TargetStack.java</url>
           <line>55</line>
           <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
+          <line>969</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
+          <line>933</line>
+          <option name="timeStamp" value="146" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
