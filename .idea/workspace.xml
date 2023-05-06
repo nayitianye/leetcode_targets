@@ -256,6 +256,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="a20a7f5d-4c92-453a-b34f-a76a5678b862" name="变更" comment="" />
       <created>1567131427981</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -405,14 +406,8 @@
       <workItem from="1682518770093" duration="5644000" />
       <workItem from="1682609642306" duration="2076000" />
       <workItem from="1683040606998" duration="4474000" />
-      <workItem from="1683296551767" duration="1354000" />
-    </task>
-    <task id="LOCAL-00044" summary="学习计划_LeetCode 75&#10;70. 爬楼梯&#10;733. 图像渲染&#10;509. 斐波拉契数列">
-      <created>1678809806233</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1678809806233</updated>
+      <workItem from="1683296551767" duration="2735000" />
+      <workItem from="1683386683985" duration="1279000" />
     </task>
     <task id="LOCAL-00045" summary="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩">
       <created>1678896033507</created>
@@ -750,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683129313876</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="每日一题：&#10;2432. 处理用时最长的那个任务的员工">
+      <created>1683298168065</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1683298168065</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -837,7 +839,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_算法入门：&#10;70. 爬楼梯&#10;120. 三角形最小路径和&#10;198. 打家劫舍" />
     <MESSAGE value="学习计划_二分查找基础：&#10;222. 完全二叉树的节点个数&#10;1712. 将数组分成三个子数组的方案数&#10;学习计划_剑指offer:&#10;剑指 Offer 59 - I. 滑动窗口的最大值&#10;面试题59 - II. 队列的最大值&#10;每日一题：&#10;1637. 两点之间不包含任何点的最宽垂直区域" />
     <MESSAGE value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
     <MESSAGE value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
@@ -862,7 +863,8 @@
     <MESSAGE value="学习计划_算法基础：&#10;201. 数字范围按位与&#10;学习计划_数据结构基础：&#10;841. 钥匙和房间&#10;997. 找到小镇的法官&#10;1557. 可以到达所有点的最少点数目&#10;学习计划_编程能力基础：&#10;707. 设计链表&#10;1797. 设计一个验证系统" />
     <MESSAGE value="学习计划_数据结构基础：&#10;451. 根据字符出现频率排序&#10;973. 最接近原点的 K 个点" />
     <MESSAGE value="每日一题：&#10;1003. 检查替换后的词是否有效" />
-    <option name="LAST_COMMIT_MESSAGE" value="每日一题：&#10;1003. 检查替换后的词是否有效" />
+    <MESSAGE value="每日一题：&#10;2432. 处理用时最长的那个任务的员工" />
+    <option name="LAST_COMMIT_MESSAGE" value="每日一题：&#10;2432. 处理用时最长的那个任务的员工" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -937,7 +939,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetString.java</url>
-          <line>715</line>
+          <line>677</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
