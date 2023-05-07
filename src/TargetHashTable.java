@@ -168,6 +168,32 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230507    1010. 总持续时间可被 60 整除的歌曲
+
+    /**
+     * https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/
+     *
+     * @param time 歌曲列表 time 中，第 i 首歌曲的持续时间为 time[i] 秒
+     * @return 返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量
+     */
+    public int numPairsDivisibleBy60(int[] time) {
+        int[] times = new int[60];
+        int res = 0;
+        for (int i = 0; i < time.length; i++) {
+            times[time[i] % 60]++;
+        }
+        int left = 1, right = times.length - 1;
+        while (left < right) {
+            res += times[left] * times[right];
+            left++;
+            right--;
+        }
+        res += times[0]%2==1? (times[0]-1)/2*times[0]:(times[0]/2)*(time[0]-1);
+        res += times[30]%2==1? (times[30]-1)/2*times[30]:(times[30]/2)*(time[30]-1);
+        return res;
+    }
+    //endregion
+
     //region    20230308    2215. 找出两数组的不同
 
     /**
@@ -303,6 +329,6 @@ public class TargetHashTable {
     //endregion
 
     public static void main(String[] args) {
-        new TargetHashTable().containsNearbyAlmostDuplicate(new int[]{1, 5, 9, 1, 5, 9}, 2, 3);
+        new TargetHashTable().numPairsDivisibleBy60(new int[]{30, 20, 150, 100, 40});
     }
 }

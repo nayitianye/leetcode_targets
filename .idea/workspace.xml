@@ -186,7 +186,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TargetArray">
+  <component name="RunManager" selected="应用程序.TargetHashTable">
     <configuration name="TargetArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TargetArray" />
       <module name="leetcode_targets" />
@@ -207,15 +207,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TargetProgrammingSkillsBasic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StudyPlan.TargetProgrammingSkillsBasic" />
+    <configuration name="TargetHashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TargetHashTable" />
       <module name="leetcode_targets" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StudyPlan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -242,11 +236,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.TargetHashTable" />
         <item itemvalue="应用程序.TargetArray" />
         <item itemvalue="应用程序.TargetStack" />
         <item itemvalue="应用程序.TargetSeries.TargetString" />
         <item itemvalue="应用程序.TargetDataStructuresBasic" />
-        <item itemvalue="应用程序.TargetProgrammingSkillsBasic" />
       </list>
     </recent_temporary>
   </component>
@@ -407,14 +401,7 @@
       <workItem from="1682609642306" duration="2076000" />
       <workItem from="1683040606998" duration="4474000" />
       <workItem from="1683296551767" duration="2735000" />
-      <workItem from="1683386683985" duration="1279000" />
-    </task>
-    <task id="LOCAL-00045" summary="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩">
-      <created>1678896033507</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1678896033507</updated>
+      <workItem from="1683386683985" duration="4949000" />
     </task>
     <task id="LOCAL-00046" summary="学习计划_数据结构初级&#10;94. 二叉树的中序遍历&#10;144. 二叉树的前序遍历&#10;145. 二叉树的后序遍历&#10;学习计划_编程能力入门&#10;191. 位1的个数&#10;1281. 整数的各位积和之差&#10;1779. 找到最近的有相同 X 或 Y 坐标的点&#10;1790. 仅执行一次字符串交换能否使两个字符串相等&#10;每日一题：&#10;1615. 最大网络秩">
       <created>1678896885500</created>
@@ -752,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683298168065</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="每日一题：&#10;1419. 数青蛙">
+      <created>1683388491369</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1683388491369</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -839,7 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="学习计划_二分查找基础：&#10;222. 完全二叉树的节点个数&#10;1712. 将数组分成三个子数组的方案数&#10;学习计划_剑指offer:&#10;剑指 Offer 59 - I. 滑动窗口的最大值&#10;面试题59 - II. 队列的最大值&#10;每日一题：&#10;1637. 两点之间不包含任何点的最宽垂直区域" />
     <MESSAGE value="学习计划_算法入门：&#10;191. 位1的个数&#10;231. 2 的幂&#10;学习计划_剑指offer:&#10;剑指 Offer 37. 序列化二叉树&#10;剑指 Offer 38. 字符串的排列&#10;每日一题：&#10;2367. 算术三元组的数目" />
     <MESSAGE value="学习计划_算法入门：&#10;136. 只出现一次的数字&#10;190. 颠倒二进制位&#10;LeetBook_前缀和：&#10;303. 区域和检索 - 数组不可变&#10;1177. 构建回文串检测" />
     <MESSAGE value="学习计划_剑指offer:&#10;剑指 Offer 17. 打印从1到最大的n位数&#10;剑指 Offer 51. 数组中的逆序对&#10;学习计划_LeetCode75_Level2：&#10;19. 删除链表的倒数第 N 个结点&#10;234. 回文链表&#10;学习计划_二分查找基础：&#10;436. 寻找右区间&#10;826. 安排工作以达到最大收益&#10;1508. 子数组和排序后的区间和&#10;1574. 删除最短的子数组使剩余数组有序&#10;每日一题：&#10;1039. 多边形三角剖分的最低得分" />
@@ -864,7 +857,8 @@
     <MESSAGE value="学习计划_数据结构基础：&#10;451. 根据字符出现频率排序&#10;973. 最接近原点的 K 个点" />
     <MESSAGE value="每日一题：&#10;1003. 检查替换后的词是否有效" />
     <MESSAGE value="每日一题：&#10;2432. 处理用时最长的那个任务的员工" />
-    <option name="LAST_COMMIT_MESSAGE" value="每日一题：&#10;2432. 处理用时最长的那个任务的员工" />
+    <MESSAGE value="每日一题：&#10;1419. 数青蛙" />
+    <option name="LAST_COMMIT_MESSAGE" value="每日一题：&#10;1419. 数青蛙" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -918,11 +912,6 @@
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
-          <line>305</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TargetTwoPointers.java</url>
           <line>362</line>
           <option name="timeStamp" value="105" />
@@ -971,6 +960,16 @@
           <url>file://$PROJECT_DIR$/src/TargetArray.java</url>
           <line>933</line>
           <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
+          <line>331</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TargetHashTable.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="153" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
