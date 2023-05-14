@@ -11,9 +11,10 @@ public class TargetArray {
 
     /**
      * https://leetcode.cn/problems/two-sum/
-     * @param nums  整数数组 nums
-     * @param target  整数目标值 target
-     * @return  在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标
+     *
+     * @param nums   整数数组 nums
+     * @param target 整数目标值 target
+     * @return 在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标
      */
     private int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -33,8 +34,8 @@ public class TargetArray {
     /**
      * https://leetcode.cn/problems/3sum/
      *
-     * @param nums  整数数组 nums
-     * @return  所有和为 0 且不重复的三元组
+     * @param nums 整数数组 nums
+     * @return 所有和为 0 且不重复的三元组
      */
     private List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
@@ -745,6 +746,37 @@ public class TargetArray {
     }
     //endregion
 
+    //region    20230514    1054. 距离相等的条形码
+
+    /**
+     * https://leetcode.cn/problems/distant-barcodes/
+     *
+     * @param barcodes 一排条形码 barcodes
+     * @return 重新排列这些条形码，使其中任意两个相邻的条形码不能相等
+     */
+    public int[] rearrangeBarcodes(int[] barcodes) {
+        int n = barcodes.length;
+        Integer[] t = new Integer[n];
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            t[i] = barcodes[i];
+            max = Math.max(max, barcodes[i]);
+        }
+        int[] cnt = new int[max + 1];
+        for (int x : barcodes) {
+            ++cnt[x];
+        }
+        Arrays.sort(t, (a, b) -> cnt[a] == cnt[b] ? a - b : cnt[b] - cnt[a]);
+        int[] ans = new int[n];
+        for (int i = 0, j = 0; i < 2; i++) {
+            for (int k = i; k < n; k += 2) {
+                ans[k] = t[j++];
+            }
+        }
+        return ans;
+    }
+    //endregion
+
     //region    20190926    1064. 不动点
 
     /**
@@ -926,24 +958,25 @@ public class TargetArray {
 
     /**
      * https://leetcode.cn/problems/the-employee-that-worked-on-the-longest-task/
-     * @param n  有 n 位员工，每位员工都有一个从 0 到 n - 1 的唯一 id
-     * @param logs  二维整数数组 logs ，其中 logs[i] = [idi, leaveTimei]
-     * @return  返回处理用时最长的那个任务的员工的 id 。如果存在两个或多个员工同时满足，则返回几人中 最小 的 id
+     *
+     * @param n    有 n 位员工，每位员工都有一个从 0 到 n - 1 的唯一 id
+     * @param logs 二维整数数组 logs ，其中 logs[i] = [idi, leaveTimei]
+     * @return 返回处理用时最长的那个任务的员工的 id 。如果存在两个或多个员工同时满足，则返回几人中 最小 的 id
      */
     public int hardestWorker(int n, int[][] logs) {
-        int maxTime=Integer.MIN_VALUE;
-        int preStart=0;
-        int res=n;
+        int maxTime = Integer.MIN_VALUE;
+        int preStart = 0;
+        int res = n;
         for (int i = 0; i < logs.length; i++) {
-            int interTime=logs[i][1]-preStart;
-            if(interTime==maxTime){
-                res=Math.min(res,logs[i][0]);
+            int interTime = logs[i][1] - preStart;
+            if (interTime == maxTime) {
+                res = Math.min(res, logs[i][0]);
             }
-            if(interTime>maxTime){
-                maxTime=interTime;
-                res=logs[i][0];
+            if (interTime > maxTime) {
+                maxTime = interTime;
+                res = logs[i][0];
             }
-            preStart=logs[i][1];
+            preStart = logs[i][1];
         }
         return res;
     }
@@ -967,6 +1000,6 @@ public class TargetArray {
     }
 
     public static void main(String[] args) {
-        new TargetArray().hardestWorker(10,new int[][]{{1,1},{3,7},{2,12},{7,17}});
+        new TargetArray().hardestWorker(10, new int[][]{{1, 1}, {3, 7}, {2, 12}, {7, 17}});
     }
 }
