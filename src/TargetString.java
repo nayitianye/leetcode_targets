@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class TargetString {
 
-    // region 12. 整数转罗马数字  2021/5/15
+    //region    20210515    12. 整数转罗马数字
 
     /**
      * 罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
@@ -64,7 +64,7 @@ public class TargetString {
     }
     // endregion
 
-    // region 13. 罗马数字转整数 2021/5/15
+    //region   20210515    13. 罗马数字转整数
 
     /**
      * 罗马数字包含以下七种字符: I，V，X，L，C，D 和 M。
@@ -135,7 +135,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 22. 括号生成  2019/10/6  回溯求解
+    //region    20191006    22. 括号生成
 
     /**
      * 给出 n 代表生成括号的对数，请你写出一个函数，
@@ -173,45 +173,7 @@ public class TargetString {
     }
     //endregion
 
-    // region  159. 至多包含两个不同字符的最长子串
-    public int lengthOfLongestSubstringTwoDistinct(String s) {
-        int maxLength = 0;
-        char[] ab = new char[3];
-        int[] index = new int[3];
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = 0; j < ab.length; j++) {
-                if (ab[j] == '\0') {
-                    ab[j] = s.charAt(i);
-                    index[j] = i;
-                    if (j != 2) {
-                        break;
-                    }
-                }
-                if (j == 2) {
-                    int num = index[2] - index[0];
-                    if (num > maxLength) {
-                        maxLength = num;
-                    }
-                    ab[0] = ab[1];
-                    ab[1] = ab[2];
-                    ab[2] = '\0';
-                    index[0] = index[1];
-                    index[1] = index[2];
-                    break;
-                }
-                if (ab[j] == s.charAt(i)) {
-                    break;
-                }
-            }
-        }
-        if (s.length() - index[0] > maxLength) {
-            maxLength = s.length() - index[0];
-        }
-        return maxLength;
-    }
-    // endregion
-
-    //region 186. 翻转字符串里的单词 II  2019/10/6  字符串处理
+    //region    20191006    186. 翻转字符串里的单词 II
 
     /**
      * 给定一个字符串，逐个翻转字符串中的每个单词。
@@ -251,7 +213,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 293. 翻转游戏  2019/10/6  字符串处理
+    //region    20191006    293. 翻转游戏
 
     /**
      * 你和朋友玩一个叫做「翻转游戏」的游戏，游戏规则：给定一个只有 + 和 - 的字符串。
@@ -285,7 +247,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 459. 重复的子字符串  2022.11.07 字符串处理
+    //region    20221107    459. 重复的子字符串
 
     /**
      * 给定一个非空的字符串 s ，检查是否可以通过由它的一个子串重复多次构成。
@@ -316,7 +278,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 521. 最长特殊序列 Ⅰ  2019/10/6  文字游戏
+    //region    20191006    521. 最长特殊序列 Ⅰ
 
     /**
      * 给定两个字符串，你需要从这两个字符串中找出最长的特殊序列。
@@ -341,7 +303,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 544. 输出比赛匹配对  2019/10/6 递归
+    //region    20191006    544. 输出比赛匹配对
 
     /**
      * 在 NBA 季后赛中，我们总是安排较强的队伍对战较弱的队伍，
@@ -408,7 +370,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 557. 反转字符串中的单词 III   2019/10/6  字符串处理
+    //region    20191006    557. 反转字符串中的单词 III
 
     /**
      * 给定一个字符串，你需要反转字符串中每个单词的字符顺序，
@@ -438,7 +400,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 657. 机器人能否返回原点  2019/10/6  字符串处理
+    //region    20191006    657. 机器人能否返回原点
 
     /**
      * 在二维平面上，有一个机器人从原点 (0, 0) 开始。
@@ -486,7 +448,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 686. 重复叠加字符串匹配  2021/12/22 字符串处理
+    //region    20211222    686. 重复叠加字符串匹配
 
     /**
      * 给定两个字符串 a 和 b，寻找重复叠加字符串 a 的最小次数，使得字符串 b 成为叠加后的字符串 a 的子串，如果不存在则返回 -1。
@@ -549,7 +511,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 709. 转换成小写字母   2019/10/6  字符串处理
+    //region    20191006    709. 转换成小写字母
 
     /**
      * 实现函数 ToLowerCase()，该函数接收一个字符串参数 str，
@@ -583,7 +545,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 791. 自定义字符串排序   2019/10/9
+    //region    20191009    791. 自定义字符串排序
 
     /**
      * 字符串S和 T 只包含小写字符。在S中，所有字符只会出现一次。
@@ -636,7 +598,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 804. 唯一摩尔斯密码词  2019/10/3   集合
+    //region    20191003    804. 唯一摩尔斯密码词
 
     /**
      * 国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如: "a" 对应 ".-", "b" 对应 "-...", "c" 对应 "-.-.", 等等。
@@ -677,7 +639,50 @@ public class TargetString {
     }
     //endregion
 
-    //region 890. 查找和替换模式  2019/10/6  双映射处理
+    //region    20230401    831. 隐藏个人信息
+
+    /**
+     * https://leetcode.cn/problems/masking-personal-information/
+     *
+     * @param s 个人信息字符串 s
+     * @return 返回按如下规则 隐藏 个人信息后的结果
+     */
+    public String maskPII(String s) {
+        StringBuilder res = new StringBuilder();
+        if (s.contains("@")) {
+            String[] tempString = s.toLowerCase().split("@");
+            res.append(tempString[0].charAt(0));
+            res.append("*****");
+            res.append(tempString[0].charAt(tempString[0].length() - 1));
+            res.append("@");
+            res.append(tempString[1]);
+        } else {
+            int number = 0;
+            StringBuilder numbers = new StringBuilder();
+            for (int i = 0; i < s.length(); i++) {
+                if (Character.isDigit(s.charAt(i))) {
+                    numbers.append(s.charAt(i));
+                    number++;
+                }
+            }
+            if (number == 10) {
+                res.append("***-***-");
+
+            } else if (number == 11) {
+                res.append("+*-***-***-");
+            } else if (number == 12) {
+                res.append("+**-***-***-");
+            } else {
+                res.append("+**-***-***-");
+            }
+            String numStr = numbers.toString();
+            res.append(numStr.substring(numStr.length() - 4));
+        }
+        return res.toString();
+    }
+    //endregion
+
+    //region    20191006    890. 查找和替换模式
 
     /**
      * 你有一个单词列表 words 和一个模式
@@ -765,7 +770,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 929. 独特的电子邮件地址  2019/10/6  hashset
+    //region    20191006    929. 独特的电子邮件地址
 
     /**
      * 每封电子邮件都由一个本地名称和一个域名组成，以 @ 符号分隔。
@@ -817,33 +822,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 1044. 最长重复子串
-
-    /**
-     * 给你一个字符串 s ，考虑其所有 重复子串 ：即，s 的连续子串，在 s 中出现 2 次或更多次。这些出现之间可能存在重叠。
-     * 返回 任意一个 可能具有最长长度的重复子串。如果 s 不含重复子串，那么答案为 "" 。
-     * <p>
-     * 示例 1：
-     * 输入：s = "banana"
-     * 输出："ana"
-     * <p>
-     * 示例 2：
-     * 输入：s = "abcd"
-     * 输出：""
-     * <p>
-     * 提示：
-     * 2 <= s.length <= 3 * 10^4
-     * s 由小写英文字母组成
-     *
-     * @param s
-     * @return
-     */
-    public String longestDupSubstring(String s) {
-        return s;
-    }
-    //endregion
-
-    //region 1108. IP 地址无效化  2019/10/22  字符串处理
+    //region    20191022    1108. IP 地址无效化
 
     /**
      * 给你一个有效的 IPv4 地址 address，返回这个 IP 地址的无效化版本。
@@ -875,7 +854,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 1119. 删去字符串中的元音
+    //region    20190923    1119. 删去字符串中的元音
 
     /**
      * 给你一个字符串 S，请你删去其中的所有元音字母（ 'a'，'e'，'i'，'o'，'u'），并返回这个新字符串。
@@ -906,7 +885,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 1154. 一年中的第几天  2021/12/22 字符串处理
+    //region    20211222    1154. 一年中的第几天
 
     /**
      * 给你一个字符串 date ，按 YYYY-MM-DD 格式表示一个 现行公元纪年法 日期。请你计算并返回该日期是当年的第几天。
@@ -988,7 +967,7 @@ public class TargetString {
     }
     //endregion
 
-    //region 1165. 单行键盘
+    //region    20190923    1165. 单行键盘
 
     /**
      * 我们定制了一款特殊的力扣键盘，所有的键都排列在一行上。
@@ -1039,12 +1018,86 @@ public class TargetString {
     }
     //endregion
 
+    //region    20230414    1023. 驼峰式匹配
+
+    /**
+     * https://leetcode.cn/problems/camelcase-matching/
+     *
+     * @param queries 待查询列表 queries
+     * @param pattern 模式串 pattern
+     * @return 返回由布尔值组成的答案列表 answer
+     */
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> res = new ArrayList<>(queries.length);
+        for (String query : queries) {
+            res.add(isMatch1(query, pattern));
+        }
+        return res;
+    }
+
+    public Boolean isMatch1(String query, String pattern) {
+        int index = 0;
+        for (char c : query.toCharArray()) {
+            if (index == pattern.length()) {
+                if (c < 'a' || c > 'z') {
+                    return false;
+                }
+            } else {
+                if (c == pattern.charAt(index)) {
+                    index++;
+                } else if (c < 'a' || c > 'z') {
+                    return false;
+                }
+            }
+        }
+        return index == pattern.length();
+    }
+    //endregion
+
+    //region    20230506    1419. 数青蛙
+
+    /**
+     * https://leetcode.cn/problems/minimum-number-of-frogs-croaking/
+     * @param croakOfFrogs  一个字符串 croakOfFrogs
+     * @return  返回模拟字符串中所有蛙鸣所需不同青蛙的最少数目
+     */
+    public int minNumberOfFrogs(String croakOfFrogs) {
+        int c,r,o,a,k;
+        c = 0; r = 0; o = 0; a = 0;k = 0;
+        char []chars = croakOfFrogs.toCharArray();
+        int res = 0;
+        for(int i = 0;i < chars.length;i++){
+            if(chars[i] == 'c'){
+                if(k > 0){k--;}else{res++;}
+                c++;
+            }else if(chars[i] == 'r'){
+                c--;r++;
+            }else if(chars[i] == 'o'){
+                r--;o++;
+            }else if(chars[i] == 'a'){
+                o--;a++;
+            }else if(chars[i] == 'k'){
+                a--;k++;
+            }
+            if(c < 0 || r < 0 || o < 0 || a < 0){
+                break;
+            }
+        }
+        if(c != 0 || r != 0 || o != 0 || a != 0){
+            return -1;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230309    2379. 得到 K 个黑块的最少涂色次数
+
     /**
      * https://leetcode.cn/problems/minimum-recolors-to-get-k-consecutive-black-blocks/
-     * @param blocks  给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。
-     * @param k 给你一个整数 k ，表示想要 连续 黑色块的数目。
-     * @return  请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
+     *
+     * @param blocks 给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。
+     * @param k      给你一个整数 k ，表示想要 连续 黑色块的数目。
+     * @return 请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
      */
     public int minimumRecolors(String blocks, int k) {
         if (blocks.length() < k) {
@@ -1066,15 +1119,11 @@ public class TargetString {
                 }
             }
         }
-        return Math.min(count,min);
+        return Math.min(count, min);
     }
     //endregion
 
     public static void main(String[] args) {
-        //int res=(new TargetString()).lengthOfLongestSubstringTwoDistinct("ccaabbb");
-
-        //int res=(new TargetString().repeatedStringMatch("abccb","cbabccb"));
-        //int res = (new TargetString().dayOfYear("1900-3-26"));
-        new TargetString().minimumRecolors("BBBBBWWBBWBWBWWWBWBWBBBBWBBBBWBWBWBWBWWBWWBWBWWWWBBWWWWBWWWWBWBBWBBWBBWWW", 29);
+        new TargetString().maskPII("1(234)567-890");
     }
 }

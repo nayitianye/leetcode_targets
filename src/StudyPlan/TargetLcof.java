@@ -319,8 +319,7 @@ public class TargetLcof {
             return true;
         }
         board[i][j] = '\0';
-        boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) ||
-                dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
+        boolean res = dfsExist(board, words, i + 1, j, k + 1) || dfsExist(board, words, i - 1, j, k + 1) || dfsExist(board, words, i, j + 1, k + 1) || dfsExist(board, words, i, j - 1, k + 1);
         board[i][j] = words[k];
         return res;
     }
@@ -392,6 +391,36 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230403    剑指 Offer 14- II. 剪绳子 II
+
+    /**
+     * https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/
+     *
+     * @param n 长度为 n 的绳子
+     * @return 请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m - 1] 。请问 k[0]*k[1]*...*k[m - 1] 可能的最大乘积是多少
+     */
+    public int cuttingRope1(int n) {
+        if (n <= 3) {
+            return n - 1;
+        }
+        int b = n % 3, p = 1000000007;
+        long rem = 1, x = 3;
+        for (int i = n / 3 - 1; i > 0; i /= 2) {
+            if (i % 2 == 1) {
+                rem = (rem * x) % p;
+            }
+            x = (x * x) % p;
+        }
+        if (b == 0) {
+            return (int) (rem * 3 % p);
+        }
+        if (b == 1) {
+            return (int) (rem * 4 % p);
+        }
+        return (int) (rem * 6 % p);
+    }
+    //endregion
+
     //region    20230324    剑指 Offer 15. 二进制中1的个数
 
     /**
@@ -433,6 +462,24 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230402    剑指 Offer 17. 打印从1到最大的n位数
+
+    /**
+     * https://leetcode.cn/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
+     *
+     * @param n 数字 n
+     * @return 顺序打印出从 1 到最大的 n 位十进制数
+     */
+    public int[] printNumbers(int n) {
+        int end = (int) Math.pow(10, n) - 1;
+        int[] res = new int[end];
+        for (int i = 0; i < end; i++) {
+            res[i] = i + 1;
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230315    剑指 Offer 18. 删除链表的节点
 
     /**
@@ -452,6 +499,112 @@ public class TargetLcof {
             head.next = deleteNode(head.next, val);
         }
         return head;
+    }
+    //endregion
+
+    //region    20230401    剑指 Offer 19. 正则表达式匹配
+
+    /**
+     * https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/
+     *
+     * @param s 字符串 s
+     * @param p 字符串 p
+     * @return 现一个函数用来匹配包含'. '和'*'的正则表达式
+     */
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+
+        boolean[][] f = new boolean[m + 1][n + 1];
+        f[0][0] = true;
+        for (int i = 0; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                if (p.charAt(j - 1) == '*') {
+                    f[i][j] = f[i][j - 2];
+                    if (matches(s, p, i, j - 1)) {
+                        f[i][j] = f[i][j] || f[i - 1][j];
+                    }
+                } else {
+                    if (matches(s, p, i, j)) {
+                        f[i][j] = f[i - 1][j - 1];
+                    }
+                }
+            }
+        }
+        return f[m][n];
+    }
+
+    public boolean matches(String s, String p, int i, int j) {
+        if (i == 0) {
+            return false;
+        }
+        if (p.charAt(j - 1) == '.') {
+            return true;
+        }
+        return s.charAt(i - 1) == p.charAt(j - 1);
+    }
+    //endregion
+
+    //region    20230329    剑指 Offer 20. 表示数值的字符串
+
+    /**
+     * https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof
+     *
+     * @param s 字符串 s
+     * @return 判断字符串是否表示数值
+     */
+    public boolean isNumber(String s) {
+        Map[] states = {new HashMap<Character, Integer>() {{
+            put(' ', 0);
+            put('s', 1);
+            put('d', 2);
+            put('.', 4);
+        }}, // 0.
+                new HashMap<Character, Integer>() {{
+                    put('d', 2);
+                    put('.', 4);
+                }},                           // 1.
+                new HashMap<Character, Integer>() {{
+                    put('d', 2);
+                    put('.', 3);
+                    put('e', 5);
+                    put(' ', 8);
+                }}, // 2.
+                new HashMap<Character, Integer>() {{
+                    put('d', 3);
+                    put('e', 5);
+                    put(' ', 8);
+                }},              // 3.
+                new HashMap<Character, Integer>() {{
+                    put('d', 3);
+                }},                                        // 4.
+                new HashMap<Character, Integer>() {{
+                    put('s', 6);
+                    put('d', 7);
+                }},                           // 5.
+                new HashMap<Character, Integer>() {{
+                    put('d', 7);
+                }},                                        // 6.
+                new HashMap<Character, Integer>() {{
+                    put('d', 7);
+                    put(' ', 8);
+                }},                           // 7.
+                new HashMap<Character, Integer>() {{
+                    put(' ', 8);
+                }}                                         // 8.
+        };
+        int p = 0;
+        char t;
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') t = 'd';
+            else if (c == '+' || c == '-') t = 's';
+            else if (c == 'e' || c == 'E') t = 'e';
+            else if (c == '.' || c == ' ') t = c;
+            else t = '?';
+            if (!states[p].containsKey(t)) return false;
+            p = (int) states[p].get(t);
+        }
+        return p == 2 || p == 3 || p == 7 || p == 8;
     }
     //endregion
 
@@ -738,6 +891,7 @@ public class TargetLcof {
 
     /**
      * https://leetcode.cn/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/
+     *
      * @param pushed 入栈序列
      * @param popped 出栈序列
      * @return 判断第二个序列是否为该栈的弹出顺序
@@ -1000,6 +1154,86 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230331    剑指 Offer 37. 序列化二叉树
+
+    /**
+     * https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/
+     */
+    public class Codec {
+        public String serialize(TreeNode root) {
+            return rserialize(root, "");
+        }
+
+        public TreeNode deserialize(String data) {
+            String[] dataArray = data.split(",");
+            List<String> dataList = new LinkedList<String>(Arrays.asList(dataArray));
+            return rdeserialize(dataList);
+        }
+
+        public String rserialize(TreeNode root, String str) {
+            if (root == null) {
+                str += "None,";
+            } else {
+                str += str.valueOf(root.val) + ",";
+                str = rserialize(root.left, str);
+                str = rserialize(root.right, str);
+            }
+            return str;
+        }
+
+        public TreeNode rdeserialize(List<String> dataList) {
+            if (dataList.get(0).equals("None")) {
+                dataList.remove(0);
+                return null;
+            }
+
+            TreeNode root = new TreeNode(Integer.valueOf(dataList.get(0)));
+            dataList.remove(0);
+            root.left = rdeserialize(dataList);
+            root.right = rdeserialize(dataList);
+
+            return root;
+        }
+    }
+    //endregion
+
+    //region    20230331    剑指 Offer 38. 字符串的排列
+
+    /**
+     * https://leetcode.cn/problems/zi-fu-chuan-de-pai-lie-lcof
+     *
+     * @param s 一个字符串 s
+     * @return 打印出该字符串中字符的所有排列
+     */
+    public String[] permutation(String s) {
+        result = new ArrayList<>();
+        visited = new boolean[s.length()];
+        char[] payloads = s.toCharArray();
+        Arrays.sort(payloads);
+        permuate(payloads, "");
+
+        return result.stream().toArray(String[]::new);
+    }
+
+    private void permuate(char[] s, String p) {
+        if (p.length() == s.length) {
+            result.add(p);
+            return;
+        }
+        for (int i = 0; i < s.length; i++) {
+            if (visited[i] || (i > 0 && s[i] == s[i - 1] && !visited[i - 1])) {
+                continue;
+            }
+            visited[i] = true;
+            permuate(s, p + s[i]);
+            visited[i] = false;
+        }
+    }
+
+    private List<String> result;
+    private boolean[] visited;
+    //endregion
+
     //region    20230326    剑指 Offer 39. 数组中出现次数超过一半的数字
 
     /**
@@ -1087,6 +1321,51 @@ public class TargetLcof {
             res = Math.max(res, dp[i]);
         }
         return res;
+    }
+    //endregion
+
+    //region    20230403    剑指 Offer 43. 1～n 整数中 1 出现的次数
+
+    /**
+     * https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof
+     * @param n 一个整数 n
+     * @return  求1～n这n个整数的十进制表示中1出现的次数
+     */
+    public int countDigitOne(int n) {
+        // mulk 表示 10^k
+        // 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用10^k）
+        // 但为了让代码看起来更加直观，这里保留了k
+        long mulk = 1;
+        int ans = 0;
+        for (int i = 0; n >= mulk; i++) {
+            ans += (n / (mulk * 10)) * mulk + Math.min(Math.max(n % (mulk * 10) - mulk + 1, 0), mulk);
+            mulk *= 10;
+        }
+        return ans;
+    }
+    //endregion
+
+    //region    20230403    剑指 Offer 44. 数字序列中某一位的数字
+
+    /**
+     * https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
+     *
+     * @param n 第n位
+     * @return 求任意第n位对应的数字
+     */
+    public int findNthDigit(int n) {
+        int d = 1, count = 9;
+        while (n > (long) d * count) {
+            n -= d * count;
+            d++;
+            count *= 10;
+        }
+        int index = n - 1;
+        int start = (int) Math.pow(10, d - 1);
+        int num = start + index / d;
+        int digitIndex = index % d;
+        int digit = (num / (int) Math.pow(10, d - digitIndex - 1)) % 10;
+        return digit;
     }
     //endregion
 
@@ -1193,6 +1472,35 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230401    剑指 Offer 49. 丑数
+
+    /**
+     * https://leetcode.cn/problems/chou-shu-lcof
+     *
+     * @param n 第 n 个丑数
+     * @return 从小到大的顺序的第 n 个丑数
+     */
+    public int nthUglyNumber(int n) {
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        int p2 = 1, p3 = 1, p5 = 1;
+        for (int i = 2; i <= n; i++) {
+            int num2 = dp[p2] * 2, num3 = dp[p3] * 3, num5 = dp[p5] * 5;
+            dp[i] = Math.min(Math.min(num2, num3), num5);
+            if (dp[i] == num2) {
+                p2++;
+            }
+            if (dp[i] == num3) {
+                p3++;
+            }
+            if (dp[i] == num5) {
+                p5++;
+            }
+        }
+        return dp[n];
+    }
+    //endregion
+
     //region    20230308    剑指 Offer 50. 第一个只出现一次的字符
 
     /**
@@ -1213,6 +1521,77 @@ public class TargetLcof {
             }
         }
         return ' ';
+    }
+    //endregion
+
+    //region    20230402    剑指 Offer 51. 数组中的逆序对
+
+    /**
+     * https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
+     *
+     * @param nums 数组 nums
+     * @return 求出这个数组中的逆序对的总数
+     */
+    public int reversePairs(int[] nums) {
+        int len = nums.length;
+
+        if (len < 2) {
+            return 0;
+        }
+
+        int[] copy = new int[len];
+        for (int i = 0; i < len; i++) {
+            copy[i] = nums[i];
+        }
+
+        int[] temp = new int[len];
+        return reversePairs(copy, 0, len - 1, temp);
+    }
+
+    private int reversePairs(int[] nums, int left, int right, int[] temp) {
+        if (left == right) {
+            return 0;
+        }
+
+        int mid = left + (right - left) / 2;
+        int leftPairs = reversePairs(nums, left, mid, temp);
+        int rightPairs = reversePairs(nums, mid + 1, right, temp);
+
+        if (nums[mid] <= nums[mid + 1]) {
+            return leftPairs + rightPairs;
+        }
+
+        int crossPairs = mergeAndCount(nums, left, mid, right, temp);
+        return leftPairs + rightPairs + crossPairs;
+    }
+
+    private int mergeAndCount(int[] nums, int left, int mid, int right, int[] temp) {
+        for (int i = left; i <= right; i++) {
+            temp[i] = nums[i];
+        }
+
+        int i = left;
+        int j = mid + 1;
+
+        int count = 0;
+        for (int k = left; k <= right; k++) {
+
+            if (i == mid + 1) {
+                nums[k] = temp[j];
+                j++;
+            } else if (j == right + 1) {
+                nums[k] = temp[i];
+                i++;
+            } else if (temp[i] <= temp[j]) {
+                nums[k] = temp[i];
+                i++;
+            } else {
+                nums[k] = temp[j];
+                j++;
+                count += (mid - i + 1);
+            }
+        }
+        return count;
     }
     //endregion
 
@@ -1515,6 +1894,98 @@ public class TargetLcof {
     }
     //endregion
 
+    //region    20230330    剑指 Offer 59 - I. 滑动窗口的最大值
+
+    /**
+     * https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof
+     *
+     * @param nums 一个数组 nums
+     * @param k    滑动窗口的大小 k
+     * @return
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] != o2[0] ? o2[0] - o1[0] : o2[1] - o1[1];
+            }
+        });
+        for (int i = 0; i < k; i++) {
+            pq.offer(new int[]{nums[i], i});
+        }
+        int[] res = new int[n - k + 1];
+        res[0] = pq.peek()[0];
+        for (int i = k; i < n; i++) {
+            pq.offer(new int[]{nums[i], i});
+            while (pq.peek()[1] <= i - k) {
+                pq.poll();
+            }
+            res[i - k + 1] = pq.peek()[0];
+        }
+        return res;
+    }
+    //endregion
+
+    //region    20230330    面试题59 - II. 队列的最大值
+
+    /**
+     * https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof
+     */
+    class MaxQueue {
+
+        int[] q = new int[20000];
+        int begin = 0, end = 0;
+
+        public MaxQueue() {
+
+        }
+
+        public int max_value() {
+            int ans = -1;
+            for (int i = begin; i != end; ++i) {
+                ans = Math.max(ans, q[i]);
+            }
+            return ans;
+        }
+
+        public void push_back(int value) {
+            q[end++] = value;
+        }
+
+        public int pop_front() {
+            if (begin == end) {
+                return -1;
+            }
+            return q[begin++];
+        }
+    }
+    //endregion
+
+    //region    20230401    剑指 Offer 60. n个骰子的点数
+
+    /**
+     * https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/
+     *
+     * @param n 输入n
+     * @return 打印出s的所有可能的值出现的概率
+     */
+    public double[] dicesProbability(int n) {
+        double[] dp = new double[6];
+        Arrays.fill(dp, 1.0 / 6.0);
+        for (int i = 2; i <= n; i++) {
+            double[] temp = new double[5 * i + 1];
+            for (int j = 0; j < dp.length; j++) {
+                for (int k = 0; k < 6; k++) {
+                    temp[j + k] += dp[j] / 6.0;
+                }
+            }
+            dp = temp;
+        }
+        return dp;
+    }
+    //endregion
+
     //region    20230327    剑指 Offer 62. 圆圈中最后剩下的数字
 
     /**
@@ -1648,6 +2119,44 @@ public class TargetLcof {
             answer[i] = R[i] * L[i];
         }
         return answer;
+    }
+    //endregion
+
+    //region    20230329    面试题67. 把字符串转换成整数
+
+    /**
+     * https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof
+     *
+     * @param str 字符串
+     * @return 一个函数 StrToInt，实现把字符串转换成整数这个功能
+     */
+    public int strToInt(String str) {
+        int res = 0, bndry = Integer.MAX_VALUE / 10;
+        int i = 0, sign = 1, length = str.length();
+        if (length == 0) {
+            return 0;
+        }
+        while (str.charAt(i) == ' ') {
+            if (++i == length) {
+                return 0;
+            }
+        }
+        if (str.charAt(i) == '-') {
+            sign = -1;
+        }
+        if (str.charAt(i) == '-' || str.charAt(i) == '+') {
+            i++;
+        }
+        for (int j = i; j < length; j++) {
+            if (str.charAt(j) < '0' || str.charAt(j) > '9') {
+                break;
+            }
+            if (res > bndry || res == bndry && str.charAt(j) > '7') {
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + (str.charAt(j) - '0');
+        }
+        return sign * res;
     }
     //endregion
 

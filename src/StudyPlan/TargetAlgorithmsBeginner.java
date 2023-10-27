@@ -1,9 +1,6 @@
 package StudyPlan;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @author yyb
@@ -15,6 +12,10 @@ public class TargetAlgorithmsBeginner {
     //region    自定义数据结构
     public class Node {
         public int val;
+
+        public Node left;
+        public Node right;
+        public Node next;
         public List<Node> children;
 
         public Node() {
@@ -27,6 +28,13 @@ public class TargetAlgorithmsBeginner {
         public Node(int _val, List<Node> _children) {
             val = _val;
             children = _children;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
         }
     }
 
@@ -133,6 +141,7 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/merge-two-sorted-lists
+     *
      * @param list1 链表 list1
      * @param list2 链表 list2
      * @return 返回两个链表的合并链表
@@ -180,6 +189,188 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return nums[right] < target ? right + 1 : right;
+    }
+    //endregion
+
+    //region    20230329    46. 全排列
+
+    /**
+     * https://leetcode.cn/problems/permutations/
+     *
+     * @param nums 不含重复数字的数组 num
+     * @return 返回其 所有可能的全排列
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int num : nums) {
+            output.add(num);
+        }
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
+    }
+
+    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
+        //所有数都填完了
+        if (first == n) {
+            res.add(new ArrayList<>(output));
+        }
+        for (int i = first; i < n; i++) {
+            //动态维护数组
+            Collections.swap(output, first, i);
+            //继续递归填下一个数
+            backtrack(n, output, res, first + 1);
+            //撤销操作
+            Collections.swap(output, first, i);
+        }
+    }
+    //endregion
+
+    //region    20230330    70. 爬楼梯
+    HashMap<Integer, Integer> hashMapClimbStairs = new HashMap<>();
+
+    /**
+     * https://leetcode.cn/problems/climbing-stairs/
+     *
+     * @param n n 阶楼梯
+     * @return 多少种方法
+     */
+    public int climbStairs(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 2;
+        } else {
+            if (hashMapClimbStairs.containsKey(n)) {
+                return hashMapClimbStairs.get(n);
+            } else {
+                hashMapClimbStairs.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+                return hashMapClimbStairs.get(n);
+            }
+        }
+    }
+    //endregion
+
+    //region    20230329    77. 组合
+
+    /**
+     * https://leetcode.cn/problems/combinations/
+     *
+     * @param n 整数 n
+     * @param k 整数 k
+     * @return 回范围 [1, n] 中所有可能的 k 个数的组合
+     */
+    public List<List<Integer>> combine(int n, int k) {
+        dfs(1, n, k);
+        return ans;
+    }
+
+    public void dfs(int cur, int n, int k) {
+        //剪枝；temp 长度加上区间【cur,n】的长度小于 k, 不可能构造出长度为 k 的temp;
+        if (temp.size() + (n - cur + 1) < k) {
+            return;
+        }
+        // 记录合法的答案
+        if (temp.size() == k) {
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        //考虑选择当前位置
+        temp.add(cur);
+        dfs(cur + 1, n, k);
+        temp.remove(temp.size() - 1);
+        dfs(cur + 1, n, k);
+    }
+
+    List<Integer> temp = new ArrayList<>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    //endregion
+
+    //region    20230328    116. 填充每个节点的下一个右侧节点指针
+
+    /**
+     * https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/description/
+     *
+     * @param root 完美二叉树 root
+     * @return
+     */
+    public Node connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+
+        // 初始化队列同时将第一层节点加入队列中，即根节点
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        // 外层的 while 循环迭代的是层数
+        while (!queue.isEmpty()) {
+            // 记录当前队列大小
+            int size = queue.size();
+            // 遍历这一层的所有节点
+            for (int i = 0; i < size; i++) {
+
+                // 从队首取出元素
+                Node node = queue.poll();
+
+                // 连接
+                if (i < size - 1) {
+                    node.next = queue.peek();
+                }
+
+                // 拓展下一层节点
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+        }
+        // 返回根节点
+        return root;
+    }
+    //endregion
+
+    //region    20230330    120. 三角形最小路径和
+
+    /**
+     * https://leetcode.cn/problems/triangle/
+     *
+     * @param triangle 三角形 triangle
+     * @return 自顶向下的最小路径和
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] dp = new int[triangle.size()];
+        dp[0] = triangle.get(0).get(0);
+        for (int i = 1; i < triangle.size(); i++) {
+            dp[i] = dp[i - 1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; --j) {
+                dp[j] = Math.min(dp[j - 1], dp[j]) + triangle.get(i).get(j);
+            }
+            dp[0] += triangle.get(i).get(0);
+        }
+        int minTotal = dp[0];
+        for (int i = 1; i < triangle.size(); i++) {
+            minTotal = Math.min(minTotal, dp[i]);
+        }
+        return minTotal;
+    }
+    //endregion
+
+    //region    20230401    136. 只出现一次的数字
+
+    /**
+     * https://leetcode.cn/problems/single-number/
+     * @param nums   非空 整数数组 nums
+     * @return  找出那个只出现了一次的元素
+     */
+    public int singleNumber(int[] nums) {
+        int res=0;
+        for (int num:nums) {
+            res^=num;
+        }
+        return res;
     }
     //endregion
 
@@ -237,12 +428,75 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230401    190. 颠倒二进制位
+
+    /**
+     * https://leetcode.cn/problems/reverse-bits/
+     * @param n  给定的 32 位无符号整数 n
+     * @return  颠倒给定的 32 位无符号整数的二进制位
+     */
+    public int reverseBits(int n) {
+        int rev = 0;
+        for (int i = 0; i < 32 && n != 0; ++i) {
+            rev |= (n & 1) << (31 - i);
+            n >>>= 1;
+        }
+        return rev;
+    }
+    //endregion
+
+    //region    20230330    191. 位1的个数
+
+    /**
+     * https://leetcode.cn/problems/number-of-1-bits/description/
+     *
+     * @param n 输入是一个无符号整数（以二进制串的形式）
+     * @return 返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）
+     */
+    public int hammingWeight(int n) {
+        int ret = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & (1 << i)) != 0) {
+                ret++;
+            }
+        }
+        return ret;
+    }
+    //endregion
+
+    //region    20230330    198. 打家劫舍
+
+    /**
+     * https://leetcode.cn/problems/house-robber/
+     *
+     * @param nums 一个代表每个房屋存放金额的非负整数数
+     * @return 计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额
+     */
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    // endregion
+
     //region    20230328    206. 反转链表
 
     /**
      * https://leetcode.cn/problems/reverse-linked-list
-     * @param head  单链表的头节点 head
-     * @return  反转链表，并返回反转后的链表
+     *
+     * @param head 单链表的头节点 head
+     * @return 反转链表，并返回反转后的链表
      */
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
@@ -275,6 +529,18 @@ public class TargetAlgorithmsBeginner {
             }
         }
         return false;
+    }
+    //endregion
+
+    //region    20230331    231. 2 的幂
+
+    /**
+     * https://leetcode.cn/problems/power-of-two/
+     * @param n 一个整数 n
+     * @return  判断该整数是否是 2 的幂次方
+     */
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
     }
     //endregion
 
@@ -384,6 +650,47 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230328    542. 01 矩阵
+
+    /**
+     * https://leetcode.cn/problems/01-matrix/
+     *
+     * @param mat 由 0 和 1 组成的矩阵 mat
+     * @return 请输出一个大小相同的矩阵，其中每一个格子是 mat 中对应位置元素到最近的 0 的距离。
+     */
+    public int[][] updateMatrix(int[][] mat) {
+        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int m = mat.length, n = mat[0].length;
+        int[][] dist = new int[m][n];
+        boolean[][] seen = new boolean[m][n];
+        Queue<int[]> queue = new LinkedList<int[]>();
+        // 将所有的 0 添加进初始队列中
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                    seen[i][j] = true;
+                }
+            }
+        }
+        // 广度优先搜索
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            int i = cell[0], j = cell[1];
+            for (int k = 0; k < 4; k++) {
+                int ni = i + dirs[k][0];
+                int nj = j + dirs[k][1];
+                if (ni >= 0 && ni < m && nj >= 0 && nj < n && !seen[ni][nj]) {
+                    dist[ni][nj] = dist[i][j] + 1;
+                    queue.offer(new int[]{ni, nj});
+                    seen[ni][nj] = true;
+                }
+            }
+        }
+        return dist;
+    }
+    //endregion
+
     //region    20230322    557. 反转字符串中的单词 III
 
     /**
@@ -451,9 +758,10 @@ public class TargetAlgorithmsBeginner {
 
     /**
      * https://leetcode.cn/problems/merge-two-binary-trees/
+     *
      * @param root1 二叉树： root1
      * @param root2 二叉树： root1
-     * @return  返回合并后的二叉树
+     * @return 返回合并后的二叉树
      */
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
@@ -559,6 +867,35 @@ public class TargetAlgorithmsBeginner {
     }
     //endregion
 
+    //region    20230329    784. 字母大小写全排列
+
+    /**
+     * https://leetcode.cn/problems/letter-case-permutation
+     *
+     * @param s 字符串 s
+     * @return 通过将字符串 s 中的每个字母转变大小写，我们可以获得一个新的字符串,返回 所有可能得到的字符串集合
+     */
+    public List<String> letterCasePermutation(String s) {
+        List<String> ans = new ArrayList<>();
+        dfsPermutation(s.toCharArray(), 0, ans);
+        return ans;
+    }
+
+    public void dfsPermutation(char[] arr, int pos, List<String> res) {
+        while (pos < arr.length && Character.isDigit(arr[pos])) {
+            pos++;
+        }
+        if (pos == arr.length) {
+            res.add(new String(arr));
+            return;
+        }
+        arr[pos] ^= 32;
+        dfsPermutation(arr, pos + 1, res);
+        arr[pos] ^= 32;
+        dfsPermutation(arr, pos + 1, res);
+    }
+    //endregion
+
     //region    20230323    876. 链表的中间结点
 
     /**
@@ -605,6 +942,56 @@ public class TargetAlgorithmsBeginner {
             pos--;
         }
         return res;
+    }
+    //endregion
+
+    //region    20230328    994. 腐烂的橘子
+
+    /**
+     * https://leetcode.cn/problems/rotting-oranges/
+     *
+     * @param grid 定的 m x n 网格 grid
+     * @return 直到单元格中没有新鲜橘子为止所必须经过的最小分钟数.
+     */
+    public int orangesRotting(int[][] grid) {
+        int[] dr = new int[]{-1, 0, 1, 0};
+        int[] dc = new int[]{0, -1, 0, 1};
+        int row = grid.length, col = grid[0].length;
+        Queue<Integer> queue = new ArrayDeque<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 2) {
+                    int code = i * col + j;
+                    queue.add(code);
+                    map.put(code, 0);
+                }
+            }
+        }
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int code = queue.remove();
+            int r = code / col, c = code % col;
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                if (0 <= nr && nr < row && 0 <= nc && nc < col && grid[nr][nc] == 1) {
+                    grid[nr][nc] = 2;
+                    int ncode = nr * col + nc;
+                    queue.add(ncode);
+                    map.put(ncode, map.get(code) + 1);
+                    ans = map.get(ncode);
+                }
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    return -1;
+                }
+            }
+        }
+        return ans;
     }
     //endregion
 

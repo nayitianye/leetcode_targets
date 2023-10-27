@@ -9,30 +9,13 @@ import java.util.List;
  */
 public class TargetMath {
 
-    //region 66. 加一 2021/10/21
+    //region    20211021    66. 加一
 
     /**
-     * 给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
-     * 最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
-     * 你可以假设除了整数 0 之外，这个整数不会以零开头。
-     * 示例 1：
-     * 输入：digits = [1,2,3]
-     * 输出：[1,2,4]
-     * 解释：输入数组表示数字 123。
-     * 示例 2：
-     * 输入：digits = [4,3,2,1]
-     * 输出：[4,3,2,2]
-     * 解释：输入数组表示数字 4321。
-     * 示例 3：
-     * 输入：digits = [0]
-     * 输出：[1]
-     * <p>
-     * 提示：
-     * 1 <= digits.length <= 100
-     * 0 <= digits[i] <= 9
+     * https://leetcode.cn/problems/plus-one/
      *
-     * @param digits
-     * @return
+     * @param digits 由整数组成的非空数组 digits
+     * @return 一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一
      */
     public int[] plusOne(int[] digits) {
         int n = digits.length;
@@ -52,24 +35,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 96. 不同的二叉搜索树  20230226
+    //region    20230226    96. 不同的二叉搜索树
 
     /**
-     * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？
-     * 返回满足题意的二叉搜索树的种数。
-     * <p>
-     * 示例 1：
-     * 输入：n = 3
-     * 输出：5
-     * 示例 2：
-     * 输入：n = 1
-     * 输出：1
-     * <p>
-     * 提示：
-     * 1 <= n <= 19
+     * https://leetcode.cn/problems/unique-binary-search-trees/
      *
-     * @param n 整数n
-     * @return
+     * @param n 整数 n
+     * @return 返回满足题意的二叉搜索树的种数
      */
     public int numTrees(int n) {
         //卡塔兰数  C0=1 Cn+1=2*(2*n+1)/(n+2)*Cn
@@ -82,60 +54,39 @@ public class TargetMath {
     }
     //endregion
 
-    //region 171. Excel表列序号
+    //region    20190922    171. Excel表列序号
 
     /**
-     * 给定一个Excel表格中的列名称，返回其相应的列序号。
-     * 例如，
-     * A -> 1
-     * B -> 2
-     * C -> 3
-     * ...
-     * Z -> 26
-     * AA -> 27
-     * AB -> 28
-     * ...
-     * <p>
-     * 示例 1:
-     * 输入: "A"
-     * 输出: 1
-     * <p>
-     * 示例 2:
-     * 输入: "AB"
-     * 输出: 28
-     * <p>
-     * 示例 3:
-     * 输入: "ZY"
-     * 输出: 701
+     * https://leetcode.cn/problems/excel-sheet-column-number/
      *
-     * @param s
-     * @return
+     * @param columnTitle 一个字符串 columnTitle ，表示 Excel 表格中的列名称
+     * @return 返回该列名称对应的列序号
      */
-    private int titleToNumber(String s) {
+    private int titleToNumber(String columnTitle) {
         int res = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int flag = s.charAt(i) - 'A' + 1;
+        for (int i = 0; i < columnTitle.length(); i++) {
+            int flag = columnTitle.charAt(i) - 'A' + 1;
             res = res * 26 + flag;
         }
         return res;
     }
     //endregion
 
-    //region 258. 各位相加
+    //region    20190922    258. 各位相加
 
     /**
-     * 给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。
-     * 示例:
-     * 输入: 38
-     * 输出: 2
-     * 解释: 各位相加的过程为：3 + 8 = 11, 1 + 1 = 2。 由于 2 是一位数，所以返回 2。
+     * https://leetcode.cn/problems/add-digits/
      *
-     * @param num
-     * @return
+     * @param num 一个非负整数 num
+     * @return 反复将各个位上的数字相加，直到结果为一位数。返回这个结果
      */
     private int addDigits(int num) {
-        if (num != 0 && num % 9 == 0) return 9;//若括号内为9，原本应该返回9，但经过模运算变为0，故要考虑此情况
-        else return num % 9;
+        //若括号内为9，原本应该返回9，但经过模运算变为0，故要考虑此情况
+        if (num != 0 && num % 9 == 0) {
+            return 9;
+        } else {
+            return num % 9;
+        }
     }
 
     /**
@@ -174,30 +125,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 263. 丑数 20230226
+    //region    20230226    263. 丑数
 
     /**
-     * 丑数 就是只包含质因数 2、3 和 5 的正整数。
-     * 给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
-     * <p>
-     * 示例 1：
-     * 输入：n = 6
-     * 输出：true
-     * 解释：6 = 2 × 3
-     * 示例 2：
-     * 输入：n = 1
-     * 输出：true
-     * 解释：1 没有质因数，因此它的全部质因数是 {2, 3, 5} 的空集。习惯上将其视作第一个丑数。
-     * 示例 3：
-     * 输入：n = 14
-     * 输出：false
-     * 解释：14 不是丑数，因为它包含了另外一个质因数 7 。
-     * <p>
-     * 提示：
-     * -2^31 <= n <= 2^31 - 1
+     * https://leetcode.cn/problems/ugly-number/
      *
-     * @param n
-     * @return
+     * @param n 一个整数 n
+     * @return 判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false
      */
     public boolean isUgly(int n) {
         if (n < 1) {
@@ -218,29 +152,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 453.最小操作次数使数组元素相等 20211021
+    //region    20211020    453.最小操作次数使数组元素相等
 
     /**
-     * 给你一个长度为 n 的整数数组，每次操作将会使 n - 1 个元素增加 1 。返回让数组所有元素相等的最小操作次数。
-     * <p>
-     * 示例 1：
-     * 输入：nums = [1,2,3]
-     * 输出：3
-     * 解释：
-     * 只需要3次操作（注意每次操作会增加两个元素的值）：
-     * [1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4]
-     * 示例 2：
-     * 输入：nums = [1,1,1]
-     * 输出：0
-     * <p>
-     * 提示：
-     * n == nums.length
-     * 1 <= nums.length <= 10^5
-     * -10^9 <= nums[i] <= 10^9
-     * 答案保证符合 32-bit 整数
+     * https://leetcode.cn/problems/minimum-moves-to-equal-array-elements/
      *
-     * @param nums
-     * @return
+     * @param nums 长度为 n 的整数数组 nums
+     * @return 返回让数组所有元素相等的最小操作次数
      */
     public int minMoves(int[] nums) {
         int minNum = Arrays.stream(nums).min().getAsInt();
@@ -252,56 +170,14 @@ public class TargetMath {
     }
     //endregion
 
-    //region  640.求解方程 2022.08.10
+    //region    20190922    728. 自除数
 
     /**
-     * 求解一个给定的方程，将x以字符串 "x=#value" 的形式返回。该方程仅包含 '+' ， '-' 操作，变量 x 和其对应系数。
-     * 如果方程没有解，请返回 "No solution" 。如果方程有无限解，则返回 “Infinite solutions” 。
-     * 题目保证，如果方程中只有一个解，则 'x' 的值是一个整数。
-     * <p>
-     * 示例 1：
-     * 输入: equation = "x+5-3+x=6+x-2"
-     * 输出: "x=2"
-     * 示例 2:
-     * 输入: equation = "x=x"
-     * 输出: "Infinite solutions"
-     * 示例 3:
-     * 输入: equation = "2x=x"
-     * 输出: "x=0"
-     * <p>
-     * 提示:
-     * 3 <= equation.length <= 1000
-     * equation 只有一个 '='.
-     * equation 方程由整数组成，其绝对值在 [0, 100] 范围内，不含前导零和变量 'x' 。
+     * https://leetcode.cn/problems/self-dividing-numbers/
      *
-     * @param equation
-     * @return
-     */
-    public String solveEquation(String equation) {
-        return "";
-    }
-    //endregion
-
-    //region 728. 自除数
-
-    /**
-     * 自除数 是指可以被它包含的每一位数除尽的数。
-     * 例如，128 是一个自除数，因为 128 % 1 == 0，128 % 2 == 0，
-     * 128 % 8 == 0。
-     * 还有，自除数不允许包含 0 。
-     * 给定上边界和下边界数字，输出一个列表，
-     * 列表的元素是边界（含边界）内所有的自除数。
-     * <p>
-     * 示例 1：
-     * 输入：
-     * 上边界left = 1, 下边界right = 22
-     * 输出： [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
-     * 注意：
-     * 每个输入参数的边界满足 1 <= left <= right <= 10000。
-     *
-     * @param left
-     * @param right
-     * @return
+     * @param left  整数 left
+     * @param right 整数 right
+     * @return 返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数
      */
     private List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> list = new ArrayList<>();
@@ -329,36 +205,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 877. 石子游戏   2019/10/22  动态规划
+    //region    20191022    877. 石子游戏
 
     /**
-     * 亚历克斯和李用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 piles[i] 。
-     * 游戏以谁手中的石子最多来决出胜负。石子的总数是奇数，所以没有平局。
-     * 亚历克斯和李轮流进行，亚历克斯先开始。
-     * 每回合，玩家从行的开始或结束处取走整堆石头。
-     * 这种情况一直持续到没有更多的石子堆为止，此时手中石子最多的玩家获胜。
-     * <p>
-     * 假设亚历克斯和李都发挥出最佳水平，当亚历克斯赢得比赛时返回 true ，当李赢得比赛时返回 false 。
-     * <p>
-     * <p>
-     * 示例：
-     * 输入：[5,3,4,5]
-     * 输出：true
-     * 解释：
-     * 亚历克斯先开始，只能拿前 5 颗或后 5 颗石子 。
-     * 假设他取了前 5 颗，这一行就变成了 [3,4,5] 。
-     * 如果李拿走前 3 颗，那么剩下的是 [4,5]，亚历克斯拿走后 5 颗赢得 10 分。
-     * 如果李拿走后 5 颗，那么剩下的是 [3,4]，亚历克斯拿走后 4 颗赢得 9 分。
-     * 这表明，取前 5 颗石子对亚历克斯来说是一个胜利的举动，所以我们返回 true 。
-     * <p>
-     * 提示：
-     * 2 <= piles.length <= 500
-     * piles.length 是偶数。
-     * 1 <= piles[i] <= 500
-     * sum(piles) 是奇数。
+     * https://leetcode.cn/problems/stone-game/
      *
-     * @param piles
-     * @return
+     * @param piles 一共有偶数堆石子，排成一行；每堆都有 正 整数颗石子，数目为 piles[i]
+     * @return 当 Alice 赢得比赛时返回 true ，当 Bob 赢得比赛时返回 false
      */
     public boolean stoneGame(int[] piles) {
         int N = piles.length;
@@ -379,40 +232,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 883. 三维形体投影面积
+    //region    20190922    883. 三维形体投影面积
 
     /**
-     * 在 N * N 的网格中，我们放置了一些与 x，y，z 三轴对齐的 1 * 1 * 1 立方体。
-     * 每个值 v = grid[i][j] 表示 v 个正方体叠放在单元格 (i, j) 上。
-     * 现在，我们查看这些立方体在 xy、yz 和 zx 平面上的投影。
-     * 投影就像影子，将三维形体映射到一个二维平面上。
-     * 在这里，从顶部、前面和侧面看立方体时，我们会看到“影子”。
-     * 返回所有三个投影的总面积。
-     * <p>
-     * 示例 1：
-     * 输入：[[2]]
-     * 输出：5
-     * <p>
-     * 示例 2：
-     * 输入：[[1,2],[3,4]]
-     * 输出：17
-     * 解释：
-     * 这里有该形体在三个轴对齐平面上的三个投影(“阴影部分”)。
-     * <p>
-     * 示例 3：
-     * 输入：[[1,0],[0,2]]
-     * 输出：8
-     * <p>
-     * 示例 4：
-     * 输入：[[1,1,1],[1,0,1],[1,1,1]]
-     * 输出：14
-     * <p>
-     * 示例 5：
-     * 输入：[[2,2,2],[2,1,2],[2,2,2]]
-     * 输出：21
+     * https://leetcode.cn/problems/projection-area-of-3d-shapes/
      *
-     * @param grid
-     * @return
+     * @param grid 网格 grid
+     * @return 返回所有三个投影的总面积
      */
     private int projectionArea(int[][] grid) {
         int N = grid.length;
@@ -431,46 +257,24 @@ public class TargetMath {
     }
     //endregion
 
-    //region 908. 最小差值 I
+    //region    20190922    908. 最小差值 I
 
     /**
-     * 给定一个整数数组 A，对于每个整数 A[i]，我们可以选择任意 x 满足 -K <= x <= K，并将 x 加到 A[i] 中。
-     * 在此过程之后，我们得到一些数组 B。
-     * 返回 B 的最大值和 B 的最小值之间可能存在的最小差值。
-     * <p>
-     * 示例 1：
-     * 输入：A = [1], K = 0
-     * 输出：0
-     * 解释：B = [1]
-     * <p>
-     * 示例 2：
-     * 输入：A = [0,10], K = 2
-     * 输出：6
-     * 解释：B = [2,8]
-     * <p>
-     * 示例 3：
-     * 输入：A = [1,3,6], K = 3
-     * 输出：0
-     * 解释：B = [3,3,3] 或 B = [4,4,4]
-     * <p>
-     * 提示：
-     * 1 <= A.length <= 10000
-     * 0 <= A[i] <= 10000
-     * 0 <= K <= 10000
+     * https://leetcode.cn/problems/smallest-range-i/
      *
-     * @param A
-     * @param K
-     * @return
+     * @param nums 整数数组 nums
+     * @param K    整数 k
+     * @return 返回 nums 的最低 分数
      */
-    private int smallestRangeI(int[] A, int K) {
+    private int smallestRangeI(int[] nums, int K) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] > max) {
-                max = A[i];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
             }
-            if (A[i] < min) {
-                min = A[i];
+            if (nums[i] < min) {
+                min = nums[i];
             }
         }
         int sum = max - min;
@@ -478,34 +282,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 942. 增减字符串匹配
+    //region    20190926    942. 增减字符串匹配
 
     /**
-     * 给定只含 "I"（增大）或 "D"（减小）的字符串 S ，
-     * 令 N = S.length。
-     * 返回 [0, 1, ..., N] 的任意排列 A
-     * 使得对于所有 i = 0, ..., N-1，都有：
-     * 如果 S[i] == "I"，那么 A[i] < A[i+1]
-     * 如果 S[i] == "D"，那么 A[i] > A[i+1]
-     * <p>
-     * 示例 1：
-     * 输出："IDID"
-     * 输出：[0,4,1,3,2]
-     * <p>
-     * 示例 2：
-     * 输出："III"
-     * 输出：[0,1,2,3]
-     * <p>
-     * 示例 3：
-     * 输出："DDI"
-     * 输出：[3,2,0,1]
-     * <p>
-     * 提示：
-     * 1 <= S.length <= 1000
-     * S 只包含字符 "I" 或 "D"。
+     * https://leetcode.cn/problems/di-string-match/
      *
-     * @param S
-     * @return
+     * @param S 范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s
+     * @return 给定一个字符串 s ，重构排列 perm 并返回它
      */
     private int[] diStringMatch(String S) {
         int left = S.length();
@@ -525,33 +308,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 1025. 除数博弈
+    //region    20190922    1025. 除数博弈
 
     /**
-     * 爱丽丝和鲍勃一起玩游戏，他们轮流行动。爱丽丝先手开局。
-     * 最初，黑板上有一个数字 N 。在每个玩家的回合，玩家需要执行以下操作：
-     * 选出任一 x，满足 0 < x < N 且 N % x == 0 。
-     * 用 N - x 替换黑板上的数字 N 。
-     * 如果玩家无法执行这些操作，就会输掉游戏。
-     * <p>
-     * 只有在爱丽丝在游戏中取得胜利时才返回 True，否则返回 false。
-     * 假设两个玩家都以最佳状态参与游戏。
-     * <p>
-     * 示例 1：
-     * 输入：2
-     * 输出：true
-     * 解释：爱丽丝选择 1，鲍勃无法进行操作。
-     * 示例 2：
-     * <p>
-     * 输入：3
-     * 输出：false
-     * 解释：爱丽丝选择 1，鲍勃也选择 1，然后爱丽丝无法进行操作。
-     * <p>
-     * 提示：
-     * 1 <= N <= 1000
+     * https://leetcode.cn/problems/divisor-game/
      *
-     * @param N
-     * @return
+     * @param N 一个数字 n
+     * @return 在爱丽丝在游戏中取得胜利时才返回 true
      */
     private boolean divisorGame(int N) {
         return N % 2 == 0;
@@ -560,8 +323,8 @@ public class TargetMath {
     /**
      * 动态规划求解
      *
-     * @param N
-     * @return
+     * @param N 一个数字 n
+     * @return 在爱丽丝在游戏中取得胜利时才返回 true
      */
     private boolean divisorGame2(int N) {
         boolean dp[] = new boolean[N + 1];
@@ -580,30 +343,38 @@ public class TargetMath {
     }
     //endregion
 
-    //region 1134. 阿姆斯特朗数
+    //region    20230411    1041. 困于环中的机器人
 
     /**
-     * 假设存在一个 k 位数 N，其每一位上的数字的 k 次幂的总和也是 N，
-     * 那么这个数是阿姆斯特朗数。
-     * 给你一个正整数 N，让你来判定他是否是阿姆斯特朗数，是则返回 true，
-     * 不是则返回 false。
-     * <p>
-     * 示例 1：
-     * 输入：153
-     * 输出：true
-     * 示例：
-     * 153 是一个 3 位数，且 153 = 1^3 + 5^3 + 3^3。
-     * <p>
-     * 示例 2：
-     * 输入：123
-     * 输出：false
-     * 解释：
-     * 123 是一个 3 位数，且 123 != 1^3 + 2^3 + 3^3 = 36。
-     * 提示：
-     * 1 <= N <= 10^8
+     * https://leetcode.cn/problems/robot-bounded-in-circle/
      *
-     * @param N
-     * @return
+     * @param instructions 执行指令 instructions
+     * @return 只有在平面中存在环使得机器人永远无法离开时，返回 true。否则，返回 fals
+     */
+    public boolean isRobotBounded(String instructions) {
+        int k = 0;
+        int[] dist = new int[4];
+        for (int i = 0; i < instructions.length(); i++) {
+            char c = instructions.charAt(i);
+            if (c == 'L') {
+                k = (k + 1) % 4;
+            } else if (c == 'R') {
+                k = (k + 3) % 4;
+            } else {
+                ++dist[k];
+            }
+        }
+        return (dist[0] == dist[2] && dist[1] == dist[3]) || (k != 0);
+    }
+    //endregion
+
+    //region    20190922    1134. 阿姆斯特朗数
+
+    /**
+     * https://leetcode.cn/problems/armstrong-number/
+     *
+     * @param N 一个整数 n
+     * @return 判定他是否是 阿姆斯特朗数
      */
     private boolean isArmstrong(int N) {
         int len = (N + "").length();
@@ -627,32 +398,13 @@ public class TargetMath {
     }
     //endregion
 
-    //region 1180. 统计只含单一字母的子串
+    //region    20190922    1180. 统计只含单一字母的子串
 
     /**
-     * 给你一个字符串 S，返回只含 单一字母 的子串个数。
-     * <p>
-     * 示例 1：
-     * 输入： "aaaba"
-     * 输出： 8
-     * 解释：
-     * 只含单一字母的子串分别是 "aaa"， "aa"， "a"， "b"。
-     * "aaa" 出现 1 次。
-     * "aa" 出现 2 次。
-     * "a" 出现 4 次。
-     * "b" 出现 1 次。
-     * 所以答案是 1 + 2 + 4 + 1 = 8。
-     * <p>
-     * 示例 2:
-     * 输入： "aaaaaaaaaa"
-     * 输出： 55
-     * <p>
-     * 提示：
-     * 1 <= S.length <= 1000
-     * S[i] 仅由小写英文字母组成。
+     * https://leetcode.cn/problems/count-substrings-with-only-one-distinct-letter/
      *
-     * @param S
-     * @return
+     * @param S 一个字符串 s
+     * @return 返回只含单一字母的子串个数
      */
     private static int countLetters(String S) {
         int sum = 0;
@@ -672,18 +424,55 @@ public class TargetMath {
     }
     //endregion
 
+    //region    20230421    2413. 最小偶倍数
+
+    /**
+     * https://leetcode.cn/problems/smallest-even-multiple
+     * @param n  一个正整数 n
+     * @return  返回 2 和 n 的最小公倍数（正整数）
+     */
+    public int smallestEvenMultiple(int n) {
+        if (n % 2 == 0) {
+            return n;
+        } else {
+            return 2 * n;
+        }
+    }
+    //endregion
+
+    //region    20230405    2427. 公因子的数目
+
+    /**
+     * https://leetcode.cn/problems/number-of-common-factors/
+     *
+     * @param a 正整数 a
+     * @param b 正整数 b
+     * @return 返回 a 和 b 的 公 因子的数目
+     */
+    public int commonFactors(int a, int b) {
+        int res = 0;
+        for (int i = 1; i <= Math.min(a, b); i++) {
+            if (a % i == 0 && b % i == 0) {
+                res++;
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230321    2469. 温度转换
 
     /**
      * https://leetcode.cn/problems/convert-the-temperature/
-     * @param celsius  摄氏度（Celsius）为单位
-     * @return  将摄氏度转换为 开氏度（Kelvin）和 华氏度（Fahrenheit），并以数组 ans = [kelvin, fahrenheit] 的形式返回结果
+     *
+     * @param celsius 摄氏度（Celsius）为单位
+     * @return 将摄氏度转换为 开氏度（Kelvin）和 华氏度（Fahrenheit），并以数组 ans = [kelvin, fahrenheit] 的形式返回结果
      */
     public double[] convertTemperature(double celsius) {
         return new double[]{celsius + 273.15, celsius * 1.8 + 32.00};
     }
     //endregion
-
+    
     public static void main(String[] args) {
         System.out.println(countLetters("jjjjxttttn"));
     }

@@ -8,7 +8,27 @@ import java.util.*;
 
 public class TargetQueue {
 
-    //region 346. 数据流中的移动平均值   2019/10/17
+    //region    自定义数据结构
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    //endregion
+
+
+    //region    20191017    346. 数据流中的移动平均值
 
     /**
      * 给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，
@@ -40,7 +60,7 @@ public class TargetQueue {
     }
     //endregion
 
-    //region 582. 杀死进程   2019/10/17
+    //region    20191017    582. 杀死进程
 
     /**
      * 给 n 个进程，每个进程都有一个独一无二的 PID （进程编号）和它的 PPID （父进程编号）。
@@ -103,7 +123,8 @@ public class TargetQueue {
     }
     //endregion  2019
 
-    //region 621. 任务调度器  2019/10/17
+    //region    20191017    621. 任务调度器
+
     /**
      * 给定一个用字符数组表示的 CPU 需要执行的任务列表。
      * 其中包含使用大写的 A - Z 字母表示的26 种不同种类的任务。
@@ -112,15 +133,16 @@ public class TargetQueue {
      * 然而，两个相同种类的任务之间必须有长度为 n 的冷却时间，
      * 因此至少有连续 n 个单位时间内 CPU 在执行不同的任务，或者在待命状态。
      * 你需要计算完成所有任务所需要的最短时间。
-     *
+     * <p>
      * 示例 1：
      * 输入: tasks = ["A","A","A","B","B","B"], n = 2
      * 输出: 8
      * 执行顺序: A -> B -> (待命) -> A -> B -> (待命) -> A -> B.
-     *
+     * <p>
      * 注：
      * 任务的总个数为 [1, 10000]。
      * n 的取值范围为 [0, 100]。
+     *
      * @param tasks
      * @param n
      * @return
@@ -156,11 +178,12 @@ public class TargetQueue {
     }
     //endregion
 
-    //region 641. 设计循环双端队列   2019/10/17
+    //region    20191017    641. 设计循环双端队列
+
     /**
      * 设计实现双端队列。
      * 你的实现需要支持以下操作：
-     *
+     * <p>
      * MyCircularDeque(k)：构造函数,双端队列的大小为k。
      * insertFront()：将一个元素添加到双端队列头部。 如果操作成功返回 true。
      * insertLast()：将一个元素添加到双端队列尾部。如果操作成功返回 true。
@@ -170,7 +193,7 @@ public class TargetQueue {
      * getRear()：获得双端队列的最后一个元素。 如果双端队列为空，返回 -1。
      * isEmpty()：检查双端队列是否为空。
      * isFull()：检查双端队列是否满了。
-     *
+     * <p>
      * 示例：
      * MyCircularDeque circularDeque = new MycircularDeque(3); // 设置容量大小为3
      * circularDeque.insertLast(1);			        // 返回 true
@@ -182,7 +205,7 @@ public class TargetQueue {
      * circularDeque.deleteLast();			        // 返回 true
      * circularDeque.insertFront(4);			        // 返回 true
      * circularDeque.getFront();				// 返回 4
-     *
+     * <p>
      * 提示：
      * 所有值的范围为 [1, 1000]
      * 操作次数的范围为 [1, 1000]
@@ -304,7 +327,7 @@ public class TargetQueue {
     }
     //endregion
 
-    //region 933. 最近的请求次数   2019/10/17
+    //region    20191017    933. 最近的请求次数
 
     /**
      * 写一个 RecentCounter 类来计算最近的请求。
@@ -338,6 +361,36 @@ public class TargetQueue {
     }
     //endregion
 
+    //region    20230410    1019. 链表中的下一个更大节点
+
+    /**
+     * https://leetcode.cn/problems/next-greater-node-in-linked-list/
+     * @param head  长度为 n 的链表 head
+     * @return  一个整数数组 answer ，其中 answer[i] 是第 i 个节点( 从1开始 )的下一个更大的节点的值。如果第 i 个节点没有下一个更大的节点，设置 answer[i] = 0
+     */
+    public int[] nextLargerNodes(ListNode head) {
+        df(head, 0);
+        return ans;
+    }
+
+    public void df(ListNode node, int i) {
+        if (node == null) {
+            ans = new int[i];
+            return;
+        }
+        df(node.next, i + 1);
+        while (!stack.isEmpty() && stack.peek() <= node.val) {
+            stack.pop();
+        }
+        if (!stack.isEmpty()) {
+            ans[i] = stack.peek();
+        }
+        stack.push(node.val);
+    }
+
+    private int[] ans;
+    private final Stack<Integer> stack = new Stack<>();
+    //endregion
 
     public static void main(String[] args) {
 

@@ -436,6 +436,62 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230215    70. 爬楼梯
+
+    /**
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     * <p>
+     * 示例 1：
+     * 输入：n = 2
+     * 输出：2
+     * 解释：有两种方法可以爬到楼顶。
+     * 1. 1 阶 + 1 阶
+     * 2. 2 阶
+     * 示例 2：
+     * 输入：n = 3
+     * 输出：3
+     * 解释：有三种方法可以爬到楼顶。
+     * 1. 1 阶 + 1 阶 + 1 阶
+     * 2. 1 阶 + 2 阶
+     * 3. 2 阶 + 1 阶
+     * <p>
+     * 提示：
+     * 1 <= n <= 45
+     *
+     * @param n 爬楼梯。需要 n 阶你才能到达楼顶
+     * @return 多少种不同的方法可以爬到楼顶
+     */
+    public int climbStairs(int n) {
+        if (hashmap.containsKey(n)) {
+            return hashmap.get(n);
+        }
+        if (n <= 2) {
+            return n;
+        } else {
+            hashmap.put(n, climbStairs(n - 1) + climbStairs(n - 2));
+            return hashmap.get(n);
+        }
+    }
+
+    HashMap<Integer, Integer> hashmap = new HashMap<>();
+
+    public int climbStairs1(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        int curr = 1;
+        int next = 2;
+        int temp;
+        for (int i = 3; i <= n; i++) {
+            temp = curr + next;
+            curr = next;
+            next = temp;
+        }
+        return next;
+    }
+    //endregion
+
     //region    20230304    72. 编辑距离
 
     /**
@@ -499,62 +555,6 @@ public class TargetDynamicProgramming {
             }
         }
         return dp[n][m];
-    }
-    //endregion
-
-    //region    20230215    70. 爬楼梯
-
-    /**
-     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
-     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
-     * <p>
-     * 示例 1：
-     * 输入：n = 2
-     * 输出：2
-     * 解释：有两种方法可以爬到楼顶。
-     * 1. 1 阶 + 1 阶
-     * 2. 2 阶
-     * 示例 2：
-     * 输入：n = 3
-     * 输出：3
-     * 解释：有三种方法可以爬到楼顶。
-     * 1. 1 阶 + 1 阶 + 1 阶
-     * 2. 1 阶 + 2 阶
-     * 3. 2 阶 + 1 阶
-     * <p>
-     * 提示：
-     * 1 <= n <= 45
-     *
-     * @param n 爬楼梯。需要 n 阶你才能到达楼顶
-     * @return 多少种不同的方法可以爬到楼顶
-     */
-    public int climbStairs(int n) {
-        if (hashmap.containsKey(n)) {
-            return hashmap.get(n);
-        }
-        if (n <= 2) {
-            return n;
-        } else {
-            hashmap.put(n, climbStairs(n - 1) + climbStairs(n - 2));
-            return hashmap.get(n);
-        }
-    }
-
-    HashMap<Integer, Integer> hashmap = new HashMap<>();
-
-    public int climbStairs1(int n) {
-        if (n <= 2) {
-            return n;
-        }
-        int curr = 1;
-        int next = 2;
-        int temp;
-        for (int i = 3; i <= n; i++) {
-            temp = curr + next;
-            curr = next;
-            next = temp;
-        }
-        return next;
     }
     //endregion
 
@@ -2191,6 +2191,77 @@ public class TargetDynamicProgramming {
     }
     //endregion
 
+    //region    20230422    1027. 最长等差数列
+
+    /**
+     * https://leetcode.cn/problems/longest-arithmetic-subsequence
+     *
+     * @param nums 一个整数数组 nums
+     * @return 返回 nums 中最长等差子序列的长度
+     */
+    public int longestArithSeqLength(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][1001];
+        int maxLength = 0;
+        for (int k = 1; k < n; k++) {
+            for (int j = 0; j < k; j++) {
+                int d = nums[k] - nums[j] + 500;
+                dp[k][d] = dp[j][d] + 1;
+                maxLength = Math.max(maxLength, dp[k][d]);
+            }
+        }
+        return maxLength + 1;
+    }
+    //endregion
+
+    //region    20230403    1039. 多边形三角剖分的最低得分
+
+    /**
+     * https://leetcode.cn/problems/minimum-score-triangulation-of-polygon/
+     *
+     * @param values 给定一个整数数组 values ，其中 values[i] 是第 i 个顶点的值（即 顺时针顺序 ）
+     * @return 多边形进行三角剖分后可以得到的最低分
+     */
+    public int minScoreTriangulation(int[] values) {
+        int n = values.length;
+        int[][] dp = new int[values.length][values.length];
+        for (int i = n - 3; i >= 0; --i)//倒着枚举起点
+            for (int j = i + 2; j < n; ++j)//枚举终点
+            {
+                int res = Integer.MAX_VALUE;
+                for (int k = i + 1; k < j; ++k)//枚举分点
+                    res = Math.min(res, dp[i][k] + dp[k][j] + values[i] * values[k] * values[j]);
+                dp[i][j] = res;
+            }
+        return dp[0][n - 1];
+    }
+    //endregion
+
+    //region    20230427    1048. 最长字符串链
+
+    /**
+     * https://leetcode.cn/problems/longest-string-chain/
+     * @param words  一个单词数组 words
+     * @return  从给定单词列表 words 中选择单词组成词链，返回 词链的 最长可能长度
+     */
+    public int longestStrChain(String[] words) {
+        Map<String,Integer> hashmap=new HashMap<>();
+        Arrays.sort(words,(a,b)->a.length()-b.length());
+        int res=0;
+        for (String word:words) {
+            hashmap.put(word,1);
+            for (int i = 0; i < word.length(); i++) {
+                String prev=word.substring(0,i)+word.substring(i+1);
+                if(hashmap.containsKey(prev)){
+                    hashmap.put(word,Math.max(hashmap.get(word),hashmap.get(prev)+1));
+                }
+            }
+            res=Math.max(res,hashmap.get(word));
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230215    1137. 第 N 个泰波那契数
 
     /**
@@ -2597,9 +2668,10 @@ public class TargetDynamicProgramming {
 
     /**
      * https://leetcode.cn/problems/count-substrings-that-differ-by-one-character/
+     *
      * @param s 字符串 s
      * @param t 字符串 t
-     * @return  请你找到 s 和 t 串中 恰好 只有一个字符不同的子字符串对的数目
+     * @return 请你找到 s 和 t 串中 恰好 只有一个字符不同的子字符串对的数目
      */
     public int countSubstrings(String s, String t) {
         int m = s.length(), n = t.length();
@@ -2625,6 +2697,26 @@ public class TargetDynamicProgramming {
             }
         }
         return ans;
+    }
+    //endregion
+
+    //region    20230329    1641. 统计字典序元音字符串的数目
+
+    /**
+     * https://leetcode.cn/problems/count-sorted-vowel-strings/
+     *
+     * @param n 一个整数 n
+     * @return 返回长度为 n 、仅由元音 (a, e, i, o, u) 组成且按 字典序排列 的字符串数量
+     */
+    public int countVowelStrings(int n) {
+        int[] dp = new int[5];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < 5; j++) {
+                dp[j] += dp[j - 1];
+            }
+        }
+        return Arrays.stream(dp).sum();
     }
     //endregion
 

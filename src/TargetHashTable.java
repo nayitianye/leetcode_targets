@@ -168,6 +168,32 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230507    1010. 总持续时间可被 60 整除的歌曲
+
+    /**
+     * https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/
+     *
+     * @param time 歌曲列表 time 中，第 i 首歌曲的持续时间为 time[i] 秒
+     * @return 返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量
+     */
+    public int numPairsDivisibleBy60(int[] time) {
+        int[] times = new int[60];
+        int res = 0;
+        for (int i = 0; i < time.length; i++) {
+            times[time[i] % 60]++;
+        }
+        int left = 1, right = times.length - 1;
+        while (left < right) {
+            res += times[left] * times[right];
+            left++;
+            right--;
+        }
+        res += times[0]%2==1? (times[0]-1)/2*times[0]:(times[0]/2)*(time[0]-1);
+        res += times[30]%2==1? (times[30]-1)/2*times[30]:(times[30]/2)*(time[30]-1);
+        return res;
+    }
+    //endregion
+
     //region    20230308    2215. 找出两数组的不同
 
     /**
@@ -211,11 +237,36 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230331    2367. 算术三元组的数目
+
+    /**
+     * https://leetcode.cn/problems/number-of-arithmetic-triplets/
+     *
+     * @param nums 严格递增 的整数数组 num
+     * @param diff 一个正整数 diff
+     * @return 不同 算术三元组 的数目
+     */
+    public int arithmeticTriplets(int[] nums, int diff) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            hashSet.add(nums[i]);
+        }
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (hashSet.contains(nums[i] + diff) && hashSet.contains(nums[i] + diff * 2)) {
+                res++;
+            }
+        }
+        return res;
+    }
+    //endregion
+
     //region    20230326    2395. 和相等的子数组
 
     /**
      * https://leetcode.cn/problems/find-subarrays-with-equal-sum/
-     * @param nums  下标从 0 开始的整数数组 nums
+     *
+     * @param nums 下标从 0 开始的整数数组 nums
      * @return 判断是否存在 两个 长度为 2 的子数组且它们的 和 相等。注意，这两个子数组起始位置的下标必须 不相同
      */
     public boolean findSubarrays(int[] nums) {
@@ -231,7 +282,53 @@ public class TargetHashTable {
     }
     //endregion
 
+    //region    20230409    2399. 检查相同字母间的距离
+
+    /**
+     * https://leetcode.cn/problems/check-distances-between-same-letters/
+     *
+     * @param s        下标从 0 开始的字符串 s
+     * @param distance 下标从 0 开始、长度为 26 的的整数数组 distance
+     * @return s 是一个 匀整 字符串，返回 true ；否则，返回 false
+     */
+    public boolean checkDistances(String s, int[] distance) {
+        int[] last = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            int c = s.charAt(i) - 'a';
+            if (last[c] != 0 && i - last[c] != distance[c]) {
+                return false;
+            }
+            last[c] = i + 1;
+        }
+        return true;
+    }
+    //endregion
+
+    //region    20230414    2404. 出现最频繁的偶数元素
+
+    /**
+     * https://leetcode.cn/problems/most-frequent-even-element
+     *
+     * @param nums 一个整数数组 nums
+     * @return 返回出现最频繁的偶数元素
+     */
+    public int mostFrequentEven(int[] nums) {
+        int res = -1;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] % 2 > 0) {
+                continue;
+            }
+            hashMap.put(nums[i], hashMap.getOrDefault(nums[i], 0) + 1);
+            if (res < 0 || hashMap.get(nums[i]) > hashMap.get(res) || hashMap.get(nums[i]) == hashMap.get(res) && nums[i] < res) {
+                res = nums[i];
+            }
+        }
+        return res;
+    }
+    //endregion
+
     public static void main(String[] args) {
-        new TargetHashTable().containsNearbyAlmostDuplicate(new int[]{1, 5, 9, 1, 5, 9}, 2, 3);
+        new TargetHashTable().numPairsDivisibleBy60(new int[]{30, 20, 150, 100, 40});
     }
 }

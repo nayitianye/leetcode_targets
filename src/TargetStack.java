@@ -1,3 +1,4 @@
+import javax.swing.plaf.nimbus.State;
 import java.util.Stack;
 
 /**
@@ -7,34 +8,12 @@ import java.util.Stack;
  */
 public class TargetStack {
 
-    //region 20. 有效的括号
+    //region    20190919    20. 有效的括号
+
     /**
-     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
-     * 有效字符串需满足：
-     * 左括号必须用相同类型的右括号闭合。
-     * 左括号必须以正确的顺序闭合。
-     * 注意空字符串可被认为是有效字符串。
-     * 示例 1:
-     * 输入: "()"
-     * 输出: true
-     *
-     * 示例 2:
-     * 输入: "()[]{}"
-     * 输出: true
-     *
-     * 示例 3:
-     * 输入: "(]"
-     * 输出: false
-     *
-     * 示例 4:
-     * 输入: "([)]"
-     * 输出: false
-     *
-     * 示例 5:
-     * 输入: "{[]}"
-     * 输出: true
-     * @param s
-     * @return
+     * https://leetcode.cn/problems/valid-parentheses
+     * @param s  给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s
+     * @return  判断字符串是否有效
      */
     private boolean isValid(String s) {
         Stack<Character> stack=new Stack<>();
@@ -66,7 +45,36 @@ public class TargetStack {
     }
     //endregion
 
+    //region    20230503    1003. 检查替换后的词是否有效
+
+    /**
+     * https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions/
+     * @param s  字符串 s
+     * @return  判断它是否有效
+     */
+    public boolean isValid1(String s) {
+        Stack<Character> stack=new Stack<>();
+        for (int i = 0; i <s.length() ; i++) {
+            stack.push(s.charAt(i));
+            while (stack.size()>=3 && stack.peek()=='c'){
+                stack.pop();
+                if(stack.peek()=='b'){
+                    stack.pop();
+                    if(stack.peek()=='a'){
+                        stack.pop();
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+    //endregion
+
     public static void main(String[] args) {
-        System.out.println(new TargetStack().isValid("{}[]()"));
+        //System.out.println(new TargetStack().isValid1("aabcbc"));
     }
 }
